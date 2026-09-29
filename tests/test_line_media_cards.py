@@ -107,6 +107,48 @@ class TestLineMediaCards(unittest.TestCase):
         for item in qr_fallback.items:
             self.assertLessEqual(len(item.action.label), 20)
 
+    def test_05_origin_exclusion_for_location_queries(self):
+        """ทดสอบการคัดกรองสถานที่ต้นทางออกเมื่อผู้ใช้ถามว่า 'อยู่ที่... จะไปไหนดี' เพื่อแนะนำสถานที่ปลายทางเป็นหลัก"""
+        query = "แล้วถ้าผมอยู่ที่ชิบูย่าละ จะไปที่ไหนดี"
+        answer = "แนะนำไปเที่ยวถนนทาเคชิตะ ย่านฮาราจูกุ หรือศาลเจ้าเมจิ จากห้าแยกชิบูย่า"
+        matched = find_matched_entities(text=answer, query=query)
+
+        self.assertGreater(len(matched), 0)
+        # ตรวจสอบว่าสถานที่แรกที่แนะนำไม่ใช่ห้าแยกชิบูย่า (ตำแหน่งที่ผู้ใช้อยู่แล้ว)
+        self.assertNotEqual(matched[0]["id"], "P_SHIBUYA_CROSSING", "Top recommendation card should be a destination, not the user's current origin")
+        # ตรวจสอบว่าฮาราจูกุหรือศาลเจ้าเมจิถูกนำมาแสดง
+        matched_ids = [m["id"] for m in matched]
+        self.assertIn("P_TAKESHITA_STREET", matched_ids)
+        self.assertIn("P_MEIJI_JINGU", matched_ids)
+
+    def test_06_message_order_text_first_card_second(self):
+        """ทดสอบโครงสร้างชุดข้อความที่จะส่ง ให้ข้อความคำอธิบายอยู่ก่อน และการ์ด Flex Message อยู่ด้านล่าง"""
+        from linebot.models import TextSendMessage
+
+        entity = PLACE_MEDIA_CATALOG["P_SENSOJI"]
+        flex_card = build_flex_message_from_entities([entity])
+        quick_reply = build_contextual_quick_replies([entity])
+
+        # จำลองการจัดลำดับข้อความใน webhook.py
+        messages_to_send = []
+        formatted_reply = "รายละเอียดการเดินทาง..."
+
+        if flex_card:
+            messages_to_send.append(TextSendMessage(text=formatted_reply))
+            flex_card.quick_reply = quick_reply
+            messages_to_send.append(flex_card)
+        else:
+            messages_to_send.append(TextSendMessage(text=formatted_reply, quick_reply=quick_reply))
+
+        # ตรวจสอบว่าข้อความแรกเป็น Text และข้อความที่สองเป็น Flex
+        self.assertEqual(len(messages_to_send), 2)
+        self.assertIsInstance(messages_to_send[0], TextSendMessage)
+        self.assertIsInstance(messages_to_send[1], FlexSendMessage)
+        # ตรวจสอบว่า Quick Reply ถูกแนบไว้ที่การ์ด Flex ด้านล่างสุด
+        self.assertIsNone(messages_to_send[0].quick_reply)
+        self.assertIsNotNone(messages_to_send[1].quick_reply)
+
 
 if __name__ == "__main__":
     unittest.main()
+

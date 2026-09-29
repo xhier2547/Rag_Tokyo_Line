@@ -253,31 +253,37 @@ if handler:
 
             # 3. ค้นหาสถานที่หรือโรงแรมที่เกี่ยวข้องเพื่อสร้างการ์ดรูปภาพ (Flex Card)
             matched_entities = find_matched_entities(
-                text=response.answer + " " + user_query,
-                citations=response.citations
+                text=response.answer,
+                citations=response.citations,
+                query=user_query
             )
 
             # 4. เตรียมชุดข้อความตอบกลับ (Messages List)
+            # เรียงลำดับให้ "ข้อความเนื้อหาอธิบายคำตอบ" อยู่ด้านบน และ "การ์ดรูปภาพ (Flex Card)" อยู่ด้านล่าง
             messages_to_send = []
-
-            # 4.1 สร้าง Flex Card (รูปภาพ + ข้อมูลย่อ + ปุ่มกดไปต่อ)
-            if matched_entities:
-                flex_card = build_flex_message_from_entities(matched_entities)
-                if flex_card:
-                    messages_to_send.append(flex_card)
-
-            # 4.2 สร้าง Dynamic Quick Reply ตามบริบทของสถานที่ในคำตอบ
             quick_reply = build_contextual_quick_replies(matched_entities)
 
-            # 4.3 เพิ่มข้อความเนื้อหาอธิบายพร้อม Quick Reply
-            messages_to_send.append(TextSendMessage(text=formatted_reply, quick_reply=quick_reply))
+            flex_card = None
+            if matched_entities:
+                flex_card = build_flex_message_from_entities(matched_entities)
+
+            if flex_card:
+                # 4.1 ข้อความอธิบายเชิงลึก (อยู่ข้างบน)
+                messages_to_send.append(TextSendMessage(text=formatted_reply))
+                # 4.2 การ์ดรูปภาพพร้อมปุ่ม Interactive (อยู่ข้างล่าง) พร้อมแนบ Quick Reply
+                flex_card.quick_reply = quick_reply
+                messages_to_send.append(flex_card)
+            else:
+                # กรณีไม่มีการ์ดรูปภาพ ให้ส่งข้อความพร้อมแนบ Quick Reply
+                messages_to_send.append(TextSendMessage(text=formatted_reply, quick_reply=quick_reply))
 
             # 5. ส่งข้อความตอบกลับไปยัง LINE
             line_bot_api.reply_message(
                 event.reply_token,
                 messages_to_send
             )
-            logger.info(f"[LINE Reply Sent] Successfully replied ({len(messages_to_send)} msgs, {len(matched_entities)} cards) to {event.source.user_id}")
+            logger.info(f"[LINE Reply Sent] Successfully replied ({len(messages_to_send)} msgs, text first, {len(matched_entities)} cards below) to {event.source.user_id}")
+
 
         except Exception as e:
             logger.error(f"[LINE Error] Failed to process message: {e}")

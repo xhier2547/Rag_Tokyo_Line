@@ -303,34 +303,83 @@ HOTEL_MEDIA_CATALOG: Dict[str, Dict[str, Any]] = {
 }
 
 
-def find_matched_entities(text: str, citations: Optional[List[str]] = None) -> List[Dict[str, Any]]:
+def find_matched_entities(
+    text: str,
+    citations: Optional[List[str]] = None,
+    query: Optional[str] = None
+) -> List[Dict[str, Any]]:
     """
     ตรวจจับสถานที่ท่องเที่ยว (Places) หรือโรงแรม (Hotels) ที่ปรากฏในข้อความคำตอบ หรือในรายการ Citations
-    คืนค่ารายการ Dictionary ข้อมูลสื่อสำหรับนำไปสร้าง Flex Cards (สูงสุด 3 รายการเพื่อความสวยงาม)
+    - รักษาลำดับการแนะนำตามที่ปรากฏในคำตอบของ AI (First Mention Order)
+    - หากผู้ใช้ถามจากตำแหน่งปัจจุบัน เช่น "อยู่ที่ชิบูย่า จะไปไหนดี" จะแยกแยะตำแหน่งต้นทาง
+      และให้ความสำคัญกับการ์ดสถานที่ปลายทาง (Destinations) ก่อนเสมอ
+    - คืนค่ารายการ Dictionary ข้อมูลสื่อสำหรับนำไปสร้าง Flex Cards (สูงสุด 3 รายการเพื่อความสวยงาม)
     """
     combined_text = (text + " " + " ".join(citations or [])).lower()
-    matched: List[Dict[str, Any]] = []
+    matched_candidates: List[Dict[str, Any]] = []
     seen_ids = set()
+
+    # ตรวจหาตำแหน่งต้นทาง (Origin) จากคำถาม เช่น "อยู่ที่...", "จาก..."
+    origin_ids = set()
+    if query:
+        clean_q = query.lower()
+        has_origin_pattern = any(k in clean_q for k in ["อยู่ที่", "ตอนนี้อยู่", "ถ้าอยู่", "จาก", "ออกจาก", "เริ่มต้นที่"])
+        if has_origin_pattern:
+            for pid, data in PLACE_MEDIA_CATALOG.items():
+                for kw in data["keywords"]:
+                    if kw in clean_q:
+                        origin_ids.add(pid)
+                        break
 
     # 1. ค้นหา Places
     for pid, data in PLACE_MEDIA_CATALOG.items():
         if pid in seen_ids:
             continue
+        first_pos = None
         for kw in data["keywords"]:
-            if kw in combined_text:
-                matched.append({**data, "type": "place"})
-                seen_ids.add(pid)
-                break
+            pos = combined_text.find(kw)
+            if pos != -1:
+                if first_pos is None or pos < first_pos:
+                    first_pos = pos
+        if first_pos is not None:
+            matched_candidates.append({
+                **data,
+                "type": "place",
+                "pos": first_pos,
+                "is_origin": pid in origin_ids
+            })
+            seen_ids.add(pid)
 
     # 2. ค้นหา Hotels
     for hid, data in HOTEL_MEDIA_CATALOG.items():
         if hid in seen_ids:
             continue
+        first_pos = None
         for kw in data["keywords"]:
-            if kw in combined_text:
-                matched.append({**data, "type": "hotel"})
-                seen_ids.add(hid)
-                break
+            pos = combined_text.find(kw)
+            if pos != -1:
+                if first_pos is None or pos < first_pos:
+                    first_pos = pos
+        if first_pos is not None:
+            matched_candidates.append({
+                **data,
+                "type": "hotel",
+                "pos": first_pos,
+                "is_origin": False
+            })
+            seen_ids.add(hid)
+
+    # เรียงลำดับตามตำแหน่งที่ปรากฏในข้อความก่อน-หลัง
+    matched_candidates.sort(key=lambda x: x["pos"])
+
+    # หากมีสถานที่ปลายทางอื่นๆ ให้กรองสถานที่ต้นทาง (เช่น ห้าแยกชิบูย่า เมื่อผู้ใช้อยู่ที่ชิบูย่า) ออก
+    # เพื่อให้การ์ดแสดงเฉพาะสถานที่ที่จะแนะนำให้เดินทางไปต่อ
+    destinations = [m for m in matched_candidates if not m.get("is_origin", False)]
+    if destinations:
+        final_list = destinations
+    else:
+        final_list = matched_candidates
 
     # คืนค่าสูงสุด 3 รายการเพื่อไม่ให้แชตยาวเกินไป
-    return matched[:3]
+    return final_list[:3]
+
