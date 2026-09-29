@@ -75,6 +75,15 @@ def build_quick_replies() -> QuickReply:
     return QuickReply(items=items)
 
 
+@app.on_event("startup")
+def startup_event():
+
+    """โหลด RAG Service ล่วงหน้า (Pre-warm) เพื่อให้พร้อมตอบคำถามทันทีตั้งแต่ข้อแรก"""
+    logger.info("[LINE Webhook Startup] กำลังเตรียมความพร้อม RAG Engine & Model Cache...")
+    get_rag_service()
+    logger.info("[LINE Webhook Startup] ระบบพร้อมให้บริการตอบคำถามเรียบร้อย!")
+
+
 @app.get("/")
 def root():
     return {
@@ -96,9 +105,16 @@ def health():
 
 
 @app.post("/callback")
-async def callback(request: Request, x_line_signature: Optional[str] = Header(None)):
+async def callback(
+    request: Request,
+    background_tasks: BackgroundTasks,
+    x_line_signature: Optional[str] = Header(None)
+):
     """
     Webhook Endpoint สำหรับรับ Event จาก LINE
+    - ตรวจสอบความถูกต้องของ Signature ทันที
+    - ส่งมอบงานให้ BackgroundTasks ประมวลผล RAG
+    - ส่ง HTTP 200 OK กลับไปยัง LINE ทันทีใน < 50ms เพื่อป้องกัน LINE Timeout
     """
     if not handler:
         logger.error("CHANNEL_SECRET is not configured in .env")
@@ -111,16 +127,23 @@ async def callback(request: Request, x_line_signature: Optional[str] = Header(No
     body = await request.body()
     body_text = body.decode("utf-8")
 
+    # ตรวจสอบลายเซ็นก่อนส่งต่อ
     try:
-        handler.handle(body_text, x_line_signature)
-    except InvalidSignatureError:
-        logger.warning("Invalid LINE Webhook Signature")
-        raise HTTPException(status_code=400, detail="Invalid signature")
+        is_valid = handler.parser.signature_validator.validate(body_text, x_line_signature)
+        if not is_valid:
+            logger.warning("Invalid LINE Webhook Signature")
+            raise HTTPException(status_code=400, detail="Invalid signature")
+    except HTTPException:
+        raise
     except Exception as e:
-        logger.error(f"Error handling webhook event: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"Signature validation error: {e}")
+        raise HTTPException(status_code=400, detail="Signature error")
+
+    # ส่งต่อให้ BackgroundTasks รันการดึงข้อมูลและตอบกลับ
+    background_tasks.add_task(handler.handle, body_text, x_line_signature)
 
     return JSONResponse(content={"status": "OK"})
+
 
 
 if handler:
