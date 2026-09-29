@@ -35,8 +35,8 @@
 - [x] **1.3 Export Clean Datasets:**
   - สร้างไฟล์ structured CSV: `places.csv`, `stations.csv`, `lines.csv`, `transit_edges.csv`, `place_station_edges.csv` และ `documents_chunks.json`
 
-### Phase 2: การสร้าง Graph Database & Cypher Retrieval (Graph RAG - 15 คะแนน)
-- [ ] **2.1 Schema Design บน Neo4j:**
+### Phase 2: การสร้าง Graph Database & Cypher Retrieval (Graph RAG - 15 คะแนน) [COMPLETED]
+- [x] **2.1 Schema Design บน Neo4j:**
   - Nodes: `(:Place)`, `(:Station)`, `(:Line)`, `(:Ward)`, `(:Category)`
   - Relationships:
     - `(:Place)-[:NEAR_STATION {walk_min: Int, distance_m: Int}]->(:Station)`
@@ -44,12 +44,13 @@
     - `(:Station)-[:ON_LINE]->(:Line)`
     - `(:Place)-[:LOCATED_IN]->(:Ward)`
     - `(:Place)-[:HAS_CATEGORY]->(:Category)`
-- [ ] **2.2 Graph Ingestion Script (`build_graph.py`):**
+- [x] **2.2 Graph Ingestion Script (`builder.py`):**
   - เขียนสคริปต์เชื่อมต่อและ Load ข้อมูลเข้า Neo4j แบบ idempotent (`MERGE`)
-  - สร้าง JSON Fallback Cache สำหรับออฟไลน์
-- [ ] **2.3 Graph Traversal & Cypher Query Engine (`graph_search.py`):**
-  - ฟังก์ชันคำนวณเส้นทางสั้นที่สุด (Shortest Path / Travel Duration)
+  - สร้าง JSON & NetworkX Fallback Cache สำหรับออฟไลน์ (`data/processed/graph_cache.json`)
+- [x] **2.3 Graph Traversal & Cypher Query Engine (`pathfinder.py`):**
+  - ฟังก์ชันคำนวณเส้นทางสั้นที่สุด (Shortest Path / Travel Duration) ทั้งแบบ Station-to-Station และ Place-to-Place
   - ฟังก์ชันค้นหาสถานที่ใกล้สถานี หรือสถานที่ในย่านเดียวกัน
+  - ฟังก์ชันสกัด Graph Context อัตโนมัติ (`extract_graph_context_for_rag`) พร้อมรองรับการเชื่อมต่อกับ LLM
 
 ### Phase 3: การสร้าง Vector & Sparse Indices (Dense RAG & Hybrid RAG - 35 คะแนน)
 - [ ] **3.1 Vector Database Comparison (ChromaDB vs FAISS):**

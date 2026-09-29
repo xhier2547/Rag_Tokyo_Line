@@ -1,0 +1,1071 @@
+{
+  "nodes": {
+    "ST_TOKYO": {
+      "type": "Station",
+      "name_th": "สถานีโตเกียว",
+      "name_en": "Tokyo Station",
+      "ward": "Chiyoda",
+      "lat": 35.681236,
+      "lon": 139.767125,
+      "lines": "LN_YAMANOTE;LN_MARUNOUCHI"
+    },
+    "ST_SHINJUKU": {
+      "type": "Station",
+      "name_th": "สถานีชินจูกุ",
+      "name_en": "Shinjuku Station",
+      "ward": "Shinjuku",
+      "lat": 35.689607,
+      "lon": 139.700571,
+      "lines": "LN_YAMANOTE;LN_MARUNOUCHI;LN_OEDO;LN_CHUO_SOBU"
+    },
+    "ST_SHIBUYA": {
+      "type": "Station",
+      "name_th": "สถานีชิบูย่า",
+      "name_en": "Shibuya Station",
+      "ward": "Shibuya",
+      "lat": 35.658034,
+      "lon": 139.701636,
+      "lines": "LN_YAMANOTE;LN_GINZA;LN_HANZOMON"
+    },
+    "ST_ASAKUSA": {
+      "type": "Station",
+      "name_th": "สถานีอาซากุสะ",
+      "name_en": "Asakusa Station",
+      "ward": "Taito",
+      "lat": 35.712285,
+      "lon": 139.798363,
+      "lines": "LN_GINZA;LN_ASAKUSA"
+    },
+    "ST_UENO": {
+      "type": "Station",
+      "name_th": "สถานีอุเอโนะ",
+      "name_en": "Ueno Station",
+      "ward": "Taito",
+      "lat": 35.713768,
+      "lon": 139.777254,
+      "lines": "LN_YAMANOTE;LN_GINZA;LN_HIBIYA"
+    },
+    "ST_AKIHABARA": {
+      "type": "Station",
+      "name_th": "สถานีอากิฮาบาระ",
+      "name_en": "Akihabara Station",
+      "ward": "Chiyoda",
+      "lat": 35.698383,
+      "lon": 139.773072,
+      "lines": "LN_YAMANOTE;LN_HIBIYA;LN_CHUO_SOBU"
+    },
+    "ST_GINZA": {
+      "type": "Station",
+      "name_th": "สถานีกินซ่า",
+      "name_en": "Ginza Station",
+      "ward": "Chuo",
+      "lat": 35.671989,
+      "lon": 139.763965,
+      "lines": "LN_GINZA;LN_MARUNOUCHI;LN_HIBIYA"
+    },
+    "ST_ROPPONGI": {
+      "type": "Station",
+      "name_th": "สถานีรปปงงิ",
+      "name_en": "Roppongi Station",
+      "ward": "Minato",
+      "lat": 35.662837,
+      "lon": 139.731443,
+      "lines": "LN_HIBIYA;LN_OEDO"
+    },
+    "ST_OSHIAGE": {
+      "type": "Station",
+      "name_th": "สถานีโอชิอาเกะ (สกายทรี)",
+      "name_en": "Oshiage (Skytree) Station",
+      "ward": "Sumida",
+      "lat": 35.710609,
+      "lon": 139.813292,
+      "lines": "LN_ASAKUSA;LN_HANZOMON"
+    },
+    "ST_HARAJUKU": {
+      "type": "Station",
+      "name_th": "สถานีฮาราจูกุ",
+      "name_en": "Harajuku Station",
+      "ward": "Shibuya",
+      "lat": 35.670168,
+      "lon": 139.702687,
+      "lines": "LN_YAMANOTE"
+    },
+    "ST_SHIMBASHI": {
+      "type": "Station",
+      "name_th": "สถานีชิมบาชิ",
+      "name_en": "Shimbashi Station",
+      "ward": "Minato",
+      "lat": 35.666379,
+      "lon": 139.75834,
+      "lines": "LN_YAMANOTE;LN_GINZA;LN_ASAKUSA;LN_YURIKAMOME"
+    },
+    "ST_HAMAMATSUCHO": {
+      "type": "Station",
+      "name_th": "สถานีฮามามัตสึโจ (โตเกียวทาวเวอร์)",
+      "name_en": "Hamamatsucho Station",
+      "ward": "Minato",
+      "lat": 35.655381,
+      "lon": 139.757135,
+      "lines": "LN_YAMANOTE;LN_OEDO"
+    },
+    "ST_IKEBUKURO": {
+      "type": "Station",
+      "name_th": "สถานีอิเคะบุคุโระ",
+      "name_en": "Ikebukuro Station",
+      "ward": "Toshima",
+      "lat": 35.729503,
+      "lon": 139.7109,
+      "lines": "LN_YAMANOTE;LN_MARUNOUCHI"
+    },
+    "ST_ODAIBA_KAIHINKOEN": {
+      "type": "Station",
+      "name_th": "สถานีโอไดบะ ไคฮินโคเอ็น",
+      "name_en": "Odaiba-Kaihinkoen Station",
+      "ward": "Minato",
+      "lat": 35.629344,
+      "lon": 139.777085,
+      "lines": "LN_YURIKAMOME"
+    },
+    "ST_SHINJUKU_GYOEMMAE": {
+      "type": "Station",
+      "name_th": "สถานีชินจูกุเกียวเอ็นมาเอะ",
+      "name_en": "Shinjuku-gyoemmae Station",
+      "ward": "Shinjuku",
+      "lat": 35.688647,
+      "lon": 139.710928,
+      "lines": "LN_MARUNOUCHI"
+    },
+    "ST_TSUKIJI": {
+      "type": "Station",
+      "name_th": "สถานีสึกิจิ",
+      "name_en": "Tsukiji Station",
+      "ward": "Chuo",
+      "lat": 35.667794,
+      "lon": 139.772591,
+      "lines": "LN_HIBIYA"
+    },
+    "ST_TOYOSU": {
+      "type": "Station",
+      "name_th": "สถานีโทโยสุ",
+      "name_en": "Toyosu Station",
+      "ward": "Koto",
+      "lat": 35.654824,
+      "lon": 139.796338,
+      "lines": "LN_YURIKAMOME"
+    },
+    "P_SENSOJI": {
+      "type": "Place",
+      "name_th": "วัดเซ็นโซจิ (วัดอาซากุสะ)",
+      "name_en": "Senso-ji Temple",
+      "ward": "Taito",
+      "category": "Temple & Shrine",
+      "lat": 35.714765,
+      "lon": 139.796655,
+      "nearest_station_id": "ST_ASAKUSA",
+      "walk_time_min": 5,
+      "opening_hours": "06:00 - 17:00 (ตัวโบสถ์หลัก) / บริเวณวัดเปิด 24 ชั่วโมง",
+      "admission_fee": "เข้าชมฟรี"
+    },
+    "P_TOKYO_SKYTREE": {
+      "type": "Place",
+      "name_th": "โตเกียวสกายทรี",
+      "name_en": "Tokyo Skytree",
+      "ward": "Sumida",
+      "category": "Landmark & Viewpoint",
+      "lat": 35.710063,
+      "lon": 139.8107,
+      "nearest_station_id": "ST_OSHIAGE",
+      "walk_time_min": 2,
+      "opening_hours": "10:00 - 21:00 (รอบสุดท้าย 20:00)",
+      "admission_fee": "ผู้ใหญ่เริ่มต้น 2,100 เยน (ขึ้นอยู่กับชั้นชมวิว)"
+    },
+    "P_SHIBUYA_CROSSING": {
+      "type": "Place",
+      "name_th": "ห้าแยกชิบูย่าและรูปปั้นฮาจิโกะ",
+      "name_en": "Shibuya Crossing & Hachiko Statue",
+      "ward": "Shibuya",
+      "category": "Landmark & Viewpoint",
+      "lat": 35.659482,
+      "lon": 139.700553,
+      "nearest_station_id": "ST_SHIBUYA",
+      "walk_time_min": 1,
+      "opening_hours": "เปิด 24 ชั่วโมง",
+      "admission_fee": "เข้าชมฟรี"
+    },
+    "P_MEIJI_JINGU": {
+      "type": "Place",
+      "name_th": "ศาลเจ้าเมจิ",
+      "name_en": "Meiji Jingu Shrine",
+      "ward": "Shibuya",
+      "category": "Temple & Shrine",
+      "lat": 35.676398,
+      "lon": 139.699326,
+      "nearest_station_id": "ST_HARAJUKU",
+      "walk_time_min": 3,
+      "opening_hours": "เปิดตั้งแต่พระอาทิตย์ขึ้นจนถึงพระอาทิตย์ตก (ประมาณ 05:00 - 18:00)",
+      "admission_fee": "เข้าชมฟรี (ส่วนสวนชั้นใน Inner Garden มีค่าเข้า 500 เยน)"
+    },
+    "P_TOKYO_TOWER": {
+      "type": "Place",
+      "name_th": "โตเกียวทาวเวอร์",
+      "name_en": "Tokyo Tower",
+      "ward": "Minato",
+      "category": "Landmark & Viewpoint",
+      "lat": 35.65858,
+      "lon": 139.745433,
+      "nearest_station_id": "ST_HAMAMATSUCHO",
+      "walk_time_min": 15,
+      "opening_hours": "09:00 - 22:30",
+      "admission_fee": "Main Deck ผู้ใหญ่ 1,200 เยน / Top Deck Tour 3,000 เยน"
+    },
+    "P_SHINJUKU_GYOEN": {
+      "type": "Place",
+      "name_th": "สวนสาธารณะชินจูกุเกียวเอ็น",
+      "name_en": "Shinjuku Gyoen National Garden",
+      "ward": "Shinjuku",
+      "category": "Nature & Park",
+      "lat": 35.685176,
+      "lon": 139.710052,
+      "nearest_station_id": "ST_SHINJUKU_GYOEMMAE",
+      "walk_time_min": 5,
+      "opening_hours": "09:00 - 16:30 (ปิดทุกวันจันทร์)",
+      "admission_fee": "ผู้ใหญ่ 500 เยน"
+    },
+    "P_AKIHABARA_ELECTRIC": {
+      "type": "Place",
+      "name_th": "ย่านเครื่องใช้ไฟฟ้าและอนิเมะอากิฮาบาระ",
+      "name_en": "Akihabara Electric Town",
+      "ward": "Chiyoda",
+      "category": "Shopping & Entertainment",
+      "lat": 35.699732,
+      "lon": 139.77138,
+      "nearest_station_id": "ST_AKIHABARA",
+      "walk_time_min": 1,
+      "opening_hours": "ร้านค้าส่วนใหญ่เปิด 10:00 - 20:00",
+      "admission_fee": "เดินชมฟรี"
+    },
+    "P_TSUKIJI_OUTER": {
+      "type": "Place",
+      "name_th": "ตลาดปลาสึกิจิ (ตลาดนอก)",
+      "name_en": "Tsukiji Outer Market",
+      "ward": "Chuo",
+      "category": "Food & Market",
+      "lat": 35.665518,
+      "lon": 139.770743,
+      "nearest_station_id": "ST_TSUKIJI",
+      "walk_time_min": 4,
+      "opening_hours": "06:00 - 14:00 (ร้านส่วนใหญ่ปิดวันพุธและอาทิตย์)",
+      "admission_fee": "เข้าชมฟรี"
+    },
+    "P_UENO_PARK": {
+      "type": "Place",
+      "name_th": "สวนอุเอโนะและพิพิธภัณฑ์แห่งชาติ",
+      "name_en": "Ueno Park & National Museum",
+      "ward": "Taito",
+      "category": "Culture & Museum",
+      "lat": 35.715368,
+      "lon": 139.77395,
+      "nearest_station_id": "ST_UENO",
+      "walk_time_min": 2,
+      "opening_hours": "05:00 - 23:00 (สวนเปิด) / พิพิธภัณฑ์เปิด 09:30 - 17:00",
+      "admission_fee": "เข้าสวนฟรี / ตั๋วเข้าพิพิธภัณฑ์เริ่มต้น 1,000 เยน"
+    },
+    "P_ROPPONGI_HILLS": {
+      "type": "Place",
+      "name_th": "รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว",
+      "name_en": "Roppongi Hills & Tokyo City View",
+      "ward": "Minato",
+      "category": "Landmark & Viewpoint",
+      "lat": 35.660464,
+      "lon": 139.729249,
+      "nearest_station_id": "ST_ROPPONGI",
+      "walk_time_min": 3,
+      "opening_hours": "10:00 - 22:00",
+      "admission_fee": "จุดชมวิวและพิพิธภัณฑ์ผู้ใหญ่ประมาณ 2,000 เยน"
+    },
+    "P_GINZA_SIX": {
+      "type": "Place",
+      "name_th": "ย่านช้อปปิ้งกินซ่าและห้างกินซ่าซิกซ์",
+      "name_en": "Ginza Shopping District & GINZA SIX",
+      "ward": "Chuo",
+      "category": "Shopping & Entertainment",
+      "lat": 35.669611,
+      "lon": 139.764024,
+      "nearest_station_id": "ST_GINZA",
+      "walk_time_min": 2,
+      "opening_hours": "10:30 - 20:30",
+      "admission_fee": "เข้าชมฟรี"
+    },
+    "P_ODAIBA_GUNDAM": {
+      "type": "Place",
+      "name_th": "โอไดบะและหุ่นยนต์กันดั้มยักษ์ยูนิคอร์น",
+      "name_en": "Odaiba & Unicorn Gundam Statue",
+      "ward": "Minato",
+      "category": "Shopping & Entertainment",
+      "lat": 35.624444,
+      "lon": 139.775556,
+      "nearest_station_id": "ST_ODAIBA_KAIHINKOEN",
+      "walk_time_min": 5,
+      "opening_hours": "ชมหุ่นยนต์เปิด 24 ชั่วโมง / การแสดงแสงสีเสียงช่วงค่ำ (19:00 - 21:30)",
+      "admission_fee": "ชมฟรี"
+    }
+  },
+  "edges": [
+    {
+      "from": "ST_TOKYO",
+      "to": "ST_SHIMBASHI",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YAMANOTE",
+      "line_name": "JR Yamanote Line",
+      "weight": 4.0,
+      "duration_min": 4,
+      "distance_km": 1.9
+    },
+    {
+      "from": "ST_TOKYO",
+      "to": "ST_AKIHABARA",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YAMANOTE",
+      "line_name": "JR Yamanote Line",
+      "weight": 4.0,
+      "duration_min": 4,
+      "distance_km": 2.0
+    },
+    {
+      "from": "ST_TOKYO",
+      "to": "ST_IKEBUKURO",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_MARUNOUCHI",
+      "line_name": "Tokyo Metro Marunouchi Line",
+      "weight": 17.0,
+      "duration_min": 17,
+      "distance_km": 8.7
+    },
+    {
+      "from": "ST_TOKYO",
+      "to": "ST_GINZA",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_MARUNOUCHI",
+      "line_name": "Tokyo Metro Marunouchi Line",
+      "weight": 3.0,
+      "duration_min": 3,
+      "distance_km": 1.1
+    },
+    {
+      "from": "ST_SHINJUKU",
+      "to": "ST_HARAJUKU",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YAMANOTE",
+      "line_name": "JR Yamanote Line",
+      "weight": 4.0,
+      "duration_min": 4,
+      "distance_km": 2.4
+    },
+    {
+      "from": "ST_SHINJUKU",
+      "to": "ST_IKEBUKURO",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YAMANOTE",
+      "line_name": "JR Yamanote Line",
+      "weight": 9.0,
+      "duration_min": 9,
+      "distance_km": 4.8
+    },
+    {
+      "from": "ST_SHINJUKU",
+      "to": "ST_SHINJUKU_GYOEMMAE",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_MARUNOUCHI",
+      "line_name": "Tokyo Metro Marunouchi Line",
+      "weight": 3.0,
+      "duration_min": 3,
+      "distance_km": 1.1
+    },
+    {
+      "from": "ST_SHINJUKU",
+      "to": "ST_ROPPONGI",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_OEDO",
+      "line_name": "Toei Oedo Line",
+      "weight": 9.0,
+      "duration_min": 9,
+      "distance_km": 4.5
+    },
+    {
+      "from": "ST_SHIBUYA",
+      "to": "ST_HAMAMATSUCHO",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YAMANOTE",
+      "line_name": "JR Yamanote Line",
+      "weight": 14.0,
+      "duration_min": 14,
+      "distance_km": 7.4
+    },
+    {
+      "from": "ST_SHIBUYA",
+      "to": "ST_HARAJUKU",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YAMANOTE",
+      "line_name": "JR Yamanote Line",
+      "weight": 2.0,
+      "duration_min": 2,
+      "distance_km": 1.2
+    },
+    {
+      "from": "ST_SHIBUYA",
+      "to": "ST_GINZA",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_GINZA",
+      "line_name": "Tokyo Metro Ginza Line",
+      "weight": 16.0,
+      "duration_min": 16,
+      "distance_km": 6.7
+    },
+    {
+      "from": "ST_SHIBUYA",
+      "to": "ST_OSHIAGE",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_HANZOMON",
+      "line_name": "Tokyo Metro Hanzomon Line",
+      "weight": 31.0,
+      "duration_min": 31,
+      "distance_km": 15.2
+    },
+    {
+      "from": "ST_SHIBUYA",
+      "to": "P_SHIBUYA_CROSSING",
+      "relation": "NEAR_PLACE",
+      "weight": 1.0,
+      "walk_time_min": 1,
+      "distance_m": 50,
+      "exit_info": "Hachiko Exit"
+    },
+    {
+      "from": "ST_ASAKUSA",
+      "to": "ST_UENO",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_GINZA",
+      "line_name": "Tokyo Metro Ginza Line",
+      "weight": 5.0,
+      "duration_min": 5,
+      "distance_km": 2.2
+    },
+    {
+      "from": "ST_ASAKUSA",
+      "to": "ST_OSHIAGE",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_ASAKUSA",
+      "line_name": "Toei Asakusa Line",
+      "weight": 3.0,
+      "duration_min": 3,
+      "distance_km": 1.5
+    },
+    {
+      "from": "ST_ASAKUSA",
+      "to": "ST_SHIMBASHI",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_ASAKUSA",
+      "line_name": "Toei Asakusa Line",
+      "weight": 14.0,
+      "duration_min": 14,
+      "distance_km": 6.8
+    },
+    {
+      "from": "ST_ASAKUSA",
+      "to": "P_SENSOJI",
+      "relation": "NEAR_PLACE",
+      "weight": 5.0,
+      "walk_time_min": 5,
+      "distance_m": 350,
+      "exit_info": "Exit 1 (Tokyo Metro Ginza Line)"
+    },
+    {
+      "from": "ST_UENO",
+      "to": "ST_IKEBUKURO",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YAMANOTE",
+      "line_name": "JR Yamanote Line",
+      "weight": 16.0,
+      "duration_min": 16,
+      "distance_km": 8.1
+    },
+    {
+      "from": "ST_UENO",
+      "to": "ST_AKIHABARA",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_HIBIYA",
+      "line_name": "Tokyo Metro Hibiya Line",
+      "weight": 3.0,
+      "duration_min": 3,
+      "distance_km": 1.6
+    },
+    {
+      "from": "ST_UENO",
+      "to": "ST_GINZA",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_GINZA",
+      "line_name": "Tokyo Metro Ginza Line",
+      "weight": 12.0,
+      "duration_min": 12,
+      "distance_km": 4.5
+    },
+    {
+      "from": "ST_UENO",
+      "to": "ST_ASAKUSA",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_GINZA",
+      "line_name": "Tokyo Metro Ginza Line",
+      "weight": 5.0,
+      "duration_min": 5,
+      "distance_km": 2.2
+    },
+    {
+      "from": "ST_UENO",
+      "to": "P_UENO_PARK",
+      "relation": "NEAR_PLACE",
+      "weight": 2.0,
+      "walk_time_min": 2,
+      "distance_m": 120,
+      "exit_info": "Park Exit"
+    },
+    {
+      "from": "ST_AKIHABARA",
+      "to": "ST_UENO",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_HIBIYA",
+      "line_name": "Tokyo Metro Hibiya Line",
+      "weight": 3.0,
+      "duration_min": 3,
+      "distance_km": 1.6
+    },
+    {
+      "from": "ST_AKIHABARA",
+      "to": "ST_TOKYO",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YAMANOTE",
+      "line_name": "JR Yamanote Line",
+      "weight": 4.0,
+      "duration_min": 4,
+      "distance_km": 2.0
+    },
+    {
+      "from": "ST_AKIHABARA",
+      "to": "ST_GINZA",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_HIBIYA",
+      "line_name": "Tokyo Metro Hibiya Line",
+      "weight": 9.0,
+      "duration_min": 9,
+      "distance_km": 3.7
+    },
+    {
+      "from": "ST_AKIHABARA",
+      "to": "P_AKIHABARA_ELECTRIC",
+      "relation": "NEAR_PLACE",
+      "weight": 1.0,
+      "walk_time_min": 1,
+      "distance_m": 80,
+      "exit_info": "Electric Town Exit"
+    },
+    {
+      "from": "ST_GINZA",
+      "to": "ST_SHIBUYA",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_GINZA",
+      "line_name": "Tokyo Metro Ginza Line",
+      "weight": 16.0,
+      "duration_min": 16,
+      "distance_km": 6.7
+    },
+    {
+      "from": "ST_GINZA",
+      "to": "ST_SHIMBASHI",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_GINZA",
+      "line_name": "Tokyo Metro Ginza Line",
+      "weight": 2.0,
+      "duration_min": 2,
+      "distance_km": 0.9
+    },
+    {
+      "from": "ST_GINZA",
+      "to": "ST_UENO",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_GINZA",
+      "line_name": "Tokyo Metro Ginza Line",
+      "weight": 12.0,
+      "duration_min": 12,
+      "distance_km": 4.5
+    },
+    {
+      "from": "ST_GINZA",
+      "to": "ST_TOKYO",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_MARUNOUCHI",
+      "line_name": "Tokyo Metro Marunouchi Line",
+      "weight": 3.0,
+      "duration_min": 3,
+      "distance_km": 1.1
+    },
+    {
+      "from": "ST_GINZA",
+      "to": "ST_SHINJUKU_GYOEMMAE",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_MARUNOUCHI",
+      "line_name": "Tokyo Metro Marunouchi Line",
+      "weight": 13.0,
+      "duration_min": 13,
+      "distance_km": 5.9
+    },
+    {
+      "from": "ST_GINZA",
+      "to": "ST_AKIHABARA",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_HIBIYA",
+      "line_name": "Tokyo Metro Hibiya Line",
+      "weight": 9.0,
+      "duration_min": 9,
+      "distance_km": 3.7
+    },
+    {
+      "from": "ST_GINZA",
+      "to": "ST_TSUKIJI",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_HIBIYA",
+      "line_name": "Tokyo Metro Hibiya Line",
+      "weight": 3.0,
+      "duration_min": 3,
+      "distance_km": 1.4
+    },
+    {
+      "from": "ST_GINZA",
+      "to": "ST_ROPPONGI",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_HIBIYA",
+      "line_name": "Tokyo Metro Hibiya Line",
+      "weight": 9.0,
+      "duration_min": 9,
+      "distance_km": 4.1
+    },
+    {
+      "from": "ST_GINZA",
+      "to": "P_GINZA_SIX",
+      "relation": "NEAR_PLACE",
+      "weight": 2.0,
+      "walk_time_min": 2,
+      "distance_m": 180,
+      "exit_info": "Exit A3"
+    },
+    {
+      "from": "ST_ROPPONGI",
+      "to": "ST_GINZA",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_HIBIYA",
+      "line_name": "Tokyo Metro Hibiya Line",
+      "weight": 9.0,
+      "duration_min": 9,
+      "distance_km": 4.1
+    },
+    {
+      "from": "ST_ROPPONGI",
+      "to": "ST_SHINJUKU",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_OEDO",
+      "line_name": "Toei Oedo Line",
+      "weight": 9.0,
+      "duration_min": 9,
+      "distance_km": 4.5
+    },
+    {
+      "from": "ST_ROPPONGI",
+      "to": "ST_HAMAMATSUCHO",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_OEDO",
+      "line_name": "Toei Oedo Line",
+      "weight": 6.0,
+      "duration_min": 6,
+      "distance_km": 2.8
+    },
+    {
+      "from": "ST_ROPPONGI",
+      "to": "P_ROPPONGI_HILLS",
+      "relation": "NEAR_PLACE",
+      "weight": 3.0,
+      "walk_time_min": 3,
+      "distance_m": 250,
+      "exit_info": "Exit 1C (Direct Concourse)"
+    },
+    {
+      "from": "ST_OSHIAGE",
+      "to": "ST_ASAKUSA",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_ASAKUSA",
+      "line_name": "Toei Asakusa Line",
+      "weight": 3.0,
+      "duration_min": 3,
+      "distance_km": 1.5
+    },
+    {
+      "from": "ST_OSHIAGE",
+      "to": "ST_SHIBUYA",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_HANZOMON",
+      "line_name": "Tokyo Metro Hanzomon Line",
+      "weight": 31.0,
+      "duration_min": 31,
+      "distance_km": 15.2
+    },
+    {
+      "from": "ST_OSHIAGE",
+      "to": "P_TOKYO_SKYTREE",
+      "relation": "NEAR_PLACE",
+      "weight": 2.0,
+      "walk_time_min": 2,
+      "distance_m": 150,
+      "exit_info": "Direct Underground Link to Solamachi"
+    },
+    {
+      "from": "ST_HARAJUKU",
+      "to": "ST_SHIBUYA",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YAMANOTE",
+      "line_name": "JR Yamanote Line",
+      "weight": 2.0,
+      "duration_min": 2,
+      "distance_km": 1.2
+    },
+    {
+      "from": "ST_HARAJUKU",
+      "to": "ST_SHINJUKU",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YAMANOTE",
+      "line_name": "JR Yamanote Line",
+      "weight": 4.0,
+      "duration_min": 4,
+      "distance_km": 2.4
+    },
+    {
+      "from": "ST_HARAJUKU",
+      "to": "P_MEIJI_JINGU",
+      "relation": "NEAR_PLACE",
+      "weight": 3.0,
+      "walk_time_min": 3,
+      "distance_m": 200,
+      "exit_info": "Omotesando Exit"
+    },
+    {
+      "from": "ST_SHIMBASHI",
+      "to": "ST_TOKYO",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YAMANOTE",
+      "line_name": "JR Yamanote Line",
+      "weight": 4.0,
+      "duration_min": 4,
+      "distance_km": 1.9
+    },
+    {
+      "from": "ST_SHIMBASHI",
+      "to": "ST_HAMAMATSUCHO",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YAMANOTE",
+      "line_name": "JR Yamanote Line",
+      "weight": 2.0,
+      "duration_min": 2,
+      "distance_km": 1.2
+    },
+    {
+      "from": "ST_SHIMBASHI",
+      "to": "ST_GINZA",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_GINZA",
+      "line_name": "Tokyo Metro Ginza Line",
+      "weight": 2.0,
+      "duration_min": 2,
+      "distance_km": 0.9
+    },
+    {
+      "from": "ST_SHIMBASHI",
+      "to": "ST_ASAKUSA",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_ASAKUSA",
+      "line_name": "Toei Asakusa Line",
+      "weight": 14.0,
+      "duration_min": 14,
+      "distance_km": 6.8
+    },
+    {
+      "from": "ST_SHIMBASHI",
+      "to": "ST_ODAIBA_KAIHINKOEN",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YURIKAMOME",
+      "line_name": "Yurikamome Line",
+      "weight": 13.0,
+      "duration_min": 13,
+      "distance_km": 5.0
+    },
+    {
+      "from": "ST_HAMAMATSUCHO",
+      "to": "ST_SHIMBASHI",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YAMANOTE",
+      "line_name": "JR Yamanote Line",
+      "weight": 2.0,
+      "duration_min": 2,
+      "distance_km": 1.2
+    },
+    {
+      "from": "ST_HAMAMATSUCHO",
+      "to": "ST_SHIBUYA",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YAMANOTE",
+      "line_name": "JR Yamanote Line",
+      "weight": 14.0,
+      "duration_min": 14,
+      "distance_km": 7.4
+    },
+    {
+      "from": "ST_HAMAMATSUCHO",
+      "to": "ST_ROPPONGI",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_OEDO",
+      "line_name": "Toei Oedo Line",
+      "weight": 6.0,
+      "duration_min": 6,
+      "distance_km": 2.8
+    },
+    {
+      "from": "ST_HAMAMATSUCHO",
+      "to": "P_TOKYO_TOWER",
+      "relation": "NEAR_PLACE",
+      "weight": 15.0,
+      "walk_time_min": 15,
+      "distance_m": 1100,
+      "exit_info": "North Exit"
+    },
+    {
+      "from": "ST_IKEBUKURO",
+      "to": "ST_SHINJUKU",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YAMANOTE",
+      "line_name": "JR Yamanote Line",
+      "weight": 9.0,
+      "duration_min": 9,
+      "distance_km": 4.8
+    },
+    {
+      "from": "ST_IKEBUKURO",
+      "to": "ST_UENO",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YAMANOTE",
+      "line_name": "JR Yamanote Line",
+      "weight": 16.0,
+      "duration_min": 16,
+      "distance_km": 8.1
+    },
+    {
+      "from": "ST_IKEBUKURO",
+      "to": "ST_TOKYO",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_MARUNOUCHI",
+      "line_name": "Tokyo Metro Marunouchi Line",
+      "weight": 17.0,
+      "duration_min": 17,
+      "distance_km": 8.7
+    },
+    {
+      "from": "ST_ODAIBA_KAIHINKOEN",
+      "to": "ST_SHIMBASHI",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YURIKAMOME",
+      "line_name": "Yurikamome Line",
+      "weight": 13.0,
+      "duration_min": 13,
+      "distance_km": 5.0
+    },
+    {
+      "from": "ST_ODAIBA_KAIHINKOEN",
+      "to": "ST_TOYOSU",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YURIKAMOME",
+      "line_name": "Yurikamome Line",
+      "weight": 16.0,
+      "duration_min": 16,
+      "distance_km": 6.9
+    },
+    {
+      "from": "ST_ODAIBA_KAIHINKOEN",
+      "to": "P_ODAIBA_GUNDAM",
+      "relation": "NEAR_PLACE",
+      "weight": 5.0,
+      "walk_time_min": 5,
+      "distance_m": 400,
+      "exit_info": "North Exit"
+    },
+    {
+      "from": "ST_SHINJUKU_GYOEMMAE",
+      "to": "ST_GINZA",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_MARUNOUCHI",
+      "line_name": "Tokyo Metro Marunouchi Line",
+      "weight": 13.0,
+      "duration_min": 13,
+      "distance_km": 5.9
+    },
+    {
+      "from": "ST_SHINJUKU_GYOEMMAE",
+      "to": "ST_SHINJUKU",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_MARUNOUCHI",
+      "line_name": "Tokyo Metro Marunouchi Line",
+      "weight": 3.0,
+      "duration_min": 3,
+      "distance_km": 1.1
+    },
+    {
+      "from": "ST_SHINJUKU_GYOEMMAE",
+      "to": "P_SHINJUKU_GYOEN",
+      "relation": "NEAR_PLACE",
+      "weight": 5.0,
+      "walk_time_min": 5,
+      "distance_m": 350,
+      "exit_info": "Exit 1 (Shinjuku Gate)"
+    },
+    {
+      "from": "ST_TSUKIJI",
+      "to": "ST_GINZA",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_HIBIYA",
+      "line_name": "Tokyo Metro Hibiya Line",
+      "weight": 3.0,
+      "duration_min": 3,
+      "distance_km": 1.4
+    },
+    {
+      "from": "ST_TSUKIJI",
+      "to": "P_TSUKIJI_OUTER",
+      "relation": "NEAR_PLACE",
+      "weight": 4.0,
+      "walk_time_min": 4,
+      "distance_m": 300,
+      "exit_info": "Exit 1"
+    },
+    {
+      "from": "ST_TOYOSU",
+      "to": "ST_ODAIBA_KAIHINKOEN",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YURIKAMOME",
+      "line_name": "Yurikamome Line",
+      "weight": 16.0,
+      "duration_min": 16,
+      "distance_km": 6.9
+    },
+    {
+      "from": "P_SENSOJI",
+      "to": "ST_ASAKUSA",
+      "relation": "NEAR_STATION",
+      "weight": 5.0,
+      "walk_time_min": 5,
+      "distance_m": 350,
+      "exit_info": "Exit 1 (Tokyo Metro Ginza Line)"
+    },
+    {
+      "from": "P_TOKYO_SKYTREE",
+      "to": "ST_OSHIAGE",
+      "relation": "NEAR_STATION",
+      "weight": 2.0,
+      "walk_time_min": 2,
+      "distance_m": 150,
+      "exit_info": "Direct Underground Link to Solamachi"
+    },
+    {
+      "from": "P_SHIBUYA_CROSSING",
+      "to": "ST_SHIBUYA",
+      "relation": "NEAR_STATION",
+      "weight": 1.0,
+      "walk_time_min": 1,
+      "distance_m": 50,
+      "exit_info": "Hachiko Exit"
+    },
+    {
+      "from": "P_MEIJI_JINGU",
+      "to": "ST_HARAJUKU",
+      "relation": "NEAR_STATION",
+      "weight": 3.0,
+      "walk_time_min": 3,
+      "distance_m": 200,
+      "exit_info": "Omotesando Exit"
+    },
+    {
+      "from": "P_TOKYO_TOWER",
+      "to": "ST_HAMAMATSUCHO",
+      "relation": "NEAR_STATION",
+      "weight": 15.0,
+      "walk_time_min": 15,
+      "distance_m": 1100,
+      "exit_info": "North Exit"
+    },
+    {
+      "from": "P_SHINJUKU_GYOEN",
+      "to": "ST_SHINJUKU_GYOEMMAE",
+      "relation": "NEAR_STATION",
+      "weight": 5.0,
+      "walk_time_min": 5,
+      "distance_m": 350,
+      "exit_info": "Exit 1 (Shinjuku Gate)"
+    },
+    {
+      "from": "P_AKIHABARA_ELECTRIC",
+      "to": "ST_AKIHABARA",
+      "relation": "NEAR_STATION",
+      "weight": 1.0,
+      "walk_time_min": 1,
+      "distance_m": 80,
+      "exit_info": "Electric Town Exit"
+    },
+    {
+      "from": "P_TSUKIJI_OUTER",
+      "to": "ST_TSUKIJI",
+      "relation": "NEAR_STATION",
+      "weight": 4.0,
+      "walk_time_min": 4,
+      "distance_m": 300,
+      "exit_info": "Exit 1"
+    },
+    {
+      "from": "P_UENO_PARK",
+      "to": "ST_UENO",
+      "relation": "NEAR_STATION",
+      "weight": 2.0,
+      "walk_time_min": 2,
+      "distance_m": 120,
+      "exit_info": "Park Exit"
+    },
+    {
+      "from": "P_ROPPONGI_HILLS",
+      "to": "ST_ROPPONGI",
+      "relation": "NEAR_STATION",
+      "weight": 3.0,
+      "walk_time_min": 3,
+      "distance_m": 250,
+      "exit_info": "Exit 1C (Direct Concourse)"
+    },
+    {
+      "from": "P_GINZA_SIX",
+      "to": "ST_GINZA",
+      "relation": "NEAR_STATION",
+      "weight": 2.0,
+      "walk_time_min": 2,
+      "distance_m": 180,
+      "exit_info": "Exit A3"
+    },
+    {
+      "from": "P_ODAIBA_GUNDAM",
+      "to": "ST_ODAIBA_KAIHINKOEN",
+      "relation": "NEAR_STATION",
+      "weight": 5.0,
+      "walk_time_min": 5,
+      "distance_m": 400,
+      "exit_info": "North Exit"
+    }
+  ]
+}
