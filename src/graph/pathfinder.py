@@ -483,11 +483,64 @@ class TokyoGraphPathfinder:
                         + "\n".join(items)
                     )
 
+        # 3. ถ้ายังไม่พบบริบทเฉพาะเจาะจง ให้ตรวจจับคำถาม Multi-hop หรือ Category-based Preference
+        if not context_parts:
+            # 3.1 Multi-hop Spatial Query (เช่น "หาวัดที่อยู่ใกล้สถานีรถไฟและมีสถานที่ทางประวัติศาสตร์อื่นอยู่ในระยะเดินถึง")
+            if any(k in clean_q for k in ["ระยะเดิน", "เดินถึง", "ใกล้สถานี", "อยู่ใกล้", "และมี"]) and any(k in clean_q for k in ["วัด", "ศาลเจ้า", "ประวัติศาสตร์", "พิพิธภัณฑ์", "ตลาด", "สวน", "สตรีทฟู้ด"]):
+                multihop_items = []
+                for s_node, s_data in self.nx_graph.nodes(data=True):
+                    if s_data.get("type") == "Station":
+                        s_name = s_data.get("name_th", s_node)
+                        nearby = self.find_nearby_places(s_node)
+                        if nearby:
+                            # ตรวจสอบสถานที่ที่เดินถึงได้สะดวก (walk_time_min <= 10)
+                            walkable = [p for p in nearby if p.get("walk_time_min", 99) <= 10]
+                            if walkable:
+                                p_desc = [f"{p['name_th']} ({p['category']}, เดิน ~{p['walk_time_min']} นาที)" for p in walkable]
+                                multihop_items.append(f"- ย่านสถานี {s_name}: มี {', '.join(p_desc)}")
+
+                if multihop_items:
+                    context_parts.append(
+                        "[ข้อมูลการสืบค้นความสัมพันธ์เชิงพื้นที่หลายชั้นจาก Knowledge Graph (Multi-hop Spatial Query)]:\n"
+                        + "\n".join(multihop_items[:5])
+                    )
+
+            # 3.2 Category-based Preference Query (เช่น "ชอบประวัติศาสตร์", "ไม่สนใจช้อปปิ้ง", "สายอนิเมะ", "ชอบธรรมชาติ")
+            elif any(k in clean_q for k in ["ประวัติศาสตร์", "วัฒนธรรม", "โบราณ", "วัด", "ศาลเจ้า", "อนิเมะ", "อาหาร", "ตลาด", "สวน", "ธรรมชาติ"]):
+                matched_places = []
+                for p_node, p_data in self.nx_graph.nodes(data=True):
+                    if p_data.get("type") == "Place":
+                        cat = p_data.get("category", "")
+                        desc = p_data.get("description_th", "")
+                        name = p_data.get("name_th", p_node)
+                        st_id = p_data.get("nearest_station_id", "")
+                        st_name = self.nx_graph.nodes[st_id].get("name_th", st_id) if st_id in self.nx_graph else ""
+
+                        is_match = False
+                        if any(k in clean_q for k in ["ประวัติศาสตร์", "วัฒนธรรม", "โบราณ", "วัด", "ศาลเจ้า"]) and ("Culture" in cat or "Temple" in cat or "History" in cat or "ประวัติ" in desc):
+                            is_match = True
+                        elif any(k in clean_q for k in ["อนิเมะ", "เกม", "ฟิกเกอร์"]) and ("Anime" in desc or "Shopping" in cat or "อากิฮาบาระ" in name):
+                            is_match = True
+                        elif any(k in clean_q for k in ["อาหาร", "ตลาด", "สตรีทฟู้ด", "กิน"]) and ("Food" in cat or "ตลาด" in name or "อาหาร" in desc):
+                            is_match = True
+                        elif any(k in clean_q for k in ["สวน", "ธรรมชาติ", "ซากุระ"]) and ("Nature" in cat or "สวน" in name):
+                            is_match = True
+
+                        if is_match:
+                            matched_places.append(f"- {name} ({cat}, สถานีใกล้เคียง: {st_name})")
+
+                if matched_places:
+                    context_parts.append(
+                        "[สถานที่ท่องเที่ยวตรงตามหมวดหมู่ความสนใจจาก Knowledge Graph]:\n"
+                        + "\n".join(matched_places[:6])
+                    )
+
         if not context_parts:
             # Fallback ทั่วไป
             return "โครงข่ายความสัมพันธ์: รองรับการเดินทางเชื่อมต่อระหว่างสถานีหลักในโตเกียว (JR Yamanote, Tokyo Metro Ginza, Marunouchi, Hibiya, Asakusa, Oedo, Yurikamome)"
 
         return "\n\n".join(context_parts)
+
 
 if __name__ == "__main__":
     pf = TokyoGraphPathfinder()
