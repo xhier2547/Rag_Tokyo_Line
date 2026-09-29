@@ -138,7 +138,28 @@ class TokyoHybridRAGEngine:
                 scored_candidates.append((doc, final_score))
 
             scored_candidates.sort(key=lambda x: x[1], reverse=True)
-            return [doc for doc, score in scored_candidates[:top_n]]
+
+            # Diversity-Aware Selection: เลือกสถานที่ (place_id) ที่ไม่ซ้ำกันก่อน เพื่อให้ครอบคลุมหลายสถานที่
+            selected_docs: List[Document] = []
+            seen_places = set()
+
+            for doc, score in scored_candidates:
+                place_id = doc.metadata.get("place_id") or doc.metadata.get("title", "")
+                if place_id not in seen_places:
+                    seen_places.add(place_id)
+                    selected_docs.append(doc)
+                    if len(selected_docs) >= top_n:
+                        break
+
+            # หากจำนวนยังไม่ครบ top_n ให้เติมด้วย chunks รายละเอียดที่เหลือ
+            if len(selected_docs) < top_n:
+                for doc, score in scored_candidates:
+                    if doc not in selected_docs:
+                        selected_docs.append(doc)
+                        if len(selected_docs) >= top_n:
+                            break
+
+            return selected_docs
         except Exception as e:
             print(f"[TokyoHybridRAGEngine] Re-ranking fallback warning: {e}")
             return candidates[:top_n]
@@ -146,14 +167,22 @@ class TokyoHybridRAGEngine:
     def retrieve_hybrid_context(
         self,
         query: str,
-        top_k_retrieval: int = 6,
-        top_n_rerank: int = 3
+        top_k_retrieval: int = 15,
+        top_n_rerank: int = 5
     ) -> HybridContextResult:
         """
         Pipeline หลักของการทำ Hybrid Retrieval:
         Routing -> (Dense + BM25 -> RRF -> Rerank) + (Neo4j Graph Traversal) -> Context Aggregation
         """
         intent = self.route_query_intent(query)
+        clean_q = query.lower()
+
+        # ปรับ Top-N อัตโนมัติหากเป็นคำถามที่ต้องการคำแนะนำหลายสถานที่ (เช่น แนะนำ 5 สถานที่, ยอดนิยม)
+        recommend_keywords = ["5", "10", "แนะนำ", "ยอดนิยม", "ที่เที่ยว", "จัดทริป", "มีที่ไหนบ้าง", "ไฮไลท์", "แลนด์มาร์ก"]
+        if any(kw in clean_q for kw in recommend_keywords):
+            top_n_rerank = max(top_n_rerank, 8)
+            top_k_retrieval = max(top_k_retrieval, 15)
+
         dense_results: List[Tuple[Document, float]] = []
         sparse_results: List[Tuple[Document, float]] = []
         graph_context = ""
