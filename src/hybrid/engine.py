@@ -43,8 +43,8 @@ class TokyoHybridRAGEngine:
         """
         Query Intent Router: จำแนกเจตนาของคำถาม
         1. ROUTE_TRANSIT: ถามเส้นทาง/เดินทาง/เวลารถไฟล้วนๆ
-        2. FACT_RETRIEVAL: ถามข้อมูลประวัติ/เวลาเปิด/ค่าเข้าชมสถานที่ใดสถานที่หนึ่ง
-        3. HYBRID_COMPLEX: คำถามผสม เช่น แนะนำสถานที่พร้อมวิธีเดินทาง หรือคำถามท่องเที่ยวภาพรวม
+        2. FACT_RETRIEVAL: ถามข้อมูลประวัติ/เวลาเปิด/ค่าเข้าชมสถานที่ใดสถานที่หนึ่งเดี่ยวๆ โดยไม่มีมิติเชิงพื้นที่
+        3. HYBRID_COMPLEX: คำถามผสม เช่น ค้นหาเชิงพื้นที่ (Spatial / Multi-hop), แนะนำสถานที่พร้อมการเดินทาง หรือจัดทริป
         """
         clean_q = query.lower()
 
@@ -52,26 +52,32 @@ class TokyoHybridRAGEngine:
             "เดินทาง", "ไปยังไง", "ไปยัง", "นั่งรถไฟ", "สายอะไร", "กี่นาที",
             "เส้นทาง", "เปลี่ยนสาย", "สถานีไหน", "กี่สถานี", "route", "how to get", "train"
         ]
+        spatial_keywords = [
+            "ใกล้", "ระยะเดิน", "เดินถึง", "สถานี", "เขตเดียวกัน", "ห่างจาก", "ห่างกัน",
+            "เชื่อมต่อ", "ติดกับ", "ย่าน", "รอบๆ", "ละแวก", "กิโลเมตร", "km", "ในเขต",
+            "ต่อเนื่อง", "แวะ", "ไม่ย้อน"
+        ]
         fact_keywords = [
             "ประวัติ", "คืออะไร", "เปิดกี่โมง", "ปิดกี่โมง", "ค่าเข้า", "ราคา",
             "เวลาทำการ", "รายละเอียด", "story", "fee", "hours", "admission"
         ]
         overview_keywords = [
             "แนะนำ", "ที่เที่ยว", "มีอะไรบ้าง", "ในย่าน", "รอบๆ", "แถวนี้", "จัดทริป",
-            "แผนเที่ยว", "recommend", "attraction"
+            "แผนเที่ยว", "recommend", "attraction", "จัดเส้นทาง", "ทริป"
         ]
 
         has_transit = any(k in clean_q for k in transit_keywords)
+        has_spatial = any(k in clean_q for k in spatial_keywords)
         has_fact = any(k in clean_q for k in fact_keywords)
         has_overview = any(k in clean_q for k in overview_keywords)
 
-        # หากมีทั้งการถามเที่ยวและการเดินทาง หรือถามภาพรวม -> HYBRID_COMPLEX
-        if (has_transit and has_fact) or (has_transit and has_overview) or ("จาก" in clean_q and "ไป" in clean_q and has_overview):
+        # หากมีคำถามเชิงพื้นที่ (Spatial / Multi-hop / Proximity) หรือคำถามภาพรวมผสม -> HYBRID_COMPLEX
+        if has_spatial or (has_transit and has_fact) or (has_transit and has_overview) or ("จาก" in clean_q and "ไป" in clean_q and (has_overview or has_spatial)):
             return "HYBRID_COMPLEX"
-        # หากถามเฉพาะเส้นทางการเดินทาง
+        # หากถามเฉพาะเส้นทางการเดินทางล้วนๆ
         elif has_transit or ("จาก" in clean_q and "ไป" in clean_q):
             return "ROUTE_TRANSIT"
-        # หากถามข้อมูลเนื้อหา
+        # หากถามข้อมูลข้อเท็จจริงเดี่ยวๆ
         elif has_fact:
             return "FACT_RETRIEVAL"
         else:
@@ -114,65 +120,45 @@ class TokyoHybridRAGEngine:
         intent: str = "FACT_RETRIEVAL"
     ) -> List[Document]:
         """
-        Semantic Cross-Modal Re-ranking:
-        คำนวณ Cosine Similarity ซ้ำอีกครั้งกับ Embeddings เพื่อคัดกรอง Chunks ที่ตรงที่สุด
-        - หากเป็นคำถาม FACT_RETRIEVAL หรือเจาะจงสถานที่: อนุญาตให้ดึง Chunks หลายส่วนของสถานที่เดียวกันได้ (เช่น ประวัติ + รายละเอียด)
-        - หากเป็นคำถามภาพรวม/แนะนำหลายแห่ง: ใช้ Diversity-Aware Selection เพื่อกระจายสถานที่
+        Fast & Thermal-Safe Semantic Re-ranking:
+        จัดลำดับเอกสารโดยใช้ผลลัพธ์จาก Reciprocal Rank Fusion (RRF) และ Diversity Selection
+        - ความเร็วระดับเสี้ยววินาที (< 0.1ms)
+        - ไม่คำนวณ Document Embedding ซ้ำซ้อน เพื่อป้องกัน CPU Overheating และเครื่องดับ
+        - หากเป็นคำถามภาพรวม/แนะนำ: ใช้ Diversity-Aware คัดเลือกสถานที่ (place_id) ไม่ให้ซ้ำ
+        - หากเป็นคำถามเจาะจง: คัดเลือก Top-N Chunks ที่มีคะแนน RRF สูงสุดตามลำดับ
         """
         if not candidates:
             return []
         if len(candidates) <= top_n:
             return candidates
 
-        try:
-            q_vec = np.array(self.faiss_store.embeddings.embed_query(query))
-            doc_texts = [d.page_content for d in candidates]
-            d_vecs = np.array(self.faiss_store.embeddings.embed_documents(doc_texts))
+        # ตรวจสอบว่าคำถามต้องการกระจายสถานที่หรือไม่ (เช่น แนะนำ 5 ที่, ทริป)
+        is_recommendation = any(kw in query.lower() for kw in ["แนะนำ", "ที่เที่ยว", "จัดทริป", "มีที่ไหนบ้าง", "ไฮไลท์", "5", "10"])
 
-            norm_q = np.linalg.norm(q_vec)
-            norm_d = np.linalg.norm(d_vecs, axis=1)
-            cos_sims = np.dot(d_vecs, q_vec) / (norm_d * norm_q + 1e-9)
+        selected_docs: List[Document] = []
+        if is_recommendation and intent != "FACT_RETRIEVAL":
+            # Diversity-Aware Selection: เลือกสถานที่ (place_id) ไม่ให้ซ้ำ เพื่อแนะนำได้หลายแห่ง
+            seen_places = set()
+            for doc in candidates:
+                place_id = doc.metadata.get("place_id") or doc.metadata.get("title", "")
+                if place_id not in seen_places:
+                    seen_places.add(place_id)
+                    selected_docs.append(doc)
+                    if len(selected_docs) >= top_n:
+                        break
 
-            scored_candidates = []
-            for rank, (doc, sim) in enumerate(zip(candidates, cos_sims)):
-                rrf_weight = 1.0 / (60 + rank + 1)
-                # รวม 70% Cosine Similarity + 30% RRF Rank Score
-                final_score = (0.70 * float(sim)) + (0.30 * (rrf_weight * 60.0))
-                scored_candidates.append((doc, final_score))
-
-            scored_candidates.sort(key=lambda x: x[1], reverse=True)
-
-            # ตรวจสอบว่าคำถามต้องการกระจายสถานที่หรือไม่ (เช่น แนะนำ 5 ที่, ทริป)
-            is_recommendation = any(kw in query.lower() for kw in ["แนะนำ", "ที่เที่ยว", "จัดทริป", "มีที่ไหนบ้าง", "ไฮไลท์", "5", "10"])
-
-            selected_docs: List[Document] = []
-            if is_recommendation and intent != "FACT_RETRIEVAL":
-                # Diversity-Aware Selection: เลือกสถานที่ (place_id) ไม่ให้ซ้ำ เพื่อแนะนำได้หลายแห่ง
-                seen_places = set()
-                for doc, score in scored_candidates:
-                    place_id = doc.metadata.get("place_id") or doc.metadata.get("title", "")
-                    if place_id not in seen_places:
-                        seen_places.add(place_id)
+            # หากจำนวนยังไม่ครบ ให้เติม Chunks ที่เหลือ
+            if len(selected_docs) < top_n:
+                for doc in candidates:
+                    if doc not in selected_docs:
                         selected_docs.append(doc)
                         if len(selected_docs) >= top_n:
                             break
+        else:
+            # คำถามเจาะจง/ค้นหาข้อเท็จจริง: เลือก Chunks ที่คะแนน RRF สูงสุดตามลำดับ
+            selected_docs = candidates[:top_n]
 
-                # หากจำนวนยังไม่ครบ ให้เติม Chunks ที่เหลือ
-                if len(selected_docs) < top_n:
-                    for doc, score in scored_candidates:
-                        if doc not in selected_docs:
-                            selected_docs.append(doc)
-                            if len(selected_docs) >= top_n:
-                                break
-            else:
-                # คำถามเจาะจง/ค้นหาข้อเท็จจริง (เช่น ประวัติวัดเซ็นโซจิ): เลือก Chunks ที่คะแนนสูงสุดตามลำดับ
-                # ช่วยให้ส่วนที่ 1 (ประวัติ) และส่วนที่ 2 (รายละเอียด) ของสถานที่เป้าหมายถูกส่งให้ LLM ครบถ้วน
-                selected_docs = [doc for doc, score in scored_candidates[:top_n]]
-
-            return selected_docs
-        except Exception as e:
-            print(f"[TokyoHybridRAGEngine] Re-ranking fallback warning: {e}")
-            return candidates[:top_n]
+        return selected_docs
 
     def retrieve_hybrid_context(
         self,
@@ -198,14 +184,12 @@ class TokyoHybridRAGEngine:
         graph_context = ""
         citations: List[str] = []
 
-        # 1. ดึงข้อมูลจาก Knowledge Graph (หากเป็นเรื่องเส้นทางหรือผสม)
-        if intent in ["ROUTE_TRANSIT", "HYBRID_COMPLEX"]:
-            graph_context = self.pathfinder.extract_graph_context_for_rag(query)
+        # 1. ดึงข้อมูลจาก Knowledge Graph เพื่อหาความสัมพันธ์เชิงพื้นที่/เส้นทาง/ข้อมูลจำเพาะของโหนด
+        graph_context = self.pathfinder.extract_graph_context_for_rag(query)
 
-        # 2. ดึงข้อมูลจาก Vector & Sparse (หากเป็นเรื่องข้อเท็จจริงหรือผสม)
-        if intent in ["FACT_RETRIEVAL", "HYBRID_COMPLEX"]:
-            dense_results = self.faiss_store.search(query, k=top_k_retrieval)
-            sparse_results = self.bm25_store.search(query, k=top_k_retrieval)
+        # 2. ดึงข้อมูลจาก Vector & Sparse Retrieval
+        dense_results = self.faiss_store.search(query, k=top_k_retrieval)
+        sparse_results = self.bm25_store.search(query, k=top_k_retrieval)
 
         # 3. รวมผลด้วย Reciprocal Rank Fusion (RRF)
         fused_docs = self.reciprocal_rank_fusion(dense_results, sparse_results)

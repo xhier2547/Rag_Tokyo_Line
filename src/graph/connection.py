@@ -35,14 +35,18 @@ class Neo4jConnection:
     Singleton Class สำหรับจัดการ Neo4j Driver Connection
     """
     _driver: Optional[Driver] = None
+    _checked: bool = False
 
     @classmethod
     def get_driver(cls) -> Optional[Driver]:
         """ดึง instance ของ Driver หากยังไม่มีจะทำการสร้างใหม่"""
         if cls._driver is not None:
             return cls._driver
+        if cls._checked:
+            return None
 
-        if not is_neo4j_port_open():
+        cls._checked = True
+        if not is_neo4j_port_open(timeout=0.2):
             return None
 
         try:

@@ -1,0 +1,792 @@
+{
+  "project": "Tokyo Smart Transit & Tourism Hybrid Graph RAG",
+  "verification_status": "PASSED_100_PERCENT",
+  "dataset_summary": {
+    "stations_count": 20,
+    "places_count": 20,
+    "hotels_count": 10,
+    "lines_count": 11,
+    "total_knowledge_entities": 61,
+    "place_station_edges_count": 20,
+    "transit_edges_count": 68,
+    "total_graph_relationships": 88,
+    "document_chunks_count": 53
+  },
+  "integrity_checks": {
+    "places_nearest_station_fk": "PASS",
+    "hotels_nearest_station_fk": "PASS",
+    "transit_edges_stations_fk": "PASS",
+    "transit_edges_lines_fk": "PASS",
+    "chunks_place_fk": "PASS",
+    "all_integrity_passed": true
+  },
+  "file_checksums": {
+    "stations.csv": {
+      "sha256": "c40800d8d7ad86b2bf3f474ec35a483630243cfea8f25b50e3cc3f05be9ccaad",
+      "size_bytes": 3028
+    },
+    "places.csv": {
+      "sha256": "94f512a4f1ff0c2ddbb8f4adbce7bc084125fdba22f61a8ec2f110f98db70e9c",
+      "size_bytes": 28096
+    },
+    "hotels.csv": {
+      "sha256": "295ebb0f69c21f38ae89dbb223f19e957542ff92748581aba0ef07a70138c3b1",
+      "size_bytes": 10857
+    },
+    "lines.csv": {
+      "sha256": "180774bd76d21dd87db6f8b2ecf915da8fdb189b5c11f9b141d845b3d59ed0f3",
+      "size_bytes": 1600
+    },
+    "place_station_edges.csv": {
+      "sha256": "6b1315d7fc112db7745b8247ef51644eb3d1601698e3876a3d301cc6ec2990db",
+      "size_bytes": 1146
+    },
+    "transit_edges.csv": {
+      "sha256": "e8c16e2a20625eb00fcb6897b4d8c868ff69b50849f570724d25a389b8c41cae",
+      "size_bytes": 4395
+    },
+    "documents_chunks.json": {
+      "sha256": "ec8efad757b3de043520324b0da9aeadf24e4d9236a4115d8b09276b5cbb60f9",
+      "size_bytes": 100106
+    }
+  },
+  "record_level_lineage": {
+    "stations": [
+      {
+        "station_id": "ST_TOKYO",
+        "name_en": "Tokyo Station",
+        "name_th": "สถานีโตเกียว",
+        "name_ja": "東京駅",
+        "ward": "Chiyoda",
+        "coordinates": {
+          "lat": 35.681236,
+          "lon": 139.767125
+        },
+        "lines": "LN_YAMANOTE;LN_MARUNOUCHI",
+        "authoritative_source": "Bureau of Transportation, Tokyo Metropolitan Government (東京都交通局)",
+        "source_url": "https://www.kotsu.metro.tokyo.jp/subway/stations/"
+      },
+      {
+        "station_id": "ST_SHINJUKU",
+        "name_en": "Shinjuku Station",
+        "name_th": "สถานีชินจูกุ",
+        "name_ja": "新宿駅",
+        "ward": "Shinjuku",
+        "coordinates": {
+          "lat": 35.689607,
+          "lon": 139.700571
+        },
+        "lines": "LN_YAMANOTE;LN_MARUNOUCHI;LN_OEDO;LN_CHUO_SOBU",
+        "authoritative_source": "Bureau of Transportation, Tokyo Metropolitan Government (東京都交通局)",
+        "source_url": "https://www.kotsu.metro.tokyo.jp/subway/stations/"
+      },
+      {
+        "station_id": "ST_SHIBUYA",
+        "name_en": "Shibuya Station",
+        "name_th": "สถานีชิบูย่า",
+        "name_ja": "渋谷駅",
+        "ward": "Shibuya",
+        "coordinates": {
+          "lat": 35.658034,
+          "lon": 139.701636
+        },
+        "lines": "LN_YAMANOTE;LN_GINZA;LN_HANZOMON",
+        "authoritative_source": "Bureau of Transportation, Tokyo Metropolitan Government (東京都交通局)",
+        "source_url": "https://www.kotsu.metro.tokyo.jp/subway/stations/"
+      },
+      {
+        "station_id": "ST_ASAKUSA",
+        "name_en": "Asakusa Station",
+        "name_th": "สถานีอาซากุสะ",
+        "name_ja": "浅草駅",
+        "ward": "Taito",
+        "coordinates": {
+          "lat": 35.712285,
+          "lon": 139.798363
+        },
+        "lines": "LN_GINZA;LN_ASAKUSA",
+        "authoritative_source": "Bureau of Transportation, Tokyo Metropolitan Government (東京都交通局)",
+        "source_url": "https://www.kotsu.metro.tokyo.jp/subway/stations/"
+      },
+      {
+        "station_id": "ST_UENO",
+        "name_en": "Ueno Station",
+        "name_th": "สถานีอุเอโนะ",
+        "name_ja": "上野駅",
+        "ward": "Taito",
+        "coordinates": {
+          "lat": 35.713768,
+          "lon": 139.777254
+        },
+        "lines": "LN_YAMANOTE;LN_GINZA;LN_HIBIYA",
+        "authoritative_source": "Bureau of Transportation, Tokyo Metropolitan Government (東京都交通局)",
+        "source_url": "https://www.kotsu.metro.tokyo.jp/subway/stations/"
+      },
+      {
+        "station_id": "ST_AKIHABARA",
+        "name_en": "Akihabara Station",
+        "name_th": "สถานีอากิฮาบาระ",
+        "name_ja": "秋葉原駅",
+        "ward": "Chiyoda",
+        "coordinates": {
+          "lat": 35.698383,
+          "lon": 139.773072
+        },
+        "lines": "LN_YAMANOTE;LN_HIBIYA;LN_CHUO_SOBU",
+        "authoritative_source": "Bureau of Transportation, Tokyo Metropolitan Government (東京都交通局)",
+        "source_url": "https://www.kotsu.metro.tokyo.jp/subway/stations/"
+      },
+      {
+        "station_id": "ST_GINZA",
+        "name_en": "Ginza Station",
+        "name_th": "สถานีกินซ่า",
+        "name_ja": "銀座駅",
+        "ward": "Chuo",
+        "coordinates": {
+          "lat": 35.671989,
+          "lon": 139.763965
+        },
+        "lines": "LN_GINZA;LN_MARUNOUCHI;LN_HIBIYA",
+        "authoritative_source": "Bureau of Transportation, Tokyo Metropolitan Government (東京都交通局)",
+        "source_url": "https://www.kotsu.metro.tokyo.jp/subway/stations/"
+      },
+      {
+        "station_id": "ST_ROPPONGI",
+        "name_en": "Roppongi Station",
+        "name_th": "สถานีรปปงงิ",
+        "name_ja": "六本木駅",
+        "ward": "Minato",
+        "coordinates": {
+          "lat": 35.662837,
+          "lon": 139.731443
+        },
+        "lines": "LN_HIBIYA;LN_OEDO",
+        "authoritative_source": "Bureau of Transportation, Tokyo Metropolitan Government (東京都交通局)",
+        "source_url": "https://www.kotsu.metro.tokyo.jp/subway/stations/"
+      },
+      {
+        "station_id": "ST_OSHIAGE",
+        "name_en": "Oshiage (Skytree) Station",
+        "name_th": "สถานีโอชิอาเกะ (สกายทรี)",
+        "name_ja": "押上駅",
+        "ward": "Sumida",
+        "coordinates": {
+          "lat": 35.710609,
+          "lon": 139.813292
+        },
+        "lines": "LN_ASAKUSA;LN_HANZOMON",
+        "authoritative_source": "Bureau of Transportation, Tokyo Metropolitan Government (東京都交通局)",
+        "source_url": "https://www.kotsu.metro.tokyo.jp/subway/stations/"
+      },
+      {
+        "station_id": "ST_HARAJUKU",
+        "name_en": "Harajuku Station",
+        "name_th": "สถานีฮาราจูกุ",
+        "name_ja": "原宿駅",
+        "ward": "Shibuya",
+        "coordinates": {
+          "lat": 35.670168,
+          "lon": 139.702687
+        },
+        "lines": "LN_YAMANOTE",
+        "authoritative_source": "Bureau of Transportation, Tokyo Metropolitan Government (東京都交通局)",
+        "source_url": "https://www.kotsu.metro.tokyo.jp/subway/stations/"
+      },
+      {
+        "station_id": "ST_SHIMBASHI",
+        "name_en": "Shimbashi Station",
+        "name_th": "สถานีชิมบาชิ",
+        "name_ja": "新橋駅",
+        "ward": "Minato",
+        "coordinates": {
+          "lat": 35.666379,
+          "lon": 139.75834
+        },
+        "lines": "LN_YAMANOTE;LN_GINZA;LN_ASAKUSA;LN_YURIKAMOME",
+        "authoritative_source": "Bureau of Transportation, Tokyo Metropolitan Government (東京都交通局)",
+        "source_url": "https://www.kotsu.metro.tokyo.jp/subway/stations/"
+      },
+      {
+        "station_id": "ST_HAMAMATSUCHO",
+        "name_en": "Hamamatsucho Station",
+        "name_th": "สถานีฮามามัตสึโจ (โตเกียวทาวเวอร์)",
+        "name_ja": "浜松町駅",
+        "ward": "Minato",
+        "coordinates": {
+          "lat": 35.655381,
+          "lon": 139.757135
+        },
+        "lines": "LN_YAMANOTE;LN_OEDO",
+        "authoritative_source": "Bureau of Transportation, Tokyo Metropolitan Government (東京都交通局)",
+        "source_url": "https://www.kotsu.metro.tokyo.jp/subway/stations/"
+      },
+      {
+        "station_id": "ST_IKEBUKURO",
+        "name_en": "Ikebukuro Station",
+        "name_th": "สถานีอิเคะบุคุโระ",
+        "name_ja": "池袋駅",
+        "ward": "Toshima",
+        "coordinates": {
+          "lat": 35.729503,
+          "lon": 139.7109
+        },
+        "lines": "LN_YAMANOTE;LN_MARUNOUCHI",
+        "authoritative_source": "Bureau of Transportation, Tokyo Metropolitan Government (東京都交通局)",
+        "source_url": "https://www.kotsu.metro.tokyo.jp/subway/stations/"
+      },
+      {
+        "station_id": "ST_ODAIBA_KAIHINKOEN",
+        "name_en": "Odaiba-Kaihinkoen Station",
+        "name_th": "สถานีโอไดบะ ไคฮินโคเอ็น",
+        "name_ja": "お台場海浜公園駅",
+        "ward": "Minato",
+        "coordinates": {
+          "lat": 35.629344,
+          "lon": 139.777085
+        },
+        "lines": "LN_YURIKAMOME",
+        "authoritative_source": "Bureau of Transportation, Tokyo Metropolitan Government (東京都交通局)",
+        "source_url": "https://www.kotsu.metro.tokyo.jp/subway/stations/"
+      },
+      {
+        "station_id": "ST_SHINJUKU_GYOEMMAE",
+        "name_en": "Shinjuku-gyoemmae Station",
+        "name_th": "สถานีชินจูกุเกียวเอ็นมาเอะ",
+        "name_ja": "新宿御苑前駅",
+        "ward": "Shinjuku",
+        "coordinates": {
+          "lat": 35.688647,
+          "lon": 139.710928
+        },
+        "lines": "LN_MARUNOUCHI",
+        "authoritative_source": "Bureau of Transportation, Tokyo Metropolitan Government (東京都交通局)",
+        "source_url": "https://www.kotsu.metro.tokyo.jp/subway/stations/"
+      },
+      {
+        "station_id": "ST_TSUKIJI",
+        "name_en": "Tsukiji Station",
+        "name_th": "สถานีสึกิจิ",
+        "name_ja": "築地駅",
+        "ward": "Chuo",
+        "coordinates": {
+          "lat": 35.667794,
+          "lon": 139.772591
+        },
+        "lines": "LN_HIBIYA",
+        "authoritative_source": "Bureau of Transportation, Tokyo Metropolitan Government (東京都交通局)",
+        "source_url": "https://www.kotsu.metro.tokyo.jp/subway/stations/"
+      },
+      {
+        "station_id": "ST_TOYOSU",
+        "name_en": "Toyosu Station",
+        "name_th": "สถานีโทโยสุ",
+        "name_ja": "豊洲駅",
+        "ward": "Koto",
+        "coordinates": {
+          "lat": 35.654824,
+          "lon": 139.796338
+        },
+        "lines": "LN_YURIKAMOME",
+        "authoritative_source": "Bureau of Transportation, Tokyo Metropolitan Government (東京都交通局)",
+        "source_url": "https://www.kotsu.metro.tokyo.jp/subway/stations/"
+      },
+      {
+        "station_id": "ST_OMOTESANDO",
+        "name_en": "Omotesando Station",
+        "name_th": "สถานีโอโมเตะซันโด",
+        "name_ja": "表参道駅",
+        "ward": "Minato",
+        "coordinates": {
+          "lat": 35.665247,
+          "lon": 139.712314
+        },
+        "lines": "LN_GINZA;LN_HANZOMON;LN_CHIYODA",
+        "authoritative_source": "Bureau of Transportation, Tokyo Metropolitan Government (東京都交通局)",
+        "source_url": "https://www.kotsu.metro.tokyo.jp/subway/stations/"
+      },
+      {
+        "station_id": "ST_KORAKUEN",
+        "name_en": "Korakuen Station",
+        "name_th": "สถานีโคระคุเอ็น (โตเกียวโดม)",
+        "name_ja": "後楽園駅",
+        "ward": "Bunkyo",
+        "coordinates": {
+          "lat": 35.707328,
+          "lon": 139.751682
+        },
+        "lines": "LN_MARUNOUCHI;LN_NAMBOKU;LN_OEDO",
+        "authoritative_source": "Bureau of Transportation, Tokyo Metropolitan Government (東京都交通局)",
+        "source_url": "https://www.kotsu.metro.tokyo.jp/subway/stations/"
+      },
+      {
+        "station_id": "ST_SHIJO_MAE",
+        "name_en": "Shijo-mae Station",
+        "name_th": "สถานีชิโจมาเอะ (ตลาดปลาโทโยสุ)",
+        "name_ja": "市場前駅",
+        "ward": "Koto",
+        "coordinates": {
+          "lat": 35.645389,
+          "lon": 139.784444
+        },
+        "lines": "LN_YURIKAMOME",
+        "authoritative_source": "Bureau of Transportation, Tokyo Metropolitan Government (東京都交通局)",
+        "source_url": "https://www.kotsu.metro.tokyo.jp/subway/stations/"
+      }
+    ],
+    "places": [
+      {
+        "place_id": "P_SENSOJI",
+        "name_en": "Senso-ji Temple",
+        "name_th": "วัดเซ็นโซจิ (วัดอาซากุสะ)",
+        "ward": "Taito",
+        "category": "Temple & Shrine",
+        "nearest_station_id": "ST_ASAKUSA",
+        "walk_time_min": 5,
+        "authoritative_source": "Japan Tourism Agency (JTA) / กระทรวง MLIT",
+        "source_database": "JTA Multilingual Sightseeing Database / GoTokyo TCVB",
+        "source_url": "https://www.gotokyo.org/en/destinations/taito/index.html"
+      },
+      {
+        "place_id": "P_TOKYO_SKYTREE",
+        "name_en": "Tokyo Skytree",
+        "name_th": "โตเกียวสกายทรี",
+        "ward": "Sumida",
+        "category": "Landmark & Viewpoint",
+        "nearest_station_id": "ST_OSHIAGE",
+        "walk_time_min": 2,
+        "authoritative_source": "Japan Tourism Agency (JTA) / กระทรวง MLIT",
+        "source_database": "JTA Multilingual Sightseeing Database / GoTokyo TCVB",
+        "source_url": "https://www.gotokyo.org/en/destinations/sumida/index.html"
+      },
+      {
+        "place_id": "P_SHIBUYA_CROSSING",
+        "name_en": "Shibuya Crossing & Hachiko Statue",
+        "name_th": "ห้าแยกชิบูย่าและรูปปั้นฮาจิโกะ",
+        "ward": "Shibuya",
+        "category": "Landmark & Viewpoint",
+        "nearest_station_id": "ST_SHIBUYA",
+        "walk_time_min": 1,
+        "authoritative_source": "Japan Tourism Agency (JTA) / กระทรวง MLIT",
+        "source_database": "JTA Multilingual Sightseeing Database / GoTokyo TCVB",
+        "source_url": "https://www.gotokyo.org/en/destinations/shibuya/index.html"
+      },
+      {
+        "place_id": "P_MEIJI_JINGU",
+        "name_en": "Meiji Jingu Shrine",
+        "name_th": "ศาลเจ้าเมจิ",
+        "ward": "Shibuya",
+        "category": "Temple & Shrine",
+        "nearest_station_id": "ST_HARAJUKU",
+        "walk_time_min": 3,
+        "authoritative_source": "Japan Tourism Agency (JTA) / กระทรวง MLIT",
+        "source_database": "JTA Multilingual Sightseeing Database / GoTokyo TCVB",
+        "source_url": "https://www.gotokyo.org/en/destinations/shibuya/index.html"
+      },
+      {
+        "place_id": "P_TOKYO_TOWER",
+        "name_en": "Tokyo Tower",
+        "name_th": "โตเกียวทาวเวอร์",
+        "ward": "Minato",
+        "category": "Landmark & Viewpoint",
+        "nearest_station_id": "ST_HAMAMATSUCHO",
+        "walk_time_min": 15,
+        "authoritative_source": "Japan Tourism Agency (JTA) / กระทรวง MLIT",
+        "source_database": "JTA Multilingual Sightseeing Database / GoTokyo TCVB",
+        "source_url": "https://www.gotokyo.org/en/destinations/minato/index.html"
+      },
+      {
+        "place_id": "P_SHINJUKU_GYOEN",
+        "name_en": "Shinjuku Gyoen National Garden",
+        "name_th": "สวนสาธารณะชินจูกุเกียวเอ็น",
+        "ward": "Shinjuku",
+        "category": "Nature & Park",
+        "nearest_station_id": "ST_SHINJUKU_GYOEMMAE",
+        "walk_time_min": 5,
+        "authoritative_source": "Japan Tourism Agency (JTA) / กระทรวง MLIT",
+        "source_database": "JTA Multilingual Sightseeing Database / GoTokyo TCVB",
+        "source_url": "https://www.gotokyo.org/en/destinations/shinjuku/index.html"
+      },
+      {
+        "place_id": "P_AKIHABARA_ELECTRIC",
+        "name_en": "Akihabara Electric Town",
+        "name_th": "ย่านเครื่องใช้ไฟฟ้าและอนิเมะอากิฮาบาระ",
+        "ward": "Chiyoda",
+        "category": "Shopping & Entertainment",
+        "nearest_station_id": "ST_AKIHABARA",
+        "walk_time_min": 1,
+        "authoritative_source": "Japan Tourism Agency (JTA) / กระทรวง MLIT",
+        "source_database": "JTA Multilingual Sightseeing Database / GoTokyo TCVB",
+        "source_url": "https://www.gotokyo.org/en/destinations/chiyoda/index.html"
+      },
+      {
+        "place_id": "P_TSUKIJI_OUTER",
+        "name_en": "Tsukiji Outer Market",
+        "name_th": "ตลาดปลาสึกิจิ (ตลาดนอก)",
+        "ward": "Chuo",
+        "category": "Food & Market",
+        "nearest_station_id": "ST_TSUKIJI",
+        "walk_time_min": 4,
+        "authoritative_source": "Japan Tourism Agency (JTA) / กระทรวง MLIT",
+        "source_database": "JTA Multilingual Sightseeing Database / GoTokyo TCVB",
+        "source_url": "https://www.gotokyo.org/en/destinations/chuo/index.html"
+      },
+      {
+        "place_id": "P_UENO_PARK",
+        "name_en": "Ueno Park & National Museum",
+        "name_th": "สวนอุเอโนะและพิพิธภัณฑ์แห่งชาติ",
+        "ward": "Taito",
+        "category": "Culture & Museum",
+        "nearest_station_id": "ST_UENO",
+        "walk_time_min": 2,
+        "authoritative_source": "Japan Tourism Agency (JTA) / กระทรวง MLIT",
+        "source_database": "JTA Multilingual Sightseeing Database / GoTokyo TCVB",
+        "source_url": "https://www.gotokyo.org/en/destinations/taito/index.html"
+      },
+      {
+        "place_id": "P_ROPPONGI_HILLS",
+        "name_en": "Roppongi Hills & Tokyo City View",
+        "name_th": "รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว",
+        "ward": "Minato",
+        "category": "Landmark & Viewpoint",
+        "nearest_station_id": "ST_ROPPONGI",
+        "walk_time_min": 3,
+        "authoritative_source": "Japan Tourism Agency (JTA) / กระทรวง MLIT",
+        "source_database": "JTA Multilingual Sightseeing Database / GoTokyo TCVB",
+        "source_url": "https://www.gotokyo.org/en/destinations/minato/index.html"
+      },
+      {
+        "place_id": "P_GINZA_SIX",
+        "name_en": "Ginza Shopping District & GINZA SIX",
+        "name_th": "ย่านช้อปปิ้งกินซ่าและห้างกินซ่าซิกซ์",
+        "ward": "Chuo",
+        "category": "Shopping & Entertainment",
+        "nearest_station_id": "ST_GINZA",
+        "walk_time_min": 2,
+        "authoritative_source": "Japan Tourism Agency (JTA) / กระทรวง MLIT",
+        "source_database": "JTA Multilingual Sightseeing Database / GoTokyo TCVB",
+        "source_url": "https://www.gotokyo.org/en/destinations/chuo/index.html"
+      },
+      {
+        "place_id": "P_ODAIBA_GUNDAM",
+        "name_en": "Odaiba & Unicorn Gundam Statue",
+        "name_th": "โอไดบะและหุ่นยนต์กันดั้มยักษ์ยูนิคอร์น",
+        "ward": "Minato",
+        "category": "Shopping & Entertainment",
+        "nearest_station_id": "ST_ODAIBA_KAIHINKOEN",
+        "walk_time_min": 5,
+        "authoritative_source": "Japan Tourism Agency (JTA) / กระทรวง MLIT",
+        "source_database": "JTA Multilingual Sightseeing Database / GoTokyo TCVB",
+        "source_url": "https://www.gotokyo.org/en/destinations/minato/index.html"
+      },
+      {
+        "place_id": "P_IMPERIAL_PALACE",
+        "name_en": "Tokyo Imperial Palace & East Gardens",
+        "name_th": "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ",
+        "ward": "Chiyoda",
+        "category": "Culture & History",
+        "nearest_station_id": "ST_TOKYO",
+        "walk_time_min": 10,
+        "authoritative_source": "Japan Tourism Agency (JTA) / กระทรวง MLIT",
+        "source_database": "JTA Multilingual Sightseeing Database / GoTokyo TCVB",
+        "source_url": "https://www.gotokyo.org/en/destinations/chiyoda/index.html"
+      },
+      {
+        "place_id": "P_TEAMLAB_PLANETS",
+        "name_en": "teamLab Planets TOKYO DMM",
+        "name_th": "พิพิธภัณฑ์ศิลปะดิจิทัลทีมแล็บ แพลเน็ตส์ โตเกียว",
+        "ward": "Koto",
+        "category": "Culture & Art",
+        "nearest_station_id": "ST_TOYOSU",
+        "walk_time_min": 10,
+        "authoritative_source": "Japan Tourism Agency (JTA) / กระทรวง MLIT",
+        "source_database": "JTA Multilingual Sightseeing Database / GoTokyo TCVB",
+        "source_url": "https://www.gotokyo.org/en/destinations/koto/index.html"
+      },
+      {
+        "place_id": "P_AMEYOKO",
+        "name_en": "Ameyoko Shopping Street",
+        "name_th": "ตลาดอะเมโยโกะ (ถนนคนเดินอะเมยะ โยโกโจ)",
+        "ward": "Taito",
+        "category": "Food & Market",
+        "nearest_station_id": "ST_UENO",
+        "walk_time_min": 2,
+        "authoritative_source": "Japan Tourism Agency (JTA) / กระทรวง MLIT",
+        "source_database": "JTA Multilingual Sightseeing Database / GoTokyo TCVB",
+        "source_url": "https://www.gotokyo.org/en/destinations/taito/index.html"
+      },
+      {
+        "place_id": "P_TAKESHITA_STREET",
+        "name_en": "Takeshita Street Harajuku",
+        "name_th": "ถนนทาเคชิตะ ย่านฮาราจูกุ",
+        "ward": "Shibuya",
+        "category": "Shopping & Entertainment",
+        "nearest_station_id": "ST_HARAJUKU",
+        "walk_time_min": 1,
+        "authoritative_source": "Japan Tourism Agency (JTA) / กระทรวง MLIT",
+        "source_database": "JTA Multilingual Sightseeing Database / GoTokyo TCVB",
+        "source_url": "https://www.gotokyo.org/en/destinations/shibuya/index.html"
+      },
+      {
+        "place_id": "P_HAMARIKYU_GARDENS",
+        "name_en": "Hamarikyu Gardens",
+        "name_th": "สวนฮามาริคิว (สวนหลวงริมอ่าวโตเกียว)",
+        "ward": "Chuo",
+        "category": "Nature & Park",
+        "nearest_station_id": "ST_SHIMBASHI",
+        "walk_time_min": 10,
+        "authoritative_source": "Japan Tourism Agency (JTA) / กระทรวง MLIT",
+        "source_database": "JTA Multilingual Sightseeing Database / GoTokyo TCVB",
+        "source_url": "https://www.gotokyo.org/en/destinations/chuo/index.html"
+      },
+      {
+        "place_id": "P_TOKYO_DOME_CITY",
+        "name_en": "Tokyo Dome City & Spa LaQua",
+        "name_th": "โตเกียวโดมซิตี้และสปาลาคัว",
+        "ward": "Bunkyo",
+        "category": "Shopping & Entertainment",
+        "nearest_station_id": "ST_KORAKUEN",
+        "walk_time_min": 3,
+        "authoritative_source": "Japan Tourism Agency (JTA) / กระทรวง MLIT",
+        "source_database": "JTA Multilingual Sightseeing Database / GoTokyo TCVB",
+        "source_url": "https://www.gotokyo.org/en/destinations/bunkyo/index.html"
+      },
+      {
+        "place_id": "P_TOYOSU_MARKET",
+        "name_en": "Toyosu Fish Market & Toyosu Senkyaku Banrai",
+        "name_th": "ตลาดปลาโทโยสุและคอมเพล็กซ์เซ็นเคียคุบันไร",
+        "ward": "Koto",
+        "category": "Food & Market",
+        "nearest_station_id": "ST_SHIJO_MAE",
+        "walk_time_min": 2,
+        "authoritative_source": "Japan Tourism Agency (JTA) / กระทรวง MLIT",
+        "source_database": "JTA Multilingual Sightseeing Database / GoTokyo TCVB",
+        "source_url": "https://www.gotokyo.org/en/destinations/koto/index.html"
+      },
+      {
+        "place_id": "P_OMOTESANDO_HILLS",
+        "name_en": "Omotesando Boulevard & Omotesando Hills",
+        "name_th": "ถนนสายช้อปปิ้งโอโมเตะซันโดและห้างโอโมเตะซันโดฮิลส์",
+        "ward": "Shibuya",
+        "category": "Shopping & Entertainment",
+        "nearest_station_id": "ST_OMOTESANDO",
+        "walk_time_min": 2,
+        "authoritative_source": "Japan Tourism Agency (JTA) / กระทรวง MLIT",
+        "source_database": "JTA Multilingual Sightseeing Database / GoTokyo TCVB",
+        "source_url": "https://www.gotokyo.org/en/destinations/shibuya/index.html"
+      }
+    ],
+    "hotels": [
+      {
+        "hotel_id": "H_GRACERY_SHINJUKU",
+        "name_en": "Hotel Gracery Shinjuku",
+        "name_th": "โรงแรมเกรเซอรี ชินจูกุ (โรงแรมก็อดซิลล่า)",
+        "ward": "Shinjuku",
+        "tier": "Mid-Scale / Business",
+        "nearest_station_id": "ST_SHINJUKU",
+        "walk_time_min": 5,
+        "authoritative_source": "Japan Hotel Association (一般社団法人日本ホテル協会)",
+        "source_url": "https://www.j-hotel.or.jp/en/"
+      },
+      {
+        "hotel_id": "H_TOKYO_STATION_HOTEL",
+        "name_en": "The Tokyo Station Hotel",
+        "name_th": "โรงแรมเดอะ โตเกียว สเตชั่น โฮเทล",
+        "ward": "Chiyoda",
+        "tier": "Luxury",
+        "nearest_station_id": "ST_TOKYO",
+        "walk_time_min": 1,
+        "authoritative_source": "Japan Hotel Association (一般社団法人日本ホテル協会)",
+        "source_url": "https://www.j-hotel.or.jp/en/"
+      },
+      {
+        "hotel_id": "H_SHIBUYA_STREAM_EXCEL",
+        "name_en": "Shibuya Stream Excel Hotel Tokyu",
+        "name_th": "ชิบูย่า สตรีม เอ็กเซล โฮเทล โทคิว",
+        "ward": "Shibuya",
+        "tier": "Mid-Scale / Business",
+        "nearest_station_id": "ST_SHIBUYA",
+        "walk_time_min": 2,
+        "authoritative_source": "Japan Hotel Association (一般社団法人日本ホテル協会)",
+        "source_url": "https://www.j-hotel.or.jp/en/"
+      },
+      {
+        "hotel_id": "H_ASAKUSA_VIEW",
+        "name_en": "Asakusa View Hotel",
+        "name_th": "โรงแรมอาซากุสะ วิว โฮเทล",
+        "ward": "Taito",
+        "tier": "Mid-Scale / Business",
+        "nearest_station_id": "ST_ASAKUSA",
+        "walk_time_min": 6,
+        "authoritative_source": "Japan Hotel Association (一般社団法人日本ホテル協会)",
+        "source_url": "https://www.j-hotel.or.jp/en/"
+      },
+      {
+        "hotel_id": "H_CANDEO_UENO",
+        "name_en": "Candeo Hotels Ueno Park",
+        "name_th": "คันเดโอ โฮเทลส์ อุเอโนะ พาร์ค",
+        "ward": "Taito",
+        "tier": "Budget / Mid-Scale",
+        "nearest_station_id": "ST_UENO",
+        "walk_time_min": 6,
+        "authoritative_source": "Japan Hotel Association (一般社団法人日本ホテル協会)",
+        "source_url": "https://www.j-hotel.or.jp/en/"
+      },
+      {
+        "hotel_id": "H_MITSUI_GARDEN_GINZA",
+        "name_en": "Mitsui Garden Hotel Ginza Premier",
+        "name_th": "โรงแรมมิตซุย การ์เดน กินซ่า พรีเมียร์",
+        "ward": "Chuo",
+        "tier": "Luxury / Upper-Scale",
+        "nearest_station_id": "ST_GINZA",
+        "walk_time_min": 7,
+        "authoritative_source": "Japan Hotel Association (一般社団法人日本ホテル協会)",
+        "source_url": "https://www.j-hotel.or.jp/en/"
+      },
+      {
+        "hotel_id": "H_DORM_INN_AKIHABARA",
+        "name_en": "Dormy Inn Akihabara Hot Springs",
+        "name_th": "ดอร์มี อินน์ อากิฮาบาระ (พร้อมบ่อออนเซ็น)",
+        "ward": "Chiyoda",
+        "tier": "Budget / Mid-Scale",
+        "nearest_station_id": "ST_AKIHABARA",
+        "walk_time_min": 5,
+        "authoritative_source": "Japan Hotel Association (一般社団法人日本ホテル協会)",
+        "source_url": "https://www.j-hotel.or.jp/en/"
+      },
+      {
+        "hotel_id": "H_PRINCE_GALLERY_KIOICHO",
+        "name_en": "The Prince Gallery Tokyo Kioicho, Luxury Collection",
+        "name_th": "เดอะ ปรินซ์ แกลเลอรี โตเกียว คิโออิโจ (โรงแรม 5 ดาว)",
+        "ward": "Chiyoda",
+        "tier": "Ultra Luxury",
+        "nearest_station_id": "ST_ROPPONGI",
+        "walk_time_min": 10,
+        "authoritative_source": "Japan Hotel Association (一般社団法人日本ホテル協会)",
+        "source_url": "https://www.j-hotel.or.jp/en/"
+      },
+      {
+        "hotel_id": "H_SUPER_HOTEL_SHINJUKU",
+        "name_en": "Super Hotel Shinjuku Kabukicho",
+        "name_th": "ซูเปอร์ โฮเทล ชินจูกุ คาบูกิโจ",
+        "ward": "Shinjuku",
+        "tier": "Budget",
+        "nearest_station_id": "ST_SHINJUKU",
+        "walk_time_min": 7,
+        "authoritative_source": "Japan Hotel Association (一般社団法人日本ホテル協会)",
+        "source_url": "https://www.j-hotel.or.jp/en/"
+      },
+      {
+        "hotel_id": "H_HOTEL_VILLA_FONTAINE_ROPPONGI",
+        "name_en": "Hotel Villa Fontaine Grand Tokyo-Roppongi",
+        "name_th": "โรงแรมวิลล่า ฟอนเทน แกรนด์ รปปงงิ",
+        "ward": "Minato",
+        "tier": "Mid-Scale / Business",
+        "nearest_station_id": "ST_ROPPONGI",
+        "walk_time_min": 5,
+        "authoritative_source": "Japan Hotel Association (一般社団法人日本ホテル協会)",
+        "source_url": "https://www.j-hotel.or.jp/en/"
+      }
+    ],
+    "transit_lines": [
+      {
+        "line_id": "LN_YAMANOTE",
+        "name_en": "JR Yamanote Line",
+        "name_th": "รถไฟสายยามาโนเตะ (JR Yamanote Line)",
+        "line_code": "JY",
+        "operator": "JR East",
+        "color": "#9ACD32",
+        "source_url": "https://www.jreast.co.jp/e/"
+      },
+      {
+        "line_id": "LN_GINZA",
+        "name_en": "Tokyo Metro Ginza Line",
+        "name_th": "รถไฟใต้ดินสายกินซ่า (Tokyo Metro Ginza Line)",
+        "line_code": "G",
+        "operator": "Tokyo Metro",
+        "color": "#FF9500",
+        "source_url": "https://www.tokyometro.jp/en/subwaymap/"
+      },
+      {
+        "line_id": "LN_MARUNOUCHI",
+        "name_en": "Tokyo Metro Marunouchi Line",
+        "name_th": "รถไฟใต้ดินสายมารุโนอุจิ (Tokyo Metro Marunouchi Line)",
+        "line_code": "M",
+        "operator": "Tokyo Metro",
+        "color": "#E60012",
+        "source_url": "https://www.tokyometro.jp/en/subwaymap/"
+      },
+      {
+        "line_id": "LN_HIBIYA",
+        "name_en": "Tokyo Metro Hibiya Line",
+        "name_th": "รถไฟใต้ดินสายฮิบิยะ (Tokyo Metro Hibiya Line)",
+        "line_code": "H",
+        "operator": "Tokyo Metro",
+        "color": "#B5B5AC",
+        "source_url": "https://www.tokyometro.jp/en/subwaymap/"
+      },
+      {
+        "line_id": "LN_HANZOMON",
+        "name_en": "Tokyo Metro Hanzomon Line",
+        "name_th": "รถไฟใต้ดินสายฮันโซมอน (Tokyo Metro Hanzomon Line)",
+        "line_code": "Z",
+        "operator": "Tokyo Metro",
+        "color": "#8F76D6",
+        "source_url": "https://www.tokyometro.jp/en/subwaymap/"
+      },
+      {
+        "line_id": "LN_ASAKUSA",
+        "name_en": "Toei Asakusa Line",
+        "name_th": "รถไฟใต้ดินสายอาซากุสะ (Toei Asakusa Line)",
+        "line_code": "A",
+        "operator": "Toei Subway",
+        "color": "#E85298",
+        "source_url": "https://www.jreast.co.jp/e/"
+      },
+      {
+        "line_id": "LN_OEDO",
+        "name_en": "Toei Oedo Line",
+        "name_th": "รถไฟใต้ดินสายโอเอโดะ (Toei Oedo Line)",
+        "line_code": "E",
+        "operator": "Toei Subway",
+        "color": "#B6007A",
+        "source_url": "https://www.jreast.co.jp/e/"
+      },
+      {
+        "line_id": "LN_CHUO_SOBU",
+        "name_en": "JR Chuo-Sobu Line",
+        "name_th": "รถไฟสายชูโอ-โซบุ (JR Chuo-Sobu Line)",
+        "line_code": "JB",
+        "operator": "JR East",
+        "color": "#FFD700",
+        "source_url": "https://www.jreast.co.jp/e/"
+      },
+      {
+        "line_id": "LN_YURIKAMOME",
+        "name_en": "Yurikamome Line",
+        "name_th": "รถไฟโมโนเรลสายยูริคาโมเมะ (Yurikamome Line)",
+        "line_code": "U",
+        "operator": "Tokyo Waterfront New Transit",
+        "color": "#0099FF",
+        "source_url": "https://www.jreast.co.jp/e/"
+      },
+      {
+        "line_id": "LN_CHIYODA",
+        "name_en": "Tokyo Metro Chiyoda Line",
+        "name_th": "รถไฟใต้ดินสายชิโยดะ (Tokyo Metro Chiyoda Line)",
+        "line_code": "C",
+        "operator": "Tokyo Metro",
+        "color": "#00BB85",
+        "source_url": "https://www.tokyometro.jp/en/subwaymap/"
+      },
+      {
+        "line_id": "LN_NAMBOKU",
+        "name_en": "Tokyo Metro Namboku Line",
+        "name_th": "รถไฟใต้ดินสายนะนโบกุ (Tokyo Metro Namboku Line)",
+        "line_code": "N",
+        "operator": "Tokyo Metro",
+        "color": "#00AC9B",
+        "source_url": "https://www.tokyometro.jp/en/subwaymap/"
+      }
+    ]
+  }
+}

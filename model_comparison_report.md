@@ -65,6 +65,10 @@
 
 ### 2.1 ตารางเปรียบเทียบประสิทธิภาพรอบด้าน (Comprehensive LLM Comparison)
 
+> 🔬 **หลักฐานผลการทดสอบดิบ (Empirical Raw Artifact):**  
+> สามารถตรวจสอบข้อมูลดิบรายข้อของการทดสอบเปรียบเทียบโมเดล LLM ทั้ง 3 สถาปัตยกรรม (Cloud Serverless API, Local Ollama และ Deterministic Fallback) พร้อม Prompt, Context Length, Latency, Output Tokens, Throughput และคำตอบที่ได้จริงจากไฟล์ [model_comparison_raw.json](file:///c:/Users/wator/Documents/Y4/SOCIAL/Final_01/data/model_comparison_raw.json)  
+> ซึ่งสามารถรันซ้ำเพื่อตรวจสอบผลได้ผ่านสคริปต์ `python src/evaluation/generate_model_comparison_raw.py`
+
 *(เปรียบเทียบระหว่าง Cloud API, Local Ollama Models และ Deterministic Fallback Engine)*
 
 | มิติการเปรียบเทียบ (Metrics) | Google Gemini 3.1 Flash Lite | Google Gemini 2.5 Flash | Ollama Qwen 2.5 3B | Ollama Gemma 3 4B | Tokyo Hybrid Retriever (Fallback) |
@@ -129,16 +133,16 @@
 
 | หมวดคำถาม (Category) | ชื่อหมวดหมู่ | Intent ที่ตรวจจับ | เวลาเฉลี่ย (s) | การอ้างอิง (%) | การใช้ Graph (%) |
 | :---: | :---| :---: | :---: | :---: | :---: |
-| **A** | General POI (ค้นหาและแนะนำทั่วไป) | `HYBRID_COMPLEX` | 7.64s | 100.0% | 100.0% |
-| **B** | Temples & History (วัดและประวัติศาสตร์) | `HYBRID_COMPLEX` | 3.63s | 100.0% | 100.0% |
-| **C** | Anime & Gaming (อากิฮาบาระ/เทคโนโลยี) | `HYBRID_COMPLEX` | 5.23s | 100.0% | 100.0% |
-| **D** | Parks & Views (ธรรมชาติและจุดชมวิว) | `HYBRID_COMPLEX` | 4.25s | 100.0% | 100.0% |
-| **E** | Food & Markets (ของกินและตลาดปลา) | `HYBRID_COMPLEX` | 4.60s | 100.0% | 100.0% |
-| **F** | Spatial / Walking (สถานที่ใกล้เคียง) | `HYBRID_COMPLEX` | 4.14s | 0.0% | 100.0% |
-| **G** | Route & Transit (เส้นทางและเวลารถไฟ) | `ROUTE_TRANSIT` | 5.54s | 100.0% | 100.0% |
-| **H** | 1-Day Itinerary (จัดทริปท่องเที่ยว 1 วัน) | `HYBRID_COMPLEX` | 7.87s | 100.0% | 100.0% |
-| **I** | Preferences (แนะนำตามความชอบเฉพาะตัว) | `FACT_RETRIEVAL` | **2.84s** | 100.0% | 0.0% |
-| **J** | Multi-hop Graph RAG (โจทย์ผสมหลายเงื่อนไข)| `FACT_RETRIEVAL` | **3.70s** | 100.0% | 0.0% |
+| **A** | General POI (ค้นหาและแนะนำทั่วไป) | `HYBRID_COMPLEX` | 9.09s | 66.7% | **100.0%** |
+| **B** | Temples & History (วัดและประวัติศาสตร์) | `HYBRID_COMPLEX` | 3.70s | 66.7% | **100.0%** |
+| **C** | Anime & Gaming (อากิฮาบาระ/เทคโนโลยี) | `HYBRID_COMPLEX` | 1.73s | 33.3% | **100.0%** |
+| **D** | Parks & Views (ธรรมชาติและจุดชมวิว) | `HYBRID_COMPLEX` | 1.64s | 33.3% | **100.0%** |
+| **E** | Food & Markets (ของกินและตลาดปลา) | `HYBRID_COMPLEX` | 2.60s | 100.0% | **100.0%** |
+| **F** | Spatial / Walking (สถานที่ใกล้เคียง) | `HYBRID_COMPLEX` | 2.18s | 66.7% | **100.0%** |
+| **G** | Route & Transit (เส้นทางและเวลารถไฟ) | `ROUTE_TRANSIT` | 3.15s | 66.7% | **100.0%** |
+| **H** | 1-Day Itinerary (จัดทริปท่องเที่ยว 1 วัน) | `HYBRID_COMPLEX` | 5.47s | 100.0% | **100.0%** |
+| **I** | Preferences (แนะนำตามความชอบเฉพาะตัว) | `HYBRID_COMPLEX` | 2.78s | 66.7% | **100.0%** |
+| **J** | Multi-hop Graph RAG (โจทย์ผสมหลายเงื่อนไข)| `HYBRID_COMPLEX` | 2.07s | 66.7% | **100.0%** |
 
 *(ดูรูปภาพความละเอียดสูง 300 DPI ได้ที่ `reports/charts/chart_4_category_latency.png`)*
 

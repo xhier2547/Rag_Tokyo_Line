@@ -5,6 +5,9 @@
 ---
 
 ## 1. ตารางสรุปแหล่งข้อมูลหลัก (Primary Data Sources)
+> 💡 **การตรวจสอบย้อนกลับระดับระเบียน (Record-Level Traceability):**  
+> สามารถตรวจสอบข้อมูลแหล่งอ้างอิงและพิกัดรายระเบียนของทั้ง 20 สถานี, 20 สถานที่ท่องเที่ยว, 10 โรงแรม และ 11 สายรถไฟ ได้ที่ [data_provenance.md](file:///c:/Users/wator/Documents/Y4/SOCIAL/Final_01/data/data_provenance.md)  
+> และสามารถรันคำสั่ง `python src/data_pipeline/verify_provenance.py` เพื่อตรวจสอบ Checksum (SHA-256) และ Foreign Keys ได้จากไฟล์ [provenance_verification_report.json](file:///c:/Users/wator/Documents/Y4/SOCIAL/Final_01/data/processed/provenance_verification_report.json)
 
 | แหล่งข้อมูล | องค์กร/ผู้ให้บริการ | รูปแบบข้อมูล (Format) | วัตถุประสงค์ในระบบ RAG | ลิงก์อ้างอิง (Official URL) |
 | :--- | :--- | :--- | :--- | :--- |

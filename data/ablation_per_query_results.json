@@ -1,0 +1,4030 @@
+{
+  "total_questions": 100,
+  "summary": {
+    "dense_only": {
+      "hit_rate_top1_pct": 43.0,
+      "hit_rate_top3_pct": 70.0,
+      "mrr": 0.555,
+      "avg_latency_ms": 17.21,
+      "graph_coverage_pct": 0.0
+    },
+    "graph_only": {
+      "hit_rate_top1_pct": 53.0,
+      "hit_rate_top3_pct": 53.0,
+      "mrr": 0.53,
+      "avg_latency_ms": 2.31,
+      "graph_coverage_pct": 100.0
+    },
+    "hybrid_rag": {
+      "hit_rate_top1_pct": 72.0,
+      "hit_rate_top3_pct": 90.0,
+      "mrr": 0.8,
+      "avg_latency_ms": 23.81,
+      "graph_coverage_pct": 100.0
+    }
+  },
+  "details": [
+    {
+      "question_id": 1,
+      "category": "A",
+      "query": "มีสถานที่ท่องเที่ยวอะไรที่ห้ามพลาดเมื่อมา Tokyo ครั้งแรก?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_SHIBUYA_CROSSING",
+        "P_TOKYO_SKYTREE",
+        "P_TOKYO_TOWER",
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_IMPERIAL_PALACE_INFO",
+          "C_P_TOKYO_DOME_CITY_01",
+          "C_P_TOKYO_DOME_CITY_INFO"
+        ],
+        "latency_ms": 59.4
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.68
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 657.94
+      }
+    },
+    {
+      "question_id": 2,
+      "category": "A",
+      "query": "แนะนำ 5 สถานที่ท่องเที่ยวยอดนิยมใน Tokyo",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_SHIBUYA_CROSSING",
+        "P_TOKYO_SKYTREE",
+        "P_TOKYO_TOWER",
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_IMPERIAL_PALACE_INFO",
+          "C_P_TOKYO_DOME_CITY_01",
+          "C_P_ROPPONGI_HILLS_INFO"
+        ],
+        "latency_ms": 15.83
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.35
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 16.05
+      }
+    },
+    {
+      "question_id": 3,
+      "category": "A",
+      "query": "ถ้ามีเวลาเที่ยว Tokyo เพียง 1 วัน ควรไปที่ไหนบ้าง?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_SHIBUYA_CROSSING",
+        "P_TOKYO_SKYTREE",
+        "P_TOKYO_TOWER",
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_IMPERIAL_PALACE_INFO",
+          "C_P_TOKYO_DOME_CITY_INFO",
+          "C_P_ROPPONGI_HILLS_INFO"
+        ],
+        "latency_ms": 17.3
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.21
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.24
+      }
+    },
+    {
+      "question_id": 4,
+      "category": "A",
+      "query": "สถานที่ไหนเหมาะสำหรับคนที่อยากเห็นทั้ง Tokyo แบบดั้งเดิมและสมัยใหม่?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_SHIBUYA_CROSSING",
+        "P_TOKYO_SKYTREE",
+        "P_TOKYO_TOWER",
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI"
+      ],
+      "dense_only": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "retrieved_chunks": [
+          "C_P_TOKYO_DOME_CITY_01",
+          "C_P_IMPERIAL_PALACE_INFO",
+          "C_P_IMPERIAL_PALACE_02"
+        ],
+        "latency_ms": 15.87
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.21
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.12
+      }
+    },
+    {
+      "question_id": 5,
+      "category": "A",
+      "query": "แนะนำสถานที่ท่องเที่ยวที่เป็นแลนด์มาร์กสำคัญของ Tokyo",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_SHIBUYA_CROSSING",
+        "P_TOKYO_SKYTREE",
+        "P_TOKYO_TOWER",
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_IMPERIAL_PALACE_INFO",
+          "C_P_TOKYO_DOME_CITY_01",
+          "C_P_IMPERIAL_PALACE_02"
+        ],
+        "latency_ms": 15.67
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.32
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 16.12
+      }
+    },
+    {
+      "question_id": 6,
+      "category": "A",
+      "query": "มีสถานที่ท่องเที่ยวฟรีอะไรบ้างใน Tokyo?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_SHIBUYA_CROSSING",
+        "P_TOKYO_SKYTREE",
+        "P_TOKYO_TOWER",
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_IMPERIAL_PALACE_INFO",
+          "C_P_IMPERIAL_PALACE_02",
+          "C_P_TOKYO_DOME_CITY_01"
+        ],
+        "latency_ms": 13.94
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.16
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 14.92
+      }
+    },
+    {
+      "question_id": 7,
+      "category": "A",
+      "query": "สถานที่ไหนเหมาะสำหรับเที่ยวคนเดียว?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_SHIBUYA_CROSSING",
+        "P_TOKYO_SKYTREE",
+        "P_TOKYO_TOWER",
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_OMOTESANDO_HILLS_INFO",
+          "C_P_OMOTESANDO_HILLS_01",
+          "C_H_HOTEL_VILLA_FONTAINE_ROPPONGI"
+        ],
+        "latency_ms": 14.81
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.17
+      },
+      "hybrid_rag": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 15.13
+      }
+    },
+    {
+      "question_id": 8,
+      "category": "A",
+      "query": "แนะนำสถานที่ที่ไม่ใช่แหล่งท่องเที่ยวยอดนิยมแต่มีความน่าสนใจ",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_SHIBUYA_CROSSING",
+        "P_TOKYO_SKYTREE",
+        "P_TOKYO_TOWER",
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_OMOTESANDO_HILLS_01",
+          "C_P_OMOTESANDO_HILLS_INFO",
+          "C_P_ROPPONGI_HILLS_INFO"
+        ],
+        "latency_ms": 15.04
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.17
+      },
+      "hybrid_rag": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 16.13
+      }
+    },
+    {
+      "question_id": 9,
+      "category": "A",
+      "query": "มีสถานที่ไหนที่สามารถใช้เวลาเที่ยวได้ครึ่งวัน?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_SHIBUYA_CROSSING",
+        "P_TOKYO_SKYTREE",
+        "P_TOKYO_TOWER",
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_TOKYO_DOME_CITY_INFO",
+          "C_P_OMOTESANDO_HILLS_INFO",
+          "C_P_ROPPONGI_HILLS_INFO"
+        ],
+        "latency_ms": 15.31
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.17
+      },
+      "hybrid_rag": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 15.83
+      }
+    },
+    {
+      "question_id": 10,
+      "category": "A",
+      "query": "ถ้ามีเวลาเพียง 3 ชั่วโมงใน Tokyo ควรเลือกเที่ยวบริเวณไหน?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_SHIBUYA_CROSSING",
+        "P_TOKYO_SKYTREE",
+        "P_TOKYO_TOWER",
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI"
+      ],
+      "dense_only": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "retrieved_chunks": [
+          "C_P_TOKYO_DOME_CITY_INFO",
+          "C_P_IMPERIAL_PALACE_INFO",
+          "C_P_ROPPONGI_HILLS_INFO"
+        ],
+        "latency_ms": 15.58
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.21
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 15.25
+      }
+    },
+    {
+      "question_id": 11,
+      "category": "B",
+      "query": "แนะนำวัดที่มีชื่อเสียงใน Tokyo",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_MEIJI_JINGU"
+      ],
+      "dense_only": {
+        "rank": 3,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.3333,
+        "retrieved_chunks": [
+          "C_P_TOKYO_DOME_CITY_01",
+          "C_P_ROPPONGI_HILLS_01",
+          "C_P_IMPERIAL_PALACE_INFO"
+        ],
+        "latency_ms": 13.49
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.24
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 16.64
+      }
+    },
+    {
+      "question_id": 12,
+      "category": "B",
+      "query": "วัด Sensō-ji มีประวัติและความสำคัญอย่างไร?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_SENSOJI"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_SENSOJI_02",
+          "C_P_SENSOJI_01",
+          "C_P_SENSOJI_INFO"
+        ],
+        "latency_ms": 14.88
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.32
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.38
+      }
+    },
+    {
+      "question_id": 13,
+      "category": "B",
+      "query": "มีศาลเจ้าที่น่าสนใจใกล้ Shibuya หรือ Harajuku หรือไม่?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_MEIJI_JINGU",
+        "P_SHIBUYA_CROSSING"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_MEIJI_JINGU_01",
+          "C_P_MEIJI_JINGU_INFO",
+          "C_P_SHIBUYA_CROSSING_INFO"
+        ],
+        "latency_ms": 16.17
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.26
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.84
+      }
+    },
+    {
+      "question_id": 14,
+      "category": "B",
+      "query": "Meiji Jingu แตกต่างจาก Sensō-ji อย่างไร?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_SENSOJI",
+        "P_MEIJI_JINGU"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_SENSOJI_01",
+          "C_P_MEIJI_JINGU_01",
+          "C_P_SENSOJI_02"
+        ],
+        "latency_ms": 15.23
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.17
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.52
+      }
+    },
+    {
+      "question_id": 15,
+      "category": "B",
+      "query": "ถ้าสนใจประวัติศาสตร์สมัย Edo ควรไปที่ไหน?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_MEIJI_JINGU"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_IMPERIAL_PALACE_01",
+          "C_P_SENSOJI_01",
+          "C_P_IMPERIAL_PALACE_INFO"
+        ],
+        "latency_ms": 14.79
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.25
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 15.12
+      }
+    },
+    {
+      "question_id": 16,
+      "category": "B",
+      "query": "มีสถานที่ใดที่สามารถเรียนรู้เกี่ยวกับวัฒนธรรมญี่ปุ่นแบบดั้งเดิมได้?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_MEIJI_JINGU"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_SENSOJI_01",
+          "C_P_MEIJI_JINGU_01",
+          "C_P_TAKESHITA_STREET_01"
+        ],
+        "latency_ms": 14.91
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.26
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.44
+      }
+    },
+    {
+      "question_id": 17,
+      "category": "B",
+      "query": "แนะนำพิพิธภัณฑ์เกี่ยวกับประวัติศาสตร์ Tokyo",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_MEIJI_JINGU"
+      ],
+      "dense_only": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "retrieved_chunks": [
+          "C_P_ROPPONGI_HILLS_01",
+          "C_P_IMPERIAL_PALACE_02",
+          "C_P_IMPERIAL_PALACE_INFO"
+        ],
+        "latency_ms": 14.62
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.33
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 15.1
+      }
+    },
+    {
+      "question_id": 18,
+      "category": "B",
+      "query": "มีสวนญี่ปุ่นแบบดั้งเดิมที่น่าเที่ยวที่ไหนบ้าง?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_MEIJI_JINGU"
+      ],
+      "dense_only": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "retrieved_chunks": [
+          "C_P_SHINJUKU_GYOEN_01",
+          "C_P_IMPERIAL_PALACE_02",
+          "C_P_HAMARIKYU_GARDENS_01"
+        ],
+        "latency_ms": 14.1
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.28
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 15.13
+      }
+    },
+    {
+      "question_id": 19,
+      "category": "B",
+      "query": "ถ้าต้องการเที่ยววัดและศาลเจ้าหลายแห่งในหนึ่งวัน ควรจัดเส้นทางอย่างไร?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_MEIJI_JINGU"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_MEIJI_JINGU_01",
+          "C_P_SENSOJI_02",
+          "C_P_MEIJI_JINGU_INFO"
+        ],
+        "latency_ms": 17.31
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.19
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.57
+      }
+    },
+    {
+      "question_id": 20,
+      "category": "B",
+      "query": "มีสถานที่ทางประวัติศาสตร์ใกล้ Asakusa ที่สามารถเดินไปถึงได้หรือไม่?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_SENSOJI"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_AKIHABARA_ELECTRIC_01",
+          "C_H_ASAKUSA_VIEW",
+          "C_P_AKIHABARA_ELECTRIC_INFO"
+        ],
+        "latency_ms": 15.42
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.29
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 15.81
+      }
+    },
+    {
+      "question_id": 21,
+      "category": "C",
+      "query": "ถ้าชอบ Anime ควรไปเที่ยวบริเวณไหนใน Tokyo?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_ODAIBA_GUNDAM",
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_IMPERIAL_PALACE_INFO",
+          "C_P_TOKYO_DOME_CITY_01",
+          "C_P_ROPPONGI_HILLS_INFO"
+        ],
+        "latency_ms": 15.07
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.2
+      },
+      "hybrid_rag": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 15.48
+      }
+    },
+    {
+      "question_id": 22,
+      "category": "C",
+      "query": "Akihabara มีสถานที่อะไรที่เหมาะกับแฟน Anime และ Gaming?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_AKIHABARA_ELECTRIC_01",
+          "C_P_AKIHABARA_ELECTRIC_INFO",
+          "C_H_ASAKUSA_VIEW"
+        ],
+        "latency_ms": 15.35
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.26
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.34
+      }
+    },
+    {
+      "question_id": 23,
+      "category": "C",
+      "query": "นอกจาก Akihabara แล้ว มีแหล่ง Anime ที่ไหนอีก?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_AKIHABARA_ELECTRIC_01",
+          "C_P_AKIHABARA_ELECTRIC_INFO",
+          "C_P_ODAIBA_GUNDAM_INFO"
+        ],
+        "latency_ms": 17.72
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.25
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 21.08
+      }
+    },
+    {
+      "question_id": 24,
+      "category": "C",
+      "query": "Ikebukuro กับ Akihabara ต่างกันอย่างไรสำหรับแฟน Anime?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_AKIHABARA_ELECTRIC_01",
+          "C_P_ODAIBA_GUNDAM_01",
+          "C_P_ODAIBA_GUNDAM_INFO"
+        ],
+        "latency_ms": 19.53
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 204.74
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 17.95
+      }
+    },
+    {
+      "question_id": 25,
+      "category": "C",
+      "query": "มีพิพิธภัณฑ์หรือสถานที่เกี่ยวกับ Animation ใน Tokyo หรือไม่?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_ODAIBA_GUNDAM",
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "retrieved_chunks": [
+          "C_P_ROPPONGI_HILLS_01",
+          "C_P_ODAIBA_GUNDAM_01",
+          "C_P_IMPERIAL_PALACE_INFO"
+        ],
+        "latency_ms": 17.2
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.25
+      },
+      "hybrid_rag": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 17.47
+      }
+    },
+    {
+      "question_id": 26,
+      "category": "C",
+      "query": "ถ้าชอบ Pokémon ควรไปที่ไหน?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_ODAIBA_GUNDAM",
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_ODAIBA_GUNDAM_INFO",
+          "C_P_TOYOSU_MARKET_INFO",
+          "C_P_TAKESHITA_STREET_01"
+        ],
+        "latency_ms": 16.58
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.17
+      },
+      "hybrid_rag": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.31
+      }
+    },
+    {
+      "question_id": 27,
+      "category": "C",
+      "query": "ถ้าชอบ Gundam ควรไปเที่ยวบริเวณไหน?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_ODAIBA_GUNDAM"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_ODAIBA_GUNDAM_01",
+          "C_P_ODAIBA_GUNDAM_INFO",
+          "C_P_ROPPONGI_HILLS_INFO"
+        ],
+        "latency_ms": 16.73
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.17
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.3
+      }
+    },
+    {
+      "question_id": 28,
+      "category": "C",
+      "query": "แนะนำเส้นทาง Anime Tour 1 วันใน Tokyo",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_ODAIBA_GUNDAM",
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_IMPERIAL_PALACE_INFO",
+          "C_P_ROPPONGI_HILLS_INFO",
+          "C_P_TOKYO_DOME_CITY_INFO"
+        ],
+        "latency_ms": 16.38
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.35
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 17.47
+      }
+    },
+    {
+      "question_id": 29,
+      "category": "C",
+      "query": "มีสถานที่เกี่ยวกับเทคโนโลยีหรือวิทยาศาสตร์ที่น่าสนใจไหม?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_ODAIBA_GUNDAM",
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "retrieved_chunks": [
+          "C_P_TEAMLAB_PLANETS_01",
+          "C_P_AKIHABARA_ELECTRIC_01",
+          "C_P_TEAMLAB_PLANETS_INFO"
+        ],
+        "latency_ms": 16.03
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.19
+      },
+      "hybrid_rag": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.1
+      }
+    },
+    {
+      "question_id": 30,
+      "category": "C",
+      "query": "ถ้ามีเวลาเพียงครึ่งวันสำหรับ Akihabara ควรไปจุดไหนก่อน?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_AKIHABARA_ELECTRIC_INFO",
+          "C_H_DORM_INN_AKIHABARA",
+          "C_P_TOKYO_DOME_CITY_INFO"
+        ],
+        "latency_ms": 16.71
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.21
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 17.76
+      }
+    },
+    {
+      "question_id": 31,
+      "category": "D",
+      "query": "แนะนำสวนสาธารณะที่สวยที่สุดใน Tokyo",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_HAMARIKYU_GARDENS",
+        "P_TOKYO_SKYTREE",
+        "P_UENO_PARK",
+        "P_TOKYO_TOWER",
+        "P_SHINJUKU_GYOEN"
+      ],
+      "dense_only": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "retrieved_chunks": [
+          "C_P_IMPERIAL_PALACE_INFO",
+          "C_P_SHINJUKU_GYOEN_01",
+          "C_P_HAMARIKYU_GARDENS_01"
+        ],
+        "latency_ms": 15.04
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.32
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 15.35
+      }
+    },
+    {
+      "question_id": 32,
+      "category": "D",
+      "query": "มีสถานที่ชมดอกซากุระที่ไหนบ้าง?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_HAMARIKYU_GARDENS",
+        "P_TOKYO_SKYTREE",
+        "P_UENO_PARK",
+        "P_TOKYO_TOWER",
+        "P_SHINJUKU_GYOEN"
+      ],
+      "dense_only": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "retrieved_chunks": [
+          "C_P_OMOTESANDO_HILLS_01",
+          "C_P_SHINJUKU_GYOEN_01",
+          "C_P_OMOTESANDO_HILLS_INFO"
+        ],
+        "latency_ms": 15.52
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.14
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 15.44
+      }
+    },
+    {
+      "question_id": 33,
+      "category": "D",
+      "query": "ถ้าไม่อยากเจอคนเยอะ ควรไปชมซากุระที่ไหน?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_HAMARIKYU_GARDENS",
+        "P_TOKYO_SKYTREE",
+        "P_UENO_PARK",
+        "P_TOKYO_TOWER",
+        "P_SHINJUKU_GYOEN"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_OMOTESANDO_HILLS_INFO",
+          "C_P_OMOTESANDO_HILLS_01",
+          "C_P_ROPPONGI_HILLS_INFO"
+        ],
+        "latency_ms": 15.21
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.17
+      },
+      "hybrid_rag": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 15.95
+      }
+    },
+    {
+      "question_id": 34,
+      "category": "D",
+      "query": "มีสถานที่ชมใบไม้เปลี่ยนสีใน Tokyo ที่ไหนบ้าง?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_HAMARIKYU_GARDENS",
+        "P_TOKYO_SKYTREE",
+        "P_UENO_PARK",
+        "P_TOKYO_TOWER",
+        "P_SHINJUKU_GYOEN"
+      ],
+      "dense_only": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "retrieved_chunks": [
+          "C_P_IMPERIAL_PALACE_INFO",
+          "C_P_SHINJUKU_GYOEN_01",
+          "C_P_IMPERIAL_PALACE_02"
+        ],
+        "latency_ms": 14.79
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.16
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 15.63
+      }
+    },
+    {
+      "question_id": 35,
+      "category": "D",
+      "query": "จุดไหนสามารถชมวิวเมือง Tokyo จากที่สูงได้?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_HAMARIKYU_GARDENS",
+        "P_TOKYO_SKYTREE",
+        "P_UENO_PARK",
+        "P_TOKYO_TOWER",
+        "P_SHINJUKU_GYOEN"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_ROPPONGI_HILLS_01",
+          "C_P_ROPPONGI_HILLS_INFO",
+          "C_P_TOKYO_DOME_CITY_01"
+        ],
+        "latency_ms": 13.99
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.16
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 14.58
+      }
+    },
+    {
+      "question_id": 36,
+      "category": "D",
+      "query": "Tokyo Skytree กับ Tokyo Tower แตกต่างกันอย่างไรในด้านประสบการณ์และทำเล?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_TOKYO_TOWER",
+        "P_TOKYO_SKYTREE"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_TOKYO_TOWER_01",
+          "C_P_TOKYO_SKYTREE_01",
+          "C_P_TOKYO_SKYTREE_02"
+        ],
+        "latency_ms": 15.44
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.54
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.04
+      }
+    },
+    {
+      "question_id": 37,
+      "category": "D",
+      "query": "มีจุดชมวิวฟรีใน Tokyo หรือไม่?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_HAMARIKYU_GARDENS",
+        "P_TOKYO_SKYTREE",
+        "P_UENO_PARK",
+        "P_TOKYO_TOWER",
+        "P_SHINJUKU_GYOEN"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_ROPPONGI_HILLS_INFO",
+          "C_P_IMPERIAL_PALACE_INFO",
+          "C_P_TOKYO_DOME_CITY_INFO"
+        ],
+        "latency_ms": 15.74
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.2
+      },
+      "hybrid_rag": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.24
+      }
+    },
+    {
+      "question_id": 38,
+      "category": "D",
+      "query": "สถานที่ไหนเหมาะสำหรับชมพระอาทิตย์ตก?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_HAMARIKYU_GARDENS",
+        "P_TOKYO_SKYTREE",
+        "P_UENO_PARK",
+        "P_TOKYO_TOWER",
+        "P_SHINJUKU_GYOEN"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_OMOTESANDO_HILLS_INFO",
+          "C_P_OMOTESANDO_HILLS_01",
+          "C_P_ROPPONGI_HILLS_INFO"
+        ],
+        "latency_ms": 15.89
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.18
+      },
+      "hybrid_rag": {
+        "rank": 3,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.3333,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.29
+      }
+    },
+    {
+      "question_id": 39,
+      "category": "D",
+      "query": "มีสวนไหนอยู่ใกล้สถานีรถไฟและเดินทางสะดวก?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_HAMARIKYU_GARDENS",
+        "P_TOKYO_SKYTREE",
+        "P_UENO_PARK",
+        "P_TOKYO_TOWER",
+        "P_SHINJUKU_GYOEN"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_SHINJUKU_GYOEN_INFO",
+          "C_P_IMPERIAL_PALACE_INFO",
+          "C_P_HAMARIKYU_GARDENS_INFO"
+        ],
+        "latency_ms": 16.52
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.61
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.96
+      }
+    },
+    {
+      "question_id": 40,
+      "category": "D",
+      "query": "ถ้าอยากเที่ยวธรรมชาติแต่ไม่ออกนอก Tokyo ควรไปที่ไหน?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_HAMARIKYU_GARDENS",
+        "P_TOKYO_SKYTREE",
+        "P_UENO_PARK",
+        "P_TOKYO_TOWER",
+        "P_SHINJUKU_GYOEN"
+      ],
+      "dense_only": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "retrieved_chunks": [
+          "C_P_IMPERIAL_PALACE_INFO",
+          "C_P_HAMARIKYU_GARDENS_INFO",
+          "C_P_ROPPONGI_HILLS_INFO"
+        ],
+        "latency_ms": 15.3
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.22
+      },
+      "hybrid_rag": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 17.0
+      }
+    },
+    {
+      "question_id": 41,
+      "category": "E",
+      "query": "แนะนำย่านที่มี Street Food ใน Tokyo",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_AMEYOKO",
+        "P_TSUKIJI_OUTER",
+        "P_TOYOSU_MARKET"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_AMEYOKO_01",
+          "C_P_TSUKIJI_OUTER_01",
+          "C_P_TAKESHITA_STREET_01"
+        ],
+        "latency_ms": 15.22
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.24
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 14.18
+      }
+    },
+    {
+      "question_id": 42,
+      "category": "E",
+      "query": "ถ้าอยากกินอาหารทะเลควรไปที่ไหน?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_AMEYOKO",
+        "P_TSUKIJI_OUTER",
+        "P_TOYOSU_MARKET"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_TOYOSU_MARKET_01",
+          "C_P_TSUKIJI_OUTER_01",
+          "C_P_TOYOSU_MARKET_INFO"
+        ],
+        "latency_ms": 14.79
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.2
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 15.12
+      }
+    },
+    {
+      "question_id": 43,
+      "category": "E",
+      "query": "Tsukiji Outer Market มีอะไรน่าสนใจ?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_TSUKIJI_OUTER"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_TSUKIJI_OUTER_01",
+          "C_P_TSUKIJI_OUTER_INFO",
+          "C_P_AMEYOKO_01"
+        ],
+        "latency_ms": 14.73
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.18
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.18
+      }
+    },
+    {
+      "question_id": 44,
+      "category": "E",
+      "query": "มีตลาดอาหารที่สามารถเดินทางจาก Ginza ได้ง่ายหรือไม่?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_GINZA_SIX"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_GINZA_SIX_INFO",
+          "C_P_GINZA_SIX_01",
+          "C_H_MITSUI_GARDEN_GINZA"
+        ],
+        "latency_ms": 15.34
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.22
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 17.53
+      }
+    },
+    {
+      "question_id": 45,
+      "category": "E",
+      "query": "แนะนำย่านสำหรับกินอาหารญี่ปุ่นราคาประหยัด",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_AMEYOKO",
+        "P_TSUKIJI_OUTER",
+        "P_TOYOSU_MARKET"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_AMEYOKO_01",
+          "C_P_TSUKIJI_OUTER_01",
+          "C_P_AMEYOKO_INFO"
+        ],
+        "latency_ms": 15.29
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.19
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 16.34
+      }
+    },
+    {
+      "question_id": 46,
+      "category": "E",
+      "query": "ถ้าเที่ยว Asakusa ตอนเช้า มีร้านหรือบริเวณอาหารอะไรใกล้ ๆ?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_SENSOJI"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_AMEYOKO_01",
+          "C_P_AMEYOKO_INFO",
+          "C_P_TOYOSU_MARKET_INFO"
+        ],
+        "latency_ms": 16.82
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.3
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 17.84
+      }
+    },
+    {
+      "question_id": 47,
+      "category": "E",
+      "query": "ย่านไหนเหมาะสำหรับหาอาหารช่วงกลางคืน?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_AMEYOKO",
+        "P_TSUKIJI_OUTER",
+        "P_TOYOSU_MARKET"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_TSUKIJI_OUTER_01",
+          "C_P_TSUKIJI_OUTER_INFO",
+          "C_P_AMEYOKO_01"
+        ],
+        "latency_ms": 15.98
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.27
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.79
+      }
+    },
+    {
+      "question_id": 48,
+      "category": "E",
+      "query": "ถ้าต้องการเที่ยวตลาดและวัดในช่วงเช้า ควรจัดเส้นทางอย่างไร?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_AMEYOKO",
+        "P_TSUKIJI_OUTER",
+        "P_TOYOSU_MARKET"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_AMEYOKO_INFO",
+          "C_P_TOYOSU_MARKET_INFO",
+          "C_P_AMEYOKO_01"
+        ],
+        "latency_ms": 17.16
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.26
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 17.56
+      }
+    },
+    {
+      "question_id": 49,
+      "category": "E",
+      "query": "มีสถานที่ท่องเที่ยวอะไรใกล้ Tsukiji ที่สามารถเที่ยวต่อได้?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_TSUKIJI_OUTER"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_TSUKIJI_OUTER_INFO",
+          "C_P_AMEYOKO_INFO",
+          "C_P_TSUKIJI_OUTER_01"
+        ],
+        "latency_ms": 17.28
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.37
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 17.74
+      }
+    },
+    {
+      "question_id": 50,
+      "category": "E",
+      "query": "ถ้ามีงบค่าอาหาร 3,000 เยนต่อวัน ควรเลือกเที่ยวและกินบริเวณไหน?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_AMEYOKO",
+        "P_TSUKIJI_OUTER",
+        "P_TOYOSU_MARKET"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_AMEYOKO_INFO",
+          "C_H_ASAKUSA_VIEW",
+          "C_P_TOYOSU_MARKET_INFO"
+        ],
+        "latency_ms": 16.72
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.22
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 17.49
+      }
+    },
+    {
+      "question_id": 51,
+      "category": "F",
+      "query": "มีสถานที่ท่องเที่ยวอะไรอยู่ใกล้ Tokyo Station?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_IMPERIAL_PALACE"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_IMPERIAL_PALACE_INFO",
+          "C_H_TOKYO_STATION_HOTEL",
+          "C_P_TOKYO_DOME_CITY_INFO"
+        ],
+        "latency_ms": 15.22
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.28
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 15.4
+      }
+    },
+    {
+      "question_id": 52,
+      "category": "F",
+      "query": "มีสถานที่อะไรอยู่ในระยะเดินจาก Sensō-ji?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_SENSOJI"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_SENSOJI_INFO",
+          "C_P_SENSOJI_01",
+          "C_P_AMEYOKO_INFO"
+        ],
+        "latency_ms": 15.92
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.18
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 17.08
+      }
+    },
+    {
+      "question_id": 53,
+      "category": "F",
+      "query": "หลังจากเที่ยว Meiji Jingu แล้วควรไปที่ไหนต่อโดยไม่ต้องนั่งรถไฟ?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_MEIJI_JINGU"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_MEIJI_JINGU_INFO",
+          "C_H_HOTEL_VILLA_FONTAINE_ROPPONGI",
+          "C_P_IMPERIAL_PALACE_INFO"
+        ],
+        "latency_ms": 16.0
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.13
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 14.47
+      }
+    },
+    {
+      "question_id": 54,
+      "category": "F",
+      "query": "มีพิพิธภัณฑ์อะไรใกล้ Ueno Park?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_UENO_PARK"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_UENO_PARK_01",
+          "C_P_UENO_PARK_INFO",
+          "C_P_SHINJUKU_GYOEN_01"
+        ],
+        "latency_ms": 15.5
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.35
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 17.62
+      }
+    },
+    {
+      "question_id": 55,
+      "category": "F",
+      "query": "สถานที่ท่องเที่ยวอะไรอยู่ใกล้ Shibuya Station?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_SHIBUYA_CROSSING"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_SHIBUYA_CROSSING_INFO",
+          "C_H_SHIBUYA_STREAM_EXCEL",
+          "C_P_TAKESHITA_STREET_INFO"
+        ],
+        "latency_ms": 15.81
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.32
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 18.76
+      }
+    },
+    {
+      "question_id": 56,
+      "category": "F",
+      "query": "มีสวนสาธารณะใกล้สถานี Shinjuku หรือไม่?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_SHINJUKU_GYOEN"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_SHINJUKU_GYOEN_INFO",
+          "C_P_HAMARIKYU_GARDENS_INFO",
+          "C_P_IMPERIAL_PALACE_INFO"
+        ],
+        "latency_ms": 21.28
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.37
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 19.22
+      }
+    },
+    {
+      "question_id": 57,
+      "category": "F",
+      "query": "มีวัดหรือศาลเจ้าอะไรอยู่ใกล้สถานที่ชมวิวใน Tokyo?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_SHIBUYA_CROSSING",
+        "P_UENO_PARK"
+      ],
+      "dense_only": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "retrieved_chunks": [
+          "C_P_MEIJI_JINGU_01",
+          "C_P_IMPERIAL_PALACE_01",
+          "C_P_SENSOJI_01"
+        ],
+        "latency_ms": 21.48
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.32
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 19.83
+      }
+    },
+    {
+      "question_id": 58,
+      "category": "F",
+      "query": "สถานที่ท่องเที่ยวใดบ้างที่อยู่ห่างกันไม่เกิน 2 กิโลเมตร?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_SHIBUYA_CROSSING",
+        "P_UENO_PARK"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_OMOTESANDO_HILLS_INFO",
+          "C_P_OMOTESANDO_HILLS_01",
+          "C_P_ROPPONGI_HILLS_INFO"
+        ],
+        "latency_ms": 19.62
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.2
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 18.64
+      }
+    },
+    {
+      "question_id": 59,
+      "category": "F",
+      "query": "ถ้าอยู่ Akihabara มีสถานที่สำคัญอะไรที่สามารถเดินไปต่อได้?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_AKIHABARA_ELECTRIC_INFO",
+          "C_P_AKIHABARA_ELECTRIC_01",
+          "C_P_OMOTESANDO_HILLS_INFO"
+        ],
+        "latency_ms": 20.36
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.21
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 18.15
+      }
+    },
+    {
+      "question_id": 60,
+      "category": "F",
+      "query": "ช่วยหากลุ่มสถานที่ 3–4 แห่งที่อยู่ใกล้กันและเที่ยวต่อเนื่องได้",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_SHIBUYA_CROSSING",
+        "P_UENO_PARK"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_OMOTESANDO_HILLS_INFO",
+          "C_P_ROPPONGI_HILLS_INFO",
+          "C_P_OMOTESANDO_HILLS_01"
+        ],
+        "latency_ms": 16.08
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.18
+      },
+      "hybrid_rag": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 17.28
+      }
+    },
+    {
+      "question_id": 61,
+      "category": "G",
+      "query": "จาก Tokyo Station ไป Sensō-ji ควรเดินทางอย่างไร?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI"
+      ],
+      "dense_only": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "retrieved_chunks": [
+          "C_P_TOKYO_DOME_CITY_INFO",
+          "C_P_SENSOJI_INFO",
+          "C_P_IMPERIAL_PALACE_INFO"
+        ],
+        "latency_ms": 16.15
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.21
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 17.72
+      }
+    },
+    {
+      "question_id": 62,
+      "category": "G",
+      "query": "จาก Shinjuku ไป Meiji Jingu ใช้เส้นทางไหนสะดวก?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_MEIJI_JINGU",
+        "P_SHINJUKU_GYOEN"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_MEIJI_JINGU_01",
+          "C_P_MEIJI_JINGU_INFO",
+          "C_P_SENSOJI_01"
+        ],
+        "latency_ms": 16.32
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.21
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 17.03
+      }
+    },
+    {
+      "question_id": 63,
+      "category": "G",
+      "query": "จาก Asakusa ไป Tokyo Skytree ไปอย่างไร?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_SENSOJI",
+        "P_TOKYO_SKYTREE"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_TOKYO_SKYTREE_INFO",
+          "C_P_TOKYO_DOME_CITY_INFO",
+          "C_P_TOKYO_TOWER_INFO"
+        ],
+        "latency_ms": 15.19
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.38
+      },
+      "hybrid_rag": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.9
+      }
+    },
+    {
+      "question_id": 64,
+      "category": "G",
+      "query": "จาก Ueno ไป Akihabara เดินทางอย่างไร?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_UENO_PARK",
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_AKIHABARA_ELECTRIC_INFO",
+          "C_H_ASAKUSA_VIEW",
+          "C_P_UENO_PARK_INFO"
+        ],
+        "latency_ms": 15.32
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.4
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 14.82
+      }
+    },
+    {
+      "question_id": 65,
+      "category": "G",
+      "query": "จาก Shibuya ไป Odaiba ควรใช้รถไฟสายไหน?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_ODAIBA_GUNDAM",
+        "P_SHIBUYA_CROSSING"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_SHIBUYA_CROSSING_INFO",
+          "C_P_TAKESHITA_STREET_INFO",
+          "C_P_AKIHABARA_ELECTRIC_INFO"
+        ],
+        "latency_ms": 14.69
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.22
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.12
+      }
+    },
+    {
+      "question_id": 66,
+      "category": "G",
+      "query": "ถ้าจะเที่ยว Asakusa → Ueno → Akihabara ควรเรียงเส้นทางอย่างไร?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_SENSOJI",
+        "P_UENO_PARK",
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "retrieved_chunks": [
+          "C_H_ASAKUSA_VIEW",
+          "C_P_AKIHABARA_ELECTRIC_INFO",
+          "C_P_AMEYOKO_INFO"
+        ],
+        "latency_ms": 17.88
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.5
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 17.37
+      }
+    },
+    {
+      "question_id": 67,
+      "category": "G",
+      "query": "Tokyo Station → Imperial Palace → Ginza → Tsukiji ควรเดินทางแบบไหน?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_GINZA_SIX",
+        "P_IMPERIAL_PALACE",
+        "P_TSUKIJI_OUTER"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_IMPERIAL_PALACE_INFO",
+          "C_P_TOKYO_DOME_CITY_INFO",
+          "C_P_TOKYO_TOWER_INFO"
+        ],
+        "latency_ms": 16.22
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.47
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 17.42
+      }
+    },
+    {
+      "question_id": 68,
+      "category": "G",
+      "query": "ถ้าต้องการเปลี่ยนรถไฟให้น้อยที่สุดจาก Shinjuku ไป Asakusa ควรไปอย่างไร?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_SENSOJI",
+        "P_SHINJUKU_GYOEN"
+      ],
+      "dense_only": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "retrieved_chunks": [
+          "C_P_TOKYO_DOME_CITY_INFO",
+          "C_P_SENSOJI_INFO",
+          "C_P_AKIHABARA_ELECTRIC_INFO"
+        ],
+        "latency_ms": 16.77
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.53
+      },
+      "hybrid_rag": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 18.75
+      }
+    },
+    {
+      "question_id": 69,
+      "category": "G",
+      "query": "มีสถานที่ท่องเที่ยวใดบ้างที่อยู่ตามเส้นทาง Yamanote Line?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_SHIBUYA_CROSSING",
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "retrieved_chunks": [
+          "C_P_OMOTESANDO_HILLS_INFO",
+          "C_P_SHIBUYA_CROSSING_01",
+          "C_P_OMOTESANDO_HILLS_01"
+        ],
+        "latency_ms": 16.43
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.24
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.46
+      }
+    },
+    {
+      "question_id": 70,
+      "category": "G",
+      "query": "ช่วยสร้างเส้นทางที่เริ่มและจบที่ Tokyo Station โดยแวะสถานที่ท่องเที่ยว 5 แห่ง",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_IMPERIAL_PALACE"
+      ],
+      "dense_only": {
+        "rank": 3,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.3333,
+        "retrieved_chunks": [
+          "C_P_ROPPONGI_HILLS_INFO",
+          "C_P_TOKYO_DOME_CITY_INFO",
+          "C_P_IMPERIAL_PALACE_INFO"
+        ],
+        "latency_ms": 17.26
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.16
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 17.03
+      }
+    },
+    {
+      "question_id": 71,
+      "category": "H",
+      "query": "ช่วยจัดทริป Tokyo 1 วันสำหรับคนมาครั้งแรก",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_AKIHABARA_ELECTRIC",
+        "P_SENSOJI",
+        "P_SHIBUYA_CROSSING",
+        "P_UENO_PARK"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_TOKYO_DOME_CITY_INFO",
+          "C_P_IMPERIAL_PALACE_INFO",
+          "C_P_ROPPONGI_HILLS_INFO"
+        ],
+        "latency_ms": 17.2
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.25
+      },
+      "hybrid_rag": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 25.05
+      }
+    },
+    {
+      "question_id": 72,
+      "category": "H",
+      "query": "ช่วยจัดทริป Tokyo 2 วัน เน้นวัฒนธรรมและอาหาร",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_AKIHABARA_ELECTRIC",
+        "P_SENSOJI",
+        "P_SHIBUYA_CROSSING",
+        "P_UENO_PARK"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_AMEYOKO_INFO",
+          "C_P_AMEYOKO_01",
+          "C_P_TOYOSU_MARKET_INFO"
+        ],
+        "latency_ms": 15.37
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.22
+      },
+      "hybrid_rag": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 16.35
+      }
+    },
+    {
+      "question_id": 73,
+      "category": "H",
+      "query": "ช่วยจัดทริป 3 วัน โดยไม่ให้สถานที่ในแต่ละวันอยู่ไกลกันเกินไป",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_AKIHABARA_ELECTRIC",
+        "P_SENSOJI",
+        "P_SHIBUYA_CROSSING",
+        "P_UENO_PARK"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_OMOTESANDO_HILLS_INFO",
+          "C_P_TOKYO_DOME_CITY_INFO",
+          "C_H_HOTEL_VILLA_FONTAINE_ROPPONGI"
+        ],
+        "latency_ms": 16.34
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.13
+      },
+      "hybrid_rag": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 19.1
+      }
+    },
+    {
+      "question_id": 74,
+      "category": "H",
+      "query": "จัดทริป Asakusa–Ueno–Akihabara ตั้งแต่ 09:00–18:00",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_SENSOJI",
+        "P_UENO_PARK",
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": 3,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.3333,
+        "retrieved_chunks": [
+          "C_H_ASAKUSA_VIEW",
+          "C_P_ODAIBA_GUNDAM_INFO",
+          "C_P_AKIHABARA_ELECTRIC_INFO"
+        ],
+        "latency_ms": 21.36
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.19
+      },
+      "hybrid_rag": {
+        "rank": 3,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.3333,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 17.78
+      }
+    },
+    {
+      "question_id": 75,
+      "category": "H",
+      "query": "จัดเส้นทาง Shibuya–Harajuku–Shinjuku สำหรับช่วงบ่ายถึงกลางคืน",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_MEIJI_JINGU",
+        "P_SHIBUYA_CROSSING",
+        "P_SHINJUKU_GYOEN"
+      ],
+      "dense_only": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "retrieved_chunks": [
+          "C_H_SHIBUYA_STREAM_EXCEL",
+          "C_P_SHIBUYA_CROSSING_INFO",
+          "C_P_TAKESHITA_STREET_INFO"
+        ],
+        "latency_ms": 19.49
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.46
+      },
+      "hybrid_rag": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 26.34
+      }
+    },
+    {
+      "question_id": 76,
+      "category": "H",
+      "query": "ถ้าเริ่มเที่ยวจาก Tokyo Station เวลา 08:00 และต้องกลับมา 20:00 ควรไปที่ไหนบ้าง?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_IMPERIAL_PALACE"
+      ],
+      "dense_only": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "retrieved_chunks": [
+          "C_P_TOKYO_DOME_CITY_INFO",
+          "C_P_IMPERIAL_PALACE_INFO",
+          "C_P_ROPPONGI_HILLS_INFO"
+        ],
+        "latency_ms": 24.59
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.22
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 26.12
+      }
+    },
+    {
+      "question_id": 77,
+      "category": "H",
+      "query": "จัดทริปหนึ่งวันที่มี วัด 1 แห่ง พิพิธภัณฑ์ 1 แห่ง สวน 1 แห่ง และจุดชมวิว 1 แห่ง",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_AKIHABARA_ELECTRIC",
+        "P_SENSOJI",
+        "P_SHIBUYA_CROSSING",
+        "P_UENO_PARK"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_ROPPONGI_HILLS_01",
+          "C_P_MEIJI_JINGU_01",
+          "C_P_HAMARIKYU_GARDENS_01"
+        ],
+        "latency_ms": 22.02
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.26
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 20.32
+      }
+    },
+    {
+      "question_id": 78,
+      "category": "H",
+      "query": "ช่วยจัดทริปที่เดินทางด้วยรถไฟไม่เกิน 5 ครั้งต่อวัน",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_AKIHABARA_ELECTRIC",
+        "P_SENSOJI",
+        "P_SHIBUYA_CROSSING",
+        "P_UENO_PARK"
+      ],
+      "dense_only": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "retrieved_chunks": [
+          "C_P_OMOTESANDO_HILLS_INFO",
+          "C_P_SHIBUYA_CROSSING_INFO",
+          "C_P_ODAIBA_GUNDAM_INFO"
+        ],
+        "latency_ms": 15.58
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.13
+      },
+      "hybrid_rag": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 16.74
+      }
+    },
+    {
+      "question_id": 79,
+      "category": "H",
+      "query": "ช่วยจัดเส้นทางเที่ยวโดยพยายามลดเวลาเดินทางระหว่างสถานที่",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_AKIHABARA_ELECTRIC",
+        "P_SENSOJI",
+        "P_SHIBUYA_CROSSING",
+        "P_UENO_PARK"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_OMOTESANDO_HILLS_INFO",
+          "C_P_TOKYO_DOME_CITY_INFO",
+          "C_P_ROPPONGI_HILLS_INFO"
+        ],
+        "latency_ms": 16.52
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.2
+      },
+      "hybrid_rag": {
+        "rank": 3,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.3333,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 17.68
+      }
+    },
+    {
+      "question_id": 80,
+      "category": "H",
+      "query": "ช่วยจัดเส้นทางหนึ่งวันที่เที่ยวได้อย่างน้อย 5 สถานที่และไม่ย้อนเส้นทางมากเกินไป",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_AKIHABARA_ELECTRIC",
+        "P_SENSOJI",
+        "P_SHIBUYA_CROSSING",
+        "P_UENO_PARK"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_OMOTESANDO_HILLS_INFO",
+          "C_P_SHINJUKU_GYOEN_INFO",
+          "C_H_HOTEL_VILLA_FONTAINE_ROPPONGI"
+        ],
+        "latency_ms": 17.75
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.14
+      },
+      "hybrid_rag": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 16.62
+      }
+    },
+    {
+      "question_id": 81,
+      "category": "I",
+      "query": "ฉันชอบประวัติศาสตร์และไม่สนใจ Shopping ควรไปที่ไหน?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_UENO_PARK"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_AMEYOKO_01",
+          "C_P_OMOTESANDO_HILLS_INFO",
+          "C_P_GINZA_SIX_01"
+        ],
+        "latency_ms": 14.95
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.25
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 14.84
+      }
+    },
+    {
+      "question_id": 82,
+      "category": "I",
+      "query": "ฉันชอบ Anime และอาหารญี่ปุ่น ช่วยจัดเส้นทางหนึ่งวันให้หน่อย",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_ODAIBA_GUNDAM",
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "retrieved_chunks": [
+          "C_P_ROPPONGI_HILLS_INFO",
+          "C_P_AKIHABARA_ELECTRIC_01",
+          "C_P_TOKYO_DOME_CITY_INFO"
+        ],
+        "latency_ms": 17.27
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.26
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 18.01
+      }
+    },
+    {
+      "question_id": 83,
+      "category": "I",
+      "query": "ฉันชอบถ่ายรูป มีสถานที่ไหนเหมาะสำหรับ Photography?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_TOKYO_TOWER",
+        "P_SHIBUYA_CROSSING",
+        "P_ROPPONGI_HILLS"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_ROPPONGI_HILLS_INFO",
+          "C_P_ROPPONGI_HILLS_01",
+          "C_P_OMOTESANDO_HILLS_01"
+        ],
+        "latency_ms": 14.99
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.2
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 15.23
+      }
+    },
+    {
+      "question_id": 84,
+      "category": "I",
+      "query": "ฉันไม่ชอบสถานที่คนเยอะ มีสถานที่ไหนแนะนำ?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_UENO_PARK"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_OMOTESANDO_HILLS_01",
+          "C_P_TOKYO_DOME_CITY_INFO",
+          "C_P_OMOTESANDO_HILLS_INFO"
+        ],
+        "latency_ms": 15.68
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.13
+      },
+      "hybrid_rag": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 20.48
+      }
+    },
+    {
+      "question_id": 85,
+      "category": "I",
+      "query": "ฉันชอบธรรมชาติและวัด แต่ไม่สนใจย่าน Shopping ควรจัดเส้นทางอย่างไร?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_HAMARIKYU_GARDENS",
+        "P_MEIJI_JINGU",
+        "P_SHINJUKU_GYOEN"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_OMOTESANDO_HILLS_01",
+          "C_P_AMEYOKO_01",
+          "C_P_AMEYOKO_INFO"
+        ],
+        "latency_ms": 25.2
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.34
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 20.64
+      }
+    },
+    {
+      "question_id": 86,
+      "category": "I",
+      "query": "ถ้าเดินได้ไม่เกิน 5 กิโลเมตรต่อวัน ควรเที่ยวบริเวณไหน?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_UENO_PARK"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_OMOTESANDO_HILLS_INFO",
+          "C_P_SHINJUKU_GYOEN_INFO",
+          "C_P_SHIBUYA_CROSSING_01"
+        ],
+        "latency_ms": 18.07
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.13
+      },
+      "hybrid_rag": {
+        "rank": 3,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.3333,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 16.72
+      }
+    },
+    {
+      "question_id": 87,
+      "category": "I",
+      "query": "ถ้าเดินทางกับผู้สูงอายุ ควรเลือกสถานที่และเส้นทางแบบไหน?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_UENO_PARK"
+      ],
+      "dense_only": {
+        "rank": 3,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.3333,
+        "retrieved_chunks": [
+          "C_P_OMOTESANDO_HILLS_INFO",
+          "C_P_ROPPONGI_HILLS_INFO",
+          "C_P_IMPERIAL_PALACE_INFO"
+        ],
+        "latency_ms": 19.48
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.18
+      },
+      "hybrid_rag": {
+        "rank": 3,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.3333,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.86
+      }
+    },
+    {
+      "question_id": 88,
+      "category": "I",
+      "query": "ถ้าเดินทางกับเด็ก มีสถานที่ใดเหมาะสำหรับครอบครัว?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_UENO_PARK"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_OMOTESANDO_HILLS_INFO",
+          "C_H_HOTEL_VILLA_FONTAINE_ROPPONGI",
+          "C_P_AMEYOKO_INFO"
+        ],
+        "latency_ms": 14.96
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.13
+      },
+      "hybrid_rag": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 16.03
+      }
+    },
+    {
+      "question_id": 89,
+      "category": "I",
+      "query": "ถ้ามีงบประมาณจำกัด ควรจัดทริป Tokyo 1 วันอย่างไร?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_UENO_PARK"
+      ],
+      "dense_only": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "retrieved_chunks": [
+          "C_P_TOKYO_DOME_CITY_INFO",
+          "C_P_IMPERIAL_PALACE_INFO",
+          "C_H_TOKYO_STATION_HOTEL"
+        ],
+        "latency_ms": 15.32
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.23
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 16.28
+      }
+    },
+    {
+      "question_id": 90,
+      "category": "I",
+      "query": "ฉันอยากถ่ายรูป Tokyo ตอนกลางคืน ควรไปที่ไหนและเรียงเส้นทางอย่างไร?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_TOKYO_TOWER",
+        "P_SHIBUYA_CROSSING",
+        "P_ROPPONGI_HILLS"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_ROPPONGI_HILLS_INFO",
+          "C_P_TOKYO_DOME_CITY_INFO",
+          "C_H_ASAKUSA_VIEW"
+        ],
+        "latency_ms": 17.72
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.19
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 18.26
+      }
+    },
+    {
+      "question_id": 91,
+      "category": "J",
+      "query": "หาวัดที่อยู่ใกล้สถานีรถไฟและมีสถานที่ทางประวัติศาสตร์อื่นอยู่ในระยะเดินถึง",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_SHIBUYA_CROSSING",
+        "P_UENO_PARK",
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_ROPPONGI_HILLS_INFO",
+          "C_P_OMOTESANDO_HILLS_INFO",
+          "C_P_TOKYO_DOME_CITY_INFO"
+        ],
+        "latency_ms": 19.09
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.48
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 20.75
+      }
+    },
+    {
+      "question_id": 92,
+      "category": "J",
+      "query": "แนะนำสถานที่ชมวิวที่สามารถเดินทางต่อไปยังย่านอาหารได้ง่ายโดยรถไฟไม่เกินหนึ่งต่อ",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_SHIBUYA_CROSSING",
+        "P_UENO_PARK",
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_OMOTESANDO_HILLS_INFO",
+          "C_P_TOKYO_DOME_CITY_INFO",
+          "C_P_ROPPONGI_HILLS_INFO"
+        ],
+        "latency_ms": 16.37
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.28
+      },
+      "hybrid_rag": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 17.98
+      }
+    },
+    {
+      "question_id": 93,
+      "category": "J",
+      "query": "หาสถานที่ท่องเที่ยวทางวัฒนธรรม 3 แห่งที่อยู่ในเขตเดียวกันและมีสถานีรถไฟอยู่ใกล้",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_SHIBUYA_CROSSING",
+        "P_UENO_PARK",
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": 3,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.3333,
+        "retrieved_chunks": [
+          "C_P_ROPPONGI_HILLS_INFO",
+          "C_P_OMOTESANDO_HILLS_INFO",
+          "C_P_AKIHABARA_ELECTRIC_INFO"
+        ],
+        "latency_ms": 18.66
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.34
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 18.85
+      }
+    },
+    {
+      "question_id": 94,
+      "category": "J",
+      "query": "ฉันต้องการเริ่มจาก Asakusa เที่ยววัด ต่อด้วยพิพิธภัณฑ์ แล้วไปจุดชมวิวตอนเย็น ควรไปที่ไหนและเรียงอย่างไร?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_SENSOJI"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_H_ASAKUSA_VIEW",
+          "C_P_ROPPONGI_HILLS_INFO",
+          "C_P_ODAIBA_GUNDAM_INFO"
+        ],
+        "latency_ms": 19.99
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.22
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 19.66
+      }
+    },
+    {
+      "question_id": 95,
+      "category": "J",
+      "query": "สร้างเส้นทางจาก Shinjuku ที่ผ่านสวน ศาลเจ้า ย่าน Shopping และจุดชมวิว โดยลดการย้อนเส้นทาง",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_SHINJUKU_GYOEN"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_SHIBUYA_CROSSING_01",
+          "C_P_MEIJI_JINGU_01",
+          "C_P_SENSOJI_01"
+        ],
+        "latency_ms": 20.3
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.33
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 21.23
+      }
+    },
+    {
+      "question_id": 96,
+      "category": "J",
+      "query": "หาสถานที่ที่มีความเกี่ยวข้องกับประวัติศาสตร์ Edo และอยู่ใกล้สถานที่ท่องเที่ยวอื่นอย่างน้อย 2 แห่ง",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_SHIBUYA_CROSSING",
+        "P_UENO_PARK",
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_IMPERIAL_PALACE_01",
+          "C_P_IMPERIAL_PALACE_02",
+          "C_H_ASAKUSA_VIEW"
+        ],
+        "latency_ms": 19.94
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.74
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 20.45
+      }
+    },
+    {
+      "question_id": 97,
+      "category": "J",
+      "query": "ถ้าเริ่มที่ Tokyo Station เวลา 09:00 ต้องการไปวัด 1 แห่ง ตลาด 1 แห่ง พิพิธภัณฑ์ 1 แห่ง และชมวิวกลางคืน ควรจัดเส้นทางอย่างไร?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_IMPERIAL_PALACE"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_TOKYO_DOME_CITY_INFO",
+          "C_P_ROPPONGI_HILLS_INFO",
+          "C_P_TEAMLAB_PLANETS_INFO"
+        ],
+        "latency_ms": 21.01
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.22
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 22.93
+      }
+    },
+    {
+      "question_id": 98,
+      "category": "J",
+      "query": "แนะนำเส้นทางสำหรับคนที่ชอบ Japanese culture, Anime และอาหาร โดยแต่ละจุดควรเชื่อมต่อด้วยระบบขนส่งสาธารณะได้สะดวก",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_SHIBUYA_CROSSING",
+        "P_UENO_PARK",
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_AMEYOKO_INFO",
+          "C_P_TOKYO_DOME_CITY_INFO",
+          "C_P_AMEYOKO_01"
+        ],
+        "latency_ms": 19.65
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.3
+      },
+      "hybrid_rag": {
+        "rank": 3,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.3333,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 20.2
+      }
+    },
+    {
+      "question_id": 99,
+      "category": "J",
+      "query": "หาสถานที่ท่องเที่ยว 5 แห่งที่สามารถสร้างเส้นทางต่อเนื่องกันโดยแต่ละจุดห่างจากจุดถัดไปไม่เกิน 3 กิโลเมตร",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_SHIBUYA_CROSSING",
+        "P_UENO_PARK",
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": 3,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.3333,
+        "retrieved_chunks": [
+          "C_P_OMOTESANDO_HILLS_INFO",
+          "C_P_ROPPONGI_HILLS_INFO",
+          "C_P_SHIBUYA_CROSSING_01"
+        ],
+        "latency_ms": 17.52
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": false,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.13
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 17.84
+      }
+    },
+    {
+      "question_id": 100,
+      "category": "J",
+      "query": "ฉันมีเวลา 10 ชั่วโมงใน Tokyo ช่วยสร้างเส้นทางที่เหมาะสมที่สุด โดยพิจารณาประเภทสถานที่ เวลาเปิด–ปิด ระยะทาง เวลาเดินทาง ค่าใช้จ่าย และหลีกเลี่ยงการย้อนเส้นทาง",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_SHIBUYA_CROSSING",
+        "P_UENO_PARK",
+        "P_IMPERIAL_PALACE",
+        "P_SENSOJI",
+        "P_AKIHABARA_ELECTRIC"
+      ],
+      "dense_only": {
+        "rank": 2,
+        "hit1": 0,
+        "hit3": 1,
+        "rr": 0.5,
+        "retrieved_chunks": [
+          "C_P_TOKYO_DOME_CITY_INFO",
+          "C_P_IMPERIAL_PALACE_INFO",
+          "C_P_ROPPONGI_HILLS_INFO"
+        ],
+        "latency_ms": 19.55
+      },
+      "graph_only": {
+        "has_context": true,
+        "entity_matched": true,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.22
+      },
+      "hybrid_rag": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 8,
+        "latency_ms": 20.8
+      }
+    }
+  ]
+}
