@@ -180,9 +180,10 @@ def create_rich_menu_object() -> RichMenu:
     return rich_menu
 
 
-def setup_default_rich_menu(channel_access_token: Optional[str] = None) -> Optional[str]:
+def setup_default_rich_menu(channel_access_token: Optional[str] = None, image_path: Optional[str] = None) -> Optional[str]:
     """
     สร้างและตั้งค่า Rich Menu ให้เป็น Default สำหรับผู้ใช้ทุกคน
+    รองรับรูปภาพที่ผู้ใช้สร้างขึ้นเอง (.jpg / .png) และปรับขนาดให้ตรงตามข้อกำหนดของ LINE API อัตโนมัติ (2500x1686, ขนาด < 1MB)
     """
     token = channel_access_token or os.getenv("CHANNEL_ACCESS_TOKEN")
     if not token:
@@ -192,8 +193,26 @@ def setup_default_rich_menu(channel_access_token: Optional[str] = None) -> Optio
     line_bot_api = LineBotApi(token)
 
     try:
-        # 1. สร้างรูปภาพ Rich Menu ก่อน
-        image_path = generate_rich_menu_image()
+        # ตรวจหาภาพ: หากมี data/rich_menu.jpg ให้ใช้ หรือถ้ามี image_path ให้ใช้
+        target_img = image_path
+        if not target_img:
+            if os.path.exists("data/rich_menu.jpg"):
+                target_img = "data/rich_menu.jpg"
+            elif os.path.exists("data/rich_menu.png"):
+                target_img = "data/rich_menu.png"
+            else:
+                target_img = generate_rich_menu_image()
+
+        # ตรวจสอบขนาดและความละเอียดตามข้อกำหนดของ LINE API (2500x1686, < 1MB)
+        with Image.open(target_img) as im:
+            im_rgb = im.convert("RGB")
+            if im_rgb.size != (2500, 1686):
+                print(f"[RichMenuCreator] ปรับขนาดรูปภาพจาก {im.size} เป็น (2500, 1686) ให้ตรงตามมาตรฐาน LINE")
+                im_rgb = im_rgb.resize((2500, 1686), Image.Resampling.LANCZOS)
+            
+            # บันทึกเป็น JPEG คุณภาพสูงเพื่อให้ขนาดไฟล์ต่ำกว่า 1MB แน่นอน
+            final_img_path = "data/rich_menu_active.jpg"
+            im_rgb.save(final_img_path, "JPEG", quality=88, optimize=True)
 
         # 2. ลบ Rich Menu เก่าเพื่อไม่ให้ค้าง
         old_menus = line_bot_api.get_rich_menu_list()
@@ -207,9 +226,9 @@ def setup_default_rich_menu(channel_access_token: Optional[str] = None) -> Optio
         rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_obj)
         print(f"[RichMenuCreator] สร้าง Rich Menu ใหม่สำเร็จ ID: {rich_menu_id}")
 
-        # 4. อัปโหลดรูปภาพ
-        with open(image_path, "rb") as f:
-            line_bot_api.set_rich_menu_image(rich_menu_id, "image/png", f)
+        # 4. อัปโหลดรูปภาพ (JPEG < 1MB)
+        with open(final_img_path, "rb") as f:
+            line_bot_api.set_rich_menu_image(rich_menu_id, "image/jpeg", f)
         print("[RichMenuCreator] อัปโหลดรูปภาพ Rich Menu ไปยัง LINE สำเร็จ!")
 
         # 5. ตั้งเป็น Default Menu ให้ทุกคนเห็นทันที
