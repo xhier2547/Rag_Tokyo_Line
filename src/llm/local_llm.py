@@ -46,6 +46,11 @@ class LLMResponse:
     success: bool = True
     error_message: Optional[str] = None
 
+    @property
+    def error(self) -> Optional[str]:
+        return self.error_message
+
+
 
 
 class LocalLLMClient:

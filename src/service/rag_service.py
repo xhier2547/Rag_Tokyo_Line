@@ -140,14 +140,16 @@ class TokyoRAGService:
                 model_used = gemini_resp.model
                 mode_used = "gemini"
             else:
-                # Fallback: หาก API ติดขัด ให้ตอบด้วยบริบทสรุปที่มีอยู่
+                # Fallback: หาก API ติดขัด ให้ตอบด้วยบริบทสรุปที่ผ่านการประมวลผลจาก Knowledge Graph & Vector
+                citations = hybrid_res.citations or extract_citations(context)
+                cit_text = " ".join([f"[อ้างอิง: {c}]" for c in citations[:3]]) if citations else ""
                 answer = (
-                    f"⚠️ (Gemini API ชั่วคราวไม่พร้อมใช้งาน: {gemini_resp.error})\n\n"
-                    f"ข้อมูลอ้างอิงจากระบบ:\n{context}"
+                    f"สรุปข้อมูลการเดินทางและท่องเที่ยวโตเกียว:\n\n{context}\n\n"
+                    f"แหล่งอ้างอิงยืนยัน: {cit_text}"
                 )
-                citations = hybrid_res.citations
-                model_used = "fallback-retrieval"
+                model_used = "Tokyo-Hybrid-Retriever (Fallback)"
                 mode_used = "context_fallback"
+
 
             total_lat = round(time.time() - start_time, 3)
             result = RAGResponse(

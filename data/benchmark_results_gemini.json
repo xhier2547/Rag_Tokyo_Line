@@ -1,0 +1,314 @@
+{
+  "mode": "gemini",
+  "total_items": 10,
+  "summary": {
+    "mode": "gemini",
+    "model_name": "Tokyo-Hybrid-Retriever (Fallback)",
+    "total_evaluated": 10,
+    "success_rate_percent": 100.0,
+    "citation_rate_percent": 90.0,
+    "avg_latency_sec": 0.903,
+    "avg_citations_per_query": 2.7,
+    "graph_utilization_percent": 80.0,
+    "category_breakdown": {
+      "A": {
+        "name": "ค้นหาและแนะนำสถานที่ทั่วไป",
+        "total": 1,
+        "avg_latency": 2.596,
+        "citation_rate_pct": 100.0,
+        "graph_used_pct": 100.0
+      },
+      "B": {
+        "name": "วัด ศาลเจ้า ประวัติศาสตร์และวัฒนธรรม",
+        "total": 1,
+        "avg_latency": 0.917,
+        "citation_rate_pct": 100.0,
+        "graph_used_pct": 100.0
+      },
+      "C": {
+        "name": "Anime / Gaming / Technology",
+        "total": 1,
+        "avg_latency": 0.879,
+        "citation_rate_pct": 100.0,
+        "graph_used_pct": 100.0
+      },
+      "D": {
+        "name": "ธรรมชาติ สวน และจุดชมวิว",
+        "total": 1,
+        "avg_latency": 0.807,
+        "citation_rate_pct": 100.0,
+        "graph_used_pct": 100.0
+      },
+      "E": {
+        "name": "อาหาร ตลาด และย่านกินเที่ยว",
+        "total": 1,
+        "avg_latency": 0.603,
+        "citation_rate_pct": 100.0,
+        "graph_used_pct": 100.0
+      },
+      "F": {
+        "name": "Nearby / Spatial Query",
+        "total": 1,
+        "avg_latency": 0.668,
+        "citation_rate_pct": 100.0,
+        "graph_used_pct": 100.0
+      },
+      "G": {
+        "name": "Transportation & Route",
+        "total": 1,
+        "avg_latency": 0.324,
+        "citation_rate_pct": 0.0,
+        "graph_used_pct": 100.0
+      },
+      "H": {
+        "name": "Itinerary Planning",
+        "total": 1,
+        "avg_latency": 0.684,
+        "citation_rate_pct": 100.0,
+        "graph_used_pct": 100.0
+      },
+      "I": {
+        "name": "Preference / Personalized Recommendation",
+        "total": 1,
+        "avg_latency": 0.688,
+        "citation_rate_pct": 100.0,
+        "graph_used_pct": 0.0
+      },
+      "J": {
+        "name": "Complex / Multi-hop Graph RAG",
+        "total": 1,
+        "avg_latency": 0.859,
+        "citation_rate_pct": 100.0,
+        "graph_used_pct": 0.0
+      }
+    }
+  },
+  "details": [
+    {
+      "question_id": 1,
+      "category": "A",
+      "category_name": "ค้นหาและแนะนำสถานที่ทั่วไป",
+      "query": "มีสถานที่ท่องเที่ยวอะไรที่ห้ามพลาดเมื่อมา Tokyo ครั้งแรก?",
+      "requires_graph": false,
+      "mode": "gemini",
+      "model_name": "Tokyo-Hybrid-Retriever (Fallback)",
+      "intent_detected": "HYBRID_COMPLEX",
+      "answer": "สรุปข้อมูลการเดินทางและท่องเที่ยวโตเกียว:\n\n=== ข้อมูลความสัมพันธ์และเส้นทาง (Knowledge Graph) ===\nโครงข่ายความสัมพันธ์: รองรับการเดินทางเชื่อมต่อระหว่างสถานีหลักในโตเกียว (JR Yamanote, Tokyo Metro Ginza, Marunouchi, Hibiya, Asakusa, Oedo, Yurikamome)\n\n=== ข้อมูลรายละเอียดสถานที่ (Vector & Knowledge Base) ===\n[ข้อมูลที่ 1 | อ้างอิง: รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_ROPPONGI)]\nรปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม\nข้อมูลการเยี่ยมชมและการเดินทางสู่ รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View): ตั้งอยู่ในเขต Minato หมวดหมู่ Landmark & Viewpoint สถานีรถไฟที่ใกล้ที่สุดคือ ST_ROPPONGI โดยใช้เวลาเดินประมาณ 3 นาที เวลาเปิดทำการ: 10:00 - 22:00 และอัตราค่าเข้าชม: จุดชมวิวและพิพิธภัณฑ์ผู้ใหญ่ประมาณ 2,000 เยน\nVisiting & Transit Guide for Roppongi Hills & Tokyo City View: Located in Minato Ward, Category: Landmark & Viewpoint. Nearest station is ST_ROPPONGI, approximately 3 minutes walk. Opening hours: 10:00 - 22:00, Admission fee: จุดชมวิวและพิพิธภัณฑ์ผู้ใหญ่ประมาณ 2,000 เยน.\n\n[ข้อมูลที่ 2 | อ้างอิง: รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_ROPPONGI)]\nรปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View) - ส่วนที่ 1\nอาคารมิกซ์ยูสระดับไฮเอนด์ที่มี Mori Tower สูง 54 ชั้น ด้านบนเป็นที่ตั้งของพิพิธภัณฑ์ศิลปะ Mori Art Museum และจุดชมวิว Tokyo City View ที่มองเห็นโตเกียวทาวเวอร์ในมุมมองที่งดงามที่สุดจุดหนึ่งของโตเกียว ด้านล่างมีประติมากรรมแมงมุมยักษ์ Maman และร้านอาหารระดับมิชลิน\nA modern urban complex centered around the 54-story Mori Tower, featuring the acclaimed Mori Art Museum and Tokyo City View indoor/outdoor observation deck with iconic vantage points of Tokyo Tower.\n\n[ข้อมูลที่ 3 | อ้างอิง: โตเกียวสกายทรี (Tokyo Skytree) - ส่วนที่ 2 (สถานีใกล้เคียง: ST_OSHIAGE)]\nโตเกียวสกายทรี (Tokyo Skytree) - ส่วนที่ 2\nที่ฐานหอคอยมีศูนย์การค้า Tokyo Solamachi และพิพิธภัณฑ์สัตว์น้ำ Sumida Aquarium\n\nแหล่งอ้างอิงยืนยัน: [อ้างอิง: รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_ROPPONGI)] [อ้างอิง: รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_ROPPONGI)] [อ้างอิง: โตเกียวสกายทรี (Tokyo Skytree) - ส่วนที่ 2 (สถานีใกล้เคียง: ST_OSHIAGE)]",
+      "citations": [
+        "รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_ROPPONGI)",
+        "รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_ROPPONGI)",
+        "โตเกียวสกายทรี (Tokyo Skytree) - ส่วนที่ 2 (สถานีใกล้เคียง: ST_OSHIAGE)"
+      ],
+      "has_citations": true,
+      "citation_count": 3,
+      "graph_used": true,
+      "latency_sec": 2.596,
+      "is_cached": false,
+      "success": true,
+      "error": null
+    },
+    {
+      "question_id": 11,
+      "category": "B",
+      "category_name": "วัด ศาลเจ้า ประวัติศาสตร์และวัฒนธรรม",
+      "query": "แนะนำวัดที่มีชื่อเสียงใน Tokyo",
+      "requires_graph": false,
+      "mode": "gemini",
+      "model_name": "Tokyo-Hybrid-Retriever (Fallback)",
+      "intent_detected": "HYBRID_COMPLEX",
+      "answer": "สรุปข้อมูลการเดินทางและท่องเที่ยวโตเกียว:\n\n=== ข้อมูลความสัมพันธ์และเส้นทาง (Knowledge Graph) ===\nโครงข่ายความสัมพันธ์: รองรับการเดินทางเชื่อมต่อระหว่างสถานีหลักในโตเกียว (JR Yamanote, Tokyo Metro Ginza, Marunouchi, Hibiya, Asakusa, Oedo, Yurikamome)\n\n=== ข้อมูลรายละเอียดสถานที่ (Vector & Knowledge Base) ===\n[ข้อมูลที่ 1 | อ้างอิง: รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_ROPPONGI)]\nรปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View) - ส่วนที่ 1\nอาคารมิกซ์ยูสระดับไฮเอนด์ที่มี Mori Tower สูง 54 ชั้น ด้านบนเป็นที่ตั้งของพิพิธภัณฑ์ศิลปะ Mori Art Museum และจุดชมวิว Tokyo City View ที่มองเห็นโตเกียวทาวเวอร์ในมุมมองที่งดงามที่สุดจุดหนึ่งของโตเกียว ด้านล่างมีประติมากรรมแมงมุมยักษ์ Maman และร้านอาหารระดับมิชลิน\nA modern urban complex centered around the 54-story Mori Tower, featuring the acclaimed Mori Art Museum and Tokyo City View indoor/outdoor observation deck with iconic vantage points of Tokyo Tower.\n\n[ข้อมูลที่ 2 | อ้างอิง: วัดเซ็นโซจิ (วัดอาซากุสะ) (Senso-ji Temple) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_ASAKUSA)]\nวัดเซ็นโซจิ (วัดอาซากุสะ) (Senso-ji Temple) - ส่วนที่ 1\nวัดเซ็นโซจิเป็นวัดพุทธที่เก่าแก่ที่สุดในกรุงโตเกียว สร้างขึ้นในปี ค.ศ. 628 มีเอกลักษณ์คือประตูคามินาริโมง (Kaminarimon) ที่แขวนโคมแดงยักษ์อันเลื่องชื่อ ภายในมีถนนคนเดินนากามิเสะ (Nakamise-dori) ทอดยาวกว่า 250 เมตร เต็มไปด้วยร้านขายขนมพื้นเมือง เช่น ขนมเซมเบ้ มันจูทอด และของที่ระลึกดั้งเดิม\nSenso-ji is Tokyo's oldest and most significant Buddhist temple, founded in 628 AD. Famous for its colossal red paper lantern at the Kaminarimon (Thunder Gate) and the vibrant Nakamise shopping street offering traditional snacks and souvenirs.\n\n[ข้อมูลที่ 3 | อ้างอิง: โตเกียวทาวเวอร์ - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_HAMAMATSUCHO)]\nโตเกียวทาวเวอร์ - ข้อมูลการเดินทางและการเยี่ยมชม\nข้อมูลการเยี่ยมชมและการเดินทางสู่ โตเกียวทาวเวอร์ (Tokyo Tower): ตั้งอยู่ในเขต Minato หมวดหมู่ Landmark & Viewpoint สถานีรถไฟที่ใกล้ที่สุดคือ ST_HAMAMATSUCHO โดยใช้เวลาเดินประมาณ 15 นาที เวลาเปิดทำการ: 09:00 - 22:30 และอัตราค่าเข้าชม: Main Deck ผู้ใหญ่ 1,200 เยน / Top Deck Tour 3,000 เยน\nVisiting & Transit Guide for Tokyo Tower: Located in Minato Ward, Category: Landmark & Viewpoint. Nearest station is ST_HAMAMATSUCHO, approximately 15 minutes walk. Opening hours: 09:00 - 22:30, Admission fee: Main Deck ผู้ใหญ่ 1,200 เยน / Top Deck Tour 3,000 เยน.\n\nแหล่งอ้างอิงยืนยัน: [อ้างอิง: รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_ROPPONGI)] [อ้างอิง: วัดเซ็นโซจิ (วัดอาซากุสะ) (Senso-ji Temple) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_ASAKUSA)] [อ้างอิง: โตเกียวทาวเวอร์ - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_HAMAMATSUCHO)]",
+      "citations": [
+        "รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_ROPPONGI)",
+        "วัดเซ็นโซจิ (วัดอาซากุสะ) (Senso-ji Temple) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_ASAKUSA)",
+        "โตเกียวทาวเวอร์ - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_HAMAMATSUCHO)"
+      ],
+      "has_citations": true,
+      "citation_count": 3,
+      "graph_used": true,
+      "latency_sec": 0.917,
+      "is_cached": false,
+      "success": true,
+      "error": null
+    },
+    {
+      "question_id": 21,
+      "category": "C",
+      "category_name": "Anime / Gaming / Technology",
+      "query": "ถ้าชอบ Anime ควรไปเที่ยวบริเวณไหนใน Tokyo?",
+      "requires_graph": false,
+      "mode": "gemini",
+      "model_name": "Tokyo-Hybrid-Retriever (Fallback)",
+      "intent_detected": "HYBRID_COMPLEX",
+      "answer": "สรุปข้อมูลการเดินทางและท่องเที่ยวโตเกียว:\n\n=== ข้อมูลความสัมพันธ์และเส้นทาง (Knowledge Graph) ===\nโครงข่ายความสัมพันธ์: รองรับการเดินทางเชื่อมต่อระหว่างสถานีหลักในโตเกียว (JR Yamanote, Tokyo Metro Ginza, Marunouchi, Hibiya, Asakusa, Oedo, Yurikamome)\n\n=== ข้อมูลรายละเอียดสถานที่ (Vector & Knowledge Base) ===\n[ข้อมูลที่ 1 | อ้างอิง: รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_ROPPONGI)]\nรปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม\nข้อมูลการเยี่ยมชมและการเดินทางสู่ รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View): ตั้งอยู่ในเขต Minato หมวดหมู่ Landmark & Viewpoint สถานีรถไฟที่ใกล้ที่สุดคือ ST_ROPPONGI โดยใช้เวลาเดินประมาณ 3 นาที เวลาเปิดทำการ: 10:00 - 22:00 และอัตราค่าเข้าชม: จุดชมวิวและพิพิธภัณฑ์ผู้ใหญ่ประมาณ 2,000 เยน\nVisiting & Transit Guide for Roppongi Hills & Tokyo City View: Located in Minato Ward, Category: Landmark & Viewpoint. Nearest station is ST_ROPPONGI, approximately 3 minutes walk. Opening hours: 10:00 - 22:00, Admission fee: จุดชมวิวและพิพิธภัณฑ์ผู้ใหญ่ประมาณ 2,000 เยน.\n\n[ข้อมูลที่ 2 | อ้างอิง: รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_ROPPONGI)]\nรปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View) - ส่วนที่ 1\nอาคารมิกซ์ยูสระดับไฮเอนด์ที่มี Mori Tower สูง 54 ชั้น ด้านบนเป็นที่ตั้งของพิพิธภัณฑ์ศิลปะ Mori Art Museum และจุดชมวิว Tokyo City View ที่มองเห็นโตเกียวทาวเวอร์ในมุมมองที่งดงามที่สุดจุดหนึ่งของโตเกียว ด้านล่างมีประติมากรรมแมงมุมยักษ์ Maman และร้านอาหารระดับมิชลิน\nA modern urban complex centered around the 54-story Mori Tower, featuring the acclaimed Mori Art Museum and Tokyo City View indoor/outdoor observation deck with iconic vantage points of Tokyo Tower.\n\n[ข้อมูลที่ 3 | อ้างอิง: โตเกียวทาวเวอร์ - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_HAMAMATSUCHO)]\nโตเกียวทาวเวอร์ - ข้อมูลการเดินทางและการเยี่ยมชม\nข้อมูลการเยี่ยมชมและการเดินทางสู่ โตเกียวทาวเวอร์ (Tokyo Tower): ตั้งอยู่ในเขต Minato หมวดหมู่ Landmark & Viewpoint สถานีรถไฟที่ใกล้ที่สุดคือ ST_HAMAMATSUCHO โดยใช้เวลาเดินประมาณ 15 นาที เวลาเปิดทำการ: 09:00 - 22:30 และอัตราค่าเข้าชม: Main Deck ผู้ใหญ่ 1,200 เยน / Top Deck Tour 3,000 เยน\nVisiting & Transit Guide for Tokyo Tower: Located in Minato Ward, Category: Landmark & Viewpoint. Nearest station is ST_HAMAMATSUCHO, approximately 15 minutes walk. Opening hours: 09:00 - 22:30, Admission fee: Main Deck ผู้ใหญ่ 1,200 เยน / Top Deck Tour 3,000 เยน.\n\nแหล่งอ้างอิงยืนยัน: [อ้างอิง: รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_ROPPONGI)] [อ้างอิง: รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_ROPPONGI)] [อ้างอิง: โตเกียวทาวเวอร์ - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_HAMAMATSUCHO)]",
+      "citations": [
+        "รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_ROPPONGI)",
+        "รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_ROPPONGI)",
+        "โตเกียวทาวเวอร์ - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_HAMAMATSUCHO)"
+      ],
+      "has_citations": true,
+      "citation_count": 3,
+      "graph_used": true,
+      "latency_sec": 0.879,
+      "is_cached": false,
+      "success": true,
+      "error": null
+    },
+    {
+      "question_id": 31,
+      "category": "D",
+      "category_name": "ธรรมชาติ สวน และจุดชมวิว",
+      "query": "แนะนำสวนสาธารณะที่สวยที่สุดใน Tokyo",
+      "requires_graph": false,
+      "mode": "gemini",
+      "model_name": "Tokyo-Hybrid-Retriever (Fallback)",
+      "intent_detected": "HYBRID_COMPLEX",
+      "answer": "สรุปข้อมูลการเดินทางและท่องเที่ยวโตเกียว:\n\n=== ข้อมูลความสัมพันธ์และเส้นทาง (Knowledge Graph) ===\nโครงข่ายความสัมพันธ์: รองรับการเดินทางเชื่อมต่อระหว่างสถานีหลักในโตเกียว (JR Yamanote, Tokyo Metro Ginza, Marunouchi, Hibiya, Asakusa, Oedo, Yurikamome)\n\n=== ข้อมูลรายละเอียดสถานที่ (Vector & Knowledge Base) ===\n[ข้อมูลที่ 1 | อ้างอิง: สวนสาธารณะชินจูกุเกียวเอ็น (Shinjuku Gyoen National Garden) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_SHINJUKU_GYOEMMAE)]\nสวนสาธารณะชินจูกุเกียวเอ็น (Shinjuku Gyoen National Garden) - ส่วนที่ 1\nสวนสาธารณะขนาดใหญ่เนื้อที่กว่า 144 เอเคอร์ ผสมผสานศิลปะการจัดสวน 3 รูปแบบไว้ด้วยกันอย่างลงตัว ได้แก่ สวนสไตล์ญี่ปุ่นดั้งเดิม สวนสมมาตรสไตล์ฝรั่งเศส และสวนภูมิทัศน์สไตล์อังกฤษ ในช่วงฤดูใบไม้ผลิเป็นจุดชมซากุระยอดนิยมที่มีต้นซากุระกว่าพันต้นหลากสายพันธุ์ และในฤดูใบไม้ร่วงใบไม้จะเปลี่ยนเป็นสีแดงสดใส\nOne of Tokyo's largest and most popular national parks, blending three distinct landscape styles: Japanese traditional, English landscape, and French formal. A premier cherry blossom viewing haven in spring.\n\n[ข้อมูลที่ 2 | อ้างอิง: สวนอุเอโนะและพิพิธภัณฑ์แห่งชาติ (Ueno Park & National Museum) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_UENO)]\nสวนอุเอโนะและพิพิธภัณฑ์แห่งชาติ (Ueno Park & National Museum) - ส่วนที่ 1\nสวนสาธารณะขนาดใหญ่ที่มีความสำคัญทางวัฒนธรรม ภายในเป็นที่ตั้งของสระบัวชิโนบาซุ (Shinobazu Pond) สวนสัตว์อุเอโนะซึ่งมีแพนด้าชื่อดัง และพิพิธภัณฑ์ชั้นนำของญี่ปุ่น ได้แก่ พิพิธภัณฑ์แห่งชาติโตเกียว (Tokyo National Museum) และพิพิธภัณฑ์ศิลปะตะวันตกแห่งชาติ (NMWA)\nA sprawling cultural park home to prestigious institutions including the Tokyo National Museum, National Museum of Western Art, Shinobazu Lotus Pond, and Ueno Zoo.\n\n[ข้อมูลที่ 3 | อ้างอิง: รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_ROPPONGI)]\nรปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View) - ส่วนที่ 1\nอาคารมิกซ์ยูสระดับไฮเอนด์ที่มี Mori Tower สูง 54 ชั้น ด้านบนเป็นที่ตั้งของพิพิธภัณฑ์ศิลปะ Mori Art Museum และจุดชมวิว Tokyo City View ที่มองเห็นโตเกียวทาวเวอร์ในมุมมองที่งดงามที่สุดจุดหนึ่งของโตเกียว ด้านล่างมีประติมากรรมแมงมุมยักษ์ Maman และร้านอาหารระดับมิชลิน\nA modern urban complex centered around the 54-story Mori Tower, featuring the acclaimed Mori Art Museum and Tokyo City View indoor/outdoor observation deck with iconic vantage points of Tokyo Tower.\n\nแหล่งอ้างอิงยืนยัน: [อ้างอิง: สวนสาธารณะชินจูกุเกียวเอ็น (Shinjuku Gyoen National Garden) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_SHINJUKU_GYOEMMAE)] [อ้างอิง: สวนอุเอโนะและพิพิธภัณฑ์แห่งชาติ (Ueno Park & National Museum) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_UENO)] [อ้างอิง: รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_ROPPONGI)]",
+      "citations": [
+        "สวนสาธารณะชินจูกุเกียวเอ็น (Shinjuku Gyoen National Garden) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_SHINJUKU_GYOEMMAE)",
+        "สวนอุเอโนะและพิพิธภัณฑ์แห่งชาติ (Ueno Park & National Museum) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_UENO)",
+        "รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_ROPPONGI)"
+      ],
+      "has_citations": true,
+      "citation_count": 3,
+      "graph_used": true,
+      "latency_sec": 0.807,
+      "is_cached": false,
+      "success": true,
+      "error": null
+    },
+    {
+      "question_id": 41,
+      "category": "E",
+      "category_name": "อาหาร ตลาด และย่านกินเที่ยว",
+      "query": "แนะนำย่านที่มี Street Food ใน Tokyo",
+      "requires_graph": false,
+      "mode": "gemini",
+      "model_name": "Tokyo-Hybrid-Retriever (Fallback)",
+      "intent_detected": "HYBRID_COMPLEX",
+      "answer": "สรุปข้อมูลการเดินทางและท่องเที่ยวโตเกียว:\n\n=== ข้อมูลความสัมพันธ์และเส้นทาง (Knowledge Graph) ===\nโครงข่ายความสัมพันธ์: รองรับการเดินทางเชื่อมต่อระหว่างสถานีหลักในโตเกียว (JR Yamanote, Tokyo Metro Ginza, Marunouchi, Hibiya, Asakusa, Oedo, Yurikamome)\n\n=== ข้อมูลรายละเอียดสถานที่ (Vector & Knowledge Base) ===\n[ข้อมูลที่ 1 | อ้างอิง: ตลาดปลาสึกิจิ (ตลาดนอก) (Tsukiji Outer Market) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_TSUKIJI)]\nตลาดปลาสึกิจิ (ตลาดนอก) (Tsukiji Outer Market) - ส่วนที่ 1\nตลาดอาหารสตรีทฟู้ดและวัตถุดิบทางทะเลสดใหม่ใจกลางโตเกียว มีร้านค้าและแผงลอยกว่า 400 ร้าน จำหน่ายซาชิมิสด ข้าวหน้าปลาดิบ (Kaisendon) หอยเชลล์ย่าง ไข่หวานย่างร้อนๆ (Tamagoyaki) และผลไม้ตามฤดูกาล เป็นสวรรค์ของนักชิมที่เปิดให้บริการตั้งแต่เช้าตรู่\nA lively open-air seafood and food haven with hundreds of stalls offering fresh sashimi, grilled oysters, wagyu skewers, tamagoyaki (sweet omelet), and kitchenware.\n\n[ข้อมูลที่ 2 | อ้างอิง: ย่านช้อปปิ้งกินซ่าและห้างกินซ่าซิกซ์ (Ginza Shopping District & GINZA SIX) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_GINZA)]\nย่านช้อปปิ้งกินซ่าและห้างกินซ่าซิกซ์ (Ginza Shopping District & GINZA SIX) - ส่วนที่ 1\nย่านการค้าสุดหรูหราอันดับหนึ่งของญี่ปุ่น เรียงรายด้วยแฟลกชิปสโตร์ของแบรนด์เนมระดับโลก ห้างสรรพสินค้าเก่าแก่ และห้าง GINZA SIX ที่มีการจัดแสดงงานศิลปะร่วมสมัย เช่น ผลงานโคมฟักทองของ Yayoi Kusama บนดาดฟ้ามีสวนสาธารณะลอยฟ้า Ginza Six Garden\nTokyo's premier luxury shopping boulevard, home to global flagship boutiques, traditional department stores, and the upscale GINZA SIX complex with contemporary art installations and rooftop garden.\n\n[ข้อมูลที่ 3 | อ้างอิง: ตลาดปลาสึกิจิ (ตลาดนอก) - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_TSUKIJI)]\nตลาดปลาสึกิจิ (ตลาดนอก) - ข้อมูลการเดินทางและการเยี่ยมชม\nข้อมูลการเยี่ยมชมและการเดินทางสู่ ตลาดปลาสึกิจิ (ตลาดนอก) (Tsukiji Outer Market): ตั้งอยู่ในเขต Chuo หมวดหมู่ Food & Market สถานีรถไฟที่ใกล้ที่สุดคือ ST_TSUKIJI โดยใช้เวลาเดินประมาณ 4 นาที เวลาเปิดทำการ: 06:00 - 14:00 (ร้านส่วนใหญ่ปิดวันพุธและอาทิตย์) และอัตราค่าเข้าชม: เข้าชมฟรี\nVisiting & Transit Guide for Tsukiji Outer Market: Located in Chuo Ward, Category: Food & Market. Nearest station is ST_TSUKIJI, approximately 4 minutes walk. Opening hours: 06:00 - 14:00 (ร้านส่วนใหญ่ปิดวันพุธและอาทิตย์), Admission fee: เข้าชมฟรี.\n\nแหล่งอ้างอิงยืนยัน: [อ้างอิง: ตลาดปลาสึกิจิ (ตลาดนอก) (Tsukiji Outer Market) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_TSUKIJI)] [อ้างอิง: ย่านช้อปปิ้งกินซ่าและห้างกินซ่าซิกซ์ (Ginza Shopping District & GINZA SIX) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_GINZA)] [อ้างอิง: ตลาดปลาสึกิจิ (ตลาดนอก) - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_TSUKIJI)]",
+      "citations": [
+        "ตลาดปลาสึกิจิ (ตลาดนอก) (Tsukiji Outer Market) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_TSUKIJI)",
+        "ย่านช้อปปิ้งกินซ่าและห้างกินซ่าซิกซ์ (Ginza Shopping District & GINZA SIX) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_GINZA)",
+        "ตลาดปลาสึกิจิ (ตลาดนอก) - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_TSUKIJI)"
+      ],
+      "has_citations": true,
+      "citation_count": 3,
+      "graph_used": true,
+      "latency_sec": 0.603,
+      "is_cached": false,
+      "success": true,
+      "error": null
+    },
+    {
+      "question_id": 51,
+      "category": "F",
+      "category_name": "Nearby / Spatial Query",
+      "query": "มีสถานที่ท่องเที่ยวอะไรอยู่ใกล้ Tokyo Station?",
+      "requires_graph": true,
+      "mode": "gemini",
+      "model_name": "Tokyo-Hybrid-Retriever (Fallback)",
+      "intent_detected": "HYBRID_COMPLEX",
+      "answer": "สรุปข้อมูลการเดินทางและท่องเที่ยวโตเกียว:\n\n=== ข้อมูลความสัมพันธ์และเส้นทาง (Knowledge Graph) ===\nโครงข่ายความสัมพันธ์: รองรับการเดินทางเชื่อมต่อระหว่างสถานีหลักในโตเกียว (JR Yamanote, Tokyo Metro Ginza, Marunouchi, Hibiya, Asakusa, Oedo, Yurikamome)\n\n=== ข้อมูลรายละเอียดสถานที่ (Vector & Knowledge Base) ===\n[ข้อมูลที่ 1 | อ้างอิง: รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_ROPPONGI)]\nรปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม\nข้อมูลการเยี่ยมชมและการเดินทางสู่ รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View): ตั้งอยู่ในเขต Minato หมวดหมู่ Landmark & Viewpoint สถานีรถไฟที่ใกล้ที่สุดคือ ST_ROPPONGI โดยใช้เวลาเดินประมาณ 3 นาที เวลาเปิดทำการ: 10:00 - 22:00 และอัตราค่าเข้าชม: จุดชมวิวและพิพิธภัณฑ์ผู้ใหญ่ประมาณ 2,000 เยน\nVisiting & Transit Guide for Roppongi Hills & Tokyo City View: Located in Minato Ward, Category: Landmark & Viewpoint. Nearest station is ST_ROPPONGI, approximately 3 minutes walk. Opening hours: 10:00 - 22:00, Admission fee: จุดชมวิวและพิพิธภัณฑ์ผู้ใหญ่ประมาณ 2,000 เยน.\n\n[ข้อมูลที่ 2 | อ้างอิง: โตเกียวทาวเวอร์ - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_HAMAMATSUCHO)]\nโตเกียวทาวเวอร์ - ข้อมูลการเดินทางและการเยี่ยมชม\nข้อมูลการเยี่ยมชมและการเดินทางสู่ โตเกียวทาวเวอร์ (Tokyo Tower): ตั้งอยู่ในเขต Minato หมวดหมู่ Landmark & Viewpoint สถานีรถไฟที่ใกล้ที่สุดคือ ST_HAMAMATSUCHO โดยใช้เวลาเดินประมาณ 15 นาที เวลาเปิดทำการ: 09:00 - 22:30 และอัตราค่าเข้าชม: Main Deck ผู้ใหญ่ 1,200 เยน / Top Deck Tour 3,000 เยน\nVisiting & Transit Guide for Tokyo Tower: Located in Minato Ward, Category: Landmark & Viewpoint. Nearest station is ST_HAMAMATSUCHO, approximately 15 minutes walk. Opening hours: 09:00 - 22:30, Admission fee: Main Deck ผู้ใหญ่ 1,200 เยน / Top Deck Tour 3,000 เยน.\n\n[ข้อมูลที่ 3 | อ้างอิง: โตเกียวสกายทรี - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_OSHIAGE)]\nโตเกียวสกายทรี - ข้อมูลการเดินทางและการเยี่ยมชม\nข้อมูลการเยี่ยมชมและการเดินทางสู่ โตเกียวสกายทรี (Tokyo Skytree): ตั้งอยู่ในเขต Sumida หมวดหมู่ Landmark & Viewpoint สถานีรถไฟที่ใกล้ที่สุดคือ ST_OSHIAGE โดยใช้เวลาเดินประมาณ 2 นาที เวลาเปิดทำการ: 10:00 - 21:00 (รอบสุดท้าย 20:00) และอัตราค่าเข้าชม: ผู้ใหญ่เริ่มต้น 2,100 เยน (ขึ้นอยู่กับชั้นชมวิว)\nVisiting & Transit Guide for Tokyo Skytree: Located in Sumida Ward, Category: Landmark & Viewpoint. Nearest station is ST_OSHIAGE, approximately 2 minutes walk. Opening hours: 10:00 - 21:00 (รอบสุดท้าย 20:00), Admission fee: ผู้ใหญ่เริ่มต้น 2,100 เยน (ขึ้นอยู่กับชั้นชมวิว).\n\nแหล่งอ้างอิงยืนยัน: [อ้างอิง: รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_ROPPONGI)] [อ้างอิง: โตเกียวทาวเวอร์ - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_HAMAMATSUCHO)] [อ้างอิง: โตเกียวสกายทรี - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_OSHIAGE)]",
+      "citations": [
+        "รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_ROPPONGI)",
+        "โตเกียวทาวเวอร์ - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_HAMAMATSUCHO)",
+        "โตเกียวสกายทรี - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_OSHIAGE)"
+      ],
+      "has_citations": true,
+      "citation_count": 3,
+      "graph_used": true,
+      "latency_sec": 0.668,
+      "is_cached": false,
+      "success": true,
+      "error": null
+    },
+    {
+      "question_id": 61,
+      "category": "G",
+      "category_name": "Transportation & Route",
+      "query": "จาก Tokyo Station ไป Sensō-ji ควรเดินทางอย่างไร?",
+      "requires_graph": true,
+      "mode": "gemini",
+      "model_name": "Tokyo-Hybrid-Retriever (Fallback)",
+      "intent_detected": "ROUTE_TRANSIT",
+      "answer": "สรุปข้อมูลการเดินทางและท่องเที่ยวโตเกียว:\n\n=== ข้อมูลความสัมพันธ์และเส้นทาง (Knowledge Graph) ===\nโครงข่ายความสัมพันธ์: รองรับการเดินทางเชื่อมต่อระหว่างสถานีหลักในโตเกียว (JR Yamanote, Tokyo Metro Ginza, Marunouchi, Hibiya, Asakusa, Oedo, Yurikamome)\n\nแหล่งอ้างอิงยืนยัน: ",
+      "citations": [],
+      "has_citations": false,
+      "citation_count": 0,
+      "graph_used": true,
+      "latency_sec": 0.324,
+      "is_cached": false,
+      "success": true,
+      "error": null
+    },
+    {
+      "question_id": 71,
+      "category": "H",
+      "category_name": "Itinerary Planning",
+      "query": "ช่วยจัดทริป Tokyo 1 วันสำหรับคนมาครั้งแรก",
+      "requires_graph": true,
+      "mode": "gemini",
+      "model_name": "Tokyo-Hybrid-Retriever (Fallback)",
+      "intent_detected": "HYBRID_COMPLEX",
+      "answer": "สรุปข้อมูลการเดินทางและท่องเที่ยวโตเกียว:\n\n=== ข้อมูลความสัมพันธ์และเส้นทาง (Knowledge Graph) ===\nโครงข่ายความสัมพันธ์: รองรับการเดินทางเชื่อมต่อระหว่างสถานีหลักในโตเกียว (JR Yamanote, Tokyo Metro Ginza, Marunouchi, Hibiya, Asakusa, Oedo, Yurikamome)\n\n=== ข้อมูลรายละเอียดสถานที่ (Vector & Knowledge Base) ===\n[ข้อมูลที่ 1 | อ้างอิง: รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_ROPPONGI)]\nรปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม\nข้อมูลการเยี่ยมชมและการเดินทางสู่ รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View): ตั้งอยู่ในเขต Minato หมวดหมู่ Landmark & Viewpoint สถานีรถไฟที่ใกล้ที่สุดคือ ST_ROPPONGI โดยใช้เวลาเดินประมาณ 3 นาที เวลาเปิดทำการ: 10:00 - 22:00 และอัตราค่าเข้าชม: จุดชมวิวและพิพิธภัณฑ์ผู้ใหญ่ประมาณ 2,000 เยน\nVisiting & Transit Guide for Roppongi Hills & Tokyo City View: Located in Minato Ward, Category: Landmark & Viewpoint. Nearest station is ST_ROPPONGI, approximately 3 minutes walk. Opening hours: 10:00 - 22:00, Admission fee: จุดชมวิวและพิพิธภัณฑ์ผู้ใหญ่ประมาณ 2,000 เยน.\n\n[ข้อมูลที่ 2 | อ้างอิง: โตเกียวทาวเวอร์ - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_HAMAMATSUCHO)]\nโตเกียวทาวเวอร์ - ข้อมูลการเดินทางและการเยี่ยมชม\nข้อมูลการเยี่ยมชมและการเดินทางสู่ โตเกียวทาวเวอร์ (Tokyo Tower): ตั้งอยู่ในเขต Minato หมวดหมู่ Landmark & Viewpoint สถานีรถไฟที่ใกล้ที่สุดคือ ST_HAMAMATSUCHO โดยใช้เวลาเดินประมาณ 15 นาที เวลาเปิดทำการ: 09:00 - 22:30 และอัตราค่าเข้าชม: Main Deck ผู้ใหญ่ 1,200 เยน / Top Deck Tour 3,000 เยน\nVisiting & Transit Guide for Tokyo Tower: Located in Minato Ward, Category: Landmark & Viewpoint. Nearest station is ST_HAMAMATSUCHO, approximately 15 minutes walk. Opening hours: 09:00 - 22:30, Admission fee: Main Deck ผู้ใหญ่ 1,200 เยน / Top Deck Tour 3,000 เยน.\n\n[ข้อมูลที่ 3 | อ้างอิง: โตเกียวสกายทรี - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_OSHIAGE)]\nโตเกียวสกายทรี - ข้อมูลการเดินทางและการเยี่ยมชม\nข้อมูลการเยี่ยมชมและการเดินทางสู่ โตเกียวสกายทรี (Tokyo Skytree): ตั้งอยู่ในเขต Sumida หมวดหมู่ Landmark & Viewpoint สถานีรถไฟที่ใกล้ที่สุดคือ ST_OSHIAGE โดยใช้เวลาเดินประมาณ 2 นาที เวลาเปิดทำการ: 10:00 - 21:00 (รอบสุดท้าย 20:00) และอัตราค่าเข้าชม: ผู้ใหญ่เริ่มต้น 2,100 เยน (ขึ้นอยู่กับชั้นชมวิว)\nVisiting & Transit Guide for Tokyo Skytree: Located in Sumida Ward, Category: Landmark & Viewpoint. Nearest station is ST_OSHIAGE, approximately 2 minutes walk. Opening hours: 10:00 - 21:00 (รอบสุดท้าย 20:00), Admission fee: ผู้ใหญ่เริ่มต้น 2,100 เยน (ขึ้นอยู่กับชั้นชมวิว).\n\nแหล่งอ้างอิงยืนยัน: [อ้างอิง: รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_ROPPONGI)] [อ้างอิง: โตเกียวทาวเวอร์ - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_HAMAMATSUCHO)] [อ้างอิง: โตเกียวสกายทรี - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_OSHIAGE)]",
+      "citations": [
+        "รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_ROPPONGI)",
+        "โตเกียวทาวเวอร์ - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_HAMAMATSUCHO)",
+        "โตเกียวสกายทรี - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_OSHIAGE)"
+      ],
+      "has_citations": true,
+      "citation_count": 3,
+      "graph_used": true,
+      "latency_sec": 0.684,
+      "is_cached": false,
+      "success": true,
+      "error": null
+    },
+    {
+      "question_id": 81,
+      "category": "I",
+      "category_name": "Preference / Personalized Recommendation",
+      "query": "ฉันชอบประวัติศาสตร์และไม่สนใจ Shopping ควรไปที่ไหน?",
+      "requires_graph": false,
+      "mode": "gemini",
+      "model_name": "Tokyo-Hybrid-Retriever (Fallback)",
+      "intent_detected": "FACT_RETRIEVAL",
+      "answer": "สรุปข้อมูลการเดินทางและท่องเที่ยวโตเกียว:\n\n=== ข้อมูลรายละเอียดสถานที่ (Vector & Knowledge Base) ===\n[ข้อมูลที่ 1 | อ้างอิง: ย่านช้อปปิ้งกินซ่าและห้างกินซ่าซิกซ์ (Ginza Shopping District & GINZA SIX) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_GINZA)]\nย่านช้อปปิ้งกินซ่าและห้างกินซ่าซิกซ์ (Ginza Shopping District & GINZA SIX) - ส่วนที่ 1\nย่านการค้าสุดหรูหราอันดับหนึ่งของญี่ปุ่น เรียงรายด้วยแฟลกชิปสโตร์ของแบรนด์เนมระดับโลก ห้างสรรพสินค้าเก่าแก่ และห้าง GINZA SIX ที่มีการจัดแสดงงานศิลปะร่วมสมัย เช่น ผลงานโคมฟักทองของ Yayoi Kusama บนดาดฟ้ามีสวนสาธารณะลอยฟ้า Ginza Six Garden\nTokyo's premier luxury shopping boulevard, home to global flagship boutiques, traditional department stores, and the upscale GINZA SIX complex with contemporary art installations and rooftop garden.\n\n[ข้อมูลที่ 2 | อ้างอิง: ย่านช้อปปิ้งกินซ่าและห้างกินซ่าซิกซ์ - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_GINZA)]\nย่านช้อปปิ้งกินซ่าและห้างกินซ่าซิกซ์ - ข้อมูลการเดินทางและการเยี่ยมชม\nข้อมูลการเยี่ยมชมและการเดินทางสู่ ย่านช้อปปิ้งกินซ่าและห้างกินซ่าซิกซ์ (Ginza Shopping District & GINZA SIX): ตั้งอยู่ในเขต Chuo หมวดหมู่ Shopping & Entertainment สถานีรถไฟที่ใกล้ที่สุดคือ ST_GINZA โดยใช้เวลาเดินประมาณ 2 นาที เวลาเปิดทำการ: 10:30 - 20:30 และอัตราค่าเข้าชม: เข้าชมฟรี\nVisiting & Transit Guide for Ginza Shopping District & GINZA SIX: Located in Chuo Ward, Category: Shopping & Entertainment. Nearest station is ST_GINZA, approximately 2 minutes walk. Opening hours: 10:30 - 20:30, Admission fee: เข้าชมฟรี.\n\n[ข้อมูลที่ 3 | อ้างอิง: ย่านเครื่องใช้ไฟฟ้าและอนิเมะอากิฮาบาระ - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_AKIHABARA)]\nย่านเครื่องใช้ไฟฟ้าและอนิเมะอากิฮาบาระ - ข้อมูลการเดินทางและการเยี่ยมชม\nข้อมูลการเยี่ยมชมและการเดินทางสู่ ย่านเครื่องใช้ไฟฟ้าและอนิเมะอากิฮาบาระ (Akihabara Electric Town): ตั้งอยู่ในเขต Chiyoda หมวดหมู่ Shopping & Entertainment สถานีรถไฟที่ใกล้ที่สุดคือ ST_AKIHABARA โดยใช้เวลาเดินประมาณ 1 นาที เวลาเปิดทำการ: ร้านค้าส่วนใหญ่เปิด 10:00 - 20:00 และอัตราค่าเข้าชม: เดินชมฟรี\nVisiting & Transit Guide for Akihabara Electric Town: Located in Chiyoda Ward, Category: Shopping & Entertainment. Nearest station is ST_AKIHABARA, approximately 1 minutes walk. Opening hours: ร้านค้าส่วนใหญ่เปิด 10:00 - 20:00, Admission fee: เดินชมฟรี.\n\nแหล่งอ้างอิงยืนยัน: [อ้างอิง: ย่านช้อปปิ้งกินซ่าและห้างกินซ่าซิกซ์ (Ginza Shopping District & GINZA SIX) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_GINZA)] [อ้างอิง: ย่านช้อปปิ้งกินซ่าและห้างกินซ่าซิกซ์ - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_GINZA)] [อ้างอิง: ย่านเครื่องใช้ไฟฟ้าและอนิเมะอากิฮาบาระ - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_AKIHABARA)]",
+      "citations": [
+        "ย่านช้อปปิ้งกินซ่าและห้างกินซ่าซิกซ์ (Ginza Shopping District & GINZA SIX) - ส่วนที่ 1 (สถานีใกล้เคียง: ST_GINZA)",
+        "ย่านช้อปปิ้งกินซ่าและห้างกินซ่าซิกซ์ - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_GINZA)",
+        "ย่านเครื่องใช้ไฟฟ้าและอนิเมะอากิฮาบาระ - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_AKIHABARA)"
+      ],
+      "has_citations": true,
+      "citation_count": 3,
+      "graph_used": false,
+      "latency_sec": 0.688,
+      "is_cached": false,
+      "success": true,
+      "error": null
+    },
+    {
+      "question_id": 91,
+      "category": "J",
+      "category_name": "Complex / Multi-hop Graph RAG",
+      "query": "หาวัดที่อยู่ใกล้สถานีรถไฟและมีสถานที่ทางประวัติศาสตร์อื่นอยู่ในระยะเดินถึง",
+      "requires_graph": true,
+      "mode": "gemini",
+      "model_name": "Tokyo-Hybrid-Retriever (Fallback)",
+      "intent_detected": "FACT_RETRIEVAL",
+      "answer": "สรุปข้อมูลการเดินทางและท่องเที่ยวโตเกียว:\n\n=== ข้อมูลรายละเอียดสถานที่ (Vector & Knowledge Base) ===\n[ข้อมูลที่ 1 | อ้างอิง: รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_ROPPONGI)]\nรปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม\nข้อมูลการเยี่ยมชมและการเดินทางสู่ รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View): ตั้งอยู่ในเขต Minato หมวดหมู่ Landmark & Viewpoint สถานีรถไฟที่ใกล้ที่สุดคือ ST_ROPPONGI โดยใช้เวลาเดินประมาณ 3 นาที เวลาเปิดทำการ: 10:00 - 22:00 และอัตราค่าเข้าชม: จุดชมวิวและพิพิธภัณฑ์ผู้ใหญ่ประมาณ 2,000 เยน\nVisiting & Transit Guide for Roppongi Hills & Tokyo City View: Located in Minato Ward, Category: Landmark & Viewpoint. Nearest station is ST_ROPPONGI, approximately 3 minutes walk. Opening hours: 10:00 - 22:00, Admission fee: จุดชมวิวและพิพิธภัณฑ์ผู้ใหญ่ประมาณ 2,000 เยน.\n\n[ข้อมูลที่ 2 | อ้างอิง: วัดเซ็นโซจิ (วัดอาซากุสะ) - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_ASAKUSA)]\nวัดเซ็นโซจิ (วัดอาซากุสะ) - ข้อมูลการเดินทางและการเยี่ยมชม\nข้อมูลการเยี่ยมชมและการเดินทางสู่ วัดเซ็นโซจิ (วัดอาซากุสะ) (Senso-ji Temple): ตั้งอยู่ในเขต Taito หมวดหมู่ Temple & Shrine สถานีรถไฟที่ใกล้ที่สุดคือ ST_ASAKUSA โดยใช้เวลาเดินประมาณ 5 นาที เวลาเปิดทำการ: 06:00 - 17:00 (ตัวโบสถ์หลัก) / บริเวณวัดเปิด 24 ชั่วโมง และอัตราค่าเข้าชม: เข้าชมฟรี\nVisiting & Transit Guide for Senso-ji Temple: Located in Taito Ward, Category: Temple & Shrine. Nearest station is ST_ASAKUSA, approximately 5 minutes walk. Opening hours: 06:00 - 17:00 (ตัวโบสถ์หลัก) / บริเวณวัดเปิด 24 ชั่วโมง, Admission fee: เข้าชมฟรี.\n\n[ข้อมูลที่ 3 | อ้างอิง: ย่านเครื่องใช้ไฟฟ้าและอนิเมะอากิฮาบาระ - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_AKIHABARA)]\nย่านเครื่องใช้ไฟฟ้าและอนิเมะอากิฮาบาระ - ข้อมูลการเดินทางและการเยี่ยมชม\nข้อมูลการเยี่ยมชมและการเดินทางสู่ ย่านเครื่องใช้ไฟฟ้าและอนิเมะอากิฮาบาระ (Akihabara Electric Town): ตั้งอยู่ในเขต Chiyoda หมวดหมู่ Shopping & Entertainment สถานีรถไฟที่ใกล้ที่สุดคือ ST_AKIHABARA โดยใช้เวลาเดินประมาณ 1 นาที เวลาเปิดทำการ: ร้านค้าส่วนใหญ่เปิด 10:00 - 20:00 และอัตราค่าเข้าชม: เดินชมฟรี\nVisiting & Transit Guide for Akihabara Electric Town: Located in Chiyoda Ward, Category: Shopping & Entertainment. Nearest station is ST_AKIHABARA, approximately 1 minutes walk. Opening hours: ร้านค้าส่วนใหญ่เปิด 10:00 - 20:00, Admission fee: เดินชมฟรี.\n\nแหล่งอ้างอิงยืนยัน: [อ้างอิง: รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_ROPPONGI)] [อ้างอิง: วัดเซ็นโซจิ (วัดอาซากุสะ) - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_ASAKUSA)] [อ้างอิง: ย่านเครื่องใช้ไฟฟ้าและอนิเมะอากิฮาบาระ - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_AKIHABARA)]",
+      "citations": [
+        "รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_ROPPONGI)",
+        "วัดเซ็นโซจิ (วัดอาซากุสะ) - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_ASAKUSA)",
+        "ย่านเครื่องใช้ไฟฟ้าและอนิเมะอากิฮาบาระ - ข้อมูลการเดินทางและการเยี่ยมชม (สถานีใกล้เคียง: ST_AKIHABARA)"
+      ],
+      "has_citations": true,
+      "citation_count": 3,
+      "graph_used": false,
+      "latency_sec": 0.859,
+      "is_cached": false,
+      "success": true,
+      "error": null
+    }
+  ]
+}

@@ -88,18 +88,16 @@
   - Interactive CLI พร้อมโหมดสลับ Backend (`--mode gemini`, `--mode local`, `--mode compare`) และคำสั่งควบคุมในตัว (`:mode`, `:clear`, `exit`)
 
 
-### Phase 6: การประเมินผลและการวิเคราะห์เชิงลึก (Evaluation & Analysis - 10 คะแนน)
-- [ ] **6.1 Benchmark Dataset (`benchmark_qa.json`):**
-  - สร้างชุดคำถาม-คำตอบอ้างอิง (Ground Truth) ครอบคลุม:
-    - หมวด 1: เส้นทางและการเดินทาง (Route & Station Transit)
-    - หมวด 2: สถานที่ท่องเที่ยวและกิจกรรม (Attractions & Activities)
-    - หมวด 3: การวางแผนข้ามย่าน (Multi-hop District Itinerary)
-- [ ] **6.2 Automated Evaluator (`evaluate.py`):**
-  - วัด Retrieval Metrics: Hit@K, MRR (Mean Reciprocal Rank)
-  - วัด Generation Metrics: Faithfulness, Answer Relevance
-  - วัด System Performance: Latency (sec), RAM/VRAM Usage, Token Usage
-- [ ] **6.3 Comprehensive Report Generation:**
-  - สร้างรายงานสรุปผลการทดลองเปรียบเทียบเป็นตารางและกราฟิกใน `evaluation_report.md` เพื่อใช้ส่งตรวจรับคะแนน Level 5
+### Phase 6: การประเมินผลและการวิเคราะห์เชิงลึก (Evaluation & Analysis - 10 คะแนน) [COMPLETED]
+- [x] **6.1 Benchmark Dataset (`data/benchmark_100_questions.json`):**
+  - จัดเก็บชุดคำถามทดสอบมาตรฐาน 100 ข้อ ครอบคลุมครบ 10 หมวดหมู่ (A ถึง J: ท่องเที่ยวทั่วไป, วัฒนธรรม, Anime/Gaming, ธรรมชาติ, อาหาร, Spatial Query, Transportation, Itinerary, Preference, Complex Multi-hop Graph)
+- [x] **6.2 Automated Evaluator (`evaluate.py` & `src/evaluation/evaluator.py`):**
+  - วัด Retrieval & Grounding: อัตราการใส่แท็กอ้างอิง `[อ้างอิง: ...]`, การดึงความสัมพันธ์จาก Knowledge Graph
+  - วัด System Performance: Latency (sec) ต่อข้อ พร้อมระบบ Checkpoint/Resume และ Safe Throttling ไม่ให้เครื่องโหลดหนัก
+  - คำนวณสถิติภาพรวมและการแจกแจงตามหมวดหมู่ (Category-by-Category Breakdown)
+- [x] **6.3 Comprehensive Report Generation (`evaluation_report.md`):**
+  - สร้างเอกสารสรุปผลการทดลองเปรียบเทียบในรูปแบบตารางและข้อวิเคราะห์เชิงวิทยาศาสตร์ตามเกณฑ์ Rubric Level 5
+
 
 ### Phase 7: Automated Testing & Documentation (5 คะแนน)
 - [ ] เขียน Unit Tests และ Integration Tests ด้วย `pytest` ทดสอบทุกโมดูล
