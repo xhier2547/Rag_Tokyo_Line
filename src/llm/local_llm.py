@@ -11,7 +11,7 @@ import os
 import time
 import logging
 from typing import Dict, Any, Optional, List
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import requests
 from dotenv import load_dotenv
 
@@ -37,14 +37,15 @@ class LLMResponse:
     """โครงสร้างข้อมูลผลลัพธ์จาก LLM พร้อมเมตริกวัดผลตาม Rubric Level 5"""
     text: str
     model: str
-    latency_sec: float
-    prompt_tokens: int
-    completion_tokens: int
-    total_tokens: int
-    tokens_per_sec: float
-    citations: List[str]
-    success: bool
+    latency_sec: float = 0.0
+    prompt_tokens: int = 0
+    completion_tokens: int = 0
+    total_tokens: int = 0
+    tokens_per_sec: float = 0.0
+    citations: List[str] = field(default_factory=list)
+    success: bool = True
     error_message: Optional[str] = None
+
 
 
 class LocalLLMClient:

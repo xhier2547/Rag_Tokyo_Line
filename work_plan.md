@@ -78,14 +78,15 @@
   - สวิตช์สลับโมเดลและเปรียบเทียบ Side-by-Side (Latency, Citation count, Token consumption) พร้อมสร้าง Markdown Table สรุปผล
 
 
-### Phase 5: System Integration & Error Handling (System Integration - 10 คะแนน)
-- [ ] **5.1 End-to-End Orchestrator (`rag_service.py`):**
-  - Workflow: User Query $\rightarrow$ Query Normalization & Synonym Expansion $\rightarrow$ Routing $\rightarrow$ Multi-retrieval $\rightarrow$ Context Assembly $\rightarrow$ LLM $\rightarrow$ Answer with Citations
-  - Traceable Citations: ระบุชื่อสถานที่ สถานี หรือแหล่งอ้างอิงจริง
-  - Response Caching สำหรับคำถามซ้ำ
-- [ ] **5.2 Application Interface:**
-  - Interactive CLI พร้อมโหมดเปรียบเทียบ (Compare Mode)
-  - *(Optional)* Web UI แบบง่าย (Streamlit) สำหรับนำเสนอ Demo
+### Phase 5: System Integration & Error Handling (System Integration - 10 คะแนน) [COMPLETED]
+- [x] **5.1 End-to-End Orchestrator (`rag_service.py`):**
+  - Workflow: User Query $\rightarrow$ Query Routing $\rightarrow$ Multi-retrieval (Graph + Dense + Sparse) $\rightarrow$ Context Assembly $\rightarrow$ LLM $\rightarrow$ Answer with Traceable Citations
+  - Traceable Citations: สกัดแหล่งอ้างอิงชื่อสถานที่/สถานีจริงที่ตรวจสอบย้อนกลับได้
+  - Response Caching: ระบบแคชคำตอบในหน่วยความจำ (In-Memory) เพื่อประหยัด API Quota และลดภาระการประมวลผลเครื่อง
+  - Graceful Fallback: สลับใช้ Gemini หรือ Context อัตโนมัติเมื่อ Local LLM ออฟไลน์ ป้องกันระบบล่ม
+- [x] **5.2 Application Interface (`main.py`):**
+  - Interactive CLI พร้อมโหมดสลับ Backend (`--mode gemini`, `--mode local`, `--mode compare`) และคำสั่งควบคุมในตัว (`:mode`, `:clear`, `exit`)
+
 
 ### Phase 6: การประเมินผลและการวิเคราะห์เชิงลึก (Evaluation & Analysis - 10 คะแนน)
 - [ ] **6.1 Benchmark Dataset (`benchmark_qa.json`):**
