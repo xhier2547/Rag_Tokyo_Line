@@ -67,15 +67,16 @@
   - **Cross-Modal Semantic Re-ranking:** คัดกรอง Chunks ที่เกี่ยวข้องที่สุด Top-3
   - **Context Aggregation:** ผสานความสัมพันธ์จาก Graph และเอกสารจาก Vector พร้อมระบบอ้างอิง (Citations) ชัดเจน
 
-### Phase 4: การเชื่อมต่อ Local LLM & API LLM (Local + API LLM - 15 คะแนน)
-- [ ] **4.1 Local LLM via Ollama (`local_llm.py`):**
-  - รองรับโมเดลขนาด 3B–8B (เช่น `llama3.2:3b`, `qwen2.5:3b`, `typhoon2:8b`)
+### Phase 4: การเชื่อมต่อ Local LLM & API LLM (Local + API LLM - 15 คะแนน) [COMPLETED]
+- [x] **4.1 Local LLM via Ollama (`local_llm.py`):**
+  - รองรับโมเดลขนาดเบา 3B–4B (เช่น `qwen2.5:3b`, `gemma3:4b`, `typhoon2.1:4b`) เพื่อไม่ให้โหลดเครื่องหนัก
   - ออกแบบ Dynamic Prompting ที่ปรับ Context Window ให้กระชับ ประหยัดเวลา Generate
-- [ ] **4.2 API LLM via Google Gemini (`gemini_llm.py`):**
-  - เชื่อมต่อ `google-genai` / LangChain Google GenAI ผ่าน `.env` API Key
-  - จัดการ Token Budget, Error Handling, Fallback เมื่อ API เกิด Rate Limit
-- [ ] **4.3 Comparative LLM Wrapper:**
-  - สวิตช์สลับโมเดลได้ทันทีระหว่างรันเพื่อเปรียบเทียบผลลัพธ์คำตอบแบบ Side-by-Side
+- [x] **4.2 API LLM via Google Gemini (`gemini_llm.py`):**
+  - เชื่อมต่อ Google GenAI (`gemini-2.5-flash` / `gemini-1.5-flash`) ผ่าน `.env` API Key
+  - จัดการ Token Budget, Error Handling, Fallback และ Retry Logic
+- [x] **4.3 Comparative LLM Wrapper (`comparator.py`):**
+  - สวิตช์สลับโมเดลและเปรียบเทียบ Side-by-Side (Latency, Citation count, Token consumption) พร้อมสร้าง Markdown Table สรุปผล
+
 
 ### Phase 5: System Integration & Error Handling (System Integration - 10 คะแนน)
 - [ ] **5.1 End-to-End Orchestrator (`rag_service.py`):**

@@ -11,6 +11,8 @@ from chromadb.config import Settings
 from sentence_transformers import SentenceTransformer
 from langchain_core.documents import Document
 
+os.environ["TQDM_DISABLE"] = "1"
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 PROCESSED_DIR = os.path.join(BASE_DIR, "data", "processed")
 DEFAULT_CHROMA_DIR = os.path.join(BASE_DIR, "data", "chroma_db")
@@ -33,8 +35,12 @@ class TokyoChromaStore:
         self.device = device
         self._model = None
         os.makedirs(self.persist_dir, exist_ok=True)
-        self.client = chromadb.PersistentClient(path=self.persist_dir)
+        self.client = chromadb.PersistentClient(
+            path=self.persist_dir,
+            settings=Settings(anonymized_telemetry=False, allow_reset=True)
+        )
         self.collection = self.client.get_or_create_collection(name=COLLECTION_NAME)
+        self._doc_count = None
 
     @property
     def model(self):
@@ -94,10 +100,7 @@ class TokyoChromaStore:
         ค้นหาเวกเตอร์พร้อมการกรอง Metadata (Metadata-Filtered Vector Search)
         ตัวอย่าง filter_dict: {"ward": "Shibuya"} หรือ {"category": "Temple & Shrine"}
         """
-        if self.collection.count() == 0:
-            self.build_from_chunks()
-
-        q_vec = self.model.encode([query]).tolist()
+        q_vec = self.model.encode([query], show_progress_bar=False).tolist()
         
         kwargs = {
             "query_embeddings": q_vec,
@@ -106,8 +109,12 @@ class TokyoChromaStore:
         if filter_dict:
             kwargs["where"] = filter_dict
 
-        res = self.collection.query(**kwargs)
-        
+        try:
+            res = self.collection.query(**kwargs)
+        except Exception:
+            self.build_from_chunks()
+            res = self.collection.query(**kwargs)
+
         results: List[Tuple[Document, float]] = []
         if res and res["documents"] and len(res["documents"][0]) > 0:
             docs = res["documents"][0]
