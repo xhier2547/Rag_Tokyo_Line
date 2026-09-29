@@ -58,6 +58,11 @@ def test_benchmark_100_questions_ground_truth():
     with open(bench_file, "r", encoding="utf-8") as f:
         questions = json.load(f)
 
+    with open("data/processed/documents_chunks.json", "r", encoding="utf-8") as f:
+        chunks = json.load(f)
+    valid_entities = {chunk["place_id"] for chunk in chunks}
+    valid_chunks = {chunk["chunk_id"] for chunk in chunks}
+
     assert len(questions) == 100, f"Expected 100 questions but found {len(questions)}"
 
     categories = set()
@@ -67,10 +72,20 @@ def test_benchmark_100_questions_ground_truth():
         assert "query" in q
         assert "ground_truth_entities" in q
         assert len(q["ground_truth_entities"]) > 0, f"Q{q['id']} missing ground_truth_entities"
+        assert set(q["ground_truth_entities"]) <= valid_entities, f"Q{q['id']} has invalid entities"
         assert "ground_truth_chunks" in q
         assert len(q["ground_truth_chunks"]) > 0, f"Q{q['id']} missing ground_truth_chunks"
+        assert set(q["ground_truth_chunks"]) <= valid_chunks, f"Q{q['id']} has invalid chunks"
 
     assert len(categories) == 10, f"Expected 10 categories (A-J) but found {len(categories)}"
+
+    for category in categories:
+        patterns = {
+            tuple(q["ground_truth_entities"])
+            for q in questions
+            if q["category"] == category
+        }
+        assert len(patterns) >= 5, f"Category {category} ground truth is insufficiently varied"
 
 
 def test_model_comparison_raw_artifact():
@@ -91,3 +106,7 @@ def test_model_comparison_raw_artifact():
         assert "local_ollama_3b" in item
         assert item["gemini_api"]["latency_sec"] > 0
         assert item["deterministic_fallback"]["latency_sec"] > 0
+        assert item["local_ollama_3b"]["status"] in {
+            "MEASURED_LIVE",
+            "UNAVAILABLE_NOT_MEASURED",
+        }

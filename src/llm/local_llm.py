@@ -34,7 +34,7 @@ ALLOWED_3B_4B_MODELS = [
 
 @dataclass
 class LLMResponse:
-    """โครงสร้างข้อมูลผลลัพธ์จาก LLM พร้อมเมตริกวัดผลตาม Rubric Level 5"""
+    """โครงสร้างข้อมูลผลลัพธ์จาก LLM พร้อมเมตริกที่วัดได้"""
     text: str
     model: str
     latency_sec: float = 0.0

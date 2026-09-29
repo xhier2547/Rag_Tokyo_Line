@@ -1,0 +1,27 @@
+# Retrieval and embeddings
+sentence-transformers>=5.0,<6
+faiss-cpu>=1.12,<2
+rank-bm25>=0.2,<1
+chromadb>=1.5,<2
+langchain-core>=1.0,<2
+langchain-community>=0.4,<1
+langchain-huggingface>=1.0,<2
+
+# Graph, language processing, and LLM backends
+networkx>=3.0,<4
+neo4j>=6.0,<7
+pythainlp>=5.0,<6
+google-genai>=1.0,<2
+python-dotenv>=1.0,<2
+pydantic>=2.0,<3
+requests>=2.32,<3
+
+# Service and LINE integration
+fastapi>=0.115,<1
+uvicorn>=0.30,<1
+line-bot-sdk>=3.0,<4
+
+# Evaluation and tests
+matplotlib>=3.9,<4
+pytest>=8.0,<10
+httpx>=0.27,<1

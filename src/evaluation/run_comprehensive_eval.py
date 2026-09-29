@@ -32,6 +32,7 @@ import sys
 import time
 import json
 import re
+import argparse
 from typing import Dict, Any, List, Tuple
 from collections import defaultdict
 
@@ -48,6 +49,20 @@ from src.hybrid.engine import TokyoHybridRAGEngine
 from src.vector.faiss_store import TokyoFAISSStore
 from src.graph.pathfinder import TokyoGraphPathfinder
 from src.service.rag_service import TokyoRAGService
+
+
+def reciprocal_rank_fuse_ids(*ranked_lists: List[str], k: int = 60) -> List[str]:
+    """Fuse ranked entity ID lists while preserving a real comparable rank."""
+    scores: Dict[str, float] = defaultdict(float)
+    first_seen: Dict[str, int] = {}
+    sequence = 0
+    for ranked in ranked_lists:
+        for rank, entity_id in enumerate(ranked, start=1):
+            scores[entity_id] += 1.0 / (k + rank)
+            if entity_id not in first_seen:
+                first_seen[entity_id] = sequence
+                sequence += 1
+    return sorted(scores, key=lambda entity_id: (-scores[entity_id], first_seen[entity_id]))
 
 
 
@@ -138,9 +153,11 @@ def run_ablation_study(questions: List[Dict[str, Any]]) -> Dict[str, Any]:
     per_query_records = []
     n = len(questions)
 
-    # ดึงชื่อและคีย์เวิร์ดของสถานที่และสถานีในกราฟสำหรับตรวจสอบ Graph Context
+    # Map display citations back to stable entity IDs.
     place_names_map = {}
     for node, data in pathfinder.nx_graph.nodes(data=True):
+        if data.get("type") not in {"Place", "Hotel"}:
+            continue
         names = [node.lower()]
         if data.get("name_th"):
             names.append(data["name_th"].lower())
@@ -217,43 +234,29 @@ def run_ablation_study(questions: List[Dict[str, Any]]) -> Dict[str, Any]:
         hyb_lat = (time.perf_counter() - t0) * 1000.0
         results["hybrid_rag"]["total_lat_ms"] += hyb_lat
 
-        hyb_graph_ctx = hyb_res.graph_context.lower()
-        has_hyb_kg = bool(hyb_graph_ctx.strip())
+        has_hyb_kg = len(graph_ranked_entities) > 0
         if has_hyb_kg:
             results["hybrid_rag"]["graph_hit"] += 1
 
-        # ตรวจสอบอันดับของเอกสารใน Hybrid RRF Context
-        hybrid_rank = None
-        # ตรวจสอบใน Graph Context ก่อน (ถ้ามีและตรง ถือเป็นอันดับ 1 ในมิติเชิงความสัมพันธ์)
-        graph_resolved = False
-        if has_hyb_kg and gt_entities:
-            for ent in gt_entities:
-                aliases = place_names_map.get(ent, [ent.lower()])
-                if any(alias in hyb_graph_ctx for alias in aliases if len(alias) >= 3):
-                    graph_resolved = True
-                    break
-
-        # ตรวจสอบ Chunks ใน Vector Context
-        vector_rank = None
-        for r_idx, cit in enumerate(hyb_res.citations[:3]):
-            # ตรวจสอบจาก Citations ที่ระบบสกัดได้
+        # Convert the reranked vector citations to entity IDs in their actual order.
+        vector_ranked_entities = []
+        for cit in hyb_res.citations:
             cit_lower = cit.lower()
-            for ent in gt_entities:
+            for ent, aliases in place_names_map.items():
                 aliases = place_names_map.get(ent, [ent.lower()])
                 if any(alias in cit_lower for alias in aliases if len(alias) >= 3):
-                    if vector_rank is None:
-                        vector_rank = r_idx + 1
+                    if ent not in vector_ranked_entities:
+                        vector_ranked_entities.append(ent)
+                    break
 
-        if graph_resolved and vector_rank is not None:
-            hybrid_rank = min(1, vector_rank)
-        elif graph_resolved:
-            hybrid_rank = 1
-        elif vector_rank is not None:
-            hybrid_rank = vector_rank
-        elif dense_rank is not None:
-            hybrid_rank = dense_rank
-        else:
-            hybrid_rank = None
+        hybrid_ranked_entities = reciprocal_rank_fuse_ids(
+            vector_ranked_entities,
+            graph_ranked_entities,
+        )
+        hybrid_rank = next(
+            (rank for rank, ent in enumerate(hybrid_ranked_entities, start=1) if ent in gt_entities),
+            None,
+        )
 
         hybrid_hit1 = 1 if hybrid_rank == 1 else 0
         hybrid_hit3 = 1 if hybrid_rank is not None and hybrid_rank <= 3 else 0
@@ -287,6 +290,7 @@ def run_ablation_study(questions: List[Dict[str, Any]]) -> Dict[str, Any]:
                 "latency_ms": round(graph_lat, 2)
             },
             "hybrid_rag": {
+                "ranked_entities": hybrid_ranked_entities[:5],
                 "rank": hybrid_rank,
                 "hit1": hybrid_hit1,
                 "hit3": hybrid_hit3,
@@ -470,12 +474,36 @@ def run_full_evaluation(sample_size: int = 30) -> Dict[str, Any]:
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Run retrieval ablation and optional Gemini E2E evaluation")
+    parser.add_argument(
+        "--ablation-only",
+        action="store_true",
+        help="Run the local 100-question retrieval ablation without calling Gemini",
+    )
+    args = parser.parse_args()
     questions = load_benchmark()
     
     # 1. รัน Ablation Study
     ablation_results = run_ablation_study(questions)
     print("\n📊 ผลการทดลอง Ablation Study สรุปผล:")
     print(json.dumps(ablation_results, indent=2, ensure_ascii=False))
+
+    if args.ablation_only:
+        # Keep previously measured end-to-end outputs, but replace their stale
+        # retrieval section with the ablation produced by this exact run.
+        for output_path in (
+            "data/benchmark_results_comprehensive.json",
+            "data/benchmark_results_gemini.json",
+        ):
+            if not os.path.exists(output_path):
+                continue
+            with open(output_path, "r", encoding="utf-8") as f:
+                output = json.load(f)
+            output["ablation_study"] = ablation_results
+            with open(output_path, "w", encoding="utf-8") as f:
+                json.dump(output, f, ensure_ascii=False, indent=2)
+            print(f"Synced latest ablation into: {output_path}")
+        return
 
     # 2. รัน End-to-End Evaluation 30 ข้อ (หมวดละ 3 ข้อ)
     eval_output = run_full_evaluation(sample_size=30)

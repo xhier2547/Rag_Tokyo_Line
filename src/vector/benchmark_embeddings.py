@@ -15,6 +15,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 PROCESSED_DIR = os.path.join(BASE_DIR, "data", "processed")
 CHUNKS_FILE = os.path.join(PROCESSED_DIR, "documents_chunks.json")
 BENCHMARK_OUTPUT = os.path.join(PROCESSED_DIR, "embedding_benchmark_results.json")
+QUESTIONS_FILE = os.path.join(BASE_DIR, "data", "benchmark_100_questions.json")
 
 # รายชื่อโมเดลที่ต้องการเปรียบเทียบ
 CANDIDATE_MODELS = [
@@ -30,29 +31,14 @@ CANDIDATE_MODELS = [
     }
 ]
 
-# ชุดคำถามทดสอบวัดความแม่นยำ (Ground Truth Benchmark)
-BENCHMARK_QUERIES = [
-    {
-        "query": "วัดเก่าแก่ในอาซากุสะ โคมแดงยักษ์",
-        "expected_place": "P_SENSOJI"
-    },
-    {
-        "query": "จุดชมวิวหอคอยกระจายเสียงสูงที่สุดในโลก",
-        "expected_place": "P_TOKYO_SKYTREE"
-    },
-    {
-        "query": "ห้าแยกคนข้ามมากที่สุด และรูปปั้นสุนัขฮาจิโกะ",
-        "expected_place": "P_SHIBUYA_CROSSING"
-    },
-    {
-        "query": "ตลาดปลา ซาชิมิสด สตรีทฟู้ด",
-        "expected_place": "P_TSUKIJI_OUTER"
-    },
-    {
-        "query": "ย่านโอตาคุ แหล่งอนิเมะ ฟิกเกอร์ และเกมอาร์เคด",
-        "expected_place": "P_AKIHABARA_ELECTRIC"
-    }
-]
+def load_benchmark_queries() -> List[Dict[str, Any]]:
+    """Select three curated questions from each category (30 total)."""
+    with open(QUESTIONS_FILE, "r", encoding="utf-8") as f:
+        questions = json.load(f)
+    selected = []
+    for category in sorted({q["category"] for q in questions}):
+        selected.extend([q for q in questions if q["category"] == category][:3])
+    return selected
 
 def run_embedding_benchmark(output_path: str = BENCHMARK_OUTPUT) -> Dict[str, Any]:
     """
@@ -63,6 +49,7 @@ def run_embedding_benchmark(output_path: str = BENCHMARK_OUTPUT) -> Dict[str, An
 
     with open(CHUNKS_FILE, "r", encoding="utf-8") as f:
         chunks_data = json.load(f)
+    benchmark_queries = load_benchmark_queries()
 
     documents = []
     for c in chunks_data:
@@ -90,9 +77,10 @@ def run_embedding_benchmark(output_path: str = BENCHMARK_OUTPUT) -> Dict[str, An
             hit_at_1 = 0
             hit_at_3 = 0
 
-            for test_case in BENCHMARK_QUERIES:
+            per_query = []
+            for test_case in benchmark_queries:
                 q = test_case["query"]
-                exp_place = test_case["expected_place"]
+                expected_places = set(test_case["ground_truth_entities"])
 
                 t_query_start = time.time()
                 retrieved_docs = vectorstore.similarity_search(q, k=3)
@@ -100,12 +88,19 @@ def run_embedding_benchmark(output_path: str = BENCHMARK_OUTPUT) -> Dict[str, An
                 latencies.append(latency_ms)
 
                 retrieved_places = [d.metadata.get("place_id") for d in retrieved_docs]
-                if retrieved_places and retrieved_places[0] == exp_place:
+                if retrieved_places and retrieved_places[0] in expected_places:
                     hit_at_1 += 1
-                if exp_place in retrieved_places:
+                if expected_places.intersection(retrieved_places):
                     hit_at_3 += 1
+                per_query.append({
+                    "question_id": test_case["id"],
+                    "category": test_case["category"],
+                    "expected_entities": sorted(expected_places),
+                    "retrieved_entities": retrieved_places,
+                    "latency_ms": round(latency_ms, 2),
+                })
 
-            total_q = len(BENCHMARK_QUERIES)
+            total_q = len(benchmark_queries)
             avg_latency_ms = round(sum(latencies) / total_q, 2)
             hit1_rate = round(hit_at_1 / total_q, 2)
             hit3_rate = round(hit_at_3 / total_q, 2)
@@ -121,6 +116,7 @@ def run_embedding_benchmark(output_path: str = BENCHMARK_OUTPUT) -> Dict[str, An
                 "hit_at_1_rate": hit1_rate,
                 "hit_at_3_rate": hit3_rate,
                 "total_queries_tested": total_q
+                ,"per_query_results": per_query
             }
         except Exception as e:
             print(f" Error benchmarking {m_name}: {e}")

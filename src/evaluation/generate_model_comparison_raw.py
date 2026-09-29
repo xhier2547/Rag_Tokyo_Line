@@ -25,6 +25,7 @@ sys.path.insert(0, BASE_DIR)
 from src.hybrid.engine import TokyoHybridRAGEngine
 from src.service.rag_service import TokyoRAGService
 from src.llm.prompts import extract_citations
+from src.llm.local_llm import LocalLLMClient
 
 
 BENCHMARK_PROMPTS = [
@@ -94,6 +95,10 @@ def generate_raw_benchmark() -> Dict[str, Any]:
 
     gemini_latencies = []
     fallback_latencies = []
+    local_client = LocalLLMClient()
+    local_health = local_client.check_health()
+    local_available = local_health.get("status") == "online"
+    local_latencies = []
 
     for idx, item in enumerate(BENCHMARK_PROMPTS):
         q = item["query"]
@@ -122,11 +127,32 @@ def generate_raw_benchmark() -> Dict[str, Any]:
         fb_citations = extract_citations(fb_answer)
         fb_tokens = len(fb_answer.split()) * 2
 
-        # 4. บันทึกข้อมูลเปรียบเทียบเชิงประจักษ์ของ Local Ollama (Qwen 2.5 3B) จากผลทดสอบจริง
-        # สอดคล้องกับพฤติกรรม Local 3B บนเครื่อง CPU/RAM
-        local_lat = round(gemini_lat * 2.5 + 1.2, 2)
-        local_tokens = max(120, int(gemini_tokens * 0.85))
-        local_tps = round(local_tokens / max(0.1, local_lat), 1)
+        # 4. Run the local model only when Ollama is genuinely available.
+        # Never synthesize latency, token, CPU, or memory measurements.
+        if local_available:
+            local_res = local_client.answer_rag_query(q, hyb_res.final_context)
+            local_record = {
+                "model": local_res.model,
+                "latency_sec": local_res.latency_sec,
+                "prompt_tokens": local_res.prompt_tokens,
+                "completion_tokens": local_res.completion_tokens,
+                "tokens_per_sec": local_res.tokens_per_sec,
+                "citations_count": len(local_res.citations),
+                "citations": local_res.citations,
+                "success": local_res.success,
+                "error": local_res.error_message,
+                "sample_output_preview": local_res.text[:250] + "...",
+                "status": "MEASURED_LIVE",
+            }
+            if local_res.success:
+                local_latencies.append(local_res.latency_sec)
+        else:
+            local_record = {
+                "model": local_client.model_name,
+                "status": "UNAVAILABLE_NOT_MEASURED",
+                "success": False,
+                "error": local_health.get("error", "Ollama is not available"),
+            }
 
         raw_items.append({
             "test_id": idx + 1,
@@ -157,31 +183,23 @@ def generate_raw_benchmark() -> Dict[str, Any]:
                 "cpu_load_pct": 1,
                 "sample_output_preview": fb_answer[:250] + "..."
             },
-            "local_ollama_3b": {
-                "model": "qwen2.5:3b (Quantized Q4_K_M)",
-                "latency_sec": local_lat,
-                "completion_tokens_approx": local_tokens,
-                "tokens_per_sec": local_tps,
-                "citations_count": len(gemini_citations),
-                "memory_ram_mb": 2450,
-                "cpu_load_pct": 52,
-                "status": "CALIBRATED_BENCHMARK_PROFILE"
-            }
+            "local_ollama_3b": local_record,
         })
 
         time.sleep(0.5)
 
     summary = {
         "total_test_queries": len(raw_items),
-        "models_evaluated": ["gemini-3.1-flash-lite", "tokyo-hybrid-deterministic-fallback", "qwen2.5:3b"],
+        "models_evaluated": ["gemini-3.1-flash-lite", "tokyo-hybrid-deterministic-fallback"] + ([local_client.model_name] if local_available else []),
         "gemini_avg_latency_sec": round(sum(gemini_latencies) / len(gemini_latencies), 3),
         "fallback_avg_latency_sec": round(sum(fallback_latencies) / len(fallback_latencies), 4),
-        "local_ollama_avg_latency_sec": round(sum(item["local_ollama_3b"]["latency_sec"] for item in raw_items) / len(raw_items), 2),
+        "local_ollama_status": "MEASURED_LIVE" if local_available else "UNAVAILABLE_NOT_MEASURED",
+        "local_ollama_avg_latency_sec": round(sum(local_latencies) / len(local_latencies), 3) if local_latencies else None,
         "latency_speedup_gemini_vs_local": round(
-            (sum(item["local_ollama_3b"]["latency_sec"] for item in raw_items) / len(raw_items)) /
+            (sum(local_latencies) / len(local_latencies)) /
             (sum(gemini_latencies) / len(gemini_latencies)), 2
-        ),
-        "verification_note": "ข้อมูลดิบจากการทดสอบเปรียบเทียบ End-to-End LLM ตามเกณฑ์ Rubric Level 5 (Section 3.5)"
+        ) if local_latencies else None,
+        "verification_note": "Only live measurements are reported; unavailable backends remain explicitly unmeasured."
     }
 
     output = {

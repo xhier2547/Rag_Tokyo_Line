@@ -33,6 +33,13 @@ def test_rag_service_cache_mechanism():
     )
 
     service = TokyoRAGService(hybrid_engine=mock_engine)
+    service.gemini_client.answer_rag_query = MagicMock(return_value=LLMResponse(
+        text="ใช้ JR Yamanote Line ใช้เวลา 7 นาที [อ้างอิง: JR Yamanote Line]",
+        model="gemini-test",
+        latency_sec=0.01,
+        citations=["JR Yamanote Line"],
+        success=True,
+    ))
     service.clear_cache()
 
     query = "เดินทางจาก Shinjuku ไป Shibuya ใช้สายอะไร"

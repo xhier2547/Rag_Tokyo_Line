@@ -2,7 +2,7 @@
 src/evaluation/generate_charts.py
 ==================================
 สคริปต์สำหรับสร้างภาพกราฟิกวิเคราะห์เปรียบเทียบ (Data Visualization Charts)
-ตามข้อกำหนดเกณฑ์ Rubric Level 5 (Evaluation & Analysis)
+ใช้สร้างกราฟจาก raw benchmark artifacts โดยไม่เติมค่าของ backend ที่ไม่ได้วัด
 - เปรียบเทียบโมเดล Embedding (Latency, Build Time, Dimensions)
 - เปรียบเทียบโมเดล LLM (Generation Latency, Tokens/sec, RAM/CPU Resource Usage)
 - แสดงประสิทธิภาพ End-to-End Latency แยกตามหมวดหมู่ A ถึง J
@@ -30,6 +30,8 @@ import numpy as np
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 CHARTS_DIR = os.path.join(BASE_DIR, "reports", "charts")
 BENCHMARK_GEMINI_FILE = os.path.join(BASE_DIR, "data", "benchmark_results_gemini.json")
+EMBEDDING_RESULTS_FILE = os.path.join(BASE_DIR, "data", "processed", "embedding_benchmark_results.json")
+MODEL_COMPARISON_FILE = os.path.join(BASE_DIR, "data", "model_comparison_raw.json")
 
 
 def setup_style():
@@ -63,14 +65,20 @@ def plot_embedding_comparison(output_path: str):
     - Subplot 1: Query Latency (ms) (ค่ายิ่งน้อยยิ่งดี)
     - Subplot 2: Index Build Time (วินาที)
     """
-    models = ["MiniLM-L12-v2\n(384 Dim)", "Multilingual-E5-small\n(384 Dim)", "BGE-M3\n(1024 Dim)"]
-    query_latency = [16.89, 17.76, 45.20]  # ms
-    build_time = [22.34, 12.28, 58.60]     # sec
+    with open(EMBEDDING_RESULTS_FILE, "r", encoding="utf-8") as f:
+        measured = json.load(f)
+    models = []
+    query_latency = []
+    build_time = []
+    for result in measured.values():
+        models.append(result["model_id"].split("/")[-1])
+        query_latency.append(result["avg_query_latency_ms"])
+        build_time.append(result["build_time_sec"])
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 5.5), dpi=300)
     fig.patch.set_facecolor("#FFFFFF")
 
-    colors = ["#2563EB", "#0D9488", "#7C3AED"]
+    colors = ["#2563EB", "#0D9488"]
 
     # Subplot 1: Query Latency
     bars1 = ax1.bar(models, query_latency, color=colors, width=0.55, edgecolor="#0F172A", linewidth=0.5)
@@ -86,7 +94,7 @@ def plot_embedding_comparison(output_path: str):
     ax2.set_ylim(0, max(build_time) * 1.25)
     add_bar_labels(ax2, bars2, fmt="%.1f", unit=" s")
 
-    fig.suptitle("Embedding Models Benchmark: MiniLM vs E5-Small vs BGE-M3", fontsize=14, fontweight="bold", y=1.02, color="#0F172A")
+    fig.suptitle("Embedding Models Benchmark: 30 Measured Queries", fontsize=14, fontweight="bold", y=1.02, color="#0F172A")
     plt.tight_layout()
     plt.savefig(output_path, bbox_inches="tight", dpi=300)
     plt.close()
@@ -99,20 +107,21 @@ def plot_llm_latency_throughput(output_path: str):
     - Subplot 1: Generation Latency (s)
     - Subplot 2: Generation Throughput (Tokens/sec)
     """
-    llm_models = [
-        "Gemini 3.1\nFlash Lite (API)",
-        "Gemini 2.5\nFlash (API)",
-        "Qwen 2.5 3B\n(Local CPU)",
-        "Gemma 3 4B\n(Local CPU)",
-        "Retriever\nFallback (Offline)"
-    ]
-    latencies = [1.85, 2.30, 4.80, 7.50, 0.21]    # วินาที
-    throughputs = [82.5, 74.0, 18.2, 11.5, 0.0]   # tokens/sec
+    with open(MODEL_COMPARISON_FILE, "r", encoding="utf-8") as f:
+        summary = json.load(f)["summary"]
+    llm_models = ["Gemini 3.1\nFlash Lite", "Deterministic\nFallback"]
+    latencies = [summary["gemini_avg_latency_sec"], summary["fallback_avg_latency_sec"]]
+    measured_queries = [summary["total_test_queries"], summary["total_test_queries"]]
+    local_measured = summary.get("local_ollama_status") == "MEASURED_LIVE"
+    if local_measured:
+        llm_models.insert(1, "Qwen 2.5 3B\n(Local Ollama)")
+        latencies.insert(1, summary["local_ollama_avg_latency_sec"])
+        measured_queries.insert(1, summary["total_test_queries"])
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5.5), dpi=300)
     fig.patch.set_facecolor("#FFFFFF")
 
-    colors = ["#0284C7", "#2563EB", "#D97706", "#DC2626", "#059669"]
+    colors = ["#0284C7", "#D97706", "#059669"] if local_measured else ["#0284C7", "#059669"]
 
     # Subplot 1: Latency
     bars1 = ax1.bar(llm_models, latencies, color=colors, width=0.55, edgecolor="#0F172A", linewidth=0.5)
@@ -121,14 +130,15 @@ def plot_llm_latency_throughput(output_path: str):
     ax1.set_ylim(0, max(latencies) * 1.25)
     add_bar_labels(ax1, bars1, fmt="%.2f", unit="s")
 
-    # Subplot 2: Throughput
-    bars2 = ax2.bar(llm_models, throughputs, color=colors, width=0.55, edgecolor="#0F172A", linewidth=0.5)
-    ax2.set_title("Generation Throughput (Tokens / Second)", fontsize=12, fontweight="bold", pad=12, color="#0F172A")
-    ax2.set_ylabel("Tokens / Second", fontsize=10, fontweight="bold")
-    ax2.set_ylim(0, max(throughputs) * 1.25)
-    add_bar_labels(ax2, bars2, fmt="%.1f", unit=" tps")
+    # Throughput is intentionally omitted because the local backend was not
+    # available and the API artifact does not contain comparable token timing.
+    bars2 = ax2.bar(llm_models, measured_queries, color=colors, width=0.55, edgecolor="#0F172A", linewidth=0.5)
+    ax2.set_title("Measured Queries", fontsize=12, fontweight="bold", pad=12, color="#0F172A")
+    ax2.set_ylabel("Queries", fontsize=10, fontweight="bold")
+    ax2.set_ylim(0, max(measured_queries) * 1.25)
+    add_bar_labels(ax2, bars2, fmt="%d")
 
-    fig.suptitle("LLM Performance Comparison: Cloud API vs Local LLM vs Deterministic Fallback", fontsize=14, fontweight="bold", y=1.02, color="#0F172A")
+    fig.suptitle("Measured Backend Latency", fontsize=14, fontweight="bold", y=1.02, color="#0F172A")
     plt.tight_layout()
     plt.savefig(output_path, bbox_inches="tight", dpi=300)
     plt.close()
@@ -141,35 +151,30 @@ def plot_llm_resource_usage(output_path: str):
     - Subplot 1: Memory / RAM Consumption (MB)
     - Subplot 2: CPU Load During Generation (%)
     """
-    llm_models = [
-        "Gemini 3.1\nFlash Lite (API)",
-        "Qwen 2.5 3B\n(Local CPU)",
-        "Gemma 3 4B\n(Local CPU)",
-        "Retriever\nFallback (Offline)"
-    ]
-    ram_usage_mb = [0, 2450, 3780, 8]  # MB
-    cpu_percent = [0, 55, 85, 0]        # %
+    with open(MODEL_COMPARISON_FILE, "r", encoding="utf-8") as f:
+        summary = json.load(f)["summary"]
+    llm_models = ["Gemini API", "Local Ollama", "Fallback"]
+    availability = [1, int(summary.get("local_ollama_status") == "MEASURED_LIVE"), 1]
+    resource_measurement = [0, 0, 0]
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 5.5), dpi=300)
     fig.patch.set_facecolor("#FFFFFF")
 
-    colors = ["#0284C7", "#D97706", "#DC2626", "#059669"]
+    colors = ["#0284C7", "#94A3B8", "#059669"]
 
-    # Subplot 1: RAM Usage
-    bars1 = ax1.bar(llm_models, ram_usage_mb, color=colors, width=0.52, edgecolor="#0F172A", linewidth=0.5)
-    ax1.set_title("Local RAM / VRAM Consumption (MB)", fontsize=12, fontweight="bold", pad=12, color="#0F172A")
-    ax1.set_ylabel("RAM Usage (MB)", fontsize=10, fontweight="bold")
-    ax1.set_ylim(0, max(ram_usage_mb) * 1.25)
-    add_bar_labels(ax1, bars1, fmt="%d", unit=" MB")
+    bars1 = ax1.bar(llm_models, availability, color=colors, width=0.52, edgecolor="#0F172A", linewidth=0.5)
+    ax1.set_title("Backend Availability During Benchmark", fontsize=12, fontweight="bold", pad=12, color="#0F172A")
+    ax1.set_ylabel("Available (1=yes, 0=no)", fontsize=10, fontweight="bold")
+    ax1.set_ylim(0, 1.25)
+    add_bar_labels(ax1, bars1, fmt="%d")
 
-    # Subplot 2: CPU Load
-    bars2 = ax2.bar(llm_models, cpu_percent, color=colors, width=0.52, edgecolor="#0F172A", linewidth=0.5)
-    ax2.set_title("Machine CPU Load During Generation (%)", fontsize=12, fontweight="bold", pad=12, color="#0F172A")
-    ax2.set_ylabel("CPU Load (%)", fontsize=10, fontweight="bold")
-    ax2.set_ylim(0, 110)
-    add_bar_labels(ax2, bars2, fmt="%d", unit="%")
+    bars2 = ax2.bar(llm_models, resource_measurement, color=colors, width=0.52, edgecolor="#0F172A", linewidth=0.5)
+    ax2.set_title("Resource Measurements Collected", fontsize=12, fontweight="bold", pad=12, color="#0F172A")
+    ax2.set_ylabel("Measurements", fontsize=10, fontweight="bold")
+    ax2.set_ylim(0, 1)
+    add_bar_labels(ax2, bars2, fmt="%d")
 
-    fig.suptitle("Machine Resource Footprint: Cloud API Zero-Overhead vs Local Throttling", fontsize=14, fontweight="bold", y=1.02, color="#0F172A")
+    fig.suptitle("Resource Usage Status: No Fabricated Measurements", fontsize=14, fontweight="bold", y=1.02, color="#0F172A")
     plt.tight_layout()
     plt.savefig(output_path, bbox_inches="tight", dpi=300)
     plt.close()
@@ -217,11 +222,11 @@ def plot_category_latency(output_path: str):
 
     # กำหนดสีตามความเร็ว (Gradient)
     norm = plt.Normalize(min(latencies), max(latencies))
-    cmap = plt.cm.get_cmap("Blues")
+    cmap = matplotlib.colormaps["Blues"]
     bar_colors = [cmap(0.45 + (0.5 * (val - min(latencies)) / (max(latencies) - min(latencies) + 1e-6))) for val in latencies]
 
     bars = ax.bar(cat_names, latencies, color=bar_colors, width=0.6, edgecolor="#0F172A", linewidth=0.5)
-    ax.axhline(5.0, color="#DC2626", linestyle="--", linewidth=1.2, label="Level 5 Target Threshold (< 5.0s)")
+    ax.axhline(5.0, color="#DC2626", linestyle="--", linewidth=1.2, label="Project latency target (< 5.0s)")
     ax.set_title("End-to-End Latency by Query Category (A to J) with Gemini 3.1 Flash Lite", fontsize=13, fontweight="bold", pad=12, color="#0F172A")
     ax.set_ylabel("Latency (Seconds)", fontsize=10, fontweight="bold")
     ax.set_ylim(0, max(latencies) * 1.25)

@@ -935,25 +935,25 @@
   ],
   "ablation_study": {
     "dense_only": {
-      "hit_rate_top1_pct": 43.0,
-      "hit_rate_top3_pct": 70.0,
-      "mrr": 0.555,
-      "avg_latency_ms": 17.21,
+      "hit_rate_top1_pct": 42.0,
+      "hit_rate_top3_pct": 64.0,
+      "mrr": 0.5183,
+      "avg_latency_ms": 15.08,
       "graph_coverage_pct": 0.0
     },
     "graph_only": {
       "hit_rate_top1_pct": 53.0,
-      "hit_rate_top3_pct": 53.0,
-      "mrr": 0.53,
-      "avg_latency_ms": 2.31,
-      "graph_coverage_pct": 100.0
+      "hit_rate_top3_pct": 54.0,
+      "mrr": 0.5358,
+      "avg_latency_ms": 0.16,
+      "graph_coverage_pct": 80.0
     },
     "hybrid_rag": {
-      "hit_rate_top1_pct": 72.0,
-      "hit_rate_top3_pct": 90.0,
-      "mrr": 0.8,
-      "avg_latency_ms": 23.81,
-      "graph_coverage_pct": 100.0
+      "hit_rate_top1_pct": 54.0,
+      "hit_rate_top3_pct": 74.0,
+      "mrr": 0.6546,
+      "avg_latency_ms": 27.36,
+      "graph_coverage_pct": 80.0
     }
   }
 }

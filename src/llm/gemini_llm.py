@@ -124,7 +124,9 @@ class GeminiLLMClient:
                 system_instruction=system_prompt or SYSTEM_PROMPT
             )
 
-            candidate_models = ["gemini-flash-lite-latest", "gemini-2.5-flash-lite", self.model_name, "gemini-2.5-flash"]
+            # Honor the caller's requested model first. Alternate models are
+            # fallbacks only when the requested backend rejects the request.
+            candidate_models = [self.model_name, "gemini-flash-lite-latest", "gemini-2.5-flash-lite", "gemini-2.5-flash"]
             models_to_try = []
             for m in candidate_models:
                 if m and m not in models_to_try:

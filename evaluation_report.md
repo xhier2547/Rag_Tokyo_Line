@@ -1,104 +1,61 @@
-# รายงานการประเมินผลระบบ Tokyo Smart Transit & Tourism Hybrid Graph RAG
-**โครงการ:** Tokyo Smart Transit & Tourism AI Assistant  
-**โมเดลภาษาหลัก (LLM):** Google Gemini 3.1 Flash Lite (สำรอง: Gemini 2.5 Flash / Local Ollama Qwen2.5 3B)  
-**ชุดคำถามทดสอบ:** 100 ข้อคำถามมาตรฐานครอบคลุม 10 หมวดหมู่ (หมวด A ถึง J)  
-**ไฟล์ผลการทดลองดิบ (Raw Benchmark Data):** [`data/benchmark_results_comprehensive.json`](./data/benchmark_results_comprehensive.json)  
-**เอกสารที่มาของชุดข้อมูล (Data Provenance):** [`data/data_provenance.md`](./data/data_provenance.md)  
+# รายงานประเมินระบบ Tokyo Hybrid Graph RAG
 
----
+**วันที่รันผลล่าสุด:** 30 กันยายน 2026
 
-## 1. ผลการประเมินเชิงประจักษ์ภาพรวม (Comprehensive Evaluation Summary)
+**ขอบเขต:** Retrieval ablation 100 คำถาม และผล End-to-End Gemini 30 คำถามที่บันทึกไว้
 
-การประเมินผลในรอบนี้ได้รับการปรับปรุงจากการสุ่มตัวอย่างขั้นต้นสู่ **การประเมินผลเชิงลึกอย่างเป็นระบบบนชุดคำถาม 30 ข้อ (หมวดหมู่ละ 3 ข้อ กระจายครบทั้ง 10 หมวด A ถึง J)** เพื่อให้ได้ข้อมูลตัวเลขทางสถิติที่มีนัยสำคัญและสะท้อนความสามารถที่แท้จริงของระบบ:
+## 1. วิธีประเมิน
 
-| เมตริกการประเมิน (Evaluation Metrics) | ผลลัพธ์ที่ได้จากการทดลองจริง | เกณฑ์เป้าหมายมาตรฐาน | สถานะ |
-| :--- | :---: | :---: | :---: |
-| **จำนวนคำถามที่ประเมินเชิงลึก (Evaluated Queries)** | **30 ข้อ (กระจายครบ 10 หมวด)** | ครอบคลุม 10 หมวดหมู่ | ✅ ผ่าน |
-| **อัตราการตอบสำเร็จ (Success Rate)** | **100.0%** (30/30 ข้อ) | $\ge 95.0\%$ | ✅ ยอดเยี่ยม |
-| **อัตราการอ้างอิงแหล่งที่มา (Citation Rate)** | **66.7%** (20/30 ข้อ) | $\ge 60.0\%$ | ✅ ผ่าน |
-| **จำนวนแหล่งอ้างอิงเฉลี่ยต่อข้อ (Avg Citations)** | **3.57 รายการ / คำตอบ** | $\ge 2.0$ รายการ | ✅ ยอดเยี่ยม |
-| **อัตราการเรียกใช้ Knowledge Graph (Graph Utilization)** | **100.0%** (30/30 ข้อ) | บูรณาการทุกหมวดหมู่ | ✅ สมบูรณ์แบบ |
-| **เวลาตอบสนองเฉลี่ย (Avg End-to-End Latency)** | **3.44 วินาที** | $< 5.0$ วินาที | ✅ ยอดเยี่ยม |
+- ชุดทดสอบ retrieval มี 100 คำถาม แบ่งเป็น 10 หมวด หมวดละ 10 ข้อ
+- แต่ละคำถามมี `ground_truth_entities` และ `ground_truth_chunks` ของตนเอง
+- Hit@1, Hit@3 และ MRR คำนวณจากลำดับ entity ที่ระบบคืนจริง
+- ผลรายข้ออยู่ใน `data/ablation_per_query_results.json`
+- Ground truth เป็นชุดที่ผู้พัฒนา curate จาก knowledge base จึงยังไม่ถือเป็น human evaluation จากผู้ประเมินอิสระ
 
----
+## 2. Retrieval Ablation Study
 
-## 2. การทดลองเปรียบเทียบสถาปัตยกรรม (Retrieval Ablation Study)
+| Architecture | Hit@1 | Hit@3 | MRR | Graph coverage | Retrieval latency |
+|---|---:|---:|---:|---:|---:|
+| Dense only | 42% | 64% | 0.5183 | 0% | 15.08 ms |
+| Graph only | 53% | 54% | 0.5358 | 80% | 0.16 ms |
+| **Hybrid RAG** | **54%** | **74%** | **0.6546** | 80% | 27.36 ms |
 
-> 🔬 **ความโปร่งใสทางวิชาการและข้อมูลดิบรายข้อ (Per-Query Reproducible Artifact):**  
-> รายงานฉบับนี้ใช้ **การประเมินตามรายการ Ground Truth ประจำแต่ละข้อคำถาม (Explicit Ground Truth Entity/Chunk Matching)** บนชุดคำถามทดสอบทั้ง 100 ข้อ โดยบันทึกผลดิบรายข้อทุกคำถาม (Rank, Hit@1, Hit@3, Reciprocal Rank, Retrieved Items, Latency) ไว้ในไฟล์ [`data/ablation_per_query_results.json`](file:///c:/Users/wator/Documents/Y4/SOCIAL/Final_01/data/ablation_per_query_results.json)  
-> *หมายเหตุ: ยกเลิกวิธีการเดิมที่ใช้ keyword search ในข้อความ context เพื่อป้องกันข้อผิดพลาดเชิงสถิติ*
+### การตีความ
 
-สถาปัตยกรรมที่นำมาทดสอบเปรียบเทียบ (100 Questions Benchmark):
-1. **Dense RAG Only:** ใช้เฉพาะ Vector Search (FAISS + MiniLM-L12-v2, Top-3 Candidates)
-2. **Graph RAG Only:** ใช้เฉพาะ Knowledge Graph Entity Traversal & Pathfinder (NetworkX Subgraph, Top-3 Nodes)
-3. **Hybrid Graph RAG:** ผสาน Dense (FAISS) + Knowledge Graph + Reciprocal Rank Fusion (RRF k=60) + Spatial & Transit Integration
+- Hybrid เพิ่ม Hit@1 จาก Dense 12 จุดเปอร์เซ็นต์ และเพิ่ม Hit@3 10 จุดเปอร์เซ็นต์
+- Hybrid เพิ่ม MRR จาก Dense 0.5183 เป็น 0.6546 หรือประมาณ 26.3%
+- Graph ให้ Hit@1 สูงกว่า Dense แต่ Hit@3 ต่ำกว่า แสดงว่า heuristic ของกราฟมักคืนคำตอบหลักได้เร็ว แต่มี candidate ที่เกี่ยวข้องในสามอันดับแรกไม่หลากหลายพอ
+- Hybrid ใช้เวลามากกว่า Dense เพราะรวม Dense, BM25, Graph และ RRF ผลด้านคุณภาพจึงแลกกับ latency เพิ่มประมาณ 12 ms ในการรันครั้งล่าสุด
+- Graph coverage 80% หมายความว่า 20% ของคำถามไม่มี graph signal ที่เข้าเกณฑ์ ไม่ควรตีความว่า graph ตอบถูก 80%
 
-### ตารางผลการทดลอง Ablation Study (100 Questions Benchmark - Ground Truth Matching)
+## 3. Embedding Benchmark
 
-| สถาปัตยกรรมที่ทดสอบ (Architecture) | Hit Rate @ 1 | Hit Rate @ 3 | MRR (Mean Reciprocal Rank) | ความครอบคลุมเชิงกราฟ (Graph Coverage) | เวลาเฉลี่ย Retrieval (ms) |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **1. Dense RAG Only (FAISS)** | 43.00% | 70.00% | 0.5550 | 0.00% (ไม่มีข้อมูลรถไฟ/ระยะทาง) | **17.21 ms** |
-| **2. Graph RAG Only (NetworkX)** | 53.00% | 53.00% | 0.5300 | **100.00%** (ระบุสายรถไฟและเวลาเดินเท้า) | **2.31 ms** |
-| **3. Hybrid Graph RAG (ระบบปัจจุบัน)** | **72.00%** | **90.00%** | **0.8000** | **100.00%** (บูรณาการครบทั้งสองมิติ) | 23.81 ms |
+ทดลอง 30 คำถาม โดยเลือก 3 ข้อต่อหมวดจาก benchmark เดียวกัน
 
-### การวิเคราะห์ผลการทดลอง (Empirical Insights):
-* **ความแม่นยำของ Hybrid เหนือกว่าทั้งสองด้าน:** Hybrid RAG ทำ Hit@1 ได้ **72.00%** (สูงกว่า Dense +29.0% และสูงกว่า Graph +19.0%) และ Hit@3 สูงถึง **90.00%** (สูงกว่า Dense 70.0% อย่างมีนัยสำคัญ ขจัดข้อกังขาเดิมที่ Dense เคยได้ 78% เหนือกว่า Hybrid 77%)
-* **Mean Reciprocal Rank (MRR = 0.8000):** ด้วยกลไก Reciprocal Rank Fusion (RRF) เอกสารหรือโหนดกราฟที่เป็น Ground Truth ถูกจัดวางอยู่ในอันดับ 1 ของผลลัพธ์สูงถึง 72% ของคำถามทั้งหมด
-* **Zero CPU Thermal Strain (< 25 ms):** สถาปัตยกรรม RRF ปรับปรุงใหม่ตัดการ Re-embedding ซ้ำซ้อน 15 ชิ้นบน CPU ออก ทำให้การค้นหาเสร็จสิ้นใน 23.81 ms โดยเครื่องไม่ร้อนและ CPU โหลด 0%
-* **จุดเด่นร่วมกัน:** Dense RAG โดดเด่นในคำถามหมวดแนะนำทั่วไป (General POI) ส่วน Graph RAG โดดเด่นในหมวดเส้นทางและพื้นที่ (Spatial/Transit) เมื่อรวมกันจึงได้ความครอบคลุมทั้งเชิงความหมายและความสัมพันธ์ของเส้นทางรถไฟ
+| Model | Build time | Avg. query latency | Hit@1 | Hit@3 | Queries |
+|---|---:|---:|---:|---:|---:|
+| paraphrase-multilingual-MiniLM-L12-v2 | 20.323 s | **16.45 ms** | 47% | 67% | 30 |
+| **multilingual-e5-small** | **12.405 s** | 18.39 ms | **70%** | **80%** | 30 |
 
----
+E5-small ให้ retrieval accuracy สูงกว่าในการทดลองนี้ ส่วน MiniLM เร็วกว่าประมาณ 1.94 ms ต่อ query การทดลองยังมีขนาดเล็กและใช้ knowledge base ชุดเดียว จึงไม่ควรสรุปผลครอบคลุมทุกโดเมน
 
-## 3. ผลการทดสอบแยกตามหมวดหมู่คำถาม (Category-by-Category Breakdown)
+## 4. End-to-End และ LLM
 
-*(วัดผลจากการทดสอบจริง 30 ข้อคำถาม บันทึกใน [`data/benchmark_results_comprehensive.json`](file:///c:/Users/wator/Documents/Y4/SOCIAL/Final_01/data/benchmark_results_comprehensive.json))*
+- artifact เดิม `data/benchmark_results_comprehensive.json` บันทึกการเรียก Gemini 30 ข้อสำเร็จ 30 ข้อ
+- success rate วัดเพียงการทำงานสำเร็จ ไม่ใช่ answer correctness
+- citation rate วัดว่ามี citation หรือไม่ ไม่ใช่ faithfulness ของข้อความ
+- `data/model_comparison_raw.json` มีการรัน Gemini และ Local Qwen จริงอย่างละ 10 ข้อ
+- เมื่อรันนอก sandbox ระบบเข้าถึง Ollama ได้และทดสอบ `qwen2.5:3b` สำเร็จ 10/10 ข้อ: latency เฉลี่ย 4.566 วินาที และ throughput เฉลี่ย 195.76 tokens/s ตาม timing ที่ Ollama รายงาน
+- Gemini รอบ model comparison มี latency เฉลี่ย 14.322 วินาที และพบการ retry จาก HTTP 503 อย่างน้อยหนึ่งครั้ง จึงควรอ่านค่า latency รอบนี้ร่วมกับสภาพ backend
 
-| หมวด | ชื่อหมวดคำถาม | จำนวนข้อ | เวลาเฉลี่ย (s) | การอ้างอิง (%) | การใช้ Graph (%) |
-| :---: | :--- | :---: | :---: | :---: | :---: |
-| **A** | ค้นหาและแนะนำสถานที่ทั่วไป | 3 | 9.09s | 66.7% | **100.0%** |
-| **B** | วัด ศาลเจ้า ประวัติศาสตร์และวัฒนธรรม | 3 | 3.70s | 66.7% | **100.0%** |
-| **C** | Anime / Gaming / Technology | 3 | 1.73s | 33.3% | **100.0%** |
-| **D** | ธรรมชาติ สวน และจุดชมวิว | 3 | 1.64s | 33.3% | **100.0%** |
-| **E** | อาหาร ตลาด และย่านกินเที่ยว | 3 | 2.60s | 100.0% | **100.0%** |
-| **F** | Nearby / Spatial Query | 3 | 2.18s | 66.7% | **100.0%** |
-| **G** | Transportation & Route | 3 | 3.15s | 66.7% | **100.0%** |
-| **H** | Itinerary Planning | 3 | 5.47s | 100.0% | **100.0%** |
-| **I** | Preference / Personalized Recommendation | 3 | 2.78s | 66.7% | **100.0%** |
-| **J** | Complex / Multi-hop Graph RAG | 3 | 2.07s | 66.7% | **100.0%** |
-| **รวม** | **ภาพรวมเฉลี่ยทั้ง 10 หมวด** | **30** | **3.44s** | **66.7%** | **100.0%** |
+## 5. ข้อจำกัด
 
----
+1. ยังไม่มี human judge หรือผู้ประเมินอิสระตรวจความถูกต้องของ ground truth และคำตอบ
+2. ยังไม่มี generation metrics เช่น faithfulness, answer relevance หรือ semantic similarity ที่ผ่าน evaluator แยกต่างหาก
+3. ยังไม่มีการวัด RAM, VRAM และ CPU ของ Local LLM แม้มี latency และ throughput จริงแล้ว
+4. ยังไม่มี repeated runs หรือ confidence interval สำหรับ latency และ retrieval metrics
+5. ผล embedding 30 ข้อเหมาะสำหรับ model screening มากกว่าการสรุปเชิงสถิติขั้นสุดท้าย
 
-## 4. กรณีศึกษาตัวอย่างและกรณีที่แก้ไขสำเร็จ (Key Qualitative Case Studies)
+## 6. สรุป
 
-### กรณีศึกษาที่ 1: การแก้ไขคำถามสถานที่ใกล้สถานี Tokyo (ข้อ 51 หมวด F)
-* **คำถาม:** *"มีสถานที่ท่องเที่ยวอะไรอยู่ใกล้ Tokyo Station?"*
-* **ปัญหาเดิมในการประเมินรอบแรก:** ระบบตอบว่าไม่มีข้อมูลในฐานข้อมูล (เนื่องจากปัญหาการแยก Tuple ใน Graph Pathfinder)
-* **ผลลัพธ์หลังแก้ไข:** 
-  > ระบบดึงข้อมูลจาก Knowledge Graph นำเสนอ **พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ** (เดินเท้า 10 นาที) พร้อมแนะนำสถานที่ในสถานีข้างเคียง เช่น ย่านอากิฮาบาระ (JR Yamanote 4 นาที), ย่านกินซ่า (Marunouchi Line 3 นาที) และแนะนำ **The Tokyo Station Hotel** ที่เชื่อมต่อกับสถานีโตเกียว พร้อมแหล่งอ้างอิงยืนยัน 6 รายการครบถ้วน
-
-### กรณีศึกษาที่ 2: การสนทนาต่อเนื่องและการเดินทางข้ามสถานี (Multi-turn Context)
-* **คำถามรอบที่ 1:** *"แนะนำโรงแรมใกล้สถานี Shibuya"* ➔ แนะนำ Shibuya Stream Excel Hotel
-* **คำถามรอบที่ 2:** *"แล้วถ้าฉันอยู่ที่กินซ่า ต้องไปอย่างไร"*
-* **ผลลัพธ์:** Session Manager ตรวจจับเจตนาการเดินทางและเชื่อมโยงกับโรงแรมเดิม คำนวณเส้นทางรถไฟสาย Tokyo Metro Ginza Line ตรงจากสถานี Ginza ไปยังสถานี Shibuya (16 นาที) และเดินเชื่อมต่อเข้าโรงแรม 2 นาที พร้อมส่งการ์ดรูปภาพโรงแรมไว้ใต้ข้อความ
-
-### กรณีศึกษาที่ 3: คำถาม Multi-hop เชิงพื้นที่ในหมวด J (ข้อ 92)
-* **คำถาม:** *"แนะนำสถานที่ชมวิวที่สามารถเดินทางต่อไปยังย่านอาหารได้ง่ายโดยรถไฟไม่เกินหนึ่งต่อ"*
-* **ผลลัพธ์:** ระบบใช้ Knowledge Graph แนะนำจุดชมวิวโตเกียวทาวเวอร์ (ใกล้สถานี Hamamatsucho) และสามารถนั่งรถไฟ JR Yamanote Line เพียง 4 นาที ไปยังตลาดปลาสึกิจิ/ชิมบาชิ หรือนั่งจาก Roppongi Hills ไปยังตลาดปลาสึกิจิได้ใน 9 นาที
-
----
-
-## 5. การวิเคราะห์จุดอ่อนและข้อจำกัดที่พบจริง (Failure Modes & Honest Limitations)
-
-ตามหลักการประเมินทางวิชาการที่โปร่งใส ระบบยังมีข้อจำกัดที่ควรพัฒนาต่อยอดดังนี้:
-1. **คำถามเงื่อนไขซับซ้อน 3 ชั้นในหมวด J (เช่น ข้อ 93):** คำถามที่ถามหา *"สถานที่ทางวัฒนธรรม 3 แห่งในเขตเดียวกันและมีสถานีรถไฟอยู่ใกล้"* ระบบยังตอบอย่างระมัดระวัง (Cautious Fallback) ว่าข้อมูลยังไม่ครอบคลุมครบทั้ง 3 แห่ง เพื่อป้องกันการสร้างข้อมูลเท็จ (Hallucination) — ผลลัพธ์จริงดูได้จาก Q93 ใน [`data/benchmark_results_comprehensive.json`](./data/benchmark_results_comprehensive.json)
-2. **Citation Rate ที่ 66.7% (20/30 ข้อ):** คำถามปลายเปิด 10 ข้อ (เช่น หมวด C, D) ที่ระบบตอบได้ถูกต้องแต่ไม่ได้อ้างอิงแหล่งที่มาเนื่องจาก LLM สังเคราะห์คำตอบจากหลาย context โดยไม่ระบุชื่อเอกสารเฉพาะเจาะจง การปรับ Prompt Template ให้บังคับ citation ทุกครั้งเป็นเป้าหมายสำหรับเวอร์ชันถัดไป
-3. **ข้อมูลปัจจุบัน 61 entities (20 สถานี, 20 สถานที่, 10 โรงแรม, 11 สายรถไฟ):** ยังเป็นชุดข้อมูลขนาดจำกัดสำหรับ Proof-of-Concept การขยายฐานข้อมูลครอบคลุมมากขึ้น (เช่น 200+ สถานที่) จะเพิ่มความหลากหลายของคำตอบได้อย่างมีนัยสำคัญ
-4. **Gemini API Rate Limit (HTTP 429):** ในช่วงทดสอบ 30 ข้อต่อเนื่อง โมเดล `gemini-flash-lite-latest` ชนขีดจำกัดความถี่ที่คำถามข้อ 20-22 ระบบ Multi-Model Fallback สลับไปใช้โมเดลสำรองได้ทันทีโดยไม่มีข้อผิดพลาด แต่ส่งผลให้ Latency สูงขึ้นชั่วคราว (6-8 วินาที)
-
----
-
-## 6. สรุปความพร้อมของระบบ (Conclusion)
-* **ความถูกต้องของข้อมูล:** ได้รับการยืนยันผ่านเอกสารแหล่งที่มา [data_provenance.md](./data/data_provenance.md)
-* **การทำงานร่วมกันของระบบ:** เชื่อมต่อ LINE Bot Webhook, Session Manager, Knowledge Graph Pathfinder และ Gemini 3.1 Flash Lite ได้อย่างไร้รอยต่อ
-* **ผลการทดลอง:** มีไฟล์ผลการทดสอบเชิงประจักษ์แบบสมบูรณ์รองรับที่ [data/benchmark_results_comprehensive.json](./data/benchmark_results_comprehensive.json)
+หลักฐานปัจจุบันสนับสนุนว่า RRF Hybrid ช่วยเพิ่ม Hit@3 และ MRR เมื่อเทียบกับ Dense และ Graph แบบเดี่ยวในชุดทดสอบ 100 ข้อ และยืนยันว่า Gemini กับ Qwen 2.5 3B เชื่อมต่อ pipeline ได้จริง ระบบยังขาด resource measurement และการประเมินคุณภาพ generation โดยผู้ประเมินอิสระ จึงยังไม่อ้างว่าองค์ประกอบทั้งหมดผ่าน Rubric Level 5

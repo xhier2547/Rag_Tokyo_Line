@@ -5,11 +5,11 @@
 [![Evaluation](https://img.shields.io/badge/Rubric%20Level-Level%205%20(Excellent)-green.svg)](./evaluation_report.md)
 [![Tests](https://img.shields.io/badge/Automated%20Tests-Passing-brightgreen.svg)](#7-automated-testing)
 
-ระบบแนะนำการเดินทาง เส้นทางรถไฟ และสถานที่ท่องเที่ยวในกรุงโตเกียว (Tokyo Metropolitan Area) โดยบูรณาการ **Dense Vector Retrieval (FAISS & ChromaDB)**, **Sparse Keyword Search (BM25)**, **Knowledge Graph Database (Neo4j / NetworkX Fallback)**, **Local LLM (Ollama 3B/4B)** และ **Cloud API LLM (Google Gemini)** ได้รับการออกแบบตามเกณฑ์ **Rubric Level 5 (100 คะแนนเต็ม)**
+ระบบแนะนำการเดินทาง เส้นทางรถไฟ และสถานที่ท่องเที่ยวในกรุงโตเกียว (Tokyo Metropolitan Area) โดยบูรณาการ **Dense Vector Retrieval (FAISS & ChromaDB)**, **Sparse Keyword Search (BM25)**, **Knowledge Graph Database (Neo4j / NetworkX Fallback)** และ **Cloud API LLM (Google Gemini)** พร้อมทางเลือกสำหรับ **Local LLM ผ่าน Ollama** เมื่อ runtime พร้อมใช้งาน
 
 ---
 
-## 1. จุดเด่นของระบบตามเกณฑ์ Rubric Level 5
+## 1. องค์ประกอบหลักของระบบ
 
 | ด้านการประเมิน | คะแนน | การนำไปประยุกต์ใช้งานในระบบ |
 | :---| :---: | :---|
@@ -18,7 +18,7 @@
 | **2. Dense RAG** | 15 | พัฒนาทั้ง FAISS (Cosine Similarity) และ ChromaDB (Native Metadata Filtering) พร้อมการทดลองเปรียบเทียบหลาย Embedding Model |
 | **3. Graph RAG** | 15 | ออกแบบ Schema โครงข่าย Node `(:Place)`, `(:Station)`, `(:Line)` และคำนวณ Shortest Path & Travel Duration แบบ Multi-hop พิสูจน์จุดเด่นที่ Dense ทำไม่ได้ |
 | **4. Hybrid RAG (หัวใจสำคัญ)** | 20 | **Query Intent Router** จำแนกเจตนาคำถาม, ผสานผลลัพธ์ด้วย **Reciprocal Rank Fusion (RRF)** และทำ **Cross-Modal Semantic Re-ranking** Top-3 |
-| **5. Local + API LLM** | 15 | รองรับทั้ง **Local LLM 3B/4B** (Ollama: `qwen2.5:3b`, `gemma3:4b` ป้องกันเครื่องค้าง) และ **Google Gemini API** (`gemini-2.5-flash`) พร้อมระบบเปรียบเทียบ Side-by-Side |
+| **5. Local + API LLM** | 15 | เชื่อมต่อ **Google Gemini API** และ Ollama `qwen2.5:3b`; ผลล่าสุดรันทั้งสอง backend จริงอย่างละ 10 ข้อ |
 | **6. System Integration** | 10 | Pipeline เชื่อมต่อสมบูรณ์: `Query` $\rightarrow$ `Routing` $\rightarrow$ `Multi-Retrieval` $\rightarrow$ `LLM` $\rightarrow$ `Citations` พร้อมระบบ **In-Memory Response Caching** และ **Graceful Fallback** |
 | **7. Evaluation & Analysis** | 10 | ออกแบบชุดทดสอบ **100 คำถามมาตรฐาน (A ถึง J)** พร้อม Evaluator วัดผล Latency, Citation Rate, Graph Utilization และสรุปผลใน `evaluation_report.md` |
 | **8. Documentation & Testing** | 5 | มีเอกสารสถาปัตยกรรมชัดเจน, โค้ดมีคอมเมนต์ภาษาไทยเข้าใจง่าย, และมี **Automated Unit & Integration Tests ครอบคลุมทุกโมดูล** |
@@ -60,7 +60,7 @@ flowchart TD
     end
 
     subgraph LLMLayer ["LLM Generation Layer (src/llm/)"]
-        PromptBuilder["Prompt Builder\n(Zero-Hallucination Guardrail)"]
+        PromptBuilder["Prompt Builder\n(Citation Guardrail)"]
         GeminiClient["Google Gemini API\n(gemini-2.5-flash)"]
         LocalClient["Local Ollama LLM\n(3B/4B Safe Throttling)"]
         Comparator["Side-by-Side Comparator\n(Latency, Tokens, Citations)"]
@@ -120,7 +120,7 @@ Final_01/
 │   └── test_evaluation.py
 ├── main.py                           # Application CLI หลักสำหรับถาม-ตอบ
 ├── evaluate.py                       # สคริปต์รัน Benchmark และสร้างรายงานสรุปผล
-├── evaluation_report.md              # รายงานสรุปผลการประเมินตาม Rubric Level 5
+├── evaluation_report.md              # รายงานผลวัด ข้อจำกัด และ ablation ล่าสุด
 ├── work_plan.md                      # แผนแม่บทการพัฒนา (Roadmap)
 ├── rubic.md                          # เกณฑ์การประเมินคุณภาพ
 └── pytest.ini                        # การตั้งค่า pytest
@@ -138,7 +138,6 @@ Final_01/
 ```powershell
 pip install -r requirements.txt
 ```
-*(หากยังไม่ได้ติดตั้งแพ็กเกจหลัก: `pip install langchain sentence-transformers faiss-cpu chromadb rank-bm25 pythainlp neo4j google-genai python-dotenv pydantic pytest`)*
 
 ### 4.3 ตั้งค่า Environment Variables (`.env`)
 คัดลอกไฟล์ตัวอย่าง `.env.example` เป็น `.env` และใส่ API Key:
@@ -266,4 +265,4 @@ pytest tests/test_llm.py -v
 ## 8. ผู้จัดทำและการอ้างอิงข้อมูล (Credits & Citations)
 * **ข้อมูลสถานที่ท่องเที่ยว:** Japan Tourism Agency (JTA) Sightseeing Database
 * **ข้อมูลโครงข่ายสถานีและเส้นทางรถไฟ:** 駅データ.jp และ OpenStreetMap Japan
-* **สถาปัตยกรรม:** Tokyo Smart Transit & Tourism Hybrid Graph RAG Architecture (Level 5 Compliant)
+* **สถาปัตยกรรม:** Tokyo Smart Transit & Tourism Hybrid Graph RAG Architecture

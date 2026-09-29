@@ -2,19 +2,897 @@
   "paraphrase-multilingual-MiniLM-L12-v2": {
     "model_id": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
     "description": "โมเดลขนาดเล็ก น้ำหนักเบา ประมวลผลเร็วบน CPU",
-    "build_time_sec": 22.342,
-    "avg_query_latency_ms": 16.89,
-    "hit_at_1_rate": 1.0,
-    "hit_at_3_rate": 1.0,
-    "total_queries_tested": 5
+    "build_time_sec": 20.323,
+    "avg_query_latency_ms": 16.45,
+    "hit_at_1_rate": 0.47,
+    "hit_at_3_rate": 0.67,
+    "total_queries_tested": 30,
+    "per_query_results": [
+      {
+        "question_id": 1,
+        "category": "A",
+        "expected_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_MEIJI_JINGU",
+          "P_SENSOJI",
+          "P_SHIBUYA_CROSSING",
+          "P_TOKYO_SKYTREE"
+        ],
+        "retrieved_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_TOKYO_DOME_CITY",
+          "P_TOKYO_DOME_CITY"
+        ],
+        "latency_ms": 20.4
+      },
+      {
+        "question_id": 2,
+        "category": "A",
+        "expected_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_SENSOJI",
+          "P_SHIBUYA_CROSSING",
+          "P_TOKYO_SKYTREE",
+          "P_TOKYO_TOWER"
+        ],
+        "retrieved_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_TOKYO_DOME_CITY",
+          "P_ROPPONGI_HILLS"
+        ],
+        "latency_ms": 16.83
+      },
+      {
+        "question_id": 3,
+        "category": "A",
+        "expected_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_MEIJI_JINGU",
+          "P_SENSOJI",
+          "P_SHIBUYA_CROSSING"
+        ],
+        "retrieved_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_TOKYO_DOME_CITY",
+          "P_ROPPONGI_HILLS"
+        ],
+        "latency_ms": 17.02
+      },
+      {
+        "question_id": 11,
+        "category": "B",
+        "expected_entities": [
+          "P_MEIJI_JINGU",
+          "P_SENSOJI"
+        ],
+        "retrieved_entities": [
+          "P_TOKYO_DOME_CITY",
+          "P_ROPPONGI_HILLS",
+          "P_IMPERIAL_PALACE"
+        ],
+        "latency_ms": 14.47
+      },
+      {
+        "question_id": 12,
+        "category": "B",
+        "expected_entities": [
+          "P_SENSOJI"
+        ],
+        "retrieved_entities": [
+          "P_SENSOJI",
+          "P_SENSOJI",
+          "P_SENSOJI"
+        ],
+        "latency_ms": 16.55
+      },
+      {
+        "question_id": 13,
+        "category": "B",
+        "expected_entities": [
+          "P_MEIJI_JINGU"
+        ],
+        "retrieved_entities": [
+          "P_MEIJI_JINGU",
+          "P_MEIJI_JINGU",
+          "P_SHIBUYA_CROSSING"
+        ],
+        "latency_ms": 13.84
+      },
+      {
+        "question_id": 21,
+        "category": "C",
+        "expected_entities": [
+          "P_AKIHABARA_ELECTRIC",
+          "P_ODAIBA_GUNDAM"
+        ],
+        "retrieved_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_TOKYO_DOME_CITY",
+          "P_ROPPONGI_HILLS"
+        ],
+        "latency_ms": 16.05
+      },
+      {
+        "question_id": 22,
+        "category": "C",
+        "expected_entities": [
+          "P_AKIHABARA_ELECTRIC"
+        ],
+        "retrieved_entities": [
+          "P_AKIHABARA_ELECTRIC",
+          "P_AKIHABARA_ELECTRIC",
+          "H_ASAKUSA_VIEW"
+        ],
+        "latency_ms": 17.42
+      },
+      {
+        "question_id": 23,
+        "category": "C",
+        "expected_entities": [
+          "P_ODAIBA_GUNDAM"
+        ],
+        "retrieved_entities": [
+          "P_AKIHABARA_ELECTRIC",
+          "P_AKIHABARA_ELECTRIC",
+          "P_ODAIBA_GUNDAM"
+        ],
+        "latency_ms": 16.88
+      },
+      {
+        "question_id": 31,
+        "category": "D",
+        "expected_entities": [
+          "P_HAMARIKYU_GARDENS",
+          "P_SHINJUKU_GYOEN",
+          "P_UENO_PARK"
+        ],
+        "retrieved_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_SHINJUKU_GYOEN",
+          "P_HAMARIKYU_GARDENS"
+        ],
+        "latency_ms": 14.2
+      },
+      {
+        "question_id": 32,
+        "category": "D",
+        "expected_entities": [
+          "P_SHINJUKU_GYOEN",
+          "P_UENO_PARK"
+        ],
+        "retrieved_entities": [
+          "P_OMOTESANDO_HILLS",
+          "P_SHINJUKU_GYOEN",
+          "P_OMOTESANDO_HILLS"
+        ],
+        "latency_ms": 16.13
+      },
+      {
+        "question_id": 33,
+        "category": "D",
+        "expected_entities": [
+          "P_HAMARIKYU_GARDENS",
+          "P_SHINJUKU_GYOEN"
+        ],
+        "retrieved_entities": [
+          "P_OMOTESANDO_HILLS",
+          "P_OMOTESANDO_HILLS",
+          "P_ROPPONGI_HILLS"
+        ],
+        "latency_ms": 15.67
+      },
+      {
+        "question_id": 41,
+        "category": "E",
+        "expected_entities": [
+          "P_AMEYOKO",
+          "P_TSUKIJI_OUTER"
+        ],
+        "retrieved_entities": [
+          "P_AMEYOKO",
+          "P_TSUKIJI_OUTER",
+          "P_TAKESHITA_STREET"
+        ],
+        "latency_ms": 13.57
+      },
+      {
+        "question_id": 42,
+        "category": "E",
+        "expected_entities": [
+          "P_TOYOSU_MARKET",
+          "P_TSUKIJI_OUTER"
+        ],
+        "retrieved_entities": [
+          "P_TOYOSU_MARKET",
+          "P_TSUKIJI_OUTER",
+          "P_TOYOSU_MARKET"
+        ],
+        "latency_ms": 15.97
+      },
+      {
+        "question_id": 43,
+        "category": "E",
+        "expected_entities": [
+          "P_TSUKIJI_OUTER"
+        ],
+        "retrieved_entities": [
+          "P_TSUKIJI_OUTER",
+          "P_TSUKIJI_OUTER",
+          "P_AMEYOKO"
+        ],
+        "latency_ms": 15.45
+      },
+      {
+        "question_id": 51,
+        "category": "F",
+        "expected_entities": [
+          "P_GINZA_SIX",
+          "P_IMPERIAL_PALACE"
+        ],
+        "retrieved_entities": [
+          "P_IMPERIAL_PALACE",
+          "H_TOKYO_STATION_HOTEL",
+          "P_TOKYO_DOME_CITY"
+        ],
+        "latency_ms": 14.79
+      },
+      {
+        "question_id": 52,
+        "category": "F",
+        "expected_entities": [
+          "P_SENSOJI",
+          "P_TOKYO_SKYTREE"
+        ],
+        "retrieved_entities": [
+          "P_SENSOJI",
+          "P_SENSOJI",
+          "P_AMEYOKO"
+        ],
+        "latency_ms": 14.78
+      },
+      {
+        "question_id": 53,
+        "category": "F",
+        "expected_entities": [
+          "P_MEIJI_JINGU",
+          "P_OMOTESANDO_HILLS",
+          "P_TAKESHITA_STREET"
+        ],
+        "retrieved_entities": [
+          "P_MEIJI_JINGU",
+          "H_HOTEL_VILLA_FONTAINE_ROPPONGI",
+          "P_IMPERIAL_PALACE"
+        ],
+        "latency_ms": 18.96
+      },
+      {
+        "question_id": 61,
+        "category": "G",
+        "expected_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_SENSOJI"
+        ],
+        "retrieved_entities": [
+          "P_TOKYO_DOME_CITY",
+          "P_SENSOJI",
+          "P_IMPERIAL_PALACE"
+        ],
+        "latency_ms": 15.91
+      },
+      {
+        "question_id": 62,
+        "category": "G",
+        "expected_entities": [
+          "P_MEIJI_JINGU",
+          "P_SHINJUKU_GYOEN"
+        ],
+        "retrieved_entities": [
+          "P_MEIJI_JINGU",
+          "P_MEIJI_JINGU",
+          "P_SENSOJI"
+        ],
+        "latency_ms": 15.63
+      },
+      {
+        "question_id": 63,
+        "category": "G",
+        "expected_entities": [
+          "P_SENSOJI",
+          "P_TOKYO_SKYTREE"
+        ],
+        "retrieved_entities": [
+          "P_TOKYO_SKYTREE",
+          "P_TOKYO_DOME_CITY",
+          "P_TOKYO_TOWER"
+        ],
+        "latency_ms": 17.32
+      },
+      {
+        "question_id": 71,
+        "category": "H",
+        "expected_entities": [
+          "P_MEIJI_JINGU",
+          "P_SENSOJI",
+          "P_SHIBUYA_CROSSING",
+          "P_TOKYO_TOWER"
+        ],
+        "retrieved_entities": [
+          "P_TOKYO_DOME_CITY",
+          "P_IMPERIAL_PALACE",
+          "P_ROPPONGI_HILLS"
+        ],
+        "latency_ms": 16.02
+      },
+      {
+        "question_id": 72,
+        "category": "H",
+        "expected_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_MEIJI_JINGU",
+          "P_SENSOJI",
+          "P_TSUKIJI_OUTER"
+        ],
+        "retrieved_entities": [
+          "P_AMEYOKO",
+          "P_AMEYOKO",
+          "P_TOYOSU_MARKET"
+        ],
+        "latency_ms": 16.73
+      },
+      {
+        "question_id": 73,
+        "category": "H",
+        "expected_entities": [
+          "P_AKIHABARA_ELECTRIC",
+          "P_SENSOJI",
+          "P_SHIBUYA_CROSSING",
+          "P_UENO_PARK"
+        ],
+        "retrieved_entities": [
+          "P_OMOTESANDO_HILLS",
+          "P_TOKYO_DOME_CITY",
+          "H_HOTEL_VILLA_FONTAINE_ROPPONGI"
+        ],
+        "latency_ms": 18.06
+      },
+      {
+        "question_id": 81,
+        "category": "I",
+        "expected_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_MEIJI_JINGU",
+          "P_SENSOJI",
+          "P_UENO_PARK"
+        ],
+        "retrieved_entities": [
+          "P_AMEYOKO",
+          "P_OMOTESANDO_HILLS",
+          "P_GINZA_SIX"
+        ],
+        "latency_ms": 16.54
+      },
+      {
+        "question_id": 82,
+        "category": "I",
+        "expected_entities": [
+          "P_AKIHABARA_ELECTRIC",
+          "P_AMEYOKO",
+          "P_TSUKIJI_OUTER"
+        ],
+        "retrieved_entities": [
+          "P_ROPPONGI_HILLS",
+          "P_AKIHABARA_ELECTRIC",
+          "P_TOKYO_DOME_CITY"
+        ],
+        "latency_ms": 15.29
+      },
+      {
+        "question_id": 83,
+        "category": "I",
+        "expected_entities": [
+          "P_SENSOJI",
+          "P_SHIBUYA_CROSSING",
+          "P_TOKYO_SKYTREE",
+          "P_TOKYO_TOWER"
+        ],
+        "retrieved_entities": [
+          "P_ROPPONGI_HILLS",
+          "P_ROPPONGI_HILLS",
+          "P_OMOTESANDO_HILLS"
+        ],
+        "latency_ms": 16.7
+      },
+      {
+        "question_id": 91,
+        "category": "J",
+        "expected_entities": [
+          "P_SENSOJI"
+        ],
+        "retrieved_entities": [
+          "P_ROPPONGI_HILLS",
+          "P_OMOTESANDO_HILLS",
+          "P_TOKYO_DOME_CITY"
+        ],
+        "latency_ms": 16.74
+      },
+      {
+        "question_id": 92,
+        "category": "J",
+        "expected_entities": [
+          "P_ROPPONGI_HILLS",
+          "P_TOKYO_SKYTREE",
+          "P_TOKYO_TOWER"
+        ],
+        "retrieved_entities": [
+          "P_OMOTESANDO_HILLS",
+          "P_TOKYO_DOME_CITY",
+          "P_ROPPONGI_HILLS"
+        ],
+        "latency_ms": 22.87
+      },
+      {
+        "question_id": 93,
+        "category": "J",
+        "expected_entities": [
+          "P_AMEYOKO",
+          "P_SENSOJI",
+          "P_UENO_PARK"
+        ],
+        "retrieved_entities": [
+          "P_ROPPONGI_HILLS",
+          "P_OMOTESANDO_HILLS",
+          "P_AKIHABARA_ELECTRIC"
+        ],
+        "latency_ms": 16.71
+      }
+    ]
   },
   "multilingual-e5-small": {
     "model_id": "intfloat/multilingual-e5-small",
     "description": "โมเดลตระกูล E5 ขนาดกะทัดรัด ความแม่นยำสูง",
-    "build_time_sec": 12.281,
-    "avg_query_latency_ms": 17.76,
-    "hit_at_1_rate": 1.0,
-    "hit_at_3_rate": 1.0,
-    "total_queries_tested": 5
+    "build_time_sec": 12.405,
+    "avg_query_latency_ms": 18.39,
+    "hit_at_1_rate": 0.7,
+    "hit_at_3_rate": 0.8,
+    "total_queries_tested": 30,
+    "per_query_results": [
+      {
+        "question_id": 1,
+        "category": "A",
+        "expected_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_MEIJI_JINGU",
+          "P_SENSOJI",
+          "P_SHIBUYA_CROSSING",
+          "P_TOKYO_SKYTREE"
+        ],
+        "retrieved_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_HAMARIKYU_GARDENS",
+          "P_TOYOSU_MARKET"
+        ],
+        "latency_ms": 19.25
+      },
+      {
+        "question_id": 2,
+        "category": "A",
+        "expected_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_SENSOJI",
+          "P_SHIBUYA_CROSSING",
+          "P_TOKYO_SKYTREE",
+          "P_TOKYO_TOWER"
+        ],
+        "retrieved_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_ROPPONGI_HILLS",
+          "P_SHIBUYA_CROSSING"
+        ],
+        "latency_ms": 20.31
+      },
+      {
+        "question_id": 3,
+        "category": "A",
+        "expected_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_MEIJI_JINGU",
+          "P_SENSOJI",
+          "P_SHIBUYA_CROSSING"
+        ],
+        "retrieved_entities": [
+          "P_TOKYO_TOWER",
+          "P_TOYOSU_MARKET",
+          "P_IMPERIAL_PALACE"
+        ],
+        "latency_ms": 19.27
+      },
+      {
+        "question_id": 11,
+        "category": "B",
+        "expected_entities": [
+          "P_MEIJI_JINGU",
+          "P_SENSOJI"
+        ],
+        "retrieved_entities": [
+          "P_SENSOJI",
+          "P_MEIJI_JINGU",
+          "P_SENSOJI"
+        ],
+        "latency_ms": 17.2
+      },
+      {
+        "question_id": 12,
+        "category": "B",
+        "expected_entities": [
+          "P_SENSOJI"
+        ],
+        "retrieved_entities": [
+          "P_SENSOJI",
+          "P_SENSOJI",
+          "P_SENSOJI"
+        ],
+        "latency_ms": 18.51
+      },
+      {
+        "question_id": 13,
+        "category": "B",
+        "expected_entities": [
+          "P_MEIJI_JINGU"
+        ],
+        "retrieved_entities": [
+          "P_MEIJI_JINGU",
+          "P_TAKESHITA_STREET",
+          "P_SHIBUYA_CROSSING"
+        ],
+        "latency_ms": 19.73
+      },
+      {
+        "question_id": 21,
+        "category": "C",
+        "expected_entities": [
+          "P_AKIHABARA_ELECTRIC",
+          "P_ODAIBA_GUNDAM"
+        ],
+        "retrieved_entities": [
+          "P_AKIHABARA_ELECTRIC",
+          "P_IMPERIAL_PALACE",
+          "P_ROPPONGI_HILLS"
+        ],
+        "latency_ms": 21.87
+      },
+      {
+        "question_id": 22,
+        "category": "C",
+        "expected_entities": [
+          "P_AKIHABARA_ELECTRIC"
+        ],
+        "retrieved_entities": [
+          "P_AKIHABARA_ELECTRIC",
+          "P_AKIHABARA_ELECTRIC",
+          "H_DORM_INN_AKIHABARA"
+        ],
+        "latency_ms": 20.67
+      },
+      {
+        "question_id": 23,
+        "category": "C",
+        "expected_entities": [
+          "P_ODAIBA_GUNDAM"
+        ],
+        "retrieved_entities": [
+          "P_AKIHABARA_ELECTRIC",
+          "P_AKIHABARA_ELECTRIC",
+          "H_DORM_INN_AKIHABARA"
+        ],
+        "latency_ms": 17.39
+      },
+      {
+        "question_id": 31,
+        "category": "D",
+        "expected_entities": [
+          "P_HAMARIKYU_GARDENS",
+          "P_SHINJUKU_GYOEN",
+          "P_UENO_PARK"
+        ],
+        "retrieved_entities": [
+          "P_SHINJUKU_GYOEN",
+          "P_HAMARIKYU_GARDENS",
+          "P_IMPERIAL_PALACE"
+        ],
+        "latency_ms": 16.37
+      },
+      {
+        "question_id": 32,
+        "category": "D",
+        "expected_entities": [
+          "P_SHINJUKU_GYOEN",
+          "P_UENO_PARK"
+        ],
+        "retrieved_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_SHINJUKU_GYOEN",
+          "P_HAMARIKYU_GARDENS"
+        ],
+        "latency_ms": 17.42
+      },
+      {
+        "question_id": 33,
+        "category": "D",
+        "expected_entities": [
+          "P_HAMARIKYU_GARDENS",
+          "P_SHINJUKU_GYOEN"
+        ],
+        "retrieved_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_SHIBUYA_CROSSING",
+          "P_SHINJUKU_GYOEN"
+        ],
+        "latency_ms": 16.38
+      },
+      {
+        "question_id": 41,
+        "category": "E",
+        "expected_entities": [
+          "P_AMEYOKO",
+          "P_TSUKIJI_OUTER"
+        ],
+        "retrieved_entities": [
+          "P_AMEYOKO",
+          "P_TSUKIJI_OUTER",
+          "P_AMEYOKO"
+        ],
+        "latency_ms": 17.02
+      },
+      {
+        "question_id": 42,
+        "category": "E",
+        "expected_entities": [
+          "P_TOYOSU_MARKET",
+          "P_TSUKIJI_OUTER"
+        ],
+        "retrieved_entities": [
+          "P_TOYOSU_MARKET",
+          "P_TSUKIJI_OUTER",
+          "P_HAMARIKYU_GARDENS"
+        ],
+        "latency_ms": 16.34
+      },
+      {
+        "question_id": 43,
+        "category": "E",
+        "expected_entities": [
+          "P_TSUKIJI_OUTER"
+        ],
+        "retrieved_entities": [
+          "P_TSUKIJI_OUTER",
+          "P_TSUKIJI_OUTER",
+          "P_TOYOSU_MARKET"
+        ],
+        "latency_ms": 15.36
+      },
+      {
+        "question_id": 51,
+        "category": "F",
+        "expected_entities": [
+          "P_GINZA_SIX",
+          "P_IMPERIAL_PALACE"
+        ],
+        "retrieved_entities": [
+          "P_TOKYO_TOWER",
+          "P_ODAIBA_GUNDAM",
+          "P_TOKYO_SKYTREE"
+        ],
+        "latency_ms": 16.86
+      },
+      {
+        "question_id": 52,
+        "category": "F",
+        "expected_entities": [
+          "P_SENSOJI",
+          "P_TOKYO_SKYTREE"
+        ],
+        "retrieved_entities": [
+          "P_SENSOJI",
+          "P_SENSOJI",
+          "P_SENSOJI"
+        ],
+        "latency_ms": 16.27
+      },
+      {
+        "question_id": 53,
+        "category": "F",
+        "expected_entities": [
+          "P_MEIJI_JINGU",
+          "P_OMOTESANDO_HILLS",
+          "P_TAKESHITA_STREET"
+        ],
+        "retrieved_entities": [
+          "P_MEIJI_JINGU",
+          "P_SHINJUKU_GYOEN",
+          "P_UENO_PARK"
+        ],
+        "latency_ms": 18.62
+      },
+      {
+        "question_id": 61,
+        "category": "G",
+        "expected_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_SENSOJI"
+        ],
+        "retrieved_entities": [
+          "P_SENSOJI",
+          "P_TOYOSU_MARKET",
+          "P_SENSOJI"
+        ],
+        "latency_ms": 16.23
+      },
+      {
+        "question_id": 62,
+        "category": "G",
+        "expected_entities": [
+          "P_MEIJI_JINGU",
+          "P_SHINJUKU_GYOEN"
+        ],
+        "retrieved_entities": [
+          "P_MEIJI_JINGU",
+          "P_SHINJUKU_GYOEN",
+          "P_MEIJI_JINGU"
+        ],
+        "latency_ms": 16.0
+      },
+      {
+        "question_id": 63,
+        "category": "G",
+        "expected_entities": [
+          "P_SENSOJI",
+          "P_TOKYO_SKYTREE"
+        ],
+        "retrieved_entities": [
+          "P_TOKYO_SKYTREE",
+          "H_ASAKUSA_VIEW",
+          "P_TOYOSU_MARKET"
+        ],
+        "latency_ms": 17.57
+      },
+      {
+        "question_id": 71,
+        "category": "H",
+        "expected_entities": [
+          "P_MEIJI_JINGU",
+          "P_SENSOJI",
+          "P_SHIBUYA_CROSSING",
+          "P_TOKYO_TOWER"
+        ],
+        "retrieved_entities": [
+          "P_TOYOSU_MARKET",
+          "P_HAMARIKYU_GARDENS",
+          "H_MITSUI_GARDEN_GINZA"
+        ],
+        "latency_ms": 22.35
+      },
+      {
+        "question_id": 72,
+        "category": "H",
+        "expected_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_MEIJI_JINGU",
+          "P_SENSOJI",
+          "P_TSUKIJI_OUTER"
+        ],
+        "retrieved_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_TOYOSU_MARKET",
+          "P_TOKYO_SKYTREE"
+        ],
+        "latency_ms": 20.05
+      },
+      {
+        "question_id": 73,
+        "category": "H",
+        "expected_entities": [
+          "P_AKIHABARA_ELECTRIC",
+          "P_SENSOJI",
+          "P_SHIBUYA_CROSSING",
+          "P_UENO_PARK"
+        ],
+        "retrieved_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_TEAMLAB_PLANETS",
+          "P_OMOTESANDO_HILLS"
+        ],
+        "latency_ms": 21.31
+      },
+      {
+        "question_id": 81,
+        "category": "I",
+        "expected_entities": [
+          "P_IMPERIAL_PALACE",
+          "P_MEIJI_JINGU",
+          "P_SENSOJI",
+          "P_UENO_PARK"
+        ],
+        "retrieved_entities": [
+          "P_OMOTESANDO_HILLS",
+          "P_GINZA_SIX",
+          "P_OMOTESANDO_HILLS"
+        ],
+        "latency_ms": 19.14
+      },
+      {
+        "question_id": 82,
+        "category": "I",
+        "expected_entities": [
+          "P_AKIHABARA_ELECTRIC",
+          "P_AMEYOKO",
+          "P_TSUKIJI_OUTER"
+        ],
+        "retrieved_entities": [
+          "P_AMEYOKO",
+          "P_OMOTESANDO_HILLS",
+          "P_TOYOSU_MARKET"
+        ],
+        "latency_ms": 18.27
+      },
+      {
+        "question_id": 83,
+        "category": "I",
+        "expected_entities": [
+          "P_SENSOJI",
+          "P_SHIBUYA_CROSSING",
+          "P_TOKYO_SKYTREE",
+          "P_TOKYO_TOWER"
+        ],
+        "retrieved_entities": [
+          "P_TEAMLAB_PLANETS",
+          "P_AKIHABARA_ELECTRIC",
+          "P_OMOTESANDO_HILLS"
+        ],
+        "latency_ms": 18.72
+      },
+      {
+        "question_id": 91,
+        "category": "J",
+        "expected_entities": [
+          "P_SENSOJI"
+        ],
+        "retrieved_entities": [
+          "P_SENSOJI",
+          "P_AMEYOKO",
+          "P_SHIBUYA_CROSSING"
+        ],
+        "latency_ms": 17.56
+      },
+      {
+        "question_id": 92,
+        "category": "J",
+        "expected_entities": [
+          "P_ROPPONGI_HILLS",
+          "P_TOKYO_SKYTREE",
+          "P_TOKYO_TOWER"
+        ],
+        "retrieved_entities": [
+          "P_ROPPONGI_HILLS",
+          "P_AMEYOKO",
+          "P_ROPPONGI_HILLS"
+        ],
+        "latency_ms": 19.07
+      },
+      {
+        "question_id": 93,
+        "category": "J",
+        "expected_entities": [
+          "P_AMEYOKO",
+          "P_SENSOJI",
+          "P_UENO_PARK"
+        ],
+        "retrieved_entities": [
+          "P_UENO_PARK",
+          "P_IMPERIAL_PALACE",
+          "P_UENO_PARK"
+        ],
+        "latency_ms": 20.65
+      }
+    ]
   }
 }

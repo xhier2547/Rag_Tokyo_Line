@@ -6,11 +6,12 @@
       "tokyo-hybrid-deterministic-fallback",
       "qwen2.5:3b"
     ],
-    "gemini_avg_latency_sec": 4.585,
+    "gemini_avg_latency_sec": 14.322,
     "fallback_avg_latency_sec": 0.0003,
-    "local_ollama_avg_latency_sec": 12.66,
-    "latency_speedup_gemini_vs_local": 2.76,
-    "verification_note": "ข้อมูลดิบจากการทดสอบเปรียบเทียบ End-to-End LLM ตามเกณฑ์ Rubric Level 5 (Section 3.5)"
+    "local_ollama_status": "MEASURED_LIVE",
+    "local_ollama_avg_latency_sec": 4.566,
+    "latency_speedup_gemini_vs_local": 0.32,
+    "verification_note": "Only live measurements are reported; unavailable backends remain explicitly unmeasured."
   },
   "raw_results": [
     {
@@ -18,23 +19,36 @@
       "category": "A",
       "category_name": "ค้นหาและแนะนำสถานที่ทั่วไป",
       "query": "แนะนำ 5 สถานที่ท่องเที่ยวยอดนิยมใน Tokyo ที่ห้ามพลาดสำหรับผู้ที่มาครั้งแรก",
-      "context_length_chars": 8662,
+      "context_length_chars": 7629,
       "graph_context_used": true,
       "gemini_api": {
         "model": "gemini-3.1-flash-lite",
-        "latency_sec": 2.444,
-        "completion_tokens_approx": 4,
-        "tokens_per_sec": 1.6,
-        "citations_count": 0,
-        "citations": [],
+        "latency_sec": 19.579,
+        "completion_tokens_approx": 342,
+        "tokens_per_sec": 17.5,
+        "citations_count": 12,
+        "citations": [
+          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ - ข้อมูลการเดินทางและการเยี่ยมชม",
+          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ - ข้อมูลการเดินทางและการเยี่ยมชม",
+          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ - ข้อมูลการเดินทางและการเยี่ยมชม",
+          "สวนฮามาริคิว (สวนหลวงริมอ่าวโตเกียว) (Hamarikyu Gardens) - ส่วนที่ 1",
+          "สวนฮามาริคิว (สวนหลวงริมอ่าวโตเกียว) (Hamarikyu Gardens) - ส่วนที่ 1",
+          "สวนฮามาริคิว (สวนหลวงริมอ่าวโตเกียว) (Hamarikyu Gardens) - ส่วนที่ 1",
+          "โตเกียวโดมซิตี้และสปาลาคัว (Tokyo Dome City & Spa LaQua) - ส่วนที่ 1",
+          "โตเกียวโดมซิตี้และสปาลาคัว (Tokyo Dome City & Spa LaQua) - ส่วนที่ 1",
+          "โตเกียวโดมซิตี้และสปาลาคัว (Tokyo Dome City & Spa LaQua) - ส่วนที่ 1",
+          "รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View) - ส่วนที่ 1",
+          "รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View) - ส่วนที่ 1",
+          "ถนนสายช้อปปิ้งโอโมเตะซันโดและห้างโอโมเตะซันโดฮิลส์ (Omotesando Boulevard & Omotesando Hills) - ส่วนที่ 1"
+        ],
         "memory_ram_mb": 0,
         "cpu_load_pct": 0,
-        "sample_output_preview": "ขออภัยครับ ปัจจุบันระบบยังไม่มีข้อมูลครอบคลุมคำถามนี้ในฐานข้อมูล..."
+        "sample_output_preview": "ขอต้อนรับสู่กรุงโตเกียวครับ! สำหรับผู้ที่เดินทางมาเยือนโตเกียวเป็นครั้งแรก ทางเราขอแนะนำ 5 สถานที่ท่องเที่ยวยอดนิยมที่ไม่ควรพลาด ดังนี้ครับ:\n\n1. 📍 **พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ** [อ้างอิง: พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกา..."
       },
       "deterministic_fallback": {
         "model": "tokyo-hybrid-deterministic-fallback",
-        "latency_sec": 0.0005,
-        "completion_tokens_approx": 846,
+        "latency_sec": 0.0004,
+        "completion_tokens_approx": 706,
         "tokens_per_sec": "N/A (Instant In-Process Rule)",
         "citations_count": 0,
         "citations": [],
@@ -43,14 +57,23 @@
         "sample_output_preview": "ขอสรุปข้อมูลการเดินทางและสถานที่ท่องเที่ยวในโตเกียวตามที่สอบถาม ดังนี้ครับ:\n\n🚆 แผนการเดินทางและเส้นทางรถไฟ:\n[สถานที่ท่องเที่ยวแนะนำในย่านและสถานีใกล้เคียงจากสถานี สถานีโตเกียว (Knowledge Graph)]:\n- ย่านเครื่องใช้ไฟฟ้าและอนิเมะอากิฮาบาระ (Shopping & E..."
       },
       "local_ollama_3b": {
-        "model": "qwen2.5:3b (Quantized Q4_K_M)",
-        "latency_sec": 7.31,
-        "completion_tokens_approx": 120,
-        "tokens_per_sec": 16.4,
-        "citations_count": 0,
-        "memory_ram_mb": 2450,
-        "cpu_load_pct": 52,
-        "status": "CALIBRATED_BENCHMARK_PROFILE"
+        "model": "qwen2.5:3b",
+        "latency_sec": 5.824,
+        "prompt_tokens": 4095,
+        "completion_tokens": 551,
+        "tokens_per_sec": 196.65,
+        "citations_count": 5,
+        "citations": [
+          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ",
+          "พิพิธภัณฑ์ศิลปะดิจิทัลทีมแล็บ แพลเน็ตส์ โตเกียว",
+          "สวนสาธารณะชินจูกุเกียวเอ็น (Shinjuku Gyoen National Garden)",
+          "โตเกียวโดมซิตี้และสปาลาคัว (Tokyo Dome City & Spa LaQua)",
+          "โรงแรม โรงแรมอาซากุสะ วิว โฮเทล (Asakusa View Hotel)"
+        ],
+        "success": true,
+        "error": null,
+        "sample_output_preview": "ขออภัยในความสับสนครับ, คำถามของผู้ใช้นั้นมีการกำหนดให้แนะนำ 5 สถานที่ท่องเที่ยวยอดนิยมในโตเกียวสำหรับผู้ที่มาครั้งแรก. ในบริบทนี้, ผมจะขอแนะนำสถานที่ท่องเที่ยวตามข้อมูลที่มี:\n\n1. [อ้างอิง: พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ]\n- เป็นสถานที่ส...",
+        "status": "MEASURED_LIVE"
       }
     },
     {
@@ -58,27 +81,29 @@
       "category": "B",
       "category_name": "วัด ศาลเจ้า และวัฒนธรรม",
       "query": "วัด Sensō-ji มีประวัติและความสำคัญอย่างไร และเดินทางจากสถานีอาซากุสะกี่นาที?",
-      "context_length_chars": 3742,
+      "context_length_chars": 3986,
       "graph_context_used": true,
       "gemini_api": {
         "model": "gemini-3.1-flash-lite",
-        "latency_sec": 5.207,
-        "completion_tokens_approx": 188,
-        "tokens_per_sec": 36.1,
-        "citations_count": 3,
+        "latency_sec": 13.607,
+        "completion_tokens_approx": 152,
+        "tokens_per_sec": 11.2,
+        "citations_count": 5,
         "citations": [
           "วัดเซ็นโซจิ (วัดอาซากุสะ) (Senso-ji Temple) - ส่วนที่ 1",
+          "วัดเซ็นโซจิ (วัดอาซากุสะ) (Senso-ji Temple) - ส่วนที่ 1",
+          "วัดเซ็นโซจิ (วัดอาซากุสะ) (Senso-ji Temple) - ส่วนที่ 2",
           "วัดเซ็นโซจิ (วัดอาซากุสะ) (Senso-ji Temple) - ส่วนที่ 2",
           "วัดเซ็นโซจิ (วัดอาซากุสะ) - ข้อมูลการเดินทางและการเยี่ยมชม"
         ],
         "memory_ram_mb": 0,
         "cpu_load_pct": 0,
-        "sample_output_preview": "สวัสดีครับ ในฐานะ Tokyo Transit & Travel AI Assistant ยินดีให้ข้อมูลเกี่ยวกับวัดเซ็นโซจิครับ 🚆\n\n📍 **ประวัติและความสำคัญของวัดเซ็นโซจิ** [อ้างอิง: วัดเซ็นโซจิ (วัดอาซากุสะ) (Senso-ji Temple) - ส่วนที่ 1]\n* เป็นวัดพุทธที่เก่าแก่ที่สุดในกรุงโตเกียว สร้า..."
+        "sample_output_preview": "ขออนุญาตให้ข้อมูลเกี่ยวกับวัดเซ็นโซจิ (วัดอาซากุสะ) ตามที่คุณสอบถามครับ \n\n📍 **ประวัติและความสำคัญของวัดเซ็นโซจิ (วัดอาซากุสะ)**\nวัดเซ็นโซจิเป็นวัดพุทธที่เก่าแก่ที่สุดในกรุงโตเกียว สร้างขึ้นในปี ค.ศ. 628 มีเอกลักษณ์ที่โดดเด่นคือประตูคามินาริโมง (Kamin..."
       },
       "deterministic_fallback": {
         "model": "tokyo-hybrid-deterministic-fallback",
         "latency_sec": 0.0001,
-        "completion_tokens_approx": 284,
+        "completion_tokens_approx": 306,
         "tokens_per_sec": "N/A (Instant In-Process Rule)",
         "citations_count": 0,
         "citations": [],
@@ -87,14 +112,20 @@
         "sample_output_preview": "ขอสรุปข้อมูลการเดินทางและสถานที่ท่องเที่ยวในโตเกียวตามที่สอบถาม ดังนี้ครับ:\n\n🚆 แผนการเดินทางและเส้นทางรถไฟ:\n[สถานที่ท่องเที่ยวใกล้สถานี สถานีอาซากุสะ จาก Knowledge Graph]:\n- วัดเซ็นโซจิ (วัดอาซากุสะ) (Temple & Shrine, เดิน 5 นาที ทางออก Exit 1 (Tokyo..."
       },
       "local_ollama_3b": {
-        "model": "qwen2.5:3b (Quantized Q4_K_M)",
-        "latency_sec": 14.22,
-        "completion_tokens_approx": 159,
-        "tokens_per_sec": 11.2,
-        "citations_count": 3,
-        "memory_ram_mb": 2450,
-        "cpu_load_pct": 52,
-        "status": "CALIBRATED_BENCHMARK_PROFILE"
+        "model": "qwen2.5:3b",
+        "latency_sec": 5.32,
+        "prompt_tokens": 3286,
+        "completion_tokens": 488,
+        "tokens_per_sec": 195.43,
+        "citations_count": 2,
+        "citations": [
+          "ข้อมูลที่ 1 | อ้างอิง: วัดเซ็นโซจิ (วัดอาซากุสะ) - ส่วนที่ 1",
+          "ข้อมูลที่ 2 | อ้างอิง: วัดเซ็นโซจิ (วัดอาซากุสะ) - ส่วนที่ 1"
+        ],
+        "success": true,
+        "error": null,
+        "sample_output_preview": "วัดเซ็นโซจิ (วัดอาซากุสะ) มีประวัติและความสำคัญที่เกี่ยวข้องกับการเดินทางและการเยี่ยมชมดังนี้:\n\n- วัดเซ็นโซจิเป็นวัดพุทธที่เก่าแก่ที่สุดในโตเกียว สร้างขึ้นในปีค.ศ. 628\n- มีเอกลักษณ์เฉพาะอย่างคือประตูคามินาริโมง (Kaminarimon) ที่แขวนโคมแดงยักษ์อันเลื่...",
+        "status": "MEASURED_LIVE"
       }
     },
     {
@@ -102,32 +133,28 @@
       "category": "C",
       "category_name": "Anime & Gaming",
       "query": "ถ้าชอบ Gundam ควรไปเที่ยวบริเวณไหน และมีหุ่นยนต์ขนาดเท่าของจริงอยู่ที่ไหน?",
-      "context_length_chars": 4267,
+      "context_length_chars": 4215,
       "graph_context_used": true,
       "gemini_api": {
         "model": "gemini-3.1-flash-lite",
-        "latency_sec": 5.334,
-        "completion_tokens_approx": 260,
-        "tokens_per_sec": 48.7,
-        "citations_count": 8,
+        "latency_sec": 14.869,
+        "completion_tokens_approx": 158,
+        "tokens_per_sec": 10.6,
+        "citations_count": 4,
         "citations": [
           "โอไดบะและหุ่นยนต์กันดั้มยักษ์ยูนิคอร์น (Odaiba & Unicorn Gundam Statue) - ส่วนที่ 1",
           "โอไดบะและหุ่นยนต์กันดั้มยักษ์ยูนิคอร์น (Odaiba & Unicorn Gundam Statue) - ส่วนที่ 1",
           "โอไดบะและหุ่นยนต์กันดั้มยักษ์ยูนิคอร์น - ข้อมูลการเดินทางและการเยี่ยมชม",
-          "โอไดบะและหุ่นยนต์กันดั้มยักษ์ยูนิคอร์น (Odaiba & Unicorn Gundam Statue) - ส่วนที่ 1",
-          "โอไดบะและหุ่นยนต์กันดั้มยักษ์ยูนิคอร์น (Odaiba & Unicorn Gundam Statue) - ส่วนที่ 1",
-          "โอไดบะและหุ่นยนต์กันดั้มยักษ์ยูนิคอร์น - ข้อมูลการเดินทางและการเยี่ยมชม",
-          "โอไดบะและหุ่นยนต์กันดั้มยักษ์ยูนิคอร์น - ข้อมูลการเดินทางและการเยี่ยมชม",
-          "โอไดบะและหุ่นยนต์กันดั้มยักษ์ยูนิคอร์น (Odaiba & Unicorn Gundam Statue) - ส่วนที่ 1"
+          "โอไดบะและหุ่นยนต์กันดั้มยักษ์ยูนิคอร์น - ข้อมูลการเดินทางและการเยี่ยมชม"
         ],
         "memory_ram_mb": 0,
         "cpu_load_pct": 0,
-        "sample_output_preview": "ขออภัยครับ คำถามของคุณเกี่ยวกับการตามหาหุ่นยนต์กันดั้มขนาดเท่าของจริงมีคำตอบอยู่ในฐานข้อมูลของเราครับ \n\nหากคุณชื่นชอบกันดั้ม ขอแนะนำให้เดินทางไปเที่ยวชมที่ **โอไดบะและหุ่นยนต์กันดั้มยักษ์ยูนิคอร์น** [อ้างอิง: โอไดบะและหุ่นยนต์กันดั้มยักษ์ยูนิคอร์น (O..."
+        "sample_output_preview": "ขออภัยครับ คำถามของคุณเกี่ยวกับสถานที่ท่องเที่ยวสำหรับคนชอบกันดั้มและหุ่นยนต์ขนาดเท่าของจริง มีรายละเอียดดังนี้ครับ:\n\n📍 **สถานที่แนะนำ:**\n1. **โอไดบะและหุ่นยนต์กันดั้มยักษ์ยูนิคอร์น (Odaiba & Unicorn Gundam Statue)** [อ้างอิง: โอไดบะและหุ่นยนต์กันดั้..."
       },
       "deterministic_fallback": {
         "model": "tokyo-hybrid-deterministic-fallback",
-        "latency_sec": 0.0001,
-        "completion_tokens_approx": 220,
+        "latency_sec": 0.0002,
+        "completion_tokens_approx": 304,
         "tokens_per_sec": "N/A (Instant In-Process Rule)",
         "citations_count": 0,
         "citations": [],
@@ -136,14 +163,19 @@
         "sample_output_preview": "ขอสรุปข้อมูลการเดินทางและสถานที่ท่องเที่ยวในโตเกียวตามที่สอบถาม ดังนี้ครับ:\n\n🚆 แผนการเดินทางและเส้นทางรถไฟ:\nโครงข่ายความสัมพันธ์: รองรับการเดินทางเชื่อมต่อระหว่างสถานีหลักในโตเกียว (JR Yamanote, Tokyo Metro Ginza, Marunouchi, Hibiya, Asakusa, Oedo, Y..."
       },
       "local_ollama_3b": {
-        "model": "qwen2.5:3b (Quantized Q4_K_M)",
-        "latency_sec": 14.54,
-        "completion_tokens_approx": 221,
-        "tokens_per_sec": 15.2,
-        "citations_count": 8,
-        "memory_ram_mb": 2450,
-        "cpu_load_pct": 52,
-        "status": "CALIBRATED_BENCHMARK_PROFILE"
+        "model": "qwen2.5:3b",
+        "latency_sec": 3.745,
+        "prompt_tokens": 3350,
+        "completion_tokens": 203,
+        "tokens_per_sec": 199.01,
+        "citations_count": 1,
+        "citations": [
+          "อ้างอิง: โอไดบะและหุ่นยนต์กันดั้มยักษ์ยูนิคอร์น - ข้อมูลการเดินทางและการเยี่ยมชม"
+        ],
+        "success": true,
+        "error": null,
+        "sample_output_preview": "ถ้าคุณชอบ Gundam และหุ่นยนต์ขนาดเท่าของจริง, แนะนำให้ไปที่โอไดบะ (Odaiba) เพราะที่นี่มีหุ่นยนต์กันดั้มยักษ์ยูนิคอร์น (Unicorn Gundam Statue) อยู่ในบริเวณ Odaiba. หุ่นยนต์ขนาดเท่าของจริงนี้เป็นไฮไลท์ที่ไม่ควรพลาดสำหรับผู้ที่ชื่นชอบสครีมกันดั้ม (Gundam...",
+        "status": "MEASURED_LIVE"
       }
     },
     {
@@ -151,29 +183,38 @@
       "category": "D",
       "category_name": "ธรรมชาติและสวน",
       "query": "แนะนำสวนสาธารณะที่เดินทางสะดวกใกล้สถานีรถไฟสำหรับชมธรรมชาติใจกลางโตเกียว",
-      "context_length_chars": 7046,
+      "context_length_chars": 7508,
       "graph_context_used": true,
       "gemini_api": {
         "model": "gemini-3.1-flash-lite",
-        "latency_sec": 4.292,
-        "completion_tokens_approx": 270,
-        "tokens_per_sec": 62.9,
-        "citations_count": 5,
+        "latency_sec": 16.645,
+        "completion_tokens_approx": 342,
+        "tokens_per_sec": 20.5,
+        "citations_count": 14,
         "citations": [
-          "สวนสาธารณะชินจูกุเกียวเอ็น",
-          "สวนฮามาริคิว",
-          "พระราชวังอิมพีเรียลโตเกียว",
-          "สวนอุเอโนะและพิพิธภัณฑ์แห่งชาติ",
-          "สวนอุเอโนะและพิพิธภัณฑ์แห่งชาติ"
+          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ - ข้อมูลการเดินทางและการเยี่ยมชม",
+          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ - ข้อมูลการเดินทางและการเยี่ยมชม",
+          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ - ข้อมูลการเดินทางและการเยี่ยมชม",
+          "สวนสาธารณะชินจูกุเกียวเอ็น (Shinjuku Gyoen National Garden) - ส่วนที่ 1",
+          "สวนสาธารณะชินจูกุเกียวเอ็น (Shinjuku Gyoen National Garden) - ส่วนที่ 1",
+          "สวนสาธารณะชินจูกุเกียวเอ็น (Shinjuku Gyoen National Garden) - ส่วนที่ 1",
+          "สวนฮามาริคิว (สวนหลวงริมอ่าวโตเกียว) (Hamarikyu Gardens) - ส่วนที่ 1",
+          "สวนฮามาริคิว (สวนหลวงริมอ่าวโตเกียว) (Hamarikyu Gardens) - ส่วนที่ 1",
+          "สวนฮามาริคิว (สวนหลวงริมอ่าวโตเกียว) (Hamarikyu Gardens) - ส่วนที่ 1",
+          "ข้อมูลความสัมพันธ์และเส้นทาง (Knowledge Graph)",
+          "สวนอุเอโนะและพิพิธภัณฑ์แห่งชาติ (Ueno Park & National Museum) - ส่วนที่ 1",
+          "สวนอุเอโนะและพิพิธภัณฑ์แห่งชาติ (Ueno Park & National Museum) - ส่วนที่ 1",
+          "สวนอุเอโนะและพิพิธภัณฑ์แห่งชาติ (Ueno Park & National Museum) - ส่วนที่ 1",
+          "สวนอุเอโนะและพิพิธภัณฑ์แห่งชาติ (Ueno Park & National Museum) - ส่วนที่ 1"
         ],
         "memory_ram_mb": 0,
         "cpu_load_pct": 0,
-        "sample_output_preview": "สวัสดีครับ ยินดีต้อนรับสู่ผู้ช่วยอัจฉริยะด้านการเดินทางและท่องเที่ยวในกรุงโตเกียวครับ ขอแนะนำสวนสาธารณะที่เดินทางสะดวกและโดดเด่นเรื่องธรรมชาติใจกลางโตเกียว พร้อมข้อมูลการเดินทาง ดังนี้ครับ\n\n1. 🌿 **สวนสาธารณะชินจูกุเกียวเอ็น (Shinjuku Gyoen National G..."
+        "sample_output_preview": "ขอแนะนำสวนสาธารณะใจกลางโตเกียวที่เดินทางสะดวกและโดดเด่นเรื่องธรรมชาติที่สวยงาม ดังนี้ครับ:\n\n1. 📍 **พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ** [อ้างอิง: พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ - ข้อมูลการเดินทางและการเยี่ยมชม]\n   - **ไฮไลท์..."
       },
       "deterministic_fallback": {
         "model": "tokyo-hybrid-deterministic-fallback",
         "latency_sec": 0.0003,
-        "completion_tokens_approx": 698,
+        "completion_tokens_approx": 724,
         "tokens_per_sec": "N/A (Instant In-Process Rule)",
         "citations_count": 0,
         "citations": [],
@@ -182,14 +223,19 @@
         "sample_output_preview": "ขอสรุปข้อมูลการเดินทางและสถานที่ท่องเที่ยวในโตเกียวตามที่สอบถาม ดังนี้ครับ:\n\n🚆 แผนการเดินทางและเส้นทางรถไฟ:\n[สถานที่ท่องเที่ยวแนะนำในย่านและสถานีใกล้เคียงจากสถานี สถานีโตเกียว (Knowledge Graph)]:\n- ย่านเครื่องใช้ไฟฟ้าและอนิเมะอากิฮาบาระ (Shopping & E..."
       },
       "local_ollama_3b": {
-        "model": "qwen2.5:3b (Quantized Q4_K_M)",
-        "latency_sec": 11.93,
-        "completion_tokens_approx": 229,
-        "tokens_per_sec": 19.2,
-        "citations_count": 5,
-        "memory_ram_mb": 2450,
-        "cpu_load_pct": 52,
-        "status": "CALIBRATED_BENCHMARK_PROFILE"
+        "model": "qwen2.5:3b",
+        "latency_sec": 4.641,
+        "prompt_tokens": 4095,
+        "completion_tokens": 351,
+        "tokens_per_sec": 196.01,
+        "citations_count": 1,
+        "citations": [
+          "สวนอุเอโนะและพิพิธภัณฑ์แห่งชาติ - ข้อมูลการเดินทางและการเยี่ยมชม"
+        ],
+        "success": true,
+        "error": null,
+        "sample_output_preview": "แนะนำสวนสาธารณะที่เดินทางสะดวกใกล้สถานีรถไฟสำหรับชมธรรมชาติใจกลางโตเกียว เช่น สวนอุเอโนะและพิพิธภัณฑ์แห่งชาติ (Ueno Park & National Museum). \n\nข้อมูลการเยี่ยมชมและการเดินทางสู่ สวนอุเอโนะและพิพิธภัณฑ์แห่งชาติ:\n\n- [อ้างอิง: สวนอุเอโนะและพิพิธภัณฑ์แห่ง...",
+        "status": "MEASURED_LIVE"
       }
     },
     {
@@ -197,29 +243,33 @@
       "category": "E",
       "category_name": "อาหารและตลาด",
       "query": "Tsukiji Outer Market มีอะไรน่าสนใจ และเดินทางจากสถานีสึกิจิอย่างไร?",
-      "context_length_chars": 4001,
+      "context_length_chars": 4109,
       "graph_context_used": true,
       "gemini_api": {
         "model": "gemini-3.1-flash-lite",
-        "latency_sec": 3.088,
-        "completion_tokens_approx": 200,
-        "tokens_per_sec": 64.8,
-        "citations_count": 5,
+        "latency_sec": 12.519,
+        "completion_tokens_approx": 238,
+        "tokens_per_sec": 19.0,
+        "citations_count": 9,
         "citations": [
+          "ตลาดปลาสึกิจิ (ตลาดนอก)",
           "ตลาดปลาสึกิจิ (ตลาดนอก) (Tsukiji Outer Market) - ส่วนที่ 1",
           "ตลาดปลาสึกิจิ (ตลาดนอก) (Tsukiji Outer Market) - ส่วนที่ 1",
+          "ตลาดปลาสึกิจิ (ตลาดนอก) (Tsukiji Outer Market) - ส่วนที่ 1",
+          "ตลาดปลาสึกิจิ (ตลาดนอก) - ข้อมูลการเดินทางและการเยี่ยมชม",
+          "ตลาดปลาสึกิจิ (ตลาดนอก) - ข้อมูลการเดินทางและการเยี่ยมชม",
           "ตลาดปลาสึกิจิ (ตลาดนอก) - ข้อมูลการเดินทางและการเยี่ยมชม",
           "ตลาดปลาสึกิจิ (ตลาดนอก) - ข้อมูลการเดินทางและการเยี่ยมชม",
           "ตลาดปลาสึกิจิ (ตลาดนอก) - ข้อมูลการเดินทางและการเยี่ยมชม"
         ],
         "memory_ram_mb": 0,
         "cpu_load_pct": 0,
-        "sample_output_preview": "ขอขอบคุณที่สอบถามข้อมูลกับ Tokyo Transit & Travel AI Assistant ครับ ขออนุญาตสรุปข้อมูลความน่าสนใจและการเดินทางไปยังตลาดปลาสึกิจิครับ \n\n📍 **ความน่าสนใจของ Tsukiji Outer Market**\nตลาดปลาสึกิจิ (ตลาดนอก) เป็นสวรรค์ของนักชิมและแหล่งรวมอาหารสตรีทฟู้ดและวั..."
+        "sample_output_preview": "ขออภัยครับ คำถามของคุณเกี่ยวกับการเดินทางจาก \"สถานีสึกิจิ\" ไปยัง \"ตลาดปลาสึกิจิ (ตลาดนอก)\" มีความคลาดเคลื่อนจากข้อมูลในระบบเล็กน้อย เนื่องจากสถานที่ทั้งสองตั้งอยู่ติดกันและต้องใช้การเดินเท้าครับ โดยขอสรุปข้อมูลที่น่าสนใจและการเดินทางที่ถูกต้องตามฐานข..."
       },
       "deterministic_fallback": {
         "model": "tokyo-hybrid-deterministic-fallback",
-        "latency_sec": 0.0001,
-        "completion_tokens_approx": 250,
+        "latency_sec": 0.0003,
+        "completion_tokens_approx": 224,
         "tokens_per_sec": "N/A (Instant In-Process Rule)",
         "citations_count": 0,
         "citations": [],
@@ -228,14 +278,19 @@
         "sample_output_preview": "ขอสรุปข้อมูลการเดินทางและสถานที่ท่องเที่ยวในโตเกียวตามที่สอบถาม ดังนี้ครับ:\n\n🚆 แผนการเดินทางและเส้นทางรถไฟ:\n[ข้อมูลเส้นทางและการเดินทางจาก Knowledge Graph]:\nการเดินทางจาก 'ตลาดปลาสึกิจิ (ตลาดนอก)' ไปยัง 'สถานีสึกิจิ':\n1. เดินเท้าจาก ตลาดปลาสึกิจิ (ตล..."
       },
       "local_ollama_3b": {
-        "model": "qwen2.5:3b (Quantized Q4_K_M)",
-        "latency_sec": 8.92,
-        "completion_tokens_approx": 170,
-        "tokens_per_sec": 19.1,
-        "citations_count": 5,
-        "memory_ram_mb": 2450,
-        "cpu_load_pct": 52,
-        "status": "CALIBRATED_BENCHMARK_PROFILE"
+        "model": "qwen2.5:3b",
+        "latency_sec": 5.043,
+        "prompt_tokens": 3217,
+        "completion_tokens": 464,
+        "tokens_per_sec": 198.2,
+        "citations_count": 1,
+        "citations": [
+          "ตลาดปลาสึกิจิ (ตลาดนอก) - ข้อมูลการเดินทางและการเยี่ยมชม"
+        ],
+        "success": true,
+        "error": null,
+        "sample_output_preview": "ตลาดปลาสึกิจิ (ตลาดนอก) มีความน่าสนใจหลายประการ เช่น:\n\n1. **แหล่งซื้อขายอาหารทะเลสดใหม่**: ตลาดปลาสึกิจิเป็นที่รวมของกินทะเลสดๆ ทั้งซาชิมิ, หอยเชลล์ย่าง, และอาหารทะเลอื่นๆ ที่คัดสรรมาให้ผู้บริโภคได้เลือกซื้อ\n\n2. **ร้านค้าและแผงลอยกว่า 400 ร้าน**: มีร...",
+        "status": "MEASURED_LIVE"
       }
     },
     {
@@ -243,28 +298,29 @@
       "category": "F",
       "category_name": "Spatial & Nearby",
       "query": "มีสถานที่ท่องเที่ยวอะไรอยู่ใกล้ Tokyo Station ในระยะเดินเท้าไม่เกิน 10 นาที?",
-      "context_length_chars": 8411,
+      "context_length_chars": 8670,
       "graph_context_used": true,
       "gemini_api": {
         "model": "gemini-3.1-flash-lite",
-        "latency_sec": 2.977,
-        "completion_tokens_approx": 98,
-        "tokens_per_sec": 32.9,
-        "citations_count": 4,
+        "latency_sec": 17.673,
+        "completion_tokens_approx": 116,
+        "tokens_per_sec": 6.6,
+        "citations_count": 5,
         "citations": [
-          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ",
-          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ",
-          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ",
-          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ"
+          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ - ข้อมูลการเดินทางและการเยี่ยมชม",
+          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ - ข้อมูลการเดินทางและการเยี่ยมชม",
+          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ - ข้อมูลการเดินทางและการเยี่ยมชม",
+          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ - ข้อมูลการเดินทางและการเยี่ยมชม",
+          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ - ข้อมูลการเดินทางและการเยี่ยมชม"
         ],
         "memory_ram_mb": 0,
         "cpu_load_pct": 0,
-        "sample_output_preview": "สวัสดีครับ ยินดีต้อนรับสู่กรุงโตเกียวครับ 🚆\n\nสำหรับสถานที่ท่องเที่ยวที่อยู่ใกล้ **สถานีโตเกียว (Tokyo Station)** ในระยะเดินเท้าไม่เกิน 10 นาที ตามข้อมูลในระบบ มีดังนี้ครับ:\n\n📍 **1. พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ**\n* **ไฮไลท์สำคัญ:** สั..."
+        "sample_output_preview": "สวัสดีครับ ในฐานะผู้ช่วยส่วนตัวด้านการเดินทางและท่องเที่ยวในโตเกียว ขอแนะนำสถานที่ท่องเที่ยวที่อยู่ใกล้สถานีโตเกียวในระยะเดินเท้าไม่เกิน 10 นาที ดังนี้ครับ:\n\n📍 **พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ** [อ้างอิง: พระราชวังอิมพีเรียลโตเกียวและส..."
       },
       "deterministic_fallback": {
         "model": "tokyo-hybrid-deterministic-fallback",
         "latency_sec": 0.0003,
-        "completion_tokens_approx": 900,
+        "completion_tokens_approx": 940,
         "tokens_per_sec": "N/A (Instant In-Process Rule)",
         "citations_count": 0,
         "citations": [],
@@ -273,14 +329,17 @@
         "sample_output_preview": "ขอสรุปข้อมูลการเดินทางและสถานที่ท่องเที่ยวในโตเกียวตามที่สอบถาม ดังนี้ครับ:\n\n🚆 แผนการเดินทางและเส้นทางรถไฟ:\n[สถานที่ท่องเที่ยวแนะนำในย่านและสถานีใกล้เคียงจากสถานี สถานีโตเกียว (Knowledge Graph)]:\n- ย่านเครื่องใช้ไฟฟ้าและอนิเมะอากิฮาบาระ (Shopping & E..."
       },
       "local_ollama_3b": {
-        "model": "qwen2.5:3b (Quantized Q4_K_M)",
-        "latency_sec": 8.64,
-        "completion_tokens_approx": 120,
-        "tokens_per_sec": 13.9,
-        "citations_count": 4,
-        "memory_ram_mb": 2450,
-        "cpu_load_pct": 52,
-        "status": "CALIBRATED_BENCHMARK_PROFILE"
+        "model": "qwen2.5:3b",
+        "latency_sec": 3.877,
+        "prompt_tokens": 4095,
+        "completion_tokens": 218,
+        "tokens_per_sec": 193.43,
+        "citations_count": 0,
+        "citations": [],
+        "success": true,
+        "error": null,
+        "sample_output_preview": "ในระยะเดินเท้าไม่เกิน 10 นาทีจาก Tokyo Station, มีสถานที่ท่องเที่ยวต่อไปนี้:\n\n- สวนฮามาริคิว (สวนหลวงริมอ่าวโตเกียว): ตั้งอยู่ในเขต Chuo และเปิดให้เข้าชมในช่วงเวลา 09:00 - 17:00 โดยผู้ใหญ่จะเสียค่าเข้าชม 300 เยน\n- Roppongi Hills & Tokyo City View: ตั...",
+        "status": "MEASURED_LIVE"
       }
     },
     {
@@ -288,23 +347,23 @@
       "category": "G",
       "category_name": "Transportation & Route",
       "query": "จาก Tokyo Station ไป Sensō-ji ควรเดินทางด้วยรถไฟสายไหน ใช้เวลาเท่าไหร่?",
-      "context_length_chars": 4754,
+      "context_length_chars": 4995,
       "graph_context_used": true,
       "gemini_api": {
         "model": "gemini-3.1-flash-lite",
-        "latency_sec": 8.071,
+        "latency_sec": 17.324,
         "completion_tokens_approx": 4,
-        "tokens_per_sec": 0.5,
+        "tokens_per_sec": 0.2,
         "citations_count": 0,
         "citations": [],
         "memory_ram_mb": 0,
         "cpu_load_pct": 0,
-        "sample_output_preview": "ขออภัยครับ ปัจจุบันระบบยังไม่มีข้อมูลเส้นทางรถไฟจากสถานีโตเกียวไปยังวัดเซ็นโซจิในฐานข้อมูลครับ..."
+        "sample_output_preview": "ขออภัยครับ ปัจจุบันระบบยังไม่มีข้อมูลครอบคลุมคำถามนี้ในฐานข้อมูลครับ..."
       },
       "deterministic_fallback": {
         "model": "tokyo-hybrid-deterministic-fallback",
-        "latency_sec": 0.0003,
-        "completion_tokens_approx": 450,
+        "latency_sec": 0.0002,
+        "completion_tokens_approx": 488,
         "tokens_per_sec": "N/A (Instant In-Process Rule)",
         "citations_count": 0,
         "citations": [],
@@ -313,14 +372,19 @@
         "sample_output_preview": "ขอสรุปข้อมูลการเดินทางและสถานที่ท่องเที่ยวในโตเกียวตามที่สอบถาม ดังนี้ครับ:\n\n🚆 แผนการเดินทางและเส้นทางรถไฟ:\n[สถานที่ท่องเที่ยวใกล้สถานี สถานีโตเกียว จาก Knowledge Graph]:\n- พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ (Culture & History, เดิน 10 นาท..."
       },
       "local_ollama_3b": {
-        "model": "qwen2.5:3b (Quantized Q4_K_M)",
-        "latency_sec": 21.38,
-        "completion_tokens_approx": 120,
-        "tokens_per_sec": 5.6,
-        "citations_count": 0,
-        "memory_ram_mb": 2450,
-        "cpu_load_pct": 52,
-        "status": "CALIBRATED_BENCHMARK_PROFILE"
+        "model": "qwen2.5:3b",
+        "latency_sec": 3.38,
+        "prompt_tokens": 3721,
+        "completion_tokens": 115,
+        "tokens_per_sec": 197.52,
+        "citations_count": 1,
+        "citations": [
+          "ข้อมูลการเยี่ยมชมและการเดินทางสู่ รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม"
+        ],
+        "success": true,
+        "error": null,
+        "sample_output_preview": "จาก Tokyo Station ไป Sensō-ji ควรเดินทางด้วยรถไฟสาย Shiodome Line (สถานีใกล้เคียง: ST_TOKYO) โดยใช้เวลาประมาณ 15 นาที [อ้างอิง: ข้อมูลการเยี่ยมชมและการเดินทางสู่ รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม]...",
+        "status": "MEASURED_LIVE"
       }
     },
     {
@@ -328,36 +392,28 @@
       "category": "H",
       "category_name": "Itinerary Planning",
       "query": "จัดทริปเที่ยว 1 วันในโตเกียวเน้นวัด วัฒนธรรม และจุดชมวิว โดยไม่ย้อนเส้นทาง",
-      "context_length_chars": 7549,
+      "context_length_chars": 6920,
       "graph_context_used": true,
       "gemini_api": {
         "model": "gemini-3.1-flash-lite",
-        "latency_sec": 7.696,
-        "completion_tokens_approx": 284,
-        "tokens_per_sec": 36.9,
-        "citations_count": 12,
+        "latency_sec": 5.019,
+        "completion_tokens_approx": 400,
+        "tokens_per_sec": 79.7,
+        "citations_count": 4,
         "citations": [
-          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ",
-          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ",
-          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ",
-          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ",
-          "ถนนทาเคชิตะ ย่านฮาราจูกุ",
-          "ถนนทาเคชิตะ ย่านฮาราจูกุ",
-          "ถนนทาเคชิตะ ย่านฮาราจูกุ",
-          "ถนนสายช้อปปิ้งโอโมเตะซันโดและห้างโอโมเตะซันโดฮิลส์",
-          "ถนนสายช้อปปิ้งโอโมเตะซันโดและห้างโอโมเตะซันโดฮิลส์",
-          "ถนนสายช้อปปิ้งโอโมเตะซันโดและห้างโอโมเตะซันโดฮิลส์",
-          "ห้าแยกชิบูย่าและรูปปั้นฮาจิโกะ",
-          "ห้าแยกชิบูย่าและรูปปั้นฮาจิโกะ"
+          "วัดเซ็นโซจิ (วัดอาซากุสะ) - ข้อมูลการเดินทางและการเยี่ยมชม",
+          "โรงแรม โรงแรมอาซากุสะ วิว โฮเทล (Asakusa View Hotel) - ที่พักย่าน Taito",
+          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ - ข้อมูลการเดินทางและการเยี่ยมชม",
+          "รปปงหงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม"
         ],
         "memory_ram_mb": 0,
         "cpu_load_pct": 0,
-        "sample_output_preview": "สวัสดีครับ! ในฐานะผู้ช่วยส่วนตัวด้านการเดินทางและท่องเที่ยวในกรุงโตเกียว ยินดีเป็นอย่างยิ่งที่จะช่วยวางแผนทริป 1 วันในโตเกียว โดยเน้นสถานที่ท่องเที่ยวเชิงวัด วัฒนธรรม และจุดชมวิวที่เดินทางต่อเนื่องกันอย่างเป็นระบบ ไม่ย้อนเส้นทางครับ 🚆\n\n---\n\n### 🗺️ แผ..."
+        "sample_output_preview": "สวัสดีครับ! ยินดีให้บริการครับ สำหรับทริปเที่ยว 1 วันในโตเกียว เน้นวัด วัฒนธรรม และจุดชมวิว โดยไม่ย้อนเส้นทาง ผมขอเสนอแผนการเดินทางดังนี้ครับ\n\n**เช้า: สัมผัสวัฒนธรรมและประวัติศาสตร์ ณ วัดเซ็นโซจิ และย่านอาซากุสะ**\n\n*   เริ่มต้นวันด้วยการเยี่ยมชม **วั..."
       },
       "deterministic_fallback": {
         "model": "tokyo-hybrid-deterministic-fallback",
         "latency_sec": 0.0003,
-        "completion_tokens_approx": 670,
+        "completion_tokens_approx": 586,
         "tokens_per_sec": "N/A (Instant In-Process Rule)",
         "citations_count": 0,
         "citations": [],
@@ -366,14 +422,17 @@
         "sample_output_preview": "ขอสรุปข้อมูลการเดินทางและสถานที่ท่องเที่ยวในโตเกียวตามที่สอบถาม ดังนี้ครับ:\n\n🚆 แผนการเดินทางและเส้นทางรถไฟ:\n[สถานที่ท่องเที่ยวใกล้สถานี สถานีโตเกียว จาก Knowledge Graph]:\n- พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ (Culture & History, เดิน 10 นาท..."
       },
       "local_ollama_3b": {
-        "model": "qwen2.5:3b (Quantized Q4_K_M)",
-        "latency_sec": 20.44,
-        "completion_tokens_approx": 241,
-        "tokens_per_sec": 11.8,
-        "citations_count": 12,
-        "memory_ram_mb": 2450,
-        "cpu_load_pct": 52,
-        "status": "CALIBRATED_BENCHMARK_PROFILE"
+        "model": "qwen2.5:3b",
+        "latency_sec": 5.28,
+        "prompt_tokens": 4095,
+        "completion_tokens": 434,
+        "tokens_per_sec": 193.04,
+        "citations_count": 0,
+        "citations": [],
+        "success": true,
+        "error": null,
+        "sample_output_preview": "ขออภัยที่ทำให้เกิดความสับสนครับ แต่คำถามของผู้ใช้นั้นมีปัญหาเนื่องจากไม่มีทางเที่ยวในโตเกียวที่สามารถเน้นเฉพาะวัด, วัฒนธรรม และจุดชมวิวในเวลาเดียวกัน โดยไม่ย้อนเส้นทาง. \n\nโตเกียวมีความหลากหลายมากกว่าการเน้นเฉพาะเรื่องเหล่านี้ ในขณะที่วัดและสถานที่ท่อ...",
+        "status": "MEASURED_LIVE"
       }
     },
     {
@@ -381,28 +440,31 @@
       "category": "I",
       "category_name": "Personalized Recommendation",
       "query": "ฉันชอบประวัติศาสตร์และธรรมชาติ ไม่สนใจช้อปปิ้ง แนะนำ 3 สถานที่ในโตเกียว",
-      "context_length_chars": 6780,
+      "context_length_chars": 7465,
       "graph_context_used": true,
       "gemini_api": {
         "model": "gemini-3.1-flash-lite",
-        "latency_sec": 3.891,
-        "completion_tokens_approx": 200,
-        "tokens_per_sec": 51.4,
-        "citations_count": 4,
+        "latency_sec": 14.755,
+        "completion_tokens_approx": 290,
+        "tokens_per_sec": 19.7,
+        "citations_count": 7,
         "citations": [
-          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ (Tokyo Imperial Palace & East Gardens) - ส่วนที่ 2",
+          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ - ข้อมูลการเดินทางและการเยี่ยมชม",
+          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ - ส่วนที่ 2",
+          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ - ข้อมูลการเดินทางและการเยี่ยมชม",
           "สวนฮามาริคิว (สวนหลวงริมอ่าวโตเกียว) - ข้อมูลการเดินทางและการเยี่ยมชม",
-          "สวนสาธารณะชินจูกุเกียวเอ็น (Shinjuku Gyoen National Garden) - ส่วนที่ 1",
-          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ (Tokyo Imperial Palace & East Gardens) - ส่วนที่ 2"
+          "โตเกียวโดมซิตี้และสปาลาคัว (Tokyo Dome City & Spa LaQua) - ส่วนที่ 1",
+          "โตเกียวโดมซิตี้และสปาลาคัว (Tokyo Dome City & Spa LaQua) - ส่วนที่ 1",
+          "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ - ข้อมูลการเดินทางและการเยี่ยมชม"
         ],
         "memory_ram_mb": 0,
         "cpu_load_pct": 0,
-        "sample_output_preview": "สวัสดีครับ ในฐานะผู้ช่วยอัจฉริยะด้านการเดินทางและท่องเที่ยวในกรุงโตเกียว ผมขอแนะนำ 3 สถานที่ท่องเที่ยวในโตเกียวที่โดดเด่นด้านประวัติศาสตร์และธรรมชาติ ตามความสนใจของคุณดังนี้ครับ:\n\n📍 **1. พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ** [อ้างอิง: พระรา..."
+        "sample_output_preview": "สวัสดีครับ ยินดีต้อนรับสู่ผู้ช่วยอัจฉริยะด้านการเดินทางและท่องเที่ยวในกรุงโตเกียวครับ \n\nจากความสนใจของคุณที่ชื่นชอบด้าน **ประวัติศาสตร์และธรรมชาติ** และไม่เน้นการช้อปปิ้ง ผมขอแนะนำ 3 สถานที่ท่องเที่ยวที่ตอบโจทย์และเดินทางได้อย่างสะดวก ดังนี้ครับ:\n\n1...."
       },
       "deterministic_fallback": {
         "model": "tokyo-hybrid-deterministic-fallback",
-        "latency_sec": 0.0004,
-        "completion_tokens_approx": 580,
+        "latency_sec": 0.0003,
+        "completion_tokens_approx": 676,
         "tokens_per_sec": "N/A (Instant In-Process Rule)",
         "citations_count": 0,
         "citations": [],
@@ -411,14 +473,21 @@
         "sample_output_preview": "ขอสรุปข้อมูลการเดินทางและสถานที่ท่องเที่ยวในโตเกียวตามที่สอบถาม ดังนี้ครับ:\n\n🚆 แผนการเดินทางและเส้นทางรถไฟ:\n[สถานที่ท่องเที่ยวแนะนำในย่านและสถานีใกล้เคียงจากสถานี สถานีโตเกียว (Knowledge Graph)]:\n- ย่านเครื่องใช้ไฟฟ้าและอนิเมะอากิฮาบาระ (Shopping & E..."
       },
       "local_ollama_3b": {
-        "model": "qwen2.5:3b (Quantized Q4_K_M)",
-        "latency_sec": 10.93,
-        "completion_tokens_approx": 170,
-        "tokens_per_sec": 15.6,
-        "citations_count": 4,
-        "memory_ram_mb": 2450,
-        "cpu_load_pct": 52,
-        "status": "CALIBRATED_BENCHMARK_PROFILE"
+        "model": "qwen2.5:3b",
+        "latency_sec": 5.07,
+        "prompt_tokens": 4095,
+        "completion_tokens": 410,
+        "tokens_per_sec": 189.91,
+        "citations_count": 3,
+        "citations": [
+          "พิพิธภัณฑ์ศิลปะดิจิทัลทีมแล็บ แพลเน็ตส์ โตเกียว (teamLab Planets TOKYO DMM)",
+          "สวนฮามาริคิว (สวนหลวงริมอ่าวโตเกียว) (Hamarikyu Gardens)",
+          "พิพิธภัณฑ์ศิลปะดิจิทัลทีมแล็บ แพลเน็ตส์ โตเกียว (teamLab Planets TOKYO DMM)"
+        ],
+        "success": true,
+        "error": null,
+        "sample_output_preview": "ขออภัยสำหรับความสับสนครับ, ในบริบทนี้เราไม่มีข้อมูลเกี่ยวกับพื้นที่ประวัติศาสตร์และธรรมชาติในโตเกียวที่คุณสนใจ. แต่ฉันสามารถแนะนำสถานที่ท่องเที่ยวที่อาจเป็นทางเลือกสำหรับคุณได้:\n\n1. [อ้างอิง: พิพิธภัณฑ์ศิลปะดิจิทัลทีมแล็บ แพลเน็ตส์ โตเกียว (teamLab P...",
+        "status": "MEASURED_LIVE"
       }
     },
     {
@@ -426,29 +495,29 @@
       "category": "J",
       "category_name": "Complex Multi-hop Graph RAG",
       "query": "หาวัดที่อยู่ใกล้สถานีรถไฟและมีสถานที่ทางประวัติศาสตร์อื่นอยู่ในระยะเดินถึง",
-      "context_length_chars": 4985,
+      "context_length_chars": 4925,
       "graph_context_used": true,
       "gemini_api": {
         "model": "gemini-3.1-flash-lite",
-        "latency_sec": 2.849,
-        "completion_tokens_approx": 134,
-        "tokens_per_sec": 47.0,
+        "latency_sec": 11.229,
+        "completion_tokens_approx": 118,
+        "tokens_per_sec": 10.5,
         "citations_count": 5,
         "citations": [
-          "วัดเซ็นโซจิ (วัดอาซากุสะ) - ข้อมูลการเดินทางและการเยี่ยมชม",
-          "วัดเซ็นโซจิ (วัดอาซากุสะ) - ข้อมูลการเดินทางและการเยี่ยมชม",
-          "วัดเซ็นโซจิ (วัดอาซากุสะ) - ข้อมูลการเดินทางและการเยี่ยมชม",
-          "วัดเซ็นโซจิ (วัดอาซากุสะ) - ข้อมูลการเดินทางและการเยี่ยมชม",
+          "วัดเซ็นโซจิ (วัดอาซากุสะ)",
+          "วัดเซ็นโซจิ (วัดอาซากุสะ)",
+          "วัดเซ็นโซจิ (วัดอาซากุสะ)",
+          "สถานีโตเกียว",
           "สถานีโตเกียว"
         ],
         "memory_ram_mb": 0,
         "cpu_load_pct": 0,
-        "sample_output_preview": "ขออนุญาตแนะนำวัดที่มีชื่อเสียงและอยู่ใกล้สถานีรถไฟ พร้อมสถานที่ทางประวัติศาสตร์และวัฒนธรรมในระยะเดินถึงตามข้อมูลในระบบครับ:\n\n📍 **วัดเซ็นโซจิ (วัดอาซากุสะ)** [อ้างอิง: วัดเซ็นโซจิ (วัดอาซากุสะ) - ข้อมูลการเดินทางและการเยี่ยมชม]\n* 🚆 **สถานีรถไฟที่ใกล้ท..."
+        "sample_output_preview": "สวัสดีครับ ในฐานะผู้ช่วยอัจฉริยะด้านการเดินทางและท่องเที่ยวในกรุงโตเกียว ขอแนะนำวัดและสถานที่ท่องเที่ยวทางประวัติศาสตร์ในระยะเดินถึงตามที่คุณต้องการ ดังนี้ครับ\n\n📍 **วัดเซ็นโซจิ (วัดอาซากุสะ)** [อ้างอิง: วัดเซ็นโซจิ (วัดอาซากุสะ)]\n* **ไฮไลท์สำคัญ:** ว..."
       },
       "deterministic_fallback": {
         "model": "tokyo-hybrid-deterministic-fallback",
         "latency_sec": 0.0002,
-        "completion_tokens_approx": 520,
+        "completion_tokens_approx": 526,
         "tokens_per_sec": "N/A (Instant In-Process Rule)",
         "citations_count": 0,
         "citations": [],
@@ -457,14 +526,19 @@
         "sample_output_preview": "ขอสรุปข้อมูลการเดินทางและสถานที่ท่องเที่ยวในโตเกียวตามที่สอบถาม ดังนี้ครับ:\n\n🚆 แผนการเดินทางและเส้นทางรถไฟ:\n[ข้อมูลการสืบค้นความสัมพันธ์เชิงพื้นที่หลายชั้นจาก Knowledge Graph (Multi-hop Spatial Query)]:\n- ย่านสถานี สถานีโตเกียว: มี พระราชวังอิมพีเรีย..."
       },
       "local_ollama_3b": {
-        "model": "qwen2.5:3b (Quantized Q4_K_M)",
-        "latency_sec": 8.32,
-        "completion_tokens_approx": 120,
-        "tokens_per_sec": 14.4,
-        "citations_count": 5,
-        "memory_ram_mb": 2450,
-        "cpu_load_pct": 52,
-        "status": "CALIBRATED_BENCHMARK_PROFILE"
+        "model": "qwen2.5:3b",
+        "latency_sec": 3.485,
+        "prompt_tokens": 3715,
+        "completion_tokens": 123,
+        "tokens_per_sec": 198.43,
+        "citations_count": 1,
+        "citations": [
+          "ข้อมูลความสัมพันธ์และเส้นทาง, ข้อมูลรายละเอียดสถานที่"
+        ],
+        "success": true,
+        "error": null,
+        "sample_output_preview": "ขออภัยครับ, ปัจจุบันระบบยังไม่มีข้อมูลครอบคลุมคำถามนี้ในฐานข้อมูล. แต่ผมสามารถแนะนำสถานที่ท่องเที่ยวและเส้นทางการเดินทางให้คุณได้ในบริบทที่มีอยู่ [อ้างอิง: ข้อมูลความสัมพันธ์และเส้นทาง, ข้อมูลรายละเอียดสถานที่] ตามบริบทที่คุณระบุ....",
+        "status": "MEASURED_LIVE"
       }
     }
   ]

@@ -1,170 +1,52 @@
-# รายงานการวิเคราะห์และเปรียบเทียบโมเดลเชิงลึก (Model Benchmark & Comparison Report)
-**โครงการ:** Tokyo Smart Transit & Tourism Hybrid Graph RAG  
-**ระดับคุณภาพตาม Rubric:** Level 5 (Advanced / Excellent)  
-**วันที่ประเมิน:** 30 กันยายน 2026  
-**ผู้จัดทำ:** Senior Software Architect Team  
+# รายงานเปรียบเทียบ Embedding และ LLM
 
----
+**วันที่รันผลล่าสุด:** 30 กันยายน 2026
 
-## 📌 บทนำและวัตถุประสงค์ (Executive Summary)
+**หลักฐานดิบ:** `data/processed/embedding_benchmark_results.json` และ `data/model_comparison_raw.json`
 
-เอกสารฉบับนี้จัดทำขึ้นเพื่อนำเสนอผลการทดลองเชิงประจักษ์ (Empirical Evaluation) ในการคัดเลือกและเปรียบเทียบประสิทธิภาพของโมเดลที่ใช้ในระบบ **Tokyo Smart Transit & Tourism Hybrid Graph RAG** ตามเกณฑ์การประเมิน **Rubric Level 5** ครอบคลุม 2 มิติหลัก:
+## 1. Embedding Models
 
-1. **โมเดลเวกเตอร์ค้นหา (Embedding & Dense Retrieval Models):** เปรียบเทียบความเร็วในการสร้างดัชนี (Build Time), ความเร็วในการค้นหา (Query Latency), มิติเวกเตอร์ (Dimension) และความแม่นยำในการดึงข้อมูล (Hit@K Accuracy)
-2. **โมเดลสร้างภาษาธรรมชาติ (LLM Generation Models):** เปรียบเทียบระหว่าง Cloud API LLM (`Google Gemini 3.1 Flash Lite`, `Gemini 2.5 Flash`), Local LLM 3B/4B (`Qwen 2.5 3B`, `Gemma 3 4B`) และ Deterministic Fallback Engine ในด้านความเร็ว (Latency), ปริมาณคำต่อวินาที (Throughput), การใช้ทรัพยากรเครื่อง (RAM & CPU Load), คุณภาพภาษาไทย และความเที่ยงตรงของแหล่งอ้างอิง (Faithfulness / Zero-Hallucination)
+การทดลองใช้ 30 คำถามจาก 10 หมวด หมวดละ 3 ข้อ และวัดการพบ ground-truth entity ในอันดับ 1 และ 3
 
----
+![Embedding benchmark](reports/charts/chart_1_embedding_comparison.png)
 
-## 🔬 ส่วนที่ 1: การเปรียบเทียบโมเดล Embedding (Dense Retrieval Models)
+| Model | Dimensions | Build time | Query latency | Hit@1 | Hit@3 |
+|---|---:|---:|---:|---:|---:|
+| paraphrase-multilingual-MiniLM-L12-v2 | 384 | 20.323 s | **16.45 ms** | 47% | 67% |
+| **multilingual-e5-small** | 384 | **12.405 s** | 18.39 ms | **70%** | **80%** |
 
-### 1.1 ตารางเปรียบเทียบประสิทธิภาพเชิงตัวเลข (Quantitative Comparison)
+### ข้อสรุปจากผลที่วัดได้
 
-*(บันทึกจากการทดสอบจริงด้วยชุดข้อมูลสถานที่ท่องเที่ยวโตเกียวและไฟล์ `data/processed/embedding_benchmark_results.json`)*
+- E5-small เหนือกว่า MiniLM 23 จุดเปอร์เซ็นต์ที่ Hit@1 และ 13 จุดเปอร์เซ็นต์ที่ Hit@3
+- MiniLM มี query latency ต่ำกว่า 1.94 ms
+- หากเน้น accuracy ผลรอบนี้สนับสนุน E5-small หากเน้น latency และ compatibility กับระบบเดิม MiniLM ยังใช้งานได้
+- ไม่มีผล BGE-M3 ใน artifact ปัจจุบัน จึงไม่นำมาเปรียบเทียบ
 
-| คุณลักษณะ (Attributes) | `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` | `intfloat/multilingual-e5-small` | `BAAI/bge-m3` |
-| :---| :---: | :---: | :---: |
-| **ขนาดมิติเวกเตอร์ (Dimensions)** | **384 Dim** | **384 Dim** | 1,024 Dim |
-| **ขนาดโมเดลพารามิเตอร์ (Params)** | **~118M** | **~118M** | ~568M |
-| **เวลาสร้าง Index (Build Time)** | 22.34 วินาที | **12.28 วินาที** | 58.60 วินาที |
-| **เวลาค้นหาเฉลี่ย (Query Latency)** | **16.89 ms** | 17.76 ms | 45.20 ms |
-| **ความแม่นยำ Hit@1 Rate** | **100.0%** (5/5) | **100.0%** (5/5) | **100.0%** (5/5) |
-| **ความแม่นยำ Hit@3 Rate** | **100.0%** (5/5) | **100.0%** (5/5) | **100.0%** (5/5) |
-| **การใช้ RAM บนเครื่องจริง** | **~80 MB** | **~80 MB** | ~350 MB |
-| **การรองรับพหุภาษา (TH/EN/JA)** | ดีเยี่ยม (Fine-tuned สำหรับ 50+ ภาษา) | ดีมาก (ต้องใส่คำนำหน้า `query: `) | ดีเยี่ยม (Dense + Sparse + ColBERT) |
-| **สถานะในระบบปัจจุบัน** | ⭐ **Default Production Model** | โมเดลทางเลือกที่ผ่านการทดสอบ | โมเดลทางเลือกสำหรับ Server สเปกสูง |
+## 2. LLM และ Fallback
 
----
+สคริปต์ `src/evaluation/generate_model_comparison_raw.py` จะรายงานเฉพาะ backend ที่เรียกใช้งานจริง หาก Ollama ไม่พร้อมจะไม่สร้างตัวเลขจำลอง
 
-### 1.2 แผนภูมิเปรียบเทียบโมเดล Embedding (Bar Chart Visualization)
+| Backend | สถานะ | Queries | Avg. latency | หมายเหตุ |
+|---|---|---:|---:|---|
+| Gemini 3.1 Flash Lite | Measured live | 10 | 14.322 s | เรียก Cloud API จริง; รอบนี้มี retry จาก HTTP 503 |
+| Local Ollama (`Qwen 2.5 3B`) | Measured live | 10 | **4.566 s** | สำเร็จ 10/10 ข้อ, throughput เฉลี่ย 195.76 tokens/s ตาม Ollama timing |
+| Deterministic fallback | Measured locally | 10 | 0.0003 s | เป็น retrieval fallback ไม่ใช่ generative LLM |
 
-*(ดูรูปภาพความละเอียดสูง 300 DPI ได้ที่ `reports/charts/chart_1_embedding_comparison.png`)*
+Local Qwen เร็วกว่า Gemini ในรอบนี้ประมาณ 3.14 เท่า (4.566 เทียบกับ 14.322 วินาที) แต่ latency ของ Gemini รอบนี้ได้รับผลจากการ retry หลัง backend ตอบ 503 อย่างน้อยหนึ่งครั้ง จึงไม่ควรตีความว่าเป็นความเร็วปกติของ API ทุกครั้ง ค่าของ deterministic fallback ใช้เปรียบเทียบ latency กับ LLM โดยตรงไม่ได้ เพราะ fallback ไม่ได้สร้างภาษาด้วยโมเดล
 
-```
-[ ภาพกราฟ: reports/charts/chart_1_embedding_comparison.png ]
-- ซ้าย: เวลาในการค้นหาเฉลี่ย (Query Latency ในหน่วย Milliseconds)
-- ขวา: เวลาในการสร้าง Vector Index (Build Time ในหน่วยวินาที)
-```
+## 3. สิ่งที่ยังสรุปไม่ได้
 
-![Embedding Models Benchmark](reports/charts/chart_1_embedding_comparison.png)
+- ยังเปรียบเทียบคุณภาพภาษาไทยระหว่าง Gemini กับ Local LLM ไม่ได้ เพราะยังไม่มี human judge หรือ automatic quality evaluator
+- มี throughput จาก Ollama timing แต่ยังไม่มี RAM, VRAM หรือ CPU measurement ของ Local LLM
+- ยังไม่มีผล faithfulness และ answer relevance ที่วัดด้วย evaluator อิสระ
+- success และ citation presence ไม่เท่ากับความถูกต้องหรือ zero hallucination
 
----
+## 4. วิธีทำซ้ำ
 
-### 1.3 บทวิเคราะห์เชิงสถาปัตยกรรม (Architectural Discussion - Embedding)
-
-1. **ทำไมระบบจึงเลือก `MiniLM-L12-v2` เป็น Default Production?**
-   * **Latency ต่ำที่สุด (16.89 ms):** เมื่อรันบนเครื่องคอมพิวเตอร์ทั่วไป (CPU Only) โมเดล MiniLM-L12-v2 ให้เวลาตอบสนองที่เร็วกว่า BGE-M3 ถึง **2.67 เท่า** ส่งผลให้ End-to-End Pipeline ไม่สะดุด
-   * **ขนาด Vector กะทัดรัด (384 Dimensions):** ช่วยประหยัดพื้นที่จัดเก็บบน RAM และ Disk ใน FAISS Vector Store ทำให้สามารถสเกลเพื่อรองรับการขยายตัวของสถานที่ท่องเที่ยวได้โดยไม่กินแรมเครื่อง
-   * **ความแม่นยำระดับ 100%:** จากการทดสอบคัดกรองสถานที่จริง (เช่น วัดเซ็นโซจิ, ตลาดปลาสึกิจิ, อากิฮาบาระ) โมเดลสามารถจับคู่ความหมายเชิงภาษาไทยและอังกฤษได้อย่างแม่นยำเทียบเท่ากับโมเดลขนาดใหญ่
-2. **ข้อพิจารณาสำหรับโมเดลอื่นๆ:**
-   * `multilingual-e5-small`: โดดเด่นด้าน Build Time ที่เร็วเพียง 12.28 วินาที แต่มีข้อจำกัดด้านข้อกำหนดที่ต้องเติม Prefix `passage: ` และ `query: ` ซึ่งอาจเพิ่มความซับซ้อนใน Pipeline
-   * `bge-m3`: เหมาะสำหรับงานระดับ Enterprise ที่มี GPU เร่งความเร็ว แต่สำหรับการรันบนอุปกรณ์ของผู้ใช้ทั่วไป MiniLM คือจุดสมดุลที่ดีที่สุด (Sweet Spot)
-
----
-
-## 🤖 ส่วนที่ 2: การเปรียบเทียบโมเดลสร้างภาษา (LLM Generation Models)
-
-### 2.1 ตารางเปรียบเทียบประสิทธิภาพรอบด้าน (Comprehensive LLM Comparison)
-
-> 🔬 **หลักฐานผลการทดสอบดิบ (Empirical Raw Artifact):**  
-> สามารถตรวจสอบข้อมูลดิบรายข้อของการทดสอบเปรียบเทียบโมเดล LLM ทั้ง 3 สถาปัตยกรรม (Cloud Serverless API, Local Ollama และ Deterministic Fallback) พร้อม Prompt, Context Length, Latency, Output Tokens, Throughput และคำตอบที่ได้จริงจากไฟล์ [model_comparison_raw.json](file:///c:/Users/wator/Documents/Y4/SOCIAL/Final_01/data/model_comparison_raw.json)  
-> ซึ่งสามารถรันซ้ำเพื่อตรวจสอบผลได้ผ่านสคริปต์ `python src/evaluation/generate_model_comparison_raw.py`
-
-*(เปรียบเทียบระหว่าง Cloud API, Local Ollama Models และ Deterministic Fallback Engine)*
-
-| มิติการเปรียบเทียบ (Metrics) | Google Gemini 3.1 Flash Lite | Google Gemini 2.5 Flash | Ollama Qwen 2.5 3B | Ollama Gemma 3 4B | Tokyo Hybrid Retriever (Fallback) |
-| :---| :---: | :---: | :---: | :---: | :---: |
-| **ประเภทการรัน (Deployment)** | Cloud Serverless API | Cloud Serverless API | Local On-Premise (Ollama) | Local On-Premise (Ollama) | In-Process Deterministic |
-| **เวลาสร้างคำตอบเฉลี่ย (Latency)** | **1.85 วินาที** | 2.30 วินาที | 4.80 วินาที | 7.50 วินาที | **0.21 วินาที** |
-| **ความเร็ว Throughput (Tokens/s)** | **82.5 tps** | 74.0 tps | 18.2 tps | 11.5 tps | N/A (Rule-based) |
-| **ขนาด Context Window** | **1,000,000 Tokens** | **1,000,000 Tokens** | 32,768 Tokens | 8,192 Tokens | จำกัดตาม RAM |
-| **การใช้ RAM/VRAM ของเครื่อง** | **0 MB (ประมวลผลบนคลาวด์)** | **0 MB** | ~2,450 MB | ~3,780 MB | **< 10 MB** |
-| **ภาระโหลดของ CPU (CPU Load)** | **0% (ไม่กินแรงเครื่อง)** | **0%** | 40% – 60% | 70% – 90% | **< 1%** |
-| **ความเที่ยงตรงอ้างอิง (Faithfulness)**| **98% (Zero-Hallucination)** | 95% | 88% | 85% | **100% (ดึงตรงจาก Graph/Doc)** |
-| **ความเป็นธรรมชาติของภาษาไทย** | สละสลวย ระดับ Concierge | สละสลวย เป็นทางการ | ดีมาก ตอบกระชับ | ปานกลาง มีคำทับศัพท์ | กระชับ เน้นข้อเท็จจริง |
-| **ความทนทานต่อเน็ตหลุด (Offline)** | ❌ ต้องใช้อินเทอร์เน็ต | ❌ ต้องใช้อินเทอร์เน็ต | ✅ ทำงานออฟไลน์ได้ 100% | ✅ ทำงานออฟไลน์ได้ 100% | ✅ ทำงานออฟไลน์ได้ 100% |
-| **ต้นทุนค่าใช้จ่าย (Cost/1k reqs)** | **ฟรี (Free Tier) / $0.075** | ฟรี / $0.150 | **$0.00 (ฟรีตลอดชีพ)** | **$0.00 (ฟรีตลอดชีพ)** | **$0.00** |
-
----
-
-### 2.2 แผนภูมิเปรียบเทียบโมเดล LLM (Bar Chart Visualization)
-
-#### กราฟความเร็วและ Throughput (Latency vs Tokens/sec):
-*(ดูรูปภาพความละเอียดสูง 300 DPI ได้ที่ `reports/charts/chart_2_llm_latency_throughput.png`)*
-
-```
-[ ภาพกราฟ: reports/charts/chart_2_llm_latency_throughput.png ]
-- ซ้าย: เวลาประมวลผลเฉลี่ย (Generation Latency ในหน่วยวินาที)
-- ขวา: ปริมาณ Token ที่สร้างได้ต่อวินาที (Tokens / Second)
+```powershell
+python src/vector/benchmark_embeddings.py
+python src/evaluation/generate_model_comparison_raw.py
+python src/evaluation/run_comprehensive_eval.py --ablation-only
 ```
 
-![LLM Performance Comparison](reports/charts/chart_2_llm_latency_throughput.png)
-
-#### กราฟการบริโภคทรัพยากรเครื่อง (RAM Consumption & CPU Load):
-*(ดูรูปภาพความละเอียดสูง 300 DPI ได้ที่ `reports/charts/chart_3_llm_resource_usage.png`)*
-
-```
-[ ภาพกราฟ: reports/charts/chart_3_llm_resource_usage.png ]
-- ซ้าย: ปริมาณ RAM/VRAM ที่ถูกจองใช้งาน (หน่วย Megabytes)
-- ขวา: เปอร์เซ็นต์การทำงานของ CPU ขณะประมวลผลคำตอบ (CPU Load %)
-```
-
-![Machine Resource Footprint](reports/charts/chart_3_llm_resource_usage.png)
-
----
-
-### 2.3 บทวิเคราะห์เชิงสถาปัตยกรรม (Architectural Discussion - LLM)
-
-1. **จุดเด่นของ `Google Gemini 3.1 Flash Lite` ในระบบ Production:**
-   * **Zero Local Overhead:** การประมวลผลเกิดขึ้นบนโครงสร้างพื้นฐานระดับโลกของ Google ทำให้เครื่องเซิร์ฟเวอร์หรือเครื่องคอมพิวเตอร์ที่รันบอทกินแรมและซีพียูต่ำมาก พัดลมไม่หมุน เครื่องไม่ร้อน
-   * **Throughput สูงสุด (82.5 tps):** สามารถตอบกลับผู้ใช้ใน LINE ได้อย่างรวดเร็วภายใน 1.5 - 2.5 วินาที ทำให้ประสบการณ์การใช้งาน (UX) เหมือนคุยกับเจ้าหน้าที่บริการส่วนตัวจริงๆ
-   * **การจัดการข้อจำกัด (Rate Limit Handling):** ทางสถาปัตยกรรมได้ออกแบบระบบ **Multi-Model Fallback** ไว้ใน [gemini_llm.py](./src/llm/gemini_llm.py) เมื่อ `gemini-3.1-flash-lite` ชนขีดจำกัดความถี่ ระบบจะสลับไปเรียก `gemini-2.5-flash` หรือ `gemini-flash-lite-latest` ต่อเนื่องทันทีโดยที่ผู้ใช้ปลายทางไม่พบข้อผิดพลาด
-
-2. **บทบาทของ `Ollama Local LLM (Qwen 2.5 3B)`:**
-   * **ความปลอดภัยและความเป็นส่วนตัว (Data Privacy):** สำหรับโหมดที่ต้องการทำงานแบบ Private หรือไม่มีสัญญาณอินเทอร์เน็ต Qwen 2.5 3B ให้ผลลัพธ์ภาษาไทยที่อ่านรู้เรื่องและกินแรมน้อยที่สุดในกลุ่ม Local LLM (~2.4 GB)
-   * **Safe Throttling:** โมเดลขนาด 3B มีความเร็วที่ดีกว่าโมเดล 4B อย่างเห็นได้ชัด (18.2 tps เทียบกับ 11.5 tps) และไม่ทำให้ระบบปฏิบัติการ Windows เกิดอาการค้าง (Freeze)
-3. **บทบาทของ `Tokyo Hybrid Retriever Fallback`:**
-   * **Last Line of Defense (0.21s):** หากทั้ง API Cloud ภายนอกขัดข้องและ Local Ollama ไม่ได้เปิดทำงาน ตัวระบบจะไม่ล่ม แต่จะทำการสังเคราะห์คำตอบตรงจาก Knowledge Graph และ Vector Chunks ส่งคืนกลับไปยังผู้ใช้ทันทีด้วยความแม่นยำของข้อเท็จจริง 100%
-
----
-
-## 📈 ส่วนที่ 3: เวลาประมวลผล End-to-End แยกตามหมวดหมู่ (A ถึง J)
-
-จากผลการประเมินชุดคำถามมาตรฐาน Benchmark 10 หมวดหมู่ ด้วยโมเดลหลัก `Gemini 3.1 Flash Lite`:
-
-| หมวดคำถาม (Category) | ชื่อหมวดหมู่ | Intent ที่ตรวจจับ | เวลาเฉลี่ย (s) | การอ้างอิง (%) | การใช้ Graph (%) |
-| :---: | :---| :---: | :---: | :---: | :---: |
-| **A** | General POI (ค้นหาและแนะนำทั่วไป) | `HYBRID_COMPLEX` | 9.09s | 66.7% | **100.0%** |
-| **B** | Temples & History (วัดและประวัติศาสตร์) | `HYBRID_COMPLEX` | 3.70s | 66.7% | **100.0%** |
-| **C** | Anime & Gaming (อากิฮาบาระ/เทคโนโลยี) | `HYBRID_COMPLEX` | 1.73s | 33.3% | **100.0%** |
-| **D** | Parks & Views (ธรรมชาติและจุดชมวิว) | `HYBRID_COMPLEX` | 1.64s | 33.3% | **100.0%** |
-| **E** | Food & Markets (ของกินและตลาดปลา) | `HYBRID_COMPLEX` | 2.60s | 100.0% | **100.0%** |
-| **F** | Spatial / Walking (สถานที่ใกล้เคียง) | `HYBRID_COMPLEX` | 2.18s | 66.7% | **100.0%** |
-| **G** | Route & Transit (เส้นทางและเวลารถไฟ) | `ROUTE_TRANSIT` | 3.15s | 66.7% | **100.0%** |
-| **H** | 1-Day Itinerary (จัดทริปท่องเที่ยว 1 วัน) | `HYBRID_COMPLEX` | 5.47s | 100.0% | **100.0%** |
-| **I** | Preferences (แนะนำตามความชอบเฉพาะตัว) | `HYBRID_COMPLEX` | 2.78s | 66.7% | **100.0%** |
-| **J** | Multi-hop Graph RAG (โจทย์ผสมหลายเงื่อนไข)| `HYBRID_COMPLEX` | 2.07s | 66.7% | **100.0%** |
-
-*(ดูรูปภาพความละเอียดสูง 300 DPI ได้ที่ `reports/charts/chart_4_category_latency.png`)*
-
-```
-[ ภาพกราฟ: reports/charts/chart_4_category_latency.png ]
-- แสดงความเร็ว End-to-End Latency แยกตาม 10 หมวดหมู่อย่างเป็นรูปธรรม
-- มีเส้นประขีดบอกเกณฑ์เป้าหมายมาตรฐาน (< 5.0 วินาที)
-```
-
-![Category Latency Breakdown](reports/charts/chart_4_category_latency.png)
-
----
-
-## 🏆 ส่วนที่ 4: สรุปข้อเสนอแนะเชิงสถาปัตยกรรม (Architectural Recommendations)
-
-1. **สถาปัตยกรรมแบบลำดับชั้น (Tiered Hybrid Architecture):**
-   * **Primary Tier:** ให้ใช้งาน `Google Gemini 3.1 Flash Lite` ควบคู่กับ `MiniLM-L12-v2` เพื่อให้ได้ความเร็วสูงสุด ประสบการณ์ผู้ใช้ดีที่สุด และไม่กินทรัพยากรของเครื่องเซิร์ฟเวอร์
-   * **Secondary Tier:** ตั้งระบบ Auto-fallback สู่ `Gemini 2.5 Flash` เมื่อเกิดเหตุการณ์ HTTP 429 Rate Limit
-   * **Offline / Edge Tier:** สลับไปใช้ `Ollama Qwen 2.5 3B` เมื่อทำงานในสภาพแวดล้อมปิด (Air-gapped)
-   * **Emergency Safety Net:** ใช้ `Tokyo-Hybrid-Retriever Fallback` รับประกันว่าระบบจะไม่แสดงหน้า Error กับผู้ใช้ 100%
-2. **การคงอยู่ของความถูกต้อง (Zero-Hallucination Guarantee):**
-   * การผสาน Knowledge Graph เข้ามาในหมวด G (การเดินทาง) และหมวด F (สถานที่ใกล้เคียง) ช่วยขจัดปัญหาการ "มโนสายรถไฟและเวลาเดินทาง" ซึ่งเป็นข้อบกพร่องร้ายแรงของระบบ Vector RAG ดั้งเดิมได้อย่างสมบูรณ์
-
----
-*เอกสารนี้จัดทำและรับรองผลการทดสอบโดยระบบวิเคราะห์ประสิทธิภาพ Tokyo Smart Transit & Tourism Hybrid Graph RAG ตามมาตรฐาน Rubric Level 5*
+การรัน LLM comparison ต้องมี Gemini API key ส่วน Local LLM ต้องเปิด Ollama และมีโมเดลที่กำหนดไว้ใน configuration

@@ -1,5 +1,5 @@
 """
-Advanced Hybrid RAG Engine (หัวใจสำคัญตามเกณฑ์ Rubric Level 5)
+Advanced Hybrid RAG Engine
 บูรณาการ Dense Retrieval (FAISS/ChromaDB), Sparse Search (BM25) และ Knowledge Graph (Neo4j)
 พร้อมด้วย Query Intent Router, Reciprocal Rank Fusion (RRF) และ Semantic Re-ranking
 """
@@ -71,7 +71,11 @@ class TokyoHybridRAGEngine:
         has_fact = any(k in clean_q for k in fact_keywords)
         has_overview = any(k in clean_q for k in overview_keywords)
 
-        # หากมีคำถามเชิงพื้นที่ (Spatial / Multi-hop / Proximity) หรือคำถามภาพรวมผสม -> HYBRID_COMPLEX
+        # เส้นทางจากต้นทางไปปลายทางที่มีคำบ่งชี้รถไฟชัดเจนเป็น transit
+        # แม้คำถามจะมีคำว่า "สถานี" ซึ่งใช้ร่วมกับ spatial queries ด้วย
+        if has_transit and "จาก" in clean_q and "ไป" in clean_q and not has_overview and not has_fact:
+            return "ROUTE_TRANSIT"
+        # คำถามเชิงพื้นที่ (Spatial / Multi-hop / Proximity) หรือคำถามภาพรวมผสม
         if has_spatial or (has_transit and has_fact) or (has_transit and has_overview) or ("จาก" in clean_q and "ไป" in clean_q and (has_overview or has_spatial)):
             return "HYBRID_COMPLEX"
         # หากถามเฉพาะเส้นทางการเดินทางล้วนๆ
