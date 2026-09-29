@@ -1,0 +1,508 @@
+[
+  {
+    "chunk_id": "C_P_SENSOJI_01",
+    "place_id": "P_SENSOJI",
+    "title": "วัดเซ็นโซจิ (วัดอาซากุสะ) (Senso-ji Temple) - ส่วนที่ 1",
+    "content_th": "วัดเซ็นโซจิเป็นวัดพุทธที่เก่าแก่ที่สุดในกรุงโตเกียว สร้างขึ้นในปี ค.ศ. 628 มีเอกลักษณ์คือประตูคามินาริโมง (Kaminarimon) ที่แขวนโคมแดงยักษ์อันเลื่องชื่อ ภายในมีถนนคนเดินนากามิเสะ (Nakamise-dori) ทอดยาวกว่า 250 เมตร เต็มไปด้วยร้านขายขนมพื้นเมือง เช่น ขนมเซมเบ้ มันจูทอด และของที่ระลึกดั้งเดิม",
+    "content_en": "Senso-ji is Tokyo's oldest and most significant Buddhist temple, founded in 628 AD. Famous for its colossal red paper lantern at the Kaminarimon (Thunder Gate) and the vibrant Nakamise shopping street offering traditional snacks and souvenirs.",
+    "ward": "Taito",
+    "category": "Temple & Shrine",
+    "nearest_station": "ST_ASAKUSA",
+    "walk_time_min": 5,
+    "tags": [
+      "วัดเซ็นโซจิ (วัดอาซากุสะ)",
+      "Senso-ji Temple",
+      "浅草寺",
+      "Taito",
+      "Temple & Shrine",
+      "ST_ASAKUSA"
+    ]
+  },
+  {
+    "chunk_id": "C_P_SENSOJI_02",
+    "place_id": "P_SENSOJI",
+    "title": "วัดเซ็นโซจิ (วัดอาซากุสะ) (Senso-ji Temple) - ส่วนที่ 2",
+    "content_th": "เช่น ขนมเซมเบ้ มันจูทอด และของที่ระลึกดั้งเดิม เป็นจุดหมายยอดนิยมที่ผู้คนมาสักการะองค์เจ้าแม่กวนอิมเพื่อขอพรเรื่องความสุขและความสำเร็จ",
+    "content_en": "",
+    "ward": "Taito",
+    "category": "Temple & Shrine",
+    "nearest_station": "ST_ASAKUSA",
+    "walk_time_min": 5,
+    "tags": [
+      "วัดเซ็นโซจิ (วัดอาซากุสะ)",
+      "Senso-ji Temple",
+      "浅草寺",
+      "Taito",
+      "Temple & Shrine",
+      "ST_ASAKUSA"
+    ]
+  },
+  {
+    "chunk_id": "C_P_SENSOJI_INFO",
+    "place_id": "P_SENSOJI",
+    "title": "วัดเซ็นโซจิ (วัดอาซากุสะ) - ข้อมูลการเดินทางและการเยี่ยมชม",
+    "content_th": "ข้อมูลการเยี่ยมชมและการเดินทางสู่ วัดเซ็นโซจิ (วัดอาซากุสะ) (Senso-ji Temple): ตั้งอยู่ในเขต Taito หมวดหมู่ Temple & Shrine สถานีรถไฟที่ใกล้ที่สุดคือ ST_ASAKUSA โดยใช้เวลาเดินประมาณ 5 นาที เวลาเปิดทำการ: 06:00 - 17:00 (ตัวโบสถ์หลัก) / บริเวณวัดเปิด 24 ชั่วโมง และอัตราค่าเข้าชม: เข้าชมฟรี",
+    "content_en": "Visiting & Transit Guide for Senso-ji Temple: Located in Taito Ward, Category: Temple & Shrine. Nearest station is ST_ASAKUSA, approximately 5 minutes walk. Opening hours: 06:00 - 17:00 (ตัวโบสถ์หลัก) / บริเวณวัดเปิด 24 ชั่วโมง, Admission fee: เข้าชมฟรี.",
+    "ward": "Taito",
+    "category": "Temple & Shrine",
+    "nearest_station": "ST_ASAKUSA",
+    "walk_time_min": 5,
+    "tags": [
+      "วัดเซ็นโซจิ (วัดอาซากุสะ)",
+      "Senso-ji Temple",
+      "การเดินทาง",
+      "เวลาทำการ",
+      "ค่าเข้าชม",
+      "ST_ASAKUSA",
+      "Taito"
+    ]
+  },
+  {
+    "chunk_id": "C_P_TOKYO_SKYTREE_01",
+    "place_id": "P_TOKYO_SKYTREE",
+    "title": "โตเกียวสกายทรี (Tokyo Skytree) - ส่วนที่ 1",
+    "content_th": "โตเกียวสกายทรีเป็นหอคอยกระจายเสียงที่สูงที่สุดในโลก ด้วยความสูง 634 เมตร ด้านบนมีจุดชมวิว 2 ชั้น ได้แก่ Tembo Deck (ความสูง 350 เมตร) และ Tembo Galleria (ความสูง 450 เมตร) ที่สามารถมองเห็นทิวทัศน์ของมหานครโตเกียวแบบ 360 องศา และในวันที่ฟ้าโปร่งสามารถมองเห็นภูเขาไฟฟูจิได้อย่างชัดเจน ที่ฐานหอคอยมีศูนย์การค้า Tokyo Solamachi และพิพิธภัณฑ์สัตว์น้ำ",
+    "content_en": "Tokyo Skytree is the world's tallest freestanding broadcast tower at 634 meters. Features two observation decks offering panoramic 360-degree views of Tokyo and Mount Fuji on clear days, with the large Solamachi shopping complex at its base.",
+    "ward": "Sumida",
+    "category": "Landmark & Viewpoint",
+    "nearest_station": "ST_OSHIAGE",
+    "walk_time_min": 2,
+    "tags": [
+      "โตเกียวสกายทรี",
+      "Tokyo Skytree",
+      "東京スカイツリー",
+      "Sumida",
+      "Landmark & Viewpoint",
+      "ST_OSHIAGE"
+    ]
+  },
+  {
+    "chunk_id": "C_P_TOKYO_SKYTREE_02",
+    "place_id": "P_TOKYO_SKYTREE",
+    "title": "โตเกียวสกายทรี (Tokyo Skytree) - ส่วนที่ 2",
+    "content_th": "ที่ฐานหอคอยมีศูนย์การค้า Tokyo Solamachi และพิพิธภัณฑ์สัตว์น้ำ Sumida Aquarium",
+    "content_en": "",
+    "ward": "Sumida",
+    "category": "Landmark & Viewpoint",
+    "nearest_station": "ST_OSHIAGE",
+    "walk_time_min": 2,
+    "tags": [
+      "โตเกียวสกายทรี",
+      "Tokyo Skytree",
+      "東京スカイツリー",
+      "Sumida",
+      "Landmark & Viewpoint",
+      "ST_OSHIAGE"
+    ]
+  },
+  {
+    "chunk_id": "C_P_TOKYO_SKYTREE_INFO",
+    "place_id": "P_TOKYO_SKYTREE",
+    "title": "โตเกียวสกายทรี - ข้อมูลการเดินทางและการเยี่ยมชม",
+    "content_th": "ข้อมูลการเยี่ยมชมและการเดินทางสู่ โตเกียวสกายทรี (Tokyo Skytree): ตั้งอยู่ในเขต Sumida หมวดหมู่ Landmark & Viewpoint สถานีรถไฟที่ใกล้ที่สุดคือ ST_OSHIAGE โดยใช้เวลาเดินประมาณ 2 นาที เวลาเปิดทำการ: 10:00 - 21:00 (รอบสุดท้าย 20:00) และอัตราค่าเข้าชม: ผู้ใหญ่เริ่มต้น 2,100 เยน (ขึ้นอยู่กับชั้นชมวิว)",
+    "content_en": "Visiting & Transit Guide for Tokyo Skytree: Located in Sumida Ward, Category: Landmark & Viewpoint. Nearest station is ST_OSHIAGE, approximately 2 minutes walk. Opening hours: 10:00 - 21:00 (รอบสุดท้าย 20:00), Admission fee: ผู้ใหญ่เริ่มต้น 2,100 เยน (ขึ้นอยู่กับชั้นชมวิว).",
+    "ward": "Sumida",
+    "category": "Landmark & Viewpoint",
+    "nearest_station": "ST_OSHIAGE",
+    "walk_time_min": 2,
+    "tags": [
+      "โตเกียวสกายทรี",
+      "Tokyo Skytree",
+      "การเดินทาง",
+      "เวลาทำการ",
+      "ค่าเข้าชม",
+      "ST_OSHIAGE",
+      "Sumida"
+    ]
+  },
+  {
+    "chunk_id": "C_P_SHIBUYA_CROSSING_01",
+    "place_id": "P_SHIBUYA_CROSSING",
+    "title": "ห้าแยกชิบูย่าและรูปปั้นฮาจิโกะ (Shibuya Crossing & Hachiko Statue) - ส่วนที่ 1",
+    "content_th": "ห้าแยกชิบูย่าเป็นทางข้ามถนนที่มีผู้คนสัญจรพลุกพล่านที่สุดในโลก โดยมีคนเดินข้ามมากถึง 3,000 คนต่อหนึ่งสัญญาณไฟเขียว รายล้อมด้วยป้ายโฆษณาจอยักษ์แสงสีนีออน ใกล้กันมีรูปปั้นสุนัขยอดกตัญญู 'ฮาจิโกะ' ซึ่งเป็นจุดนัดพบยอดนิยมของชาวโตเกียว นักท่องเที่ยวสามารถชมวิวมุมสูงของห้าแยกได้จาก Shibuya Sky หรือร้านกาแฟชื่อดังรอบแยก",
+    "content_en": "The world's busiest pedestrian crossing, accommodating up to 3,000 people per green light. Surrounded by neon screens and adjacent to the iconic bronze statue of loyal dog Hachiko outside Shibuya Station.",
+    "ward": "Shibuya",
+    "category": "Landmark & Viewpoint",
+    "nearest_station": "ST_SHIBUYA",
+    "walk_time_min": 1,
+    "tags": [
+      "ห้าแยกชิบูย่าและรูปปั้นฮาจิโกะ",
+      "Shibuya Crossing & Hachiko Statue",
+      "渋谷スクランブル交差点",
+      "Shibuya",
+      "Landmark & Viewpoint",
+      "ST_SHIBUYA"
+    ]
+  },
+  {
+    "chunk_id": "C_P_SHIBUYA_CROSSING_INFO",
+    "place_id": "P_SHIBUYA_CROSSING",
+    "title": "ห้าแยกชิบูย่าและรูปปั้นฮาจิโกะ - ข้อมูลการเดินทางและการเยี่ยมชม",
+    "content_th": "ข้อมูลการเยี่ยมชมและการเดินทางสู่ ห้าแยกชิบูย่าและรูปปั้นฮาจิโกะ (Shibuya Crossing & Hachiko Statue): ตั้งอยู่ในเขต Shibuya หมวดหมู่ Landmark & Viewpoint สถานีรถไฟที่ใกล้ที่สุดคือ ST_SHIBUYA โดยใช้เวลาเดินประมาณ 1 นาที เวลาเปิดทำการ: เปิด 24 ชั่วโมง และอัตราค่าเข้าชม: เข้าชมฟรี",
+    "content_en": "Visiting & Transit Guide for Shibuya Crossing & Hachiko Statue: Located in Shibuya Ward, Category: Landmark & Viewpoint. Nearest station is ST_SHIBUYA, approximately 1 minutes walk. Opening hours: เปิด 24 ชั่วโมง, Admission fee: เข้าชมฟรี.",
+    "ward": "Shibuya",
+    "category": "Landmark & Viewpoint",
+    "nearest_station": "ST_SHIBUYA",
+    "walk_time_min": 1,
+    "tags": [
+      "ห้าแยกชิบูย่าและรูปปั้นฮาจิโกะ",
+      "Shibuya Crossing & Hachiko Statue",
+      "การเดินทาง",
+      "เวลาทำการ",
+      "ค่าเข้าชม",
+      "ST_SHIBUYA",
+      "Shibuya"
+    ]
+  },
+  {
+    "chunk_id": "C_P_MEIJI_JINGU_01",
+    "place_id": "P_MEIJI_JINGU",
+    "title": "ศาลเจ้าเมจิ (Meiji Jingu Shrine) - ส่วนที่ 1",
+    "content_th": "ศาลเจ้าชินโตที่สร้างขึ้นเพื่ออุทิศถวายแด่จักรพรรดิเมจิและจักรพรรดินีโชเก็ง ตั้งอยู่ท่ามกลางผืนป่าธรรมชาติอันเงียบสงบกว่า 100,000 ต้นใจกลางโตเกียว ทางเข้ามีเสาโทริอิไม้ขนาดใหญ่ ซุ้มถังสาเกบูชา และเส้นทางเดินกรวดอันร่มรื่น เป็นสถานที่ศักดิ์สิทธิ์ที่นิยมจัดพิธีแต่งงานแบบชินโตดั้งเดิมและขอพรปีใหม่ (Hatsumode)",
+    "content_en": "A tranquil Shinto shrine dedicated to Emperor Meiji and Empress Shoken, nestled within a lush 170-acre evergreen forest in the heart of Tokyo. Known for its massive wooden torii gates and vibrant sake barrel displays.",
+    "ward": "Shibuya",
+    "category": "Temple & Shrine",
+    "nearest_station": "ST_HARAJUKU",
+    "walk_time_min": 3,
+    "tags": [
+      "ศาลเจ้าเมจิ",
+      "Meiji Jingu Shrine",
+      "明治神宮",
+      "Shibuya",
+      "Temple & Shrine",
+      "ST_HARAJUKU"
+    ]
+  },
+  {
+    "chunk_id": "C_P_MEIJI_JINGU_INFO",
+    "place_id": "P_MEIJI_JINGU",
+    "title": "ศาลเจ้าเมจิ - ข้อมูลการเดินทางและการเยี่ยมชม",
+    "content_th": "ข้อมูลการเยี่ยมชมและการเดินทางสู่ ศาลเจ้าเมจิ (Meiji Jingu Shrine): ตั้งอยู่ในเขต Shibuya หมวดหมู่ Temple & Shrine สถานีรถไฟที่ใกล้ที่สุดคือ ST_HARAJUKU โดยใช้เวลาเดินประมาณ 3 นาที เวลาเปิดทำการ: เปิดตั้งแต่พระอาทิตย์ขึ้นจนถึงพระอาทิตย์ตก (ประมาณ 05:00 - 18:00) และอัตราค่าเข้าชม: เข้าชมฟรี (ส่วนสวนชั้นใน Inner Garden มีค่าเข้า 500 เยน)",
+    "content_en": "Visiting & Transit Guide for Meiji Jingu Shrine: Located in Shibuya Ward, Category: Temple & Shrine. Nearest station is ST_HARAJUKU, approximately 3 minutes walk. Opening hours: เปิดตั้งแต่พระอาทิตย์ขึ้นจนถึงพระอาทิตย์ตก (ประมาณ 05:00 - 18:00), Admission fee: เข้าชมฟรี (ส่วนสวนชั้นใน Inner Garden มีค่าเข้า 500 เยน).",
+    "ward": "Shibuya",
+    "category": "Temple & Shrine",
+    "nearest_station": "ST_HARAJUKU",
+    "walk_time_min": 3,
+    "tags": [
+      "ศาลเจ้าเมจิ",
+      "Meiji Jingu Shrine",
+      "การเดินทาง",
+      "เวลาทำการ",
+      "ค่าเข้าชม",
+      "ST_HARAJUKU",
+      "Shibuya"
+    ]
+  },
+  {
+    "chunk_id": "C_P_TOKYO_TOWER_01",
+    "place_id": "P_TOKYO_TOWER",
+    "title": "โตเกียวทาวเวอร์ (Tokyo Tower) - ส่วนที่ 1",
+    "content_th": "หอคอยสื่อสารโครงเหล็กสีส้มขาวอันเป็นสัญลักษณ์คลาสสิกของโตเกียว สร้างขึ้นในปี ค.ศ. 1958 ด้วยความสูง 333 เมตร ได้รับแรงบันดาลใจจากหอไอเฟลในปารีส มีจุดชมวิว Main Deck (150 เมตร) และ Top Deck (250 เมตร) ในยามค่ำคืนจะมีการเปิดไฟประดับสวยงาม (Light-up) เปลี่ยนตามฤดูกาลและเทศกาล",
+    "content_en": "Built in 1958, this 333-meter retro-chic communications tower was modeled after Paris's Eiffel Tower. Features observation decks at 150m and 250m, glowing with spectacular seasonal illuminations at night.",
+    "ward": "Minato",
+    "category": "Landmark & Viewpoint",
+    "nearest_station": "ST_HAMAMATSUCHO",
+    "walk_time_min": 15,
+    "tags": [
+      "โตเกียวทาวเวอร์",
+      "Tokyo Tower",
+      "東京タワー",
+      "Minato",
+      "Landmark & Viewpoint",
+      "ST_HAMAMATSUCHO"
+    ]
+  },
+  {
+    "chunk_id": "C_P_TOKYO_TOWER_INFO",
+    "place_id": "P_TOKYO_TOWER",
+    "title": "โตเกียวทาวเวอร์ - ข้อมูลการเดินทางและการเยี่ยมชม",
+    "content_th": "ข้อมูลการเยี่ยมชมและการเดินทางสู่ โตเกียวทาวเวอร์ (Tokyo Tower): ตั้งอยู่ในเขต Minato หมวดหมู่ Landmark & Viewpoint สถานีรถไฟที่ใกล้ที่สุดคือ ST_HAMAMATSUCHO โดยใช้เวลาเดินประมาณ 15 นาที เวลาเปิดทำการ: 09:00 - 22:30 และอัตราค่าเข้าชม: Main Deck ผู้ใหญ่ 1,200 เยน / Top Deck Tour 3,000 เยน",
+    "content_en": "Visiting & Transit Guide for Tokyo Tower: Located in Minato Ward, Category: Landmark & Viewpoint. Nearest station is ST_HAMAMATSUCHO, approximately 15 minutes walk. Opening hours: 09:00 - 22:30, Admission fee: Main Deck ผู้ใหญ่ 1,200 เยน / Top Deck Tour 3,000 เยน.",
+    "ward": "Minato",
+    "category": "Landmark & Viewpoint",
+    "nearest_station": "ST_HAMAMATSUCHO",
+    "walk_time_min": 15,
+    "tags": [
+      "โตเกียวทาวเวอร์",
+      "Tokyo Tower",
+      "การเดินทาง",
+      "เวลาทำการ",
+      "ค่าเข้าชม",
+      "ST_HAMAMATSUCHO",
+      "Minato"
+    ]
+  },
+  {
+    "chunk_id": "C_P_SHINJUKU_GYOEN_01",
+    "place_id": "P_SHINJUKU_GYOEN",
+    "title": "สวนสาธารณะชินจูกุเกียวเอ็น (Shinjuku Gyoen National Garden) - ส่วนที่ 1",
+    "content_th": "สวนสาธารณะขนาดใหญ่เนื้อที่กว่า 144 เอเคอร์ ผสมผสานศิลปะการจัดสวน 3 รูปแบบไว้ด้วยกันอย่างลงตัว ได้แก่ สวนสไตล์ญี่ปุ่นดั้งเดิม สวนสมมาตรสไตล์ฝรั่งเศส และสวนภูมิทัศน์สไตล์อังกฤษ ในช่วงฤดูใบไม้ผลิเป็นจุดชมซากุระยอดนิยมที่มีต้นซากุระกว่าพันต้นหลากสายพันธุ์ และในฤดูใบไม้ร่วงใบไม้จะเปลี่ยนเป็นสีแดงสดใส",
+    "content_en": "One of Tokyo's largest and most popular national parks, blending three distinct landscape styles: Japanese traditional, English landscape, and French formal. A premier cherry blossom viewing haven in spring.",
+    "ward": "Shinjuku",
+    "category": "Nature & Park",
+    "nearest_station": "ST_SHINJUKU_GYOEMMAE",
+    "walk_time_min": 5,
+    "tags": [
+      "สวนสาธารณะชินจูกุเกียวเอ็น",
+      "Shinjuku Gyoen National Garden",
+      "新宿御苑",
+      "Shinjuku",
+      "Nature & Park",
+      "ST_SHINJUKU_GYOEMMAE"
+    ]
+  },
+  {
+    "chunk_id": "C_P_SHINJUKU_GYOEN_INFO",
+    "place_id": "P_SHINJUKU_GYOEN",
+    "title": "สวนสาธารณะชินจูกุเกียวเอ็น - ข้อมูลการเดินทางและการเยี่ยมชม",
+    "content_th": "ข้อมูลการเยี่ยมชมและการเดินทางสู่ สวนสาธารณะชินจูกุเกียวเอ็น (Shinjuku Gyoen National Garden): ตั้งอยู่ในเขต Shinjuku หมวดหมู่ Nature & Park สถานีรถไฟที่ใกล้ที่สุดคือ ST_SHINJUKU_GYOEMMAE โดยใช้เวลาเดินประมาณ 5 นาที เวลาเปิดทำการ: 09:00 - 16:30 (ปิดทุกวันจันทร์) และอัตราค่าเข้าชม: ผู้ใหญ่ 500 เยน",
+    "content_en": "Visiting & Transit Guide for Shinjuku Gyoen National Garden: Located in Shinjuku Ward, Category: Nature & Park. Nearest station is ST_SHINJUKU_GYOEMMAE, approximately 5 minutes walk. Opening hours: 09:00 - 16:30 (ปิดทุกวันจันทร์), Admission fee: ผู้ใหญ่ 500 เยน.",
+    "ward": "Shinjuku",
+    "category": "Nature & Park",
+    "nearest_station": "ST_SHINJUKU_GYOEMMAE",
+    "walk_time_min": 5,
+    "tags": [
+      "สวนสาธารณะชินจูกุเกียวเอ็น",
+      "Shinjuku Gyoen National Garden",
+      "การเดินทาง",
+      "เวลาทำการ",
+      "ค่าเข้าชม",
+      "ST_SHINJUKU_GYOEMMAE",
+      "Shinjuku"
+    ]
+  },
+  {
+    "chunk_id": "C_P_AKIHABARA_ELECTRIC_01",
+    "place_id": "P_AKIHABARA_ELECTRIC",
+    "title": "ย่านเครื่องใช้ไฟฟ้าและอนิเมะอากิฮาบาระ (Akihabara Electric Town) - ส่วนที่ 1",
+    "content_th": "ศูนย์กลางวัฒนธรรมโอตาคุ อนิเมะ มังงะ ฟิกเกอร์ และอุปกรณ์อิเล็กทรอนิกส์ระดับโลก บนถนน Chuo-dori เต็มไปด้วยร้านค้าชื่อดัง เช่น Mandarake, Radio Kaikan, Yodobashi Camera รวมถึงคาเฟ่ธีมเมดคาเฟ่ (Maid Cafe) และตู้เกมอาร์เคดหลายชั้น",
+    "content_en": "The global Mecca for otaku pop culture, gaming, anime, manga, retro electronics, and multi-story hobby shops like Mandarake, Radio Kaikan, and maid cafes.",
+    "ward": "Chiyoda",
+    "category": "Shopping & Entertainment",
+    "nearest_station": "ST_AKIHABARA",
+    "walk_time_min": 1,
+    "tags": [
+      "ย่านเครื่องใช้ไฟฟ้าและอนิเมะอากิฮาบาระ",
+      "Akihabara Electric Town",
+      "秋葉原電気街",
+      "Chiyoda",
+      "Shopping & Entertainment",
+      "ST_AKIHABARA"
+    ]
+  },
+  {
+    "chunk_id": "C_P_AKIHABARA_ELECTRIC_INFO",
+    "place_id": "P_AKIHABARA_ELECTRIC",
+    "title": "ย่านเครื่องใช้ไฟฟ้าและอนิเมะอากิฮาบาระ - ข้อมูลการเดินทางและการเยี่ยมชม",
+    "content_th": "ข้อมูลการเยี่ยมชมและการเดินทางสู่ ย่านเครื่องใช้ไฟฟ้าและอนิเมะอากิฮาบาระ (Akihabara Electric Town): ตั้งอยู่ในเขต Chiyoda หมวดหมู่ Shopping & Entertainment สถานีรถไฟที่ใกล้ที่สุดคือ ST_AKIHABARA โดยใช้เวลาเดินประมาณ 1 นาที เวลาเปิดทำการ: ร้านค้าส่วนใหญ่เปิด 10:00 - 20:00 และอัตราค่าเข้าชม: เดินชมฟรี",
+    "content_en": "Visiting & Transit Guide for Akihabara Electric Town: Located in Chiyoda Ward, Category: Shopping & Entertainment. Nearest station is ST_AKIHABARA, approximately 1 minutes walk. Opening hours: ร้านค้าส่วนใหญ่เปิด 10:00 - 20:00, Admission fee: เดินชมฟรี.",
+    "ward": "Chiyoda",
+    "category": "Shopping & Entertainment",
+    "nearest_station": "ST_AKIHABARA",
+    "walk_time_min": 1,
+    "tags": [
+      "ย่านเครื่องใช้ไฟฟ้าและอนิเมะอากิฮาบาระ",
+      "Akihabara Electric Town",
+      "การเดินทาง",
+      "เวลาทำการ",
+      "ค่าเข้าชม",
+      "ST_AKIHABARA",
+      "Chiyoda"
+    ]
+  },
+  {
+    "chunk_id": "C_P_TSUKIJI_OUTER_01",
+    "place_id": "P_TSUKIJI_OUTER",
+    "title": "ตลาดปลาสึกิจิ (ตลาดนอก) (Tsukiji Outer Market) - ส่วนที่ 1",
+    "content_th": "ตลาดอาหารสตรีทฟู้ดและวัตถุดิบทางทะเลสดใหม่ใจกลางโตเกียว มีร้านค้าและแผงลอยกว่า 400 ร้าน จำหน่ายซาชิมิสด ข้าวหน้าปลาดิบ (Kaisendon) หอยเชลล์ย่าง ไข่หวานย่างร้อนๆ (Tamagoyaki) และผลไม้ตามฤดูกาล เป็นสวรรค์ของนักชิมที่เปิดให้บริการตั้งแต่เช้าตรู่",
+    "content_en": "A lively open-air seafood and food haven with hundreds of stalls offering fresh sashimi, grilled oysters, wagyu skewers, tamagoyaki (sweet omelet), and kitchenware.",
+    "ward": "Chuo",
+    "category": "Food & Market",
+    "nearest_station": "ST_TSUKIJI",
+    "walk_time_min": 4,
+    "tags": [
+      "ตลาดปลาสึกิจิ (ตลาดนอก)",
+      "Tsukiji Outer Market",
+      "築地場外市場",
+      "Chuo",
+      "Food & Market",
+      "ST_TSUKIJI"
+    ]
+  },
+  {
+    "chunk_id": "C_P_TSUKIJI_OUTER_INFO",
+    "place_id": "P_TSUKIJI_OUTER",
+    "title": "ตลาดปลาสึกิจิ (ตลาดนอก) - ข้อมูลการเดินทางและการเยี่ยมชม",
+    "content_th": "ข้อมูลการเยี่ยมชมและการเดินทางสู่ ตลาดปลาสึกิจิ (ตลาดนอก) (Tsukiji Outer Market): ตั้งอยู่ในเขต Chuo หมวดหมู่ Food & Market สถานีรถไฟที่ใกล้ที่สุดคือ ST_TSUKIJI โดยใช้เวลาเดินประมาณ 4 นาที เวลาเปิดทำการ: 06:00 - 14:00 (ร้านส่วนใหญ่ปิดวันพุธและอาทิตย์) และอัตราค่าเข้าชม: เข้าชมฟรี",
+    "content_en": "Visiting & Transit Guide for Tsukiji Outer Market: Located in Chuo Ward, Category: Food & Market. Nearest station is ST_TSUKIJI, approximately 4 minutes walk. Opening hours: 06:00 - 14:00 (ร้านส่วนใหญ่ปิดวันพุธและอาทิตย์), Admission fee: เข้าชมฟรี.",
+    "ward": "Chuo",
+    "category": "Food & Market",
+    "nearest_station": "ST_TSUKIJI",
+    "walk_time_min": 4,
+    "tags": [
+      "ตลาดปลาสึกิจิ (ตลาดนอก)",
+      "Tsukiji Outer Market",
+      "การเดินทาง",
+      "เวลาทำการ",
+      "ค่าเข้าชม",
+      "ST_TSUKIJI",
+      "Chuo"
+    ]
+  },
+  {
+    "chunk_id": "C_P_UENO_PARK_01",
+    "place_id": "P_UENO_PARK",
+    "title": "สวนอุเอโนะและพิพิธภัณฑ์แห่งชาติ (Ueno Park & National Museum) - ส่วนที่ 1",
+    "content_th": "สวนสาธารณะขนาดใหญ่ที่มีความสำคัญทางวัฒนธรรม ภายในเป็นที่ตั้งของสระบัวชิโนบาซุ (Shinobazu Pond) สวนสัตว์อุเอโนะซึ่งมีแพนด้าชื่อดัง และพิพิธภัณฑ์ชั้นนำของญี่ปุ่น ได้แก่ พิพิธภัณฑ์แห่งชาติโตเกียว (Tokyo National Museum) และพิพิธภัณฑ์ศิลปะตะวันตกแห่งชาติ (NMWA)",
+    "content_en": "A sprawling cultural park home to prestigious institutions including the Tokyo National Museum, National Museum of Western Art, Shinobazu Lotus Pond, and Ueno Zoo.",
+    "ward": "Taito",
+    "category": "Culture & Museum",
+    "nearest_station": "ST_UENO",
+    "walk_time_min": 2,
+    "tags": [
+      "สวนอุเอโนะและพิพิธภัณฑ์แห่งชาติ",
+      "Ueno Park & National Museum",
+      "上野恩賜公園",
+      "Taito",
+      "Culture & Museum",
+      "ST_UENO"
+    ]
+  },
+  {
+    "chunk_id": "C_P_UENO_PARK_INFO",
+    "place_id": "P_UENO_PARK",
+    "title": "สวนอุเอโนะและพิพิธภัณฑ์แห่งชาติ - ข้อมูลการเดินทางและการเยี่ยมชม",
+    "content_th": "ข้อมูลการเยี่ยมชมและการเดินทางสู่ สวนอุเอโนะและพิพิธภัณฑ์แห่งชาติ (Ueno Park & National Museum): ตั้งอยู่ในเขต Taito หมวดหมู่ Culture & Museum สถานีรถไฟที่ใกล้ที่สุดคือ ST_UENO โดยใช้เวลาเดินประมาณ 2 นาที เวลาเปิดทำการ: 05:00 - 23:00 (สวนเปิด) / พิพิธภัณฑ์เปิด 09:30 - 17:00 และอัตราค่าเข้าชม: เข้าสวนฟรี / ตั๋วเข้าพิพิธภัณฑ์เริ่มต้น 1,000 เยน",
+    "content_en": "Visiting & Transit Guide for Ueno Park & National Museum: Located in Taito Ward, Category: Culture & Museum. Nearest station is ST_UENO, approximately 2 minutes walk. Opening hours: 05:00 - 23:00 (สวนเปิด) / พิพิธภัณฑ์เปิด 09:30 - 17:00, Admission fee: เข้าสวนฟรี / ตั๋วเข้าพิพิธภัณฑ์เริ่มต้น 1,000 เยน.",
+    "ward": "Taito",
+    "category": "Culture & Museum",
+    "nearest_station": "ST_UENO",
+    "walk_time_min": 2,
+    "tags": [
+      "สวนอุเอโนะและพิพิธภัณฑ์แห่งชาติ",
+      "Ueno Park & National Museum",
+      "การเดินทาง",
+      "เวลาทำการ",
+      "ค่าเข้าชม",
+      "ST_UENO",
+      "Taito"
+    ]
+  },
+  {
+    "chunk_id": "C_P_ROPPONGI_HILLS_01",
+    "place_id": "P_ROPPONGI_HILLS",
+    "title": "รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View) - ส่วนที่ 1",
+    "content_th": "อาคารมิกซ์ยูสระดับไฮเอนด์ที่มี Mori Tower สูง 54 ชั้น ด้านบนเป็นที่ตั้งของพิพิธภัณฑ์ศิลปะ Mori Art Museum และจุดชมวิว Tokyo City View ที่มองเห็นโตเกียวทาวเวอร์ในมุมมองที่งดงามที่สุดจุดหนึ่งของโตเกียว ด้านล่างมีประติมากรรมแมงมุมยักษ์ Maman และร้านอาหารระดับมิชลิน",
+    "content_en": "A modern urban complex centered around the 54-story Mori Tower, featuring the acclaimed Mori Art Museum and Tokyo City View indoor/outdoor observation deck with iconic vantage points of Tokyo Tower.",
+    "ward": "Minato",
+    "category": "Landmark & Viewpoint",
+    "nearest_station": "ST_ROPPONGI",
+    "walk_time_min": 3,
+    "tags": [
+      "รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว",
+      "Roppongi Hills & Tokyo City View",
+      "六本木ヒルズ",
+      "Minato",
+      "Landmark & Viewpoint",
+      "ST_ROPPONGI"
+    ]
+  },
+  {
+    "chunk_id": "C_P_ROPPONGI_HILLS_INFO",
+    "place_id": "P_ROPPONGI_HILLS",
+    "title": "รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว - ข้อมูลการเดินทางและการเยี่ยมชม",
+    "content_th": "ข้อมูลการเยี่ยมชมและการเดินทางสู่ รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว (Roppongi Hills & Tokyo City View): ตั้งอยู่ในเขต Minato หมวดหมู่ Landmark & Viewpoint สถานีรถไฟที่ใกล้ที่สุดคือ ST_ROPPONGI โดยใช้เวลาเดินประมาณ 3 นาที เวลาเปิดทำการ: 10:00 - 22:00 และอัตราค่าเข้าชม: จุดชมวิวและพิพิธภัณฑ์ผู้ใหญ่ประมาณ 2,000 เยน",
+    "content_en": "Visiting & Transit Guide for Roppongi Hills & Tokyo City View: Located in Minato Ward, Category: Landmark & Viewpoint. Nearest station is ST_ROPPONGI, approximately 3 minutes walk. Opening hours: 10:00 - 22:00, Admission fee: จุดชมวิวและพิพิธภัณฑ์ผู้ใหญ่ประมาณ 2,000 เยน.",
+    "ward": "Minato",
+    "category": "Landmark & Viewpoint",
+    "nearest_station": "ST_ROPPONGI",
+    "walk_time_min": 3,
+    "tags": [
+      "รปปงงิฮิลส์และจุดชมวิวโตเกียวซิตี้วิว",
+      "Roppongi Hills & Tokyo City View",
+      "การเดินทาง",
+      "เวลาทำการ",
+      "ค่าเข้าชม",
+      "ST_ROPPONGI",
+      "Minato"
+    ]
+  },
+  {
+    "chunk_id": "C_P_GINZA_SIX_01",
+    "place_id": "P_GINZA_SIX",
+    "title": "ย่านช้อปปิ้งกินซ่าและห้างกินซ่าซิกซ์ (Ginza Shopping District & GINZA SIX) - ส่วนที่ 1",
+    "content_th": "ย่านการค้าสุดหรูหราอันดับหนึ่งของญี่ปุ่น เรียงรายด้วยแฟลกชิปสโตร์ของแบรนด์เนมระดับโลก ห้างสรรพสินค้าเก่าแก่ และห้าง GINZA SIX ที่มีการจัดแสดงงานศิลปะร่วมสมัย เช่น ผลงานโคมฟักทองของ Yayoi Kusama บนดาดฟ้ามีสวนสาธารณะลอยฟ้า Ginza Six Garden",
+    "content_en": "Tokyo's premier luxury shopping boulevard, home to global flagship boutiques, traditional department stores, and the upscale GINZA SIX complex with contemporary art installations and rooftop garden.",
+    "ward": "Chuo",
+    "category": "Shopping & Entertainment",
+    "nearest_station": "ST_GINZA",
+    "walk_time_min": 2,
+    "tags": [
+      "ย่านช้อปปิ้งกินซ่าและห้างกินซ่าซิกซ์",
+      "Ginza Shopping District & GINZA SIX",
+      "銀座SIX",
+      "Chuo",
+      "Shopping & Entertainment",
+      "ST_GINZA"
+    ]
+  },
+  {
+    "chunk_id": "C_P_GINZA_SIX_INFO",
+    "place_id": "P_GINZA_SIX",
+    "title": "ย่านช้อปปิ้งกินซ่าและห้างกินซ่าซิกซ์ - ข้อมูลการเดินทางและการเยี่ยมชม",
+    "content_th": "ข้อมูลการเยี่ยมชมและการเดินทางสู่ ย่านช้อปปิ้งกินซ่าและห้างกินซ่าซิกซ์ (Ginza Shopping District & GINZA SIX): ตั้งอยู่ในเขต Chuo หมวดหมู่ Shopping & Entertainment สถานีรถไฟที่ใกล้ที่สุดคือ ST_GINZA โดยใช้เวลาเดินประมาณ 2 นาที เวลาเปิดทำการ: 10:30 - 20:30 และอัตราค่าเข้าชม: เข้าชมฟรี",
+    "content_en": "Visiting & Transit Guide for Ginza Shopping District & GINZA SIX: Located in Chuo Ward, Category: Shopping & Entertainment. Nearest station is ST_GINZA, approximately 2 minutes walk. Opening hours: 10:30 - 20:30, Admission fee: เข้าชมฟรี.",
+    "ward": "Chuo",
+    "category": "Shopping & Entertainment",
+    "nearest_station": "ST_GINZA",
+    "walk_time_min": 2,
+    "tags": [
+      "ย่านช้อปปิ้งกินซ่าและห้างกินซ่าซิกซ์",
+      "Ginza Shopping District & GINZA SIX",
+      "การเดินทาง",
+      "เวลาทำการ",
+      "ค่าเข้าชม",
+      "ST_GINZA",
+      "Chuo"
+    ]
+  },
+  {
+    "chunk_id": "C_P_ODAIBA_GUNDAM_01",
+    "place_id": "P_ODAIBA_GUNDAM",
+    "title": "โอไดบะและหุ่นยนต์กันดั้มยักษ์ยูนิคอร์น (Odaiba & Unicorn Gundam Statue) - ส่วนที่ 1",
+    "content_th": "เกาะเทียมริมอ่าวโตเกียว แหล่งรวมความบันเทิงยอดนิยม มีไฮไลต์คือหุ่นยนต์กันดั้มขนาดเท่าของจริง Life-sized Unicorn Gundam สูง 19.7 เมตร หน้าห้าง DiverCity Tokyo Plaza ซึ่งจะมีการแปลงร่างจากโหมด Unicorn เป็น Destroy Mode พร้อมแสดงแสงสีเสียงทุกวัน นอกจากนี้ยังมีสะพานสายรุ้ง (Rainbow Bridge) และเทพีเสรีภาพจำลอง",
+    "content_en": "A futuristic entertainment island on Tokyo Bay featuring the full-scale 19.7-meter Unicorn Gundam statue outside DiverCity Tokyo Plaza, the scenic Rainbow Bridge, and beachside promenades.",
+    "ward": "Minato",
+    "category": "Shopping & Entertainment",
+    "nearest_station": "ST_ODAIBA_KAIHINKOEN",
+    "walk_time_min": 5,
+    "tags": [
+      "โอไดบะและหุ่นยนต์กันดั้มยักษ์ยูนิคอร์น",
+      "Odaiba & Unicorn Gundam Statue",
+      "お台場 ユニコーンガンダム",
+      "Minato",
+      "Shopping & Entertainment",
+      "ST_ODAIBA_KAIHINKOEN"
+    ]
+  },
+  {
+    "chunk_id": "C_P_ODAIBA_GUNDAM_INFO",
+    "place_id": "P_ODAIBA_GUNDAM",
+    "title": "โอไดบะและหุ่นยนต์กันดั้มยักษ์ยูนิคอร์น - ข้อมูลการเดินทางและการเยี่ยมชม",
+    "content_th": "ข้อมูลการเยี่ยมชมและการเดินทางสู่ โอไดบะและหุ่นยนต์กันดั้มยักษ์ยูนิคอร์น (Odaiba & Unicorn Gundam Statue): ตั้งอยู่ในเขต Minato หมวดหมู่ Shopping & Entertainment สถานีรถไฟที่ใกล้ที่สุดคือ ST_ODAIBA_KAIHINKOEN โดยใช้เวลาเดินประมาณ 5 นาที เวลาเปิดทำการ: ชมหุ่นยนต์เปิด 24 ชั่วโมง / การแสดงแสงสีเสียงช่วงค่ำ (19:00 - 21:30) และอัตราค่าเข้าชม: ชมฟรี",
+    "content_en": "Visiting & Transit Guide for Odaiba & Unicorn Gundam Statue: Located in Minato Ward, Category: Shopping & Entertainment. Nearest station is ST_ODAIBA_KAIHINKOEN, approximately 5 minutes walk. Opening hours: ชมหุ่นยนต์เปิด 24 ชั่วโมง / การแสดงแสงสีเสียงช่วงค่ำ (19:00 - 21:30), Admission fee: ชมฟรี.",
+    "ward": "Minato",
+    "category": "Shopping & Entertainment",
+    "nearest_station": "ST_ODAIBA_KAIHINKOEN",
+    "walk_time_min": 5,
+    "tags": [
+      "โอไดบะและหุ่นยนต์กันดั้มยักษ์ยูนิคอร์น",
+      "Odaiba & Unicorn Gundam Statue",
+      "การเดินทาง",
+      "เวลาทำการ",
+      "ค่าเข้าชม",
+      "ST_ODAIBA_KAIHINKOEN",
+      "Minato"
+    ]
+  }
+]

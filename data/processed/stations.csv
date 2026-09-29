@@ -1,0 +1,18 @@
+﻿station_id,name_th,name_en,name_ja,lines,ward,latitude,longitude
+ST_TOKYO,สถานีโตเกียว,Tokyo Station,東京駅,LN_YAMANOTE;LN_MARUNOUCHI,Chiyoda,35.681236,139.767125
+ST_SHINJUKU,สถานีชินจูกุ,Shinjuku Station,新宿駅,LN_YAMANOTE;LN_MARUNOUCHI;LN_OEDO;LN_CHUO_SOBU,Shinjuku,35.689607,139.700571
+ST_SHIBUYA,สถานีชิบูย่า,Shibuya Station,渋谷駅,LN_YAMANOTE;LN_GINZA;LN_HANZOMON,Shibuya,35.658034,139.701636
+ST_ASAKUSA,สถานีอาซากุสะ,Asakusa Station,浅草駅,LN_GINZA;LN_ASAKUSA,Taito,35.712285,139.798363
+ST_UENO,สถานีอุเอโนะ,Ueno Station,上野駅,LN_YAMANOTE;LN_GINZA;LN_HIBIYA,Taito,35.713768,139.777254
+ST_AKIHABARA,สถานีอากิฮาบาระ,Akihabara Station,秋葉原駅,LN_YAMANOTE;LN_HIBIYA;LN_CHUO_SOBU,Chiyoda,35.698383,139.773072
+ST_GINZA,สถานีกินซ่า,Ginza Station,銀座駅,LN_GINZA;LN_MARUNOUCHI;LN_HIBIYA,Chuo,35.671989,139.763965
+ST_ROPPONGI,สถานีรปปงงิ,Roppongi Station,六本木駅,LN_HIBIYA;LN_OEDO,Minato,35.662837,139.731443
+ST_OSHIAGE,สถานีโอชิอาเกะ (สกายทรี),Oshiage (Skytree) Station,押上駅,LN_ASAKUSA;LN_HANZOMON,Sumida,35.710609,139.813292
+ST_HARAJUKU,สถานีฮาราจูกุ,Harajuku Station,原宿駅,LN_YAMANOTE,Shibuya,35.670168,139.702687
+ST_SHIMBASHI,สถานีชิมบาชิ,Shimbashi Station,新橋駅,LN_YAMANOTE;LN_GINZA;LN_ASAKUSA;LN_YURIKAMOME,Minato,35.666379,139.75834
+ST_HAMAMATSUCHO,สถานีฮามามัตสึโจ (โตเกียวทาวเวอร์),Hamamatsucho Station,浜松町駅,LN_YAMANOTE;LN_OEDO,Minato,35.655381,139.757135
+ST_IKEBUKURO,สถานีอิเคะบุคุโระ,Ikebukuro Station,池袋駅,LN_YAMANOTE;LN_MARUNOUCHI,Toshima,35.729503,139.7109
+ST_ODAIBA_KAIHINKOEN,สถานีโอไดบะ ไคฮินโคเอ็น,Odaiba-Kaihinkoen Station,お台場海浜公園駅,LN_YURIKAMOME,Minato,35.629344,139.777085
+ST_SHINJUKU_GYOEMMAE,สถานีชินจูกุเกียวเอ็นมาเอะ,Shinjuku-gyoemmae Station,新宿御苑前駅,LN_MARUNOUCHI,Shinjuku,35.688647,139.710928
+ST_TSUKIJI,สถานีสึกิจิ,Tsukiji Station,築地駅,LN_HIBIYA,Chuo,35.667794,139.772591
+ST_TOYOSU,สถานีโทโยสุ,Toyosu Station,豊洲駅,LN_YURIKAMOME,Koto,35.654824,139.796338

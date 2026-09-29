@@ -1,0 +1,10 @@
+﻿line_id,name_th,name_en,line_code,operator,color
+LN_YAMANOTE,รถไฟสายยามาโนเตะ (JR Yamanote Line),JR Yamanote Line,JY,JR East,#9ACD32
+LN_GINZA,รถไฟใต้ดินสายกินซ่า (Tokyo Metro Ginza Line),Tokyo Metro Ginza Line,G,Tokyo Metro,#FF9500
+LN_MARUNOUCHI,รถไฟใต้ดินสายมารุโนอุจิ (Tokyo Metro Marunouchi Line),Tokyo Metro Marunouchi Line,M,Tokyo Metro,#E60012
+LN_HIBIYA,รถไฟใต้ดินสายฮิบิยะ (Tokyo Metro Hibiya Line),Tokyo Metro Hibiya Line,H,Tokyo Metro,#B5B5AC
+LN_HANZOMON,รถไฟใต้ดินสายฮันโซมอน (Tokyo Metro Hanzomon Line),Tokyo Metro Hanzomon Line,Z,Tokyo Metro,#8F76D6
+LN_ASAKUSA,รถไฟใต้ดินสายอาซากุสะ (Toei Asakusa Line),Toei Asakusa Line,A,Toei Subway,#E85298
+LN_OEDO,รถไฟใต้ดินสายโอเอโดะ (Toei Oedo Line),Toei Oedo Line,E,Toei Subway,#B6007A
+LN_CHUO_SOBU,รถไฟสายชูโอ-โซบุ (JR Chuo-Sobu Line),JR Chuo-Sobu Line,JB,JR East,#FFD700
+LN_YURIKAMOME,รถไฟโมโนเรลสายยูริคาโมเมะ (Yurikamome Line),Yurikamome Line,U,Tokyo Waterfront New Transit,#0099FF
