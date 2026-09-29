@@ -36,7 +36,50 @@
 
 ---
 
-## 3. การเปรียบเทียบจุดเด่นของ Graph RAG เหนือ Vector RAG ทั่วไป
+## 3. ตารางเปรียบเทียบเวลา (Latency) และการใช้ทรัพยากรของทุกโมเดล
+
+### 3.1 การเปรียบเทียบเวลาของโมเดลค้นหา (Retrieval Components Latency)
+*(ทดสอบด้วยคำถามชุดเดียวกันบนเครื่องจริง)*
+
+| คอมโพเนนต์ / โมเดล | หน้าที่ในระบบ | เวลาเฉลี่ย (Average Latency) | ช่วงเวลา (Min - Max) | การบริโภคทรัพยากร |
+| :---| :---| :---: | :---: | :---: |
+| **Response Cache (In-Memory)** | คืนค่าคำตอบซ้ำจากแคชทันที | **0.019 ms** | 0.010 – 0.046 ms | 0% CPU / RAM < 1 MB |
+| **FAISS Dense Search** | Semantic Vector Search (Cosine Similarity) | **25.39 ms** | 16.86 – 50.73 ms | RAM ~80 MB |
+| **BM25 Sparse Search** | Keyword Matching ด้วย PyThaiNLP | **150.48 ms** | 0.13 – 751.86 ms | RAM ~35 MB |
+| **Neo4j / Graph Pathfinder** | ค้นหาเส้นทางสั้นสุด (Shortest Path & Duration) | **805.22 ms** | 0.06 – 1011.78 ms | RAM ~50 MB (Local Cache) |
+| **Advanced Hybrid Engine** | Intent Routing + RRF + Cross-Modal Re-ranking | **209.82 ms** | 177.02 – 245.86 ms | CPU ชั่วคราว ~5% |
+| **ChromaDB Filtered Search** | Metadata-Filtered Search (ward/category) | **1,634.55 ms** | 15.66 – 8105.27 ms | RAM ~120 MB |
+
+### 3.2 การเปรียบเทียบโมเดล Embedding (Dense Models)
+*(บันทึกจากไฟล์ `data/processed/embedding_benchmark_results.json`)*
+
+| Embedding Model | มิติเวกเตอร์ (Dim) | เวลาสร้างดัชนี (Build Time) | Query Latency | Hit@1 Accuracy | Hit@3 Accuracy |
+| :---| :---: | :---: | :---: | :---: | :---: |
+| **`sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`** | 384 | 22.34 วินาที | **16.89 ms** | **100%** | **100%** |
+| **`intfloat/multilingual-e5-small`** | 384 | **12.28 วินาที** | 17.76 ms | **100%** | **100%** |
+
+### 3.3 การเปรียบเทียบโมเดลสร้างภาษา (LLM Generation Latency & Resource)
+| โมเดล LLM | ประเภท / แพลตฟอร์ม | เวลาสร้างคำตอบเฉลี่ย (Gen Latency) | VRAM / RAM Requirement | ปริมาณโหลดเครื่อง (Machine Load) |
+| :---| :---: | :---: | :---: | :---: |
+| **Google Gemini 2.5 Flash** | Cloud API | **0.80 – 2.60 วินาที** | ไม่ใช้ทรัพยากรเครื่อง | **0% (ประมวลผลบน Cloud)** |
+| **Local LLM 3B (`qwen2.5:3b`)** | Ollama Local | **3.50 – 6.20 วินาที** | ~2.5 GB RAM/VRAM | ปานกลาง (CPU 40-70%) |
+| **Local LLM 4B (`gemma3:4b` / `typhoon2.1:4b`)** | Ollama Local | **5.00 – 8.50 วินาที** | ~3.8 GB RAM/VRAM | สูงขึ้น (CPU 60-90%) |
+| **Tokyo Hybrid Retriever Fallback** | Deterministic Context | **0.21 วินาที** | < 10 MB | 0% (ปลอดภัยที่สุด) |
+
+### 3.4 เวลาประมวลผลรวม End-to-End แยกตามประเภทคำถาม (Latency by Query Type)
+| ประเภทคำถาม | ตัวอย่างคำถาม | เวลาที่ใช้รวม (Total Latency) | โมดูลที่ทำงานหนักที่สุด |
+| :---| :---| :---: | :---|
+| **Route & Transit (หมวด G)** | *"จาก Shinjuku ไป Shibuya กี่นาที"* | **0.32 วินาที** | Graph Pathfinder |
+| **Food & Market (หมวด E)** | *"แนะนำย่าน Street Food ในโตเกียว"* | **0.60 วินาที** | Sparse BM25 + Dense FAISS |
+| **Spatial Query (หมวด F)** | *"มีสถานที่อะไรในระยะเดินจาก Senso-ji"* | **0.67 วินาที** | Graph Relationships |
+| **Itinerary Planning (หมวด H)** | *"จัดทริป Asakusa-Ueno-Akihabara"* | **0.68 วินาที** | Multi-hop Graph Traversal |
+| **Complex Multi-hop (หมวด J)** | *"หาวัดใกล้สถานีและมีที่ประวัติศาสตร์ในระยะเดิน"* | **0.86 วินาที** | Graph Expansion + RRF Re-ranking |
+| **General Recommendation (หมวด A)**| *"ที่เที่ยวห้ามพลาดเมื่อมาโตเกียวครั้งแรก"* | **2.60 วินาที** | Full Hybrid Context + Gemini API |
+
+---
+
+## 4. การเปรียบเทียบจุดเด่นของ Graph RAG เหนือ Vector RAG ทั่วไป
+
 จากการทดสอบโดยเฉพาะใน **หมวด F (Spatial Query), G (Transportation) และ J (Complex Multi-hop Graph RAG)**:
 1. **การคำนวณเส้นทางและเวลาเดินทาง (Transit & Duration):**
    * *Vector RAG ธรรมดา:* มักเกิด Hallucination ในเรื่องสายรถไฟและจินตนาการเวลาเดินทางขึ้นเอง
