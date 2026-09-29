@@ -94,6 +94,44 @@ class TokyoRAGService:
         self._cache.clear()
         print("[TokyoRAGService] ล้าง Response Cache เรียบร้อยแล้ว")
 
+    def _format_offline_fallback(self, query: str, context: str, graph_context: str) -> str:
+        """
+        จัดรูปแบบข้อความตอบกลับในโหมด Offline Fallback ให้สวยงาม ไพเราะ และเป็นภาษาไทยล้วน (ตัดข้อความภาษาอังกฤษออก)
+        """
+        import re
+        output_sections = []
+        output_sections.append("ขอสรุปข้อมูลการเดินทางและสถานที่ท่องเที่ยวในโตเกียวตามที่สอบถาม ดังนี้ครับ:")
+
+        # 1. ข้อมูลเส้นทางรถไฟ (ถ้ามี)
+        if graph_context.strip():
+            clean_graph = graph_context.replace("[ข้อมูลเส้นทางรถไฟจาก Knowledge Graph]:", "").strip()
+            output_sections.append(f"🚆 แผนการเดินทางและเส้นทางรถไฟ:\n{clean_graph}")
+
+        # 2. ข้อมูลสถานที่ท่องเที่ยว (สกัดเฉพาะภาษาไทย)
+        blocks = re.findall(r"\[ข้อมูลที่ \d+ \| อ้างอิง: ([^\]]+)\]\s*\n(.*?)(?=\[ข้อมูลที่|\Z)", context, re.DOTALL)
+        if blocks:
+            place_list = []
+            seen = set()
+            for title, body in blocks:
+                clean_name = re.sub(r"\(.*?\)", "", title).split("-")[0].strip()
+                if clean_name in seen:
+                    continue
+                seen.add(clean_name)
+
+                # ดึงเฉพาะประโยคภาษาไทย
+                thai_lines = [
+                    line.strip() for line in body.split("\n")
+                    if any('\u0e00' <= char <= '\u0e7f' for char in line) and not line.strip().startswith("Visiting")
+                ]
+                desc = " ".join(thai_lines[:2]).strip()
+                if desc:
+                    place_list.append(f"📍 {clean_name}\n   • {desc}")
+
+            if place_list:
+                output_sections.append("🗺️ สถานที่ท่องเที่ยวที่เกี่ยวข้อง:\n" + "\n\n".join(place_list))
+
+        return "\n\n".join(output_sections) if len(output_sections) > 1 else "ขออภัยครับ ข้อมูลในระบบยังไม่ครอบคลุมคำถามนี้อย่างสมบูรณ์"
+
     def answer_query(
         self,
         query: str,
@@ -140,15 +178,12 @@ class TokyoRAGService:
                 model_used = gemini_resp.model
                 mode_used = "gemini"
             else:
-                # Fallback: หาก API ติดขัด ให้ตอบด้วยบริบทสรุปที่ผ่านการประมวลผลจาก Knowledge Graph & Vector
+                # Fallback: หาก API ติดขัด ให้สังเคราะห์คำตอบภาษาไทยจาก Graph และ Vector โดยตัดภาษาอังกฤษออก
                 citations = hybrid_res.citations or extract_citations(context)
-                cit_text = " ".join([f"[อ้างอิง: {c}]" for c in citations[:3]]) if citations else ""
-                answer = (
-                    f"สรุปข้อมูลการเดินทางและท่องเที่ยวโตเกียว:\n\n{context}\n\n"
-                    f"แหล่งอ้างอิงยืนยัน: {cit_text}"
-                )
-                model_used = "Tokyo-Hybrid-Retriever (Fallback)"
+                answer = self._format_offline_fallback(query, context, graph_ctx)
+                model_used = "Tokyo-Hybrid-Retriever (Offline)"
                 mode_used = "context_fallback"
+
 
 
             total_lat = round(time.time() - start_time, 3)

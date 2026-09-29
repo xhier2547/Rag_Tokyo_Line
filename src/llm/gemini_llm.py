@@ -124,26 +124,33 @@ class GeminiLLMClient:
                 system_instruction=system_prompt or SYSTEM_PROMPT
             )
 
+            candidate_models = [self.model_name, "gemini-flash-lite-latest", "gemini-3.1-flash-lite", "gemini-2.5-flash-lite"]
+            models_to_try = []
+            for m in candidate_models:
+                if m and m not in models_to_try:
+                    models_to_try.append(m)
+
+            response = None
             actual_model = self.model_name
-            try:
-                response = self._client.models.generate_content(
-                    model=actual_model,
-                    contents=prompt,
-                    config=config
-                )
-            except Exception as api_err:
-                # ตรวจสอบว่าเป็นกรณี Quota Exceeded (429) หรือไม่ หากใช่ให้ Fallback ไปโมเดล Lite อัตโนมัติ
-                err_str = str(api_err)
-                if ("429" in err_str or "RESOURCE_EXHAUSTED" in err_str) and actual_model != "gemini-2.5-flash-lite":
-                    logger.warning(f"[GeminiLLM] โมเดล {actual_model} ติด Quota (429) สลับไปใช้ 'gemini-2.5-flash-lite' อัตโนมัติ")
-                    actual_model = "gemini-2.5-flash-lite"
+            last_err = None
+
+            for mod in models_to_try:
+                try:
+                    actual_model = mod
                     response = self._client.models.generate_content(
-                        model=actual_model,
+                        model=mod,
                         contents=prompt,
                         config=config
                     )
-                else:
-                    raise api_err
+                    if response and response.text:
+                        break
+                except Exception as api_err:
+                    last_err = api_err
+                    logger.warning(f"[GeminiLLM] โมเดล {mod} ติดขัด ({str(api_err)[:60]}), กำลังลองโมเดลสำรองถัดไป...")
+                    continue
+
+            if response is None:
+                raise last_err or Exception("All Gemini models exhausted")
 
             latency = time.time() - start_time
             response_text = response.text.strip() if response.text else ""

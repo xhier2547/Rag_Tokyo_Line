@@ -114,8 +114,9 @@ def test_format_line_reply():
     assert "สถานี Shinjuku" in formatted
     assert "ST_SHIBUYA" not in formatted
     assert "สถานี Shibuya" in formatted
-    # 3. อ้างอิงต้องไม่ซ้ำซ้อน
-    assert formatted.count("JR Yamanote Line") == 2  # 1 ครั้งใน answer, 1 ครั้งใน citations
+    # 3. อ้างอิงต้องถูกย้ายไปแสดงในส่วนท้ายอย่างเป็นระเบียบ และไม่มีแท็ก [อ้างอิง: ...] ในเนื้อหา
+    assert "[อ้างอิง:" not in formatted
+    assert "JR Yamanote Line" in formatted
     assert "⚡ เวลาประมวลผล: 1.23s" in formatted
 
 

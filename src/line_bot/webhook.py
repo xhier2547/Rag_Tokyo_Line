@@ -192,8 +192,13 @@ def format_line_reply(response: RAGResponse) -> str:
         text = re.sub(r"แหล่งอ้างอิงยืนยัน:.*", "", text, flags=re.DOTALL)
 
     # 4. ปรับปรุง Bullet points และความเรียบร้อย
-    # แปลง * **หัวข้อ:** เป็น • หัวข้อ:
-    text = re.sub(r"^\*\s+\*\*([^*:]+)\*+:?\s*", r"• \1: ", text, flags=re.MULTILINE)
+    # ลบดอกจัน ** ทั้งหมด (LINE ไม่เรนเดอร์ Markdown bold)
+    text = text.replace("**", "")
+
+    # ลบแท็ก [อ้างอิง: ...] ที่เกะกะกลางบรรทัดออก เพื่อให้อ่านง่าย สบายตา
+    text = re.sub(r"\s*-\s*\[อ้างอิง:[^\]]+\]", "", text)
+    text = re.sub(r"\[อ้างอิง:[^\]]+\]", "", text)
+
     # แปลง sub-bullet * เป็น -
     text = re.sub(r"^\s{2,}\*\s+", "   - ", text, flags=re.MULTILINE)
 
