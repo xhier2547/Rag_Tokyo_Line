@@ -251,6 +251,54 @@ class TokyoGraphPathfinder:
         results.sort(key=lambda x: x["walk_time_min"])
         return results
 
+    def find_neighboring_attractions(self, station_query: str, max_transit_min: int = 15) -> List[Dict[str, Any]]:
+        """
+        ค้นหาสถานที่ท่องเที่ยวจากสถานีต้นทาง ทั้งที่เดินถึงได้โดยตรง และที่นั่งรถไฟต่อไปได้ใน 1-2 สถานี (ไม่เกิน max_transit_min นาที)
+        ช่วยตอบโจทย์คำถามเช่น "อยู่ที่ชิบูย่า จะไปเที่ยวไหนดี" โดยเน้นย่านข้างเคียงที่เดินทางสะดวก ไม่หลุดออกนอกกรอบ
+        """
+        st_id = self._resolve_station_id(station_query)
+        if not st_id:
+            return []
+
+        results = []
+        origin_st_name = self.nx_graph.nodes[st_id].get("name_th", st_id)
+
+        # 1. สถานที่ที่เดินถึงได้โดยตรงที่สถานีนี้
+        direct_places = self.find_nearby_places(st_id)
+        for dp in direct_places:
+            results.append({
+                **dp,
+                "transit_type": "direct_walk",
+                "station_from": origin_st_name,
+                "transit_desc": f"อยู่ที่สถานีนี้ {origin_st_name} (เดินเท้า ~{dp['walk_time_min']} นาที)",
+                "total_time_min": dp["walk_time_min"]
+            })
+
+        # 2. สถานที่ในสถานีข้างเคียง (เชื่อมต่อทางรถไฟ 1-2 สถานี)
+        for u, v, data in self.nx_graph.edges(st_id, data=True):
+            if data.get("relation") == "CONNECTED_TO":
+                neighbor_st = v
+                neighbor_name = self.nx_graph.nodes[v].get("name_th", v)
+                line_name = data.get("line_name", "")
+                transit_min = data.get("duration_min", 0)
+
+                neighbor_places = self.find_nearby_places(neighbor_st)
+                for np in neighbor_places:
+                    total_t = transit_min + np["walk_time_min"]
+                    if total_t <= max_transit_min:
+                        results.append({
+                            **np,
+                            "transit_type": "neighbor_station",
+                            "station_name": neighbor_name,
+                            "line_name": line_name,
+                            "transit_min": transit_min,
+                            "transit_desc": f"นั่ง {line_name} ไป {neighbor_name} ({transit_min} นาที) แล้วเดิน ~{np['walk_time_min']} นาที",
+                            "total_time_min": total_t
+                        })
+
+        results.sort(key=lambda x: x["total_time_min"])
+        return results
+
     def extract_graph_context_for_rag(self, query: str) -> str:
         """
         ฟังก์ชันหัวใจของ Graph RAG:
@@ -348,16 +396,30 @@ class TokyoGraphPathfinder:
                 f"- เวลาเปิดทำการ: {hours} | ค่าเข้าชม: {fee}"
             )
 
-        # ถ้าพบสถานี 1 แห่ง -> ดึงสถานที่ใกล้เคียง
+        # ถ้าพบสถานี 1 แห่ง -> ดึงสถานที่ใกล้เคียงและสถานีข้างเคียง
         elif len(detected_stations) == 1:
             st_id, st_name = detected_stations[0]
-            nearby = self.find_nearby_places(st_id)
-            if nearby:
-                items = [f"- {n['name_th']} ({n['category']}, เดิน {n['walk_time_min']} นาที ทางออก {n['exit_info']})" for n in nearby]
-                context_parts.append(
-                    f"[สถานที่ท่องเที่ยวใกล้สถานี {st_name} จาก Knowledge Graph]:\n"
-                    + "\n".join(items)
-                )
+            # ตรวจสอบว่าเป็นคำถามถามหาที่เที่ยวรอบๆ หรือถามว่า "จะไปไหนดี"
+            is_recommendation = any(k in clean_q for k in ["ไปไหนดี", "ไปที่ไหนดี", "แนะนำ", "เที่ยวไหน", "มีอะไร", "รอบๆ", "ใกล้ๆ", "ที่เที่ยว", "อยู่ที่"])
+            if is_recommendation:
+                neighbors = self.find_neighboring_attractions(st_id, max_transit_min=15)
+                if neighbors:
+                    items = []
+                    for n in neighbors:
+                        items.append(f"- {n['name_th']} ({n['category']}): {n['transit_desc']}")
+                    context_parts.append(
+                        f"[สถานที่ท่องเที่ยวแนะนำในย่านและสถานีใกล้เคียงจากสถานี {st_name} (Knowledge Graph)]:\n"
+                        + "\n".join(items)
+                        + f"\n(คำแนะนำสำหรับ AI: ผู้ใช้อยู่ที่ {st_name} ให้แนะนำสถานที่ในย่านนี้และสถานีข้างเคียงที่นั่งรถไฟต่อไปได้ใน 2-10 นาทีตามรายการด้านบนนี้เป็นหลัก ห้ามแนะนำสถานที่ที่อยู่อีกฟากของโตเกียวที่ไกลเกินไป)"
+                    )
+            else:
+                nearby = self.find_nearby_places(st_id)
+                if nearby:
+                    items = [f"- {n['name_th']} ({n['category']}, เดิน {n['walk_time_min']} นาที ทางออก {n['exit_info']})" for n in nearby]
+                    context_parts.append(
+                        f"[สถานที่ท่องเที่ยวใกล้สถานี {st_name} จาก Knowledge Graph]:\n"
+                        + "\n".join(items)
+                    )
 
         if not context_parts:
             # Fallback ทั่วไป
