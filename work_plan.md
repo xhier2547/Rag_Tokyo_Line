@@ -86,6 +86,11 @@
   - Graceful Fallback: สลับใช้ Gemini หรือ Context อัตโนมัติเมื่อ Local LLM ออฟไลน์ ป้องกันระบบล่ม
 - [x] **5.2 Application Interface (`main.py`):**
   - Interactive CLI พร้อมโหมดสลับ Backend (`--mode gemini`, `--mode local`, `--mode compare`) และคำสั่งควบคุมในตัว (`:mode`, `:clear`, `exit`)
+- [x] **5.3 LINE Chatbot & Cloudflare Tunnel (`src/line_bot/`, `line_server.py`, `run_tunnel.py`):**
+  - พัฒนา Webhook Server (FastAPI) พร้อมตรวจสอบ Signature `X-Line-Signature`
+  - ออกแบบและลงทะเบียน **Rich Menu 6 ช่อง** (2500x1686) พร้อมปุ่ม Quick Replies
+  - เชื่อมต่อผ่าน **Cloudflare Tunnel (`cloudflared`)** เพื่อสร้าง Public HTTPS Webhook ปลอดภัยและเสถียร
+
 
 
 ### Phase 6: การประเมินผลและการวิเคราะห์เชิงลึก (Evaluation & Analysis - 10 คะแนน) [COMPLETED]

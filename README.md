@@ -175,7 +175,32 @@ python main.py --mode local --query "แนะนำที่เที่ยว�
 python main.py --mode compare --query "จาก Asakusa ไป Tokyo Skytree ไปอย่างไร"
 ```
 
+### 5.2 ใช้งานผ่าน LINE Chatbot & Cloudflare Tunnel 📱
+
+ระบบรองรับการเชื่อมต่อกับ **LINE Messaging API** พร้อมด้วย **Rich Menu 6 ช่อง** และ **Quick Reply Buttons**:
+
+#### ขั้นตอนที่ 1: ตั้งค่า Rich Menu และเปิดเซิร์ฟเวอร์
+```powershell
+python line_server.py --setup-rich-menu
+```
+*(ระบบจะสร้างรูปภาพ Rich Menu ขนาด 2500x1686, ลงทะเบียนกับ LINE API และเปิดเซิร์ฟเวอร์ Webhook ที่ Port 8000 ทันที)*
+
+#### ขั้นตอนที่ 2: เปิด Cloudflare Tunnel เชื่อมต่อ Public HTTPS
+เปิด Terminal อีกหน้าต่าง แล้วพิมพ์:
+```powershell
+python run_tunnel.py
+```
+*(หรือใช้คำสั่ง: `cloudflared tunnel --url http://localhost:8000`)*
+
+#### ขั้นตอนที่ 3: ตั้งค่าใน LINE Developers Console
+1. ไปที่ Messaging API $\rightarrow$ **Webhook settings**
+2. ใส่ Webhook URL: `https://<your-tunnel-id>.trycloudflare.com/callback`
+3. กดปุ่ม **Verify** (ต้องแสดงข้อความ "Success")
+4. เปิดสวิตช์ **Use webhook** ให้เป็นสีเขียว
+5. เพิ่มเพื่อน Bot และกดเลือกเมนูบน Rich Menu เพื่อเริ่มต้นถาม-ตอบได้ทันที! 🎉
+
 ---
+
 
 ## 6. การประเมินผลระบบ (Benchmark & Evaluation)
 
