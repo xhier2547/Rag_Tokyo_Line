@@ -167,6 +167,11 @@ def main():
         help="หน่วงเวลาระหว่างข้อ (วินาที) เพื่อป้องกันเครื่องร้อนและ API Rate Limit"
     )
     parser.add_argument(
+        "--force", "-f",
+        action="store_true",
+        help="บังคับรันใหม่ทั้งหมดโดยไม่ข้ามข้อเดิมที่มีผลลัพธ์อยู่แล้ว"
+    )
+    parser.add_argument(
         "--generate-report",
         action="store_true",
         help="สร้างเอกสารสรุปผล evaluation_report.md จากผลการทดสอบที่มีอยู่"
@@ -202,7 +207,8 @@ def main():
     results, summary = evaluator.run_benchmark(
         questions=questions,
         mode=args.mode,
-        delay_sec=args.delay
+        delay_sec=args.delay,
+        force_fresh=args.force
     )
 
     print("\n" + "=" * 80)

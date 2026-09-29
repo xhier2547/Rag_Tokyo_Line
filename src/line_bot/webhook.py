@@ -220,7 +220,7 @@ def format_line_reply(response: RAGResponse) -> str:
     else:
         parts.append("──────────────────────\n")
 
-    model_display = "Gemini 2.5 Flash Lite" if "gemini" in response.model_name.lower() else response.model_name
+    model_display = "Gemini 3.1 Flash Lite" if "gemini" in response.model_name.lower() else response.model_name
     parts.append(f"⚡ เวลาประมวลผล: {response.latency_sec:.2f}s | โมเดล: {model_display}")
 
     return "\n".join(parts)

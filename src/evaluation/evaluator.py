@@ -179,7 +179,8 @@ class TokyoRAGEvaluator:
         questions: List[Dict[str, Any]],
         mode: str = "gemini",
         output_file: Optional[str] = None,
-        delay_sec: float = 0.5
+        delay_sec: float = 0.5,
+        force_fresh: bool = False
     ) -> Tuple[List[EvaluationItemResult], BenchmarkSummary]:
         """
         รัน Benchmark ตามรายการคำถามที่กำหนด
@@ -188,9 +189,9 @@ class TokyoRAGEvaluator:
         if output_file is None:
             output_file = f"data/benchmark_results_{mode}.json"
 
-        # โหลดผลเดิมหากมี (Resume Support)
+        # โหลดผลเดิมหากมี (Resume Support) เว้นแต่จะระบุ force_fresh=True
         results_map: Dict[int, EvaluationItemResult] = {}
-        if os.path.exists(output_file):
+        if not force_fresh and os.path.exists(output_file):
             try:
                 with open(output_file, "r", encoding="utf-8") as f:
                     old_data = json.load(f)
