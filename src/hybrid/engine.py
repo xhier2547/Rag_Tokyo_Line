@@ -110,11 +110,14 @@ class TokyoHybridRAGEngine:
         self,
         query: str,
         candidates: List[Document],
-        top_n: int = 3
+        top_n: int = 3,
+        intent: str = "FACT_RETRIEVAL"
     ) -> List[Document]:
         """
         Semantic Cross-Modal Re-ranking:
         คำนวณ Cosine Similarity ซ้ำอีกครั้งกับ Embeddings เพื่อคัดกรอง Chunks ที่ตรงที่สุด
+        - หากเป็นคำถาม FACT_RETRIEVAL หรือเจาะจงสถานที่: อนุญาตให้ดึง Chunks หลายส่วนของสถานที่เดียวกันได้ (เช่น ประวัติ + รายละเอียด)
+        - หากเป็นคำถามภาพรวม/แนะนำหลายแห่ง: ใช้ Diversity-Aware Selection เพื่อกระจายสถานที่
         """
         if not candidates:
             return []
@@ -139,25 +142,32 @@ class TokyoHybridRAGEngine:
 
             scored_candidates.sort(key=lambda x: x[1], reverse=True)
 
-            # Diversity-Aware Selection: เลือกสถานที่ (place_id) ที่ไม่ซ้ำกันก่อน เพื่อให้ครอบคลุมหลายสถานที่
+            # ตรวจสอบว่าคำถามต้องการกระจายสถานที่หรือไม่ (เช่น แนะนำ 5 ที่, ทริป)
+            is_recommendation = any(kw in query.lower() for kw in ["แนะนำ", "ที่เที่ยว", "จัดทริป", "มีที่ไหนบ้าง", "ไฮไลท์", "5", "10"])
+
             selected_docs: List[Document] = []
-            seen_places = set()
-
-            for doc, score in scored_candidates:
-                place_id = doc.metadata.get("place_id") or doc.metadata.get("title", "")
-                if place_id not in seen_places:
-                    seen_places.add(place_id)
-                    selected_docs.append(doc)
-                    if len(selected_docs) >= top_n:
-                        break
-
-            # หากจำนวนยังไม่ครบ top_n ให้เติมด้วย chunks รายละเอียดที่เหลือ
-            if len(selected_docs) < top_n:
+            if is_recommendation and intent != "FACT_RETRIEVAL":
+                # Diversity-Aware Selection: เลือกสถานที่ (place_id) ไม่ให้ซ้ำ เพื่อแนะนำได้หลายแห่ง
+                seen_places = set()
                 for doc, score in scored_candidates:
-                    if doc not in selected_docs:
+                    place_id = doc.metadata.get("place_id") or doc.metadata.get("title", "")
+                    if place_id not in seen_places:
+                        seen_places.add(place_id)
                         selected_docs.append(doc)
                         if len(selected_docs) >= top_n:
                             break
+
+                # หากจำนวนยังไม่ครบ ให้เติม Chunks ที่เหลือ
+                if len(selected_docs) < top_n:
+                    for doc, score in scored_candidates:
+                        if doc not in selected_docs:
+                            selected_docs.append(doc)
+                            if len(selected_docs) >= top_n:
+                                break
+            else:
+                # คำถามเจาะจง/ค้นหาข้อเท็จจริง (เช่น ประวัติวัดเซ็นโซจิ): เลือก Chunks ที่คะแนนสูงสุดตามลำดับ
+                # ช่วยให้ส่วนที่ 1 (ประวัติ) และส่วนที่ 2 (รายละเอียด) ของสถานที่เป้าหมายถูกส่งให้ LLM ครบถ้วน
+                selected_docs = [doc for doc, score in scored_candidates[:top_n]]
 
             return selected_docs
         except Exception as e:
@@ -201,7 +211,7 @@ class TokyoHybridRAGEngine:
         fused_docs = self.reciprocal_rank_fusion(dense_results, sparse_results)
 
         # 4. Re-rank ให้เหลือ Top-N ที่แม่นยำที่สุด
-        final_docs = self.rerank_documents(query, fused_docs, top_n=top_n_rerank)
+        final_docs = self.rerank_documents(query, fused_docs, top_n=top_n_rerank, intent=intent)
 
         # 5. ประกอบร่างบริบทเอกสาร (Context Aggregation)
         doc_blocks = []

@@ -283,10 +283,12 @@ class TokyoRAGService:
         else:
             raise ValueError(f"โหมดไม่ถูกต้อง: {mode} (เลือกได้: 'gemini', 'local', 'compare')")
 
-        # บันทึกลง Memory Cache
-        self._cache[cache_key] = {
-            "timestamp": time.time(),
-            "data": result
-        }
+        # บันทึกลง Memory Cache เฉพาะคำตอบที่มีข้อมูลสมบูรณ์ (ไม่บันทึกกรณีปฏิเสธว่าไม่มีข้อมูล)
+        is_fallback_reject = "ยังไม่มีข้อมูลครอบคลุม" in result.answer or "ไม่ครอบคลุมคำถามนี้อย่างสมบูรณ์" in result.answer
+        if not is_fallback_reject:
+            self._cache[cache_key] = {
+                "timestamp": time.time(),
+                "data": result
+            }
 
         return result

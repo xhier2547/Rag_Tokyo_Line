@@ -124,7 +124,7 @@ class GeminiLLMClient:
                 system_instruction=system_prompt or SYSTEM_PROMPT
             )
 
-            candidate_models = [self.model_name, "gemini-flash-lite-latest", "gemini-3.1-flash-lite", "gemini-2.5-flash-lite"]
+            candidate_models = [self.model_name, "gemini-2.5-flash", "gemini-flash-lite-latest", "gemini-3.1-flash-lite", "gemini-2.5-flash-lite"]
             models_to_try = []
             for m in candidate_models:
                 if m and m not in models_to_try:
