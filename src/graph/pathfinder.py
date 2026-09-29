@@ -541,6 +541,86 @@ class TokyoGraphPathfinder:
 
         return "\n\n".join(context_parts)
 
+    def retrieve_ranked_entities(self, query: str) -> list:
+        """
+        คืน ranked list ของ entity IDs (place_id) ที่กราฟดึงได้สำหรับคำถามนี้
+        เรียงตามลำดับที่ปรากฏใน graph context (entity ที่กราฟให้ความสำคัญสูงสุดอยู่อันดับ 1)
+        ใช้สำหรับ Ablation Study ที่ต้องการ ranked retrieval list
+        """
+        clean_q = query.lower()
+
+        # ดึงสถานที่ที่ detect ได้โดยตรงจากคำถาม (เรียงตามตำแหน่งในประโยค)
+        detected_places = []
+        for node, data in self.nx_graph.nodes(data=True):
+            if data.get("type") in ["Place", "Hotel"]:
+                n_th = data.get("name_th", "").lower()
+                n_en = data.get("name_en", "").lower()
+                key_th = n_th.split("(")[0].strip()
+                pos = -1
+                if key_th and key_th in clean_q:
+                    pos = clean_q.find(key_th)
+                elif n_en and n_en in clean_q:
+                    pos = clean_q.find(n_en)
+                if pos == -1:
+                    for kw in [k.lower() for k in data.get("keywords", [])]:
+                        if kw in clean_q and len(kw) >= 3:
+                            pos = clean_q.find(kw)
+                            break
+                if pos != -1:
+                    detected_places.append((node, pos))
+
+        detected_places.sort(key=lambda x: x[1])
+        ranked = [p[0] for p in detected_places]
+
+        # ดึงสถานที่จากสถานีที่ detect ได้ (nearby places)
+        detected_stations = []
+        for node, data in self.nx_graph.nodes(data=True):
+            if data.get("type") == "Station":
+                s_th = data.get("name_th", "").lower().replace("สถานี", "").strip()
+                s_en = data.get("name_en", "").lower().replace("station", "").strip()
+                pos = -1
+                if s_th in clean_q and len(s_th) >= 3:
+                    pos = clean_q.find(s_th)
+                elif s_en in clean_q and len(s_en) >= 4:
+                    pos = clean_q.find(s_en)
+                if pos != -1:
+                    detected_stations.append((node, pos))
+
+        detected_stations.sort(key=lambda x: x[1])
+
+        # เพิ่ม nearby places จากสถานีที่ detect ได้
+        seen = set(ranked)
+        for st_id, _ in detected_stations:
+            nearby = self.find_nearby_places(st_id)
+            for np in nearby:
+                pid = np.get("place_id", "")
+                if pid and pid not in seen:
+                    ranked.append(pid)
+                    seen.add(pid)
+
+        # ถ้ายังไม่มี — ลอง category-based matching (เหมือน extract_graph_context_for_rag)
+        if not ranked:
+            for p_node, p_data in self.nx_graph.nodes(data=True):
+                if p_data.get("type") == "Place":
+                    cat = p_data.get("category", "")
+                    name = p_data.get("name_th", "").lower()
+                    is_match = False
+                    if any(k in clean_q for k in ["วัด", "ศาลเจ้า", "ประวัติศาสตร์"]) and ("Temple" in cat or "Culture" in cat or "History" in cat):
+                        is_match = True
+                    elif any(k in clean_q for k in ["อนิเมะ", "เกม"]) and ("Shopping" in cat or "อากิฮาบาระ" in name):
+                        is_match = True
+                    elif any(k in clean_q for k in ["อาหาร", "ตลาด", "กิน"]) and ("Food" in cat or "ตลาด" in name):
+                        is_match = True
+                    elif any(k in clean_q for k in ["สวน", "ธรรมชาติ", "ซากุระ"]) and ("Nature" in cat):
+                        is_match = True
+                    elif any(k in clean_q for k in ["ชมวิว", "วิว", "จุดชมวิว"]) and ("Viewpoint" in cat or "Landmark" in cat):
+                        is_match = True
+                    if is_match and p_node not in seen:
+                        ranked.append(p_node)
+                        seen.add(p_node)
+
+        return ranked
+
 
 if __name__ == "__main__":
     pf = TokyoGraphPathfinder()

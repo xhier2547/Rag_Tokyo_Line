@@ -182,32 +182,28 @@ def run_ablation_study(questions: List[Dict[str, Any]]) -> Dict[str, Any]:
         results["dense_only"]["mrr_sum"] += dense_rr
 
         # ----------------------------------------------------
-        # 2. Graph Only (Pathfinder Context)
+        # 2. Graph Only (Ranked Entity Retrieval via Pathfinder)
+        # วัดผลเหมือน Dense: ดึง ranked list ของ entity IDs แล้ว check Hit@K
         # ----------------------------------------------------
         t0 = time.perf_counter()
-        graph_ctx = pathfinder.extract_graph_context_for_rag(query)
+        graph_ranked_entities = pathfinder.retrieve_ranked_entities(query)
         graph_lat = (time.perf_counter() - t0) * 1000.0
         results["graph_only"]["total_lat_ms"] += graph_lat
 
-        clean_graph_ctx = graph_ctx.lower()
-        has_graph = bool(clean_graph_ctx.strip())
+        has_graph = len(graph_ranked_entities) > 0
         if has_graph:
             results["graph_only"]["graph_hit"] += 1
 
-        # ตรวจสอบว่าใน Graph Context มีเอนทิตีที่ตรงกับ Ground Truth หรือไม่
-        graph_match = False
-        if has_graph and gt_entities:
-            for ent in gt_entities:
-                aliases = place_names_map.get(ent, [ent.lower()])
-                if any(alias in clean_graph_ctx for alias in aliases if len(alias) >= 3):
-                    graph_match = True
-                    break
-        elif has_graph and not gt_entities:
-            graph_match = True
+        # ค้นหาอันดับแรกที่ entity ใน ranked list ตรงกับ GT
+        graph_rank = None
+        for r_idx, ent_id in enumerate(graph_ranked_entities[:10]):  # จำกัด top-10
+            if ent_id in gt_entities:
+                graph_rank = r_idx + 1
+                break
 
-        graph_hit1 = 1 if graph_match else 0
-        graph_hit3 = 1 if graph_match else 0
-        graph_rr = 1.0 if graph_match else 0.0
+        graph_hit1 = 1 if graph_rank == 1 else 0
+        graph_hit3 = 1 if graph_rank is not None and graph_rank <= 3 else 0
+        graph_rr = (1.0 / graph_rank) if graph_rank is not None else 0.0
 
         results["graph_only"]["hits_top1"] += graph_hit1
         results["graph_only"]["hits_top3"] += graph_hit3
@@ -283,8 +279,8 @@ def run_ablation_study(questions: List[Dict[str, Any]]) -> Dict[str, Any]:
                 "latency_ms": round(dense_lat, 2)
             },
             "graph_only": {
-                "has_context": has_graph,
-                "entity_matched": graph_match,
+                "ranked_entities": graph_ranked_entities[:5],
+                "rank": graph_rank,
                 "hit1": graph_hit1,
                 "hit3": graph_hit3,
                 "rr": round(graph_rr, 4),
