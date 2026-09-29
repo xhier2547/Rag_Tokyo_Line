@@ -71,3 +71,21 @@ def test_webhook_signature_rejection(client):
     """ทดสอบว่า Request ที่ไม่มี Signature ถูกปฏิเสธ (400 Bad Request) เพื่อความปลอดภัย"""
     res = client.post("/callback", json={"events": []})
     assert res.status_code == 400
+
+
+def test_webhook_valid_signature_dispatch(client, monkeypatch):
+    """ทดสอบว่า Request ที่มี Signature ถูกต้อง ได้รับ 200 OK ทันที (Background Task)"""
+    import base64
+    import hashlib
+    import hmac
+    from src.line_bot.webhook import CHANNEL_SECRET
+
+    body = b'{"destination":"Uxxx","events":[]}'
+    hash_obj = hmac.new(CHANNEL_SECRET.encode('utf-8'), body, hashlib.sha256).digest()
+    valid_signature = base64.b64encode(hash_obj).decode('utf-8')
+
+    headers = {"X-Line-Signature": valid_signature}
+    res = client.post("/callback", content=body, headers=headers)
+    assert res.status_code == 200
+    assert res.json() == {"status": "OK"}
+
