@@ -439,7 +439,7 @@ class TokyoGraphPathfinder:
 
         # ถ้าพบสถานที่ 1 แห่ง -> ดึงข้อมูลสถานีใกล้เคียงและการเชื่อมโยง
         elif len(detected_places) == 1:
-            p_id, p_name = detected_places[0]
+            p_id, p_name = detected_places[0][0], detected_places[0][1]
             p_data = self.nx_graph.nodes[p_id]
             st_id = p_data.get("nearest_station_id")
             st_name = self.nx_graph.nodes[st_id].get("name_th", st_id) if st_id else "ไม่ระบุ"
@@ -458,9 +458,11 @@ class TokyoGraphPathfinder:
 
         # ถ้าพบสถานี 1 แห่ง -> ดึงสถานที่ใกล้เคียงและสถานีข้างเคียง
         elif len(detected_stations) == 1:
-            st_id, st_name = detected_stations[0]
+            st_id, st_name = detected_stations[0][0], detected_stations[0][1]
             # ตรวจสอบว่าเป็นคำถามถามหาที่เที่ยวรอบๆ หรือถามว่า "จะไปไหนดี"
-            is_recommendation = any(k in clean_q for k in ["ไปไหนดี", "ไปที่ไหนดี", "แนะนำ", "เที่ยวไหน", "มีอะไร", "รอบๆ", "ใกล้ๆ", "ที่เที่ยว", "อยู่ที่"])
+            is_transit_how_to = any(k in clean_q for k in ["ต้องไปอย่างไร", "ไปยังไง", "เดินทางอย่างไร", "ไปอย่างไร", "เดินทางไปอย่างไร", "นั่งสายอะไร"])
+            is_recommendation = not is_transit_how_to and any(k in clean_q for k in ["ไปไหนดี", "ไปที่ไหนดี", "แนะนำ", "เที่ยวไหน", "มีอะไร", "รอบๆ", "ใกล้ๆ", "ที่เที่ยว", "อยู่ใกล้", "ใกล้"])
+
             if is_recommendation:
                 neighbors = self.find_neighboring_attractions(st_id, max_transit_min=15)
                 if neighbors:
