@@ -89,3 +89,33 @@ def test_webhook_valid_signature_dispatch(client, monkeypatch):
     assert res.status_code == 200
     assert res.json() == {"status": "OK"}
 
+
+def test_format_line_reply():
+    """ทดสอบฟังก์ชัน format_line_reply ในการแปลง LaTeX, รหัสสถานี และการกำจัดอ้างอิงซ้ำซ้อน"""
+    from src.line_bot.webhook import format_line_reply
+    from src.service.rag_service import RAGResponse
+
+    mock_resp = RAGResponse(
+        query="เดินทางจาก Shinjuku ไป Shibuya",
+        intent="ROUTE_TRANSIT",
+        answer="ขึ้นรถไฟจาก ST_SHINJUKU $\\rightarrow$ ST_SHIBUYA ใช้เวลา 6 นาที [อ้างอิง: JR Yamanote Line]",
+        citations=["JR Yamanote Line - ส่วนที่ 1", "JR Yamanote Line - ส่วนที่ 1", "ST_SHIBUYA"],
+        mode_used="gemini",
+        model_name="gemini-2.5-flash-lite",
+        latency_sec=1.23
+    )
+
+    formatted = format_line_reply(mock_resp)
+    # 1. ต้องไม่มี LaTeX arrow
+    assert "$\\rightarrow$" not in formatted
+    assert "➔" in formatted
+    # 2. ต้องแปลงรหัสสถานี
+    assert "ST_SHINJUKU" not in formatted
+    assert "สถานี Shinjuku" in formatted
+    assert "ST_SHIBUYA" not in formatted
+    assert "สถานี Shibuya" in formatted
+    # 3. อ้างอิงต้องไม่ซ้ำซ้อน
+    assert formatted.count("JR Yamanote Line") == 2  # 1 ครั้งใน answer, 1 ครั้งใน citations
+    assert "⚡ เวลาประมวลผล: 1.23s" in formatted
+
+

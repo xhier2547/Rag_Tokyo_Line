@@ -14,6 +14,7 @@ Flow การทำงาน:
 
 import os
 import sys
+import re
 import logging
 from typing import Optional
 from dotenv import load_dotenv
@@ -151,6 +152,75 @@ async def callback(
 
 
 
+def format_line_reply(response: RAGResponse) -> str:
+    """
+    จัดรูปแบบข้อความตอบกลับของ LINE Bot ให้สวยงาม อ่านง่าย มีระดับแบบ Professional Concierge
+    - แปลง LaTeX arrow ($\rightarrow$) เป็น unicode arrow ➔
+    - แปลงรหัสสถานี ST_... เป็นชื่อสถานีภาษาไทย/อังกฤษที่เข้าใจง่าย
+    - ทำความสะอาด bullet points ให้เป็นระเบียบ สวยงาม สบายตา
+    - กรองรายการอ้างอิงไม่ให้แสดงซ้ำซ้อน (Deduplication)
+    - เพิ่มเส้นคั่นดีไซน์ ────────────────────── และไอคอนกำกับ
+    """
+    text = response.answer.strip()
+
+    # 1. แปลงสัญลักษณ์ลูกศรและรหัสทางคณิตศาสตร์
+    text = text.replace(r"$\rightarrow$", "➔").replace(r"\rightarrow", "➔").replace(r"->", "➔")
+
+    # 2. แปลงรหัสสถานีภายในเป็นชื่อสถานีที่อ่านง่าย
+    station_map = {
+        "ST_SHIBUYA": "สถานี Shibuya",
+        "ST_SHINJUKU": "สถานี Shinjuku",
+        "ST_TOKYO": "สถานี Tokyo",
+        "ST_ASAKUSA": "สถานี Asakusa",
+        "ST_GINZA": "สถานี Ginza",
+        "ST_UENO": "สถานี Ueno",
+        "ST_HARAJUKU": "สถานี Harajuku",
+        "ST_AKIHABARA": "สถานี Akihabara",
+        "ST_ROPPONGI": "สถานี Roppongi",
+        "ST_OSHIAGE": "สถานี Oshiage (Skytree)",
+        "ST_TSUKIJI": "สถานี Tsukiji",
+        "ST_DAIBA": "สถานี Daiba (Odaiba)",
+    }
+    for st_id, st_name in station_map.items():
+        text = text.replace(st_id, st_name)
+
+    # 3. จัดการกรณีข้อความ Fallback ที่มีแท็กระบบดิบ
+    if "=== ข้อมูลความสัมพันธ์และเส้นทาง" in text:
+        text = text.replace("=== ข้อมูลความสัมพันธ์และเส้นทาง (Knowledge Graph) ===", "🚆 แผนการเดินทาง (Knowledge Graph):")
+        text = text.replace("[ข้อมูลเส้นทางรถไฟจาก Knowledge Graph]:", "")
+        text = re.sub(r"=== ข้อมูลรายละเอียดสถานที่.*?===", "\n📍 ข้อมูลสถานที่เพิ่มเติม:", text)
+        text = re.sub(r"แหล่งอ้างอิงยืนยัน:.*", "", text, flags=re.DOTALL)
+
+    # 4. ปรับปรุง Bullet points และความเรียบร้อย
+    # แปลง * **หัวข้อ:** เป็น • หัวข้อ:
+    text = re.sub(r"^\*\s+\*\*([^*:]+)\*+:?\s*", r"• \1: ", text, flags=re.MULTILINE)
+    # แปลง sub-bullet * เป็น -
+    text = re.sub(r"^\s{2,}\*\s+", "   - ", text, flags=re.MULTILINE)
+
+    # 5. สกัดและกรองรายการอ้างอิงไม่ให้ซ้ำซ้อน
+    unique_cits = []
+    for c in response.citations:
+        cleaned_c = re.sub(r"\s*-\s*(ส่วนที่\s*\d+|ข้อมูลการเดินทาง.*)", "", c).strip()
+        cleaned_c = re.sub(r"\(.*?\)", "", cleaned_c).strip()
+        for st_id, st_name in station_map.items():
+            cleaned_c = cleaned_c.replace(st_id, st_name)
+        if cleaned_c and cleaned_c not in unique_cits and len(cleaned_c) > 2:
+            unique_cits.append(cleaned_c)
+
+    # 6. ประกอบข้อความตอบกลับ
+    parts = [text.strip(), ""]
+    if unique_cits:
+        cits_str = "\n".join([f"• {c}" for c in unique_cits[:4]])
+        parts.append(f"──────────────────────\n📚 ข้อมูลอ้างอิงยืนยัน:\n{cits_str}\n")
+    else:
+        parts.append("──────────────────────\n")
+
+    model_display = "Gemini 2.5 Flash Lite" if "gemini" in response.model_name.lower() else response.model_name
+    parts.append(f"⚡ เวลาประมวลผล: {response.latency_sec:.2f}s | โมเดล: {model_display}")
+
+    return "\n".join(parts)
+
+
 if handler:
     @handler.add(MessageEvent, message=TextMessage)
     def handle_text_message(event: MessageEvent):
@@ -168,13 +238,8 @@ if handler:
                 mode="gemini"
             )
 
-            # 2. จัดรูปแบบข้อความตอบกลับ
-            formatted_reply = f"{response.answer}\n\n"
-            if response.citations:
-                cits_str = "\n".join([f"• {c}" for c in response.citations[:4]])
-                formatted_reply += f"📚 แหล่งอ้างอิงยืนยัน:\n{cits_str}\n\n"
-
-            formatted_reply += f"⏱️ ประมวลผล: {response.latency_sec:.2f}s | โมเดล: {response.model_name}"
+            # 2. จัดรูปแบบข้อความตอบกลับให้สวยงาม ระดับมืออาชีพ
+            formatted_reply = format_line_reply(response)
 
             # 3. เตรียม Quick Reply ปุ่มลัด
             quick_reply = build_quick_replies()
