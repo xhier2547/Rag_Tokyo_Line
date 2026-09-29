@@ -24,16 +24,16 @@
 
 ## 2. ลำดับขั้นตอนการพัฒนา (Phase-by-Phase Roadmap)
 
-### Phase 1: การเตรียมข้อมูลและสร้าง Knowledge Base (Data & Knowledge Base - 10 คะแนน)
-- [ ] **1.1 Data Scraping & Extraction:**
+### Phase 1: การเตรียมข้อมูลและสร้าง Knowledge Base (Data & Knowledge Base - 10 คะแนน) [COMPLETED]
+- [x] **1.1 Data Scraping & Extraction:**
   - สกัดข้อมูลสถานที่ท่องเที่ยวโตเกียวจาก JTA Sightseeing Database (หมวดโตเกียว เช่น วัด, ศาลเจ้า, พิพิธภัณฑ์, ย่านช้อปปิ้ง, สวนสาธารณะ)
   - สกัดข้อมูลสถานีรถไฟโตเกียวและสายรถไฟจาก 駅データ.jp และ OpenStreetMap (JR Yamanote Line, Ginza Line, Marunouchi Line, Shinjuku Line ฯลฯ) พร้อมพิกัด (lat, lon)
-- [ ] **1.2 Data Cleaning & Chunking:**
+- [x] **1.2 Data Cleaning & Chunking:**
   - ทำความสะอาดข้อความภาษาไทย/อังกฤษ/ญี่ปุ่น ขจัดอักขระแปลกปลอม
   - ใช้ `RecursiveCharacterTextSplitter` โดยกำหนด Boundary และคำเชื่อมที่เหมาะสม
   - กำหนด Metadata ละเอียด: `place_name`, `station_nearby`, `line`, `category`, `ward`, `travel_time_min`, `source`
-- [ ] **1.3 Export Clean Datasets:**
-  - สร้างไฟล์ structured CSV: `places.csv`, `stations.csv`, `lines.csv`, `routes_edges.csv` และ `documents_chunks.json`
+- [x] **1.3 Export Clean Datasets:**
+  - สร้างไฟล์ structured CSV: `places.csv`, `stations.csv`, `lines.csv`, `transit_edges.csv`, `place_station_edges.csv` และ `documents_chunks.json`
 
 ### Phase 2: การสร้าง Graph Database & Cypher Retrieval (Graph RAG - 15 คะแนน)
 - [ ] **2.1 Schema Design บน Neo4j:**
