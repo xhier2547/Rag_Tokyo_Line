@@ -35,8 +35,10 @@ from linebot.models import (
 from src.service.rag_service import TokyoRAGService, RAGResponse
 from src.line_bot.media_catalog import find_matched_entities
 from src.line_bot.flex_cards import build_flex_message_from_entities, build_contextual_quick_replies
+from src.line_bot.session_manager import get_session_manager
 
 load_dotenv()
+
 logger = logging.getLogger("line_bot")
 logging.basicConfig(level=logging.INFO)
 
@@ -237,28 +239,45 @@ if handler:
         - ส่ง Text Message คำอธิบายเชิงลึกจาก Hybrid RAG
         - แนบ Contextual Quick Reply ให้แตะถามต่อได้ทันที
         """
+        user_id = event.source.user_id
         user_query = event.message.text.strip()
-        logger.info(f"[LINE Message Received] '{user_query}' from User: {event.source.user_id}")
+        logger.info(f"[LINE Message Received] '{user_query}' from User: {user_id}")
 
         try:
-            # 1. ส่งคำถามเข้าสู่ Hybrid RAG Service
+            # 1. จัดการบริบทการสนทนาต่อเนื่อง (Multi-turn Context Resolution)
+            session_mgr = get_session_manager()
+            resolved_query, context_hint = session_mgr.resolve_contextual_query(
+                user_id=user_id,
+                current_query=user_query
+            )
+
+            # 2. ส่งคำถามที่สมบูรณ์เข้าสู่ Hybrid RAG Service
             service = get_rag_service()
             response: RAGResponse = service.answer_query(
-                query=user_query,
+                query=resolved_query,
                 mode="gemini"
             )
 
-            # 2. จัดรูปแบบข้อความตอบกลับให้สวยงาม ระดับมืออาชีพ
+            # 3. จัดรูปแบบข้อความตอบกลับให้สวยงาม ระดับมืออาชีพ
             formatted_reply = format_line_reply(response)
 
-            # 3. ค้นหาสถานที่หรือโรงแรมที่เกี่ยวข้องเพื่อสร้างการ์ดรูปภาพ (Flex Card)
+            # 4. ค้นหาสถานที่หรือโรงแรมที่เกี่ยวข้องเพื่อสร้างการ์ดรูปภาพ (Flex Card)
             matched_entities = find_matched_entities(
                 text=response.answer,
                 citations=response.citations,
-                query=user_query
+                query=resolved_query
             )
 
-            # 4. เตรียมชุดข้อความตอบกลับ (Messages List)
+            # 5. บันทึกประวัติและบริบทการสนทนาลง Session
+            session_mgr.update_session(
+                user_id=user_id,
+                query=user_query,
+                resolved_query=resolved_query,
+                answer=response.answer,
+                matched_entities=matched_entities
+            )
+
+            # 6. เตรียมชุดข้อความตอบกลับ (Messages List)
             # เรียงลำดับให้ "ข้อความเนื้อหาอธิบายคำตอบ" อยู่ด้านบน และ "การ์ดรูปภาพ (Flex Card)" อยู่ด้านล่าง
             messages_to_send = []
             quick_reply = build_contextual_quick_replies(matched_entities)
@@ -268,21 +287,22 @@ if handler:
                 flex_card = build_flex_message_from_entities(matched_entities)
 
             if flex_card:
-                # 4.1 ข้อความอธิบายเชิงลึก (อยู่ข้างบน)
+                # 6.1 ข้อความอธิบายเชิงลึก (อยู่ข้างบน)
                 messages_to_send.append(TextSendMessage(text=formatted_reply))
-                # 4.2 การ์ดรูปภาพพร้อมปุ่ม Interactive (อยู่ข้างล่าง) พร้อมแนบ Quick Reply
+                # 6.2 การ์ดรูปภาพพร้อมปุ่ม Interactive (อยู่ข้างล่าง) พร้อมแนบ Quick Reply
                 flex_card.quick_reply = quick_reply
                 messages_to_send.append(flex_card)
             else:
                 # กรณีไม่มีการ์ดรูปภาพ ให้ส่งข้อความพร้อมแนบ Quick Reply
                 messages_to_send.append(TextSendMessage(text=formatted_reply, quick_reply=quick_reply))
 
-            # 5. ส่งข้อความตอบกลับไปยัง LINE
+            # 7. ส่งข้อความตอบกลับไปยัง LINE
             line_bot_api.reply_message(
                 event.reply_token,
                 messages_to_send
             )
-            logger.info(f"[LINE Reply Sent] Successfully replied ({len(messages_to_send)} msgs, text first, {len(matched_entities)} cards below) to {event.source.user_id}")
+            logger.info(f"[LINE Reply Sent] Successfully replied ({len(messages_to_send)} msgs, text first, {len(matched_entities)} cards below) to {user_id}")
+
 
 
         except Exception as e:

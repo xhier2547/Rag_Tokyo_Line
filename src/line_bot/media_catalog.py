@@ -272,7 +272,7 @@ HOTEL_MEDIA_CATALOG: Dict[str, Dict[str, Any]] = {
         "ward": "Shibuya",
         "nearest_station": "สถานี Shibuya",
         "walk_time_min": 2,
-        "keywords": ["shibuya stream", "ชิบูย่าสตรีม", "excel hotel"]
+        "keywords": ["shibuya stream", "ชิบูย่าสตรีม", "ชิบูย่า สตรีม", "excel hotel", "เอ็กเซล โฮเทล", "สตรีม เอ็กเซล", "shibuya stream excel"]
     },
     "H_ASAKUSA_VIEW": {
         "id": "H_ASAKUSA_VIEW",
@@ -285,7 +285,7 @@ HOTEL_MEDIA_CATALOG: Dict[str, Dict[str, Any]] = {
         "ward": "Taito",
         "nearest_station": "สถานี Asakusa",
         "walk_time_min": 6,
-        "keywords": ["อาซากุสะวิว", "asakusa view"]
+        "keywords": ["อาซากุสะวิว", "asakusa view", "อาซากุสะ วิว"]
     },
     "H_DORM_INN_AKIHABARA": {
         "id": "H_DORM_INN_AKIHABARA",
@@ -298,7 +298,7 @@ HOTEL_MEDIA_CATALOG: Dict[str, Dict[str, Any]] = {
         "ward": "Chiyoda",
         "nearest_station": "สถานี Akihabara",
         "walk_time_min": 5,
-        "keywords": ["ดอร์มี", "dormy inn", "dormy"]
+        "keywords": ["ดอร์มี", "dormy inn", "dormy", "ดอร์มี อินน์"]
     }
 }
 
@@ -311,75 +311,91 @@ def find_matched_entities(
     """
     ตรวจจับสถานที่ท่องเที่ยว (Places) หรือโรงแรม (Hotels) ที่ปรากฏในข้อความคำตอบ หรือในรายการ Citations
     - รักษาลำดับการแนะนำตามที่ปรากฏในคำตอบของ AI (First Mention Order)
-    - หากผู้ใช้ถามจากตำแหน่งปัจจุบัน เช่น "อยู่ที่ชิบูย่า จะไปไหนดี" จะแยกแยะตำแหน่งต้นทาง
-      และให้ความสำคัญกับการ์ดสถานที่ปลายทาง (Destinations) ก่อนเสมอ
+    - หากผู้ใช้ถามจากตำแหน่งปัจจุบัน เช่น "อยู่ที่ชิบูย่า จะไปไหนดี" หรือ "เดินทางจากกินซ่า ไปโรงแรมชิบูย่าสตรีม"
+      จะแยกแยะตำแหน่งต้นทาง (Origin) และให้ความสำคัญกับการ์ดสถานที่ปลายทาง (Destinations) ก่อนเสมอ
     - คืนค่ารายการ Dictionary ข้อมูลสื่อสำหรับนำไปสร้าง Flex Cards (สูงสุด 3 รายการเพื่อความสวยงาม)
     """
     combined_text = (text + " " + " ".join(citations or [])).lower()
     matched_candidates: List[Dict[str, Any]] = []
     seen_ids = set()
 
-    # ตรวจหาตำแหน่งต้นทาง (Origin) จากคำถาม เช่น "อยู่ที่...", "จาก..."
+    # ตรวจหาตำแหน่งต้นทาง (Origin) จากคำถาม เช่น "อยู่ที่...", "จาก... ไป..."
     origin_ids = set()
     if query:
         clean_q = query.lower()
-        has_origin_pattern = any(k in clean_q for k in ["อยู่ที่", "ตอนนี้อยู่", "ถ้าอยู่", "จาก", "ออกจาก", "เริ่มต้นที่"])
-        if has_origin_pattern:
-            for pid, data in PLACE_MEDIA_CATALOG.items():
+        origin_text = ""
+        if "จาก" in clean_q and ("ไป" in clean_q or "ถึง" in clean_q):
+            m = re.search(r'(?:จาก|ออกจาก|เริ่มต้นที่)\s*(.*?)\s*(?:ไปยัง|ไป|ถึง)', clean_q)
+            if m:
+                origin_text = m.group(1).strip()
+        elif any(k in clean_q for k in ["อยู่ที่", "ตอนนี้อยู่", "ถ้าอยู่", "หากอยู่"]):
+            m = re.search(r'(?:อยู่ที่|ตอนนี้อยู่|ถ้าอยู่|หากอยู่)\s*(.*?)(?:\s*(?:จะไป|ไป|ต้องไป|มีอะไร|เที่ยว|ละ|ครับ|ค่ะ|\Z))', clean_q)
+            if m:
+                origin_text = m.group(1).strip()
+
+        if origin_text:
+            for pid, data in {**PLACE_MEDIA_CATALOG, **HOTEL_MEDIA_CATALOG}.items():
                 for kw in data["keywords"]:
-                    if kw in clean_q:
+                    if kw in origin_text:
                         origin_ids.add(pid)
                         break
 
-    # 1. ค้นหา Places
-    for pid, data in PLACE_MEDIA_CATALOG.items():
-        if pid in seen_ids:
+
+    all_catalog_items = [
+        *[(pid, data, "place") for pid, data in PLACE_MEDIA_CATALOG.items()],
+        *[(hid, data, "hotel") for hid, data in HOTEL_MEDIA_CATALOG.items()]
+    ]
+
+    for eid, data, etype in all_catalog_items:
+        if eid in seen_ids:
             continue
-        first_pos = None
+        best_pos = None
+        best_kw_len = 0
         for kw in data["keywords"]:
             pos = combined_text.find(kw)
             if pos != -1:
-                if first_pos is None or pos < first_pos:
-                    first_pos = pos
-        if first_pos is not None:
+                # เลือกตำแหน่งที่พบแรกสุด หรือถ้าพบที่เดียวกันให้เลือกคำที่ยาวที่สุด
+                if best_pos is None or pos < best_pos or (pos == best_pos and len(kw) > best_kw_len):
+                    best_pos = pos
+                    best_kw_len = len(kw)
+        if best_pos is not None:
             matched_candidates.append({
                 **data,
-                "type": "place",
-                "pos": first_pos,
-                "is_origin": pid in origin_ids
+                "type": etype,
+                "pos": best_pos,
+                "kw_len": best_kw_len,
+                "is_origin": eid in origin_ids
             })
-            seen_ids.add(pid)
+            seen_ids.add(eid)
 
-    # 2. ค้นหา Hotels
-    for hid, data in HOTEL_MEDIA_CATALOG.items():
-        if hid in seen_ids:
-            continue
-        first_pos = None
-        for kw in data["keywords"]:
-            pos = combined_text.find(kw)
-            if pos != -1:
-                if first_pos is None or pos < first_pos:
-                    first_pos = pos
-        if first_pos is not None:
-            matched_candidates.append({
-                **data,
-                "type": "hotel",
-                "pos": first_pos,
-                "is_origin": False
-            })
-            seen_ids.add(hid)
+    # เรียงลำดับ: ตำแหน่งแรกสุดก่อน หากตำแหน่งเดียวกันให้คำที่ยาว/เจาะจงกว่าขึ้นก่อน
+    matched_candidates.sort(key=lambda x: (x["pos"], -x["kw_len"]))
 
-    # เรียงลำดับตามตำแหน่งที่ปรากฏในข้อความก่อน-หลัง
-    matched_candidates.sort(key=lambda x: x["pos"])
+    # หากมีคำทับซ้อนกันในตำแหน่งเดียวกัน (เช่น "ชิบูย่า สตรีม" กับ "ชิบูย่า") ให้เก็บเฉพาะคำที่ยาวกว่า
+    non_overlapping = []
+    covered_spans = []
+    for cand in matched_candidates:
+        c_start = cand["pos"]
+        c_end = c_start + cand["kw_len"]
+        # ตรวจสอบว่าถูกคลุมโดยคำที่ยาวกว่าไปแล้วหรือไม่
+        is_sub = False
+        for (s, e) in covered_spans:
+            if c_start >= s and c_end <= e:
+                is_sub = True
+                break
+        if not is_sub:
+            non_overlapping.append(cand)
+            covered_spans.append((c_start, c_end))
 
-    # หากมีสถานที่ปลายทางอื่นๆ ให้กรองสถานที่ต้นทาง (เช่น ห้าแยกชิบูย่า เมื่อผู้ใช้อยู่ที่ชิบูย่า) ออก
-    # เพื่อให้การ์ดแสดงเฉพาะสถานที่ที่จะแนะนำให้เดินทางไปต่อ
-    destinations = [m for m in matched_candidates if not m.get("is_origin", False)]
+    # หากมีสถานที่ปลายทางอื่นๆ ให้กรองสถานที่ต้นทาง (เช่น สถานีกินซ่า เมื่อเดินทางจากกินซ่า) ออก
+    # เพื่อให้การ์ดแสดงเฉพาะสถานที่ปลายทางที่แนะนำให้เดินทางไป
+    destinations = [m for m in non_overlapping if not m.get("is_origin", False)]
     if destinations:
         final_list = destinations
     else:
-        final_list = matched_candidates
+        final_list = non_overlapping
 
     # คืนค่าสูงสุด 3 รายการเพื่อไม่ให้แชตยาวเกินไป
     return final_list[:3]
+
 

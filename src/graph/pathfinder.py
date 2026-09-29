@@ -308,23 +308,50 @@ class TokyoGraphPathfinder:
         context_parts = []
 
         # 1. ตรวจจับว่ามีการถามเส้นทางระหว่างจุด A -> จุด B หรือไม่
+        # 1. ตรวจจับสถานที่ท่องเที่ยวและโรงแรม (Place & Hotel)
         detected_places = []
         for node, data in self.nx_graph.nodes(data=True):
-            if data.get("type") == "Place":
+            if data.get("type") in ["Place", "Hotel"]:
                 n_th = data.get("name_th", "").lower()
                 n_en = data.get("name_en", "").lower()
                 # ตรวจชื่อหลัก
                 key_th = n_th.split("(")[0].strip()
-                if key_th in clean_q or n_en in clean_q:
-                    detected_places.append((node, data["name_th"]))
+                pos = -1
+                if key_th and key_th in clean_q:
+                    pos = clean_q.find(key_th)
+                elif n_en and n_en in clean_q:
+                    pos = clean_q.find(n_en)
+                
+                # ตรวจคีย์เวิร์ดเสริมเฉพาะ เช่น ชื่อสั้น
+                if pos == -1:
+                    for kw in [k.lower() for k in data.get("keywords", [])]:
+                        if kw in clean_q and len(kw) >= 3:
+                            pos = clean_q.find(kw)
+                            break
 
+                if pos != -1:
+                    detected_places.append((node, data["name_th"], pos))
+
+        # เรียงตามลำดับที่ปรากฏในประโยค
+        detected_places.sort(key=lambda x: x[2])
+
+        # 2. ตรวจจับสถานีรถไฟ (Station)
         detected_stations = []
         for node, data in self.nx_graph.nodes(data=True):
             if data.get("type") == "Station":
                 s_th = re.sub(r'สถานี', '', data.get("name_th", "")).lower()
                 s_en = re.sub(r'station', '', data.get("name_en", ""), flags=re.I).lower().strip()
-                if (s_th in clean_q and len(s_th) >= 3) or (s_en in clean_q and len(s_en) >= 4):
-                    detected_stations.append((node, data["name_th"]))
+                pos = -1
+                if s_th in clean_q and len(s_th) >= 3:
+                    pos = clean_q.find(s_th)
+                elif s_en in clean_q and len(s_en) >= 4:
+                    pos = clean_q.find(s_en)
+                
+                if pos != -1:
+                    detected_stations.append((node, data["name_th"], pos))
+
+        # เรียงตามลำดับที่ปรากฏในประโยค
+        detected_stations.sort(key=lambda x: x[2])
 
         # ถ้าพบสถานที่ 2 แห่ง -> คำนวณเส้นทาง Place-to-Place
         if len(detected_places) >= 2:
@@ -339,43 +366,76 @@ class TokyoGraphPathfinder:
                     f"(สายรถไฟที่ใช้: {', '.join(route.get('lines_used', []))})"
                 )
 
-        # ถ้าพบสถานี 2 แห่ง -> คำนวณเส้นทาง Station-to-Station
-        elif len(detected_stations) >= 2 and any(k in clean_q for k in ["ไป", "เดินทาง", "นั่งรถไฟ", "เส้นทาง", "สายอะไร"]):
+        # ถ้าพบสถานี 2 แห่ง -> คำนวณเส้นทาง Station-to-Station (ตามลำดับต้นทาง -> ปลายทาง)
+        elif len(detected_stations) >= 2 and any(k in clean_q for k in ["ไป", "เดินทาง", "นั่งรถไฟ", "เส้นทาง", "สายอะไร", "อย่างไร", "ยังไง"]):
             s1, s2 = detected_stations[0][0], detected_stations[1][0]
             route = self.find_shortest_transit(s1, s2)
             if route.get("success"):
                 context_parts.append(
                     f"[ข้อมูลเส้นทางรถไฟจาก Knowledge Graph]:\n"
-                    f"จากสถานี {route['from_station']} ไปยัง {route['to_station']}:\n"
+                    f"การเดินทางจาก {route['from_station']} ไปยัง {route['to_station']}:\n"
                     + "\n".join(route["steps"]) + "\n"
                     f"เวลารถไฟรวม: {route['total_duration_min']} นาที "
                     f"ระยะทาง: {route['total_distance_km']} กม. "
                     f"(สายรถไฟ: {', '.join(route['lines_used'])})"
                 )
 
-        # ถ้าพบ 1 สถานที่ และ 1 สถานี และมีคำถามเกี่ยวกับการเดินทาง -> คำนวณเส้นทางระหว่าง Place กับ Station
-        elif len(detected_places) == 1 and len(detected_stations) == 1 and any(k in clean_q for k in ["ไป", "เดินทาง", "นั่งรถไฟ", "เส้นทาง", "สายอะไร", "จาก"]):
-            p_id, p_name = detected_places[0]
-            s_id, s_name = detected_stations[0]
+        # ถ้าพบ 1 สถานที่/โรงแรม และ 1 สถานี และมีคำถามเกี่ยวกับการเดินทาง
+        elif len(detected_places) >= 1 and len(detected_stations) >= 1 and any(k in clean_q for k in ["ไป", "เดินทาง", "นั่งรถไฟ", "เส้นทาง", "สายอะไร", "จาก", "อย่างไร", "ยังไง"]):
+            p_id, p_name, p_pos = detected_places[0]
+            s_id, s_name, s_pos = detected_stations[0]
             p_data = self.nx_graph.nodes[p_id]
-            st_origin_id = p_data.get("nearest_station_id")
-            st_origin_name = self.nx_graph.nodes[st_origin_id].get("name_th", st_origin_id)
+            st_nearest_id = p_data.get("nearest_station_id")
+            st_nearest_name = self.nx_graph.nodes[st_nearest_id].get("name_th", st_nearest_id) if st_nearest_id else "ไม่ระบุ"
             walk_min = p_data.get("walk_time_min", 0)
 
-            transit_res = self.find_shortest_transit(st_origin_id, s_id)
-            if transit_res.get("success"):
-                total_min = walk_min + transit_res["total_duration_min"]
-                itinerary = [
-                    f"1. เดินเท้าจาก {p_name} ไปยังสถานี {st_origin_name} (ประมาณ {walk_min} นาที)",
-                    *transit_res["steps"],
-                    f"รวมเวลาเดินทางทั้งหมดถึงสถานี {s_name} ประมาณ {total_min} นาที"
-                ]
+            # ตรวจสอบทิศทาง: สถานี -> สถานที่/โรงแรม หรือ สถานที่/โรงแรม -> สถานี
+            if s_pos < p_pos:
+                # กรณีต้นทางคือสถานี (เช่น จาก Ginza ไป Shibuya Stream Hotel)
+                if s_id == st_nearest_id:
+                    itinerary = [
+                        f"1. ปัจจุบันคุณอยู่ที่สถานี {s_name} ซึ่งเป็นสถานีที่ตั้งของ {p_name} อยู่แล้ว",
+                        f"2. เดินเท้าจากสถานีไปยัง {p_name} ใช้เวลาประมาณ {walk_min} นาที"
+                    ]
+                    total_min = walk_min
+                    lines = ["เดินเท้า"]
+                else:
+                    transit_res = self.find_shortest_transit(s_id, st_nearest_id)
+                    if transit_res.get("success"):
+                        total_min = transit_res["total_duration_min"] + walk_min
+                        itinerary = [
+                            *transit_res["steps"],
+                            f"- เมื่อถึงสถานี {st_nearest_name} ให้เดินเท้าไปยัง {p_name} (ประมาณ {walk_min} นาที)",
+                            f"รวมเวลาเดินทางทั้งหมดประมาณ {total_min} นาที"
+                        ]
+                        lines = transit_res.get("lines_used", [])
+                    else:
+                        itinerary = [f"ไม่พบเส้นทางเชื่อมต่อโดยตรงระหว่างสถานี {s_name} และ {st_nearest_name}"]
+                        lines = []
+                        total_min = 0
+
                 context_parts.append(
                     f"[ข้อมูลเส้นทางและการเดินทางจาก Knowledge Graph]:\n"
-                    f"การเดินทางจาก '{p_name}' ไปยัง '{s_name}':\n"
+                    f"การเดินทางจาก '{s_name}' ไปยัง '{p_name}':\n"
                     + "\n".join(itinerary) + "\n"
-                    f"(สายรถไฟที่ใช้: {', '.join(transit_res.get('lines_used', []))})"
+                    f"(สายรถไฟที่ใช้: {', '.join(lines)})"
                 )
+            else:
+                # กรณีต้นทางคือสถานที่/โรงแรม (เช่น จาก Shibuya Stream Hotel ไป Ginza)
+                transit_res = self.find_shortest_transit(st_nearest_id, s_id)
+                if transit_res.get("success"):
+                    total_min = walk_min + transit_res["total_duration_min"]
+                    itinerary = [
+                        f"1. เดินเท้าจาก {p_name} ไปยังสถานี {st_nearest_name} (ประมาณ {walk_min} นาที)",
+                        *transit_res["steps"],
+                        f"รวมเวลาเดินทางทั้งหมดถึงสถานี {s_name} ประมาณ {total_min} นาที"
+                    ]
+                    context_parts.append(
+                        f"[ข้อมูลเส้นทางและการเดินทางจาก Knowledge Graph]:\n"
+                        f"การเดินทางจาก '{p_name}' ไปยัง '{s_name}':\n"
+                        + "\n".join(itinerary) + "\n"
+                        f"(สายรถไฟที่ใช้: {', '.join(transit_res.get('lines_used', []))})"
+                    )
 
         # ถ้าพบสถานที่ 1 แห่ง -> ดึงข้อมูลสถานีใกล้เคียงและการเชื่อมโยง
         elif len(detected_places) == 1:
