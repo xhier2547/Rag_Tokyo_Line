@@ -173,9 +173,10 @@ def create_rich_menu_object() -> RichMenu:
         size=RichMenuSize(width=width, height=height),
         selected=True,
         name="Tokyo Tourism RAG Rich Menu",
-        chat_bar_text="🗼 เมนูท่องเที่ยวและรถไฟโตเกียว",
+        chat_bar_text="เมนูแนะนำ",
         areas=areas
     )
+
     return rich_menu
 
 
