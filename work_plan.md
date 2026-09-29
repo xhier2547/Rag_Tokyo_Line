@@ -52,19 +52,20 @@
   - ฟังก์ชันค้นหาสถานที่ใกล้สถานี หรือสถานที่ในย่านเดียวกัน
   - ฟังก์ชันสกัด Graph Context อัตโนมัติ (`extract_graph_context_for_rag`) พร้อมรองรับการเชื่อมต่อกับ LLM
 
-### Phase 3: การสร้าง Vector & Sparse Indices (Dense RAG & Hybrid RAG - 35 คะแนน)
-- [ ] **3.1 Vector Database Comparison (ChromaDB vs FAISS):**
-  - สร้าง FAISS Index สำหรับข้อความคำอธิบายยาว (Semantic Search)
-  - สร้าง ChromaDB Collection พร้อม Metadata Filtering (Category, Ward)
+### Phase 3: การสร้าง Vector & Sparse Indices (Dense RAG & Hybrid RAG - 35 คะแนน) [COMPLETED]
+- [x] **3.1 Vector Database Comparison (ChromaDB vs FAISS):**
+  - สร้าง FAISS Index สำหรับข้อความคำอธิบายยาว (Semantic Search) ใน `src/vector/faiss_store.py`
+  - สร้าง ChromaDB Collection พร้อม Native Metadata Filtering (`ward`, `category`) ใน `src/vector/chroma_store.py`
   - ทำการทดสอบเปรียบเทียบ Latency และความแม่นยำ
-- [ ] **3.2 Embedding Model Benchmark:**
-  - เตรียมสคริปต์เปรียบเทียบโมเดล: `BAAI/bge-m3`, `intfloat/multilingual-e5-base`, `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`
-- [ ] **3.3 Sparse BM25 Index:**
-  - สร้าง BM25 Tokenizer ด้วย PyThaiNLP / N-gram สำหรับรองรับคำค้นหาภาษาไทยและชื่อเฉพาะภาษาอังกฤษ/ญี่ปุ่น
-- [ ] **3.4 Advanced Hybrid Fusion Engine (`hybrid_engine.py`):**
-  - **Query Intent Router:** จำแนกประเภทคำถาม (1. คำถามเส้นทาง/การเดินทาง $\rightarrow$ Graph, 2. คำถามประวัติ/รายละเอียด $\rightarrow$ Vector+BM25, 3. คำถามผสม $\rightarrow$ Hybrid Full)
+- [x] **3.2 Embedding Model Benchmark:**
+  - เตรียมสคริปต์เปรียบเทียบโมเดลใน `src/vector/benchmark_embeddings.py` และบันทึกผลการทดลองลง `data/processed/embedding_benchmark_results.json`
+- [x] **3.3 Sparse BM25 Index:**
+  - สร้าง BM25 Tokenizer ด้วย PyThaiNLP ใน `src/vector/bm25_store.py` พร้อมแคชไฟล์ดัชนี
+- [x] **3.4 Advanced Hybrid Fusion Engine (`engine.py`):**
+  - **Query Intent Router:** จำแนกประเภทคำถาม (1. `ROUTE_TRANSIT` $\rightarrow$ Graph, 2. `FACT_RETRIEVAL` $\rightarrow$ Vector+BM25, 3. `HYBRID_COMPLEX` $\rightarrow$ Graph + Vector + Sparse)
   - **Reciprocal Rank Fusion (RRF):** คำนวณคะแนนถ่วงน้ำหนักจาก Dense และ Sparse
-  - **Cross-Encoder / Semantic Re-ranking:** คัดกรอง Chunks ที่เกี่ยวข้องที่สุด Top-3
+  - **Cross-Modal Semantic Re-ranking:** คัดกรอง Chunks ที่เกี่ยวข้องที่สุด Top-3
+  - **Context Aggregation:** ผสานความสัมพันธ์จาก Graph และเอกสารจาก Vector พร้อมระบบอ้างอิง (Citations) ชัดเจน
 
 ### Phase 4: การเชื่อมต่อ Local LLM & API LLM (Local + API LLM - 15 คะแนน)
 - [ ] **4.1 Local LLM via Ollama (`local_llm.py`):**
