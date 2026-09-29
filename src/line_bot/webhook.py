@@ -33,6 +33,8 @@ from linebot.models import (
 )
 
 from src.service.rag_service import TokyoRAGService, RAGResponse
+from src.line_bot.media_catalog import find_matched_entities
+from src.line_bot.flex_cards import build_flex_message_from_entities, build_contextual_quick_replies
 
 load_dotenv()
 logger = logging.getLogger("line_bot")
@@ -231,6 +233,9 @@ if handler:
     def handle_text_message(event: MessageEvent):
         """
         ประมวลผลข้อความตัวอักษรที่ส่งมาจากผู้ใช้ใน LINE
+        - ส่ง Flex Message การ์ดรูปภาพสถานที่/โรงแรม พร้อมปุ่ม Interactive Actions
+        - ส่ง Text Message คำอธิบายเชิงลึกจาก Hybrid RAG
+        - แนบ Contextual Quick Reply ให้แตะถามต่อได้ทันที
         """
         user_query = event.message.text.strip()
         logger.info(f"[LINE Message Received] '{user_query}' from User: {event.source.user_id}")
@@ -246,15 +251,33 @@ if handler:
             # 2. จัดรูปแบบข้อความตอบกลับให้สวยงาม ระดับมืออาชีพ
             formatted_reply = format_line_reply(response)
 
-            # 3. เตรียม Quick Reply ปุ่มลัด
-            quick_reply = build_quick_replies()
+            # 3. ค้นหาสถานที่หรือโรงแรมที่เกี่ยวข้องเพื่อสร้างการ์ดรูปภาพ (Flex Card)
+            matched_entities = find_matched_entities(
+                text=response.answer + " " + user_query,
+                citations=response.citations
+            )
 
-            # 4. ส่งข้อความตอบกลับไปยัง LINE
+            # 4. เตรียมชุดข้อความตอบกลับ (Messages List)
+            messages_to_send = []
+
+            # 4.1 สร้าง Flex Card (รูปภาพ + ข้อมูลย่อ + ปุ่มกดไปต่อ)
+            if matched_entities:
+                flex_card = build_flex_message_from_entities(matched_entities)
+                if flex_card:
+                    messages_to_send.append(flex_card)
+
+            # 4.2 สร้าง Dynamic Quick Reply ตามบริบทของสถานที่ในคำตอบ
+            quick_reply = build_contextual_quick_replies(matched_entities)
+
+            # 4.3 เพิ่มข้อความเนื้อหาอธิบายพร้อม Quick Reply
+            messages_to_send.append(TextSendMessage(text=formatted_reply, quick_reply=quick_reply))
+
+            # 5. ส่งข้อความตอบกลับไปยัง LINE
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text=formatted_reply, quick_reply=quick_reply)
+                messages_to_send
             )
-            logger.info(f"[LINE Reply Sent] Successfully replied to {event.source.user_id}")
+            logger.info(f"[LINE Reply Sent] Successfully replied ({len(messages_to_send)} msgs, {len(matched_entities)} cards) to {event.source.user_id}")
 
         except Exception as e:
             logger.error(f"[LINE Error] Failed to process message: {e}")
@@ -269,3 +292,4 @@ if handler:
                 )
             except Exception:
                 pass
+
