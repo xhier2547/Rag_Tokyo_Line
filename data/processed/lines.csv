@@ -8,3 +8,5 @@ LN_ASAKUSA,รถไฟใต้ดินสายอาซากุสะ (Toei
 LN_OEDO,รถไฟใต้ดินสายโอเอโดะ (Toei Oedo Line),Toei Oedo Line,E,Toei Subway,#B6007A
 LN_CHUO_SOBU,รถไฟสายชูโอ-โซบุ (JR Chuo-Sobu Line),JR Chuo-Sobu Line,JB,JR East,#FFD700
 LN_YURIKAMOME,รถไฟโมโนเรลสายยูริคาโมเมะ (Yurikamome Line),Yurikamome Line,U,Tokyo Waterfront New Transit,#0099FF
+LN_CHIYODA,รถไฟใต้ดินสายชิโยดะ (Tokyo Metro Chiyoda Line),Tokyo Metro Chiyoda Line,C,Tokyo Metro,#00BB85
+LN_NAMBOKU,รถไฟใต้ดินสายนะนโบกุ (Tokyo Metro Namboku Line),Tokyo Metro Namboku Line,N,Tokyo Metro,#00AC9B

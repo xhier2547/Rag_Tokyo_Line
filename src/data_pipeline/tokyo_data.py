@@ -1,7 +1,7 @@
 """
-Curated Tokyo Tourism & Transit Dataset
-รวบรวมข้อมูลสถานที่ท่องเที่ยว สถานีรถไฟ สายรถไฟ และโครงข่ายการเดินทางในโตเกียว
-อ้างอิงจาก JTA Sightseeing Database, 駅データ.jp และ OpenStreetMap
+Curated Tokyo Tourism, Transit & Accommodation Dataset
+รวบรวมข้อมูลสถานที่ท่องเที่ยว สถานีรถไฟ สายรถไฟ โครงข่ายการเดินทาง และโรงแรมที่พักในโตเกียว
+อ้างอิงจาก JTA Sightseeing Database, 駅データ.jp, OpenStreetMap และ e-Gov Tourism Statistics
 """
 
 LINES_DATA = [
@@ -76,6 +76,22 @@ LINES_DATA = [
         "line_code": "U",
         "operator": "Tokyo Waterfront New Transit",
         "color": "#0099FF"  # Blue
+    },
+    {
+        "line_id": "LN_CHIYODA",
+        "name_th": "รถไฟใต้ดินสายชิโยดะ (Tokyo Metro Chiyoda Line)",
+        "name_en": "Tokyo Metro Chiyoda Line",
+        "line_code": "C",
+        "operator": "Tokyo Metro",
+        "color": "#00BB85"  # Green
+    },
+    {
+        "line_id": "LN_NAMBOKU",
+        "name_th": "รถไฟใต้ดินสายนะนโบกุ (Tokyo Metro Namboku Line)",
+        "name_en": "Tokyo Metro Namboku Line",
+        "line_code": "N",
+        "operator": "Tokyo Metro",
+        "color": "#00AC9B"  # Emerald
     }
 ]
 
@@ -249,11 +265,39 @@ STATIONS_DATA = [
         "ward": "Koto",
         "latitude": 35.654824,
         "longitude": 139.796338
+    },
+    {
+        "station_id": "ST_OMOTESANDO",
+        "name_th": "สถานีโอโมเตะซันโด",
+        "name_en": "Omotesando Station",
+        "name_ja": "表参道駅",
+        "lines": "LN_GINZA;LN_HANZOMON;LN_CHIYODA",
+        "ward": "Minato",
+        "latitude": 35.665247,
+        "longitude": 139.712314
+    },
+    {
+        "station_id": "ST_KORAKUEN",
+        "name_th": "สถานีโคระคุเอ็น (โตเกียวโดม)",
+        "name_en": "Korakuen Station",
+        "name_ja": "後楽園駅",
+        "lines": "LN_MARUNOUCHI;LN_NAMBOKU;LN_OEDO",
+        "ward": "Bunkyo",
+        "latitude": 35.707328,
+        "longitude": 139.751682
+    },
+    {
+        "station_id": "ST_SHIJO_MAE",
+        "name_th": "สถานีชิโจมาเอะ (ตลาดปลาโทโยสุ)",
+        "name_en": "Shijo-mae Station",
+        "name_ja": "市場前駅",
+        "lines": "LN_YURIKAMOME",
+        "ward": "Koto",
+        "latitude": 35.645389,
+        "longitude": 139.784444
     }
 ]
 
-# โครงข่ายเชื่อมต่อระหว่างสถานีรถไฟ (Transit Edges)
-# กำหนดระยะเวลา (นาที) และระยะทาง (กม.) ตามเวลาเดินรถจริง
 TRANSIT_EDGES_DATA = [
     # 1. JR Yamanote Line (สถานีหลัก)
     {"from_station_id": "ST_TOKYO", "to_station_id": "ST_SHIMBASHI", "line_id": "LN_YAMANOTE", "line_name": "JR Yamanote Line", "duration_min": 4, "distance_km": 1.9},
@@ -267,13 +311,15 @@ TRANSIT_EDGES_DATA = [
     {"from_station_id": "ST_AKIHABARA", "to_station_id": "ST_TOKYO", "line_id": "LN_YAMANOTE", "line_name": "JR Yamanote Line", "duration_min": 4, "distance_km": 2.0},
 
     # 2. Tokyo Metro Ginza Line
-    {"from_station_id": "ST_SHIBUYA", "to_station_id": "ST_GINZA", "line_id": "LN_GINZA", "line_name": "Tokyo Metro Ginza Line", "duration_min": 16, "distance_km": 6.7},
+    {"from_station_id": "ST_SHIBUYA", "to_station_id": "ST_OMOTESANDO", "line_id": "LN_GINZA", "line_name": "Tokyo Metro Ginza Line", "duration_min": 2, "distance_km": 1.3},
+    {"from_station_id": "ST_OMOTESANDO", "to_station_id": "ST_GINZA", "line_id": "LN_GINZA", "line_name": "Tokyo Metro Ginza Line", "duration_min": 14, "distance_km": 5.4},
     {"from_station_id": "ST_GINZA", "to_station_id": "ST_SHIMBASHI", "line_id": "LN_GINZA", "line_name": "Tokyo Metro Ginza Line", "duration_min": 2, "distance_km": 0.9},
     {"from_station_id": "ST_GINZA", "to_station_id": "ST_UENO", "line_id": "LN_GINZA", "line_name": "Tokyo Metro Ginza Line", "duration_min": 12, "distance_km": 4.5},
     {"from_station_id": "ST_UENO", "to_station_id": "ST_ASAKUSA", "line_id": "LN_GINZA", "line_name": "Tokyo Metro Ginza Line", "duration_min": 5, "distance_km": 2.2},
 
     # 3. Tokyo Metro Marunouchi Line
-    {"from_station_id": "ST_IKEBUKURO", "to_station_id": "ST_TOKYO", "line_id": "LN_MARUNOUCHI", "line_name": "Tokyo Metro Marunouchi Line", "duration_min": 17, "distance_km": 8.7},
+    {"from_station_id": "ST_IKEBUKURO", "to_station_id": "ST_KORAKUEN", "line_id": "LN_MARUNOUCHI", "line_name": "Tokyo Metro Marunouchi Line", "duration_min": 7, "distance_km": 3.8},
+    {"from_station_id": "ST_KORAKUEN", "to_station_id": "ST_TOKYO", "line_id": "LN_MARUNOUCHI", "line_name": "Tokyo Metro Marunouchi Line", "duration_min": 9, "distance_km": 4.2},
     {"from_station_id": "ST_TOKYO", "to_station_id": "ST_GINZA", "line_id": "LN_MARUNOUCHI", "line_name": "Tokyo Metro Marunouchi Line", "duration_min": 3, "distance_km": 1.1},
     {"from_station_id": "ST_GINZA", "to_station_id": "ST_SHINJUKU_GYOEMMAE", "line_id": "LN_MARUNOUCHI", "line_name": "Tokyo Metro Marunouchi Line", "duration_min": 13, "distance_km": 5.9},
     {"from_station_id": "ST_SHINJUKU_GYOEMMAE", "to_station_id": "ST_SHINJUKU", "line_id": "LN_MARUNOUCHI", "line_name": "Tokyo Metro Marunouchi Line", "duration_min": 3, "distance_km": 1.1},
@@ -284,21 +330,26 @@ TRANSIT_EDGES_DATA = [
     {"from_station_id": "ST_GINZA", "to_station_id": "ST_TSUKIJI", "line_id": "LN_HIBIYA", "line_name": "Tokyo Metro Hibiya Line", "duration_min": 3, "distance_km": 1.4},
     {"from_station_id": "ST_GINZA", "to_station_id": "ST_ROPPONGI", "line_id": "LN_HIBIYA", "line_name": "Tokyo Metro Hibiya Line", "duration_min": 9, "distance_km": 4.1},
 
-    # 5. Toei Asakusa Line & Hanzomon Line (เชื่อมสู่ Oshiage / Skytree)
+    # 5. Toei Asakusa Line & Hanzomon Line
     {"from_station_id": "ST_ASAKUSA", "to_station_id": "ST_OSHIAGE", "line_id": "LN_ASAKUSA", "line_name": "Toei Asakusa Line", "duration_min": 3, "distance_km": 1.5},
     {"from_station_id": "ST_SHIMBASHI", "to_station_id": "ST_ASAKUSA", "line_id": "LN_ASAKUSA", "line_name": "Toei Asakusa Line", "duration_min": 14, "distance_km": 6.8},
-    {"from_station_id": "ST_SHIBUYA", "to_station_id": "ST_OSHIAGE", "line_id": "LN_HANZOMON", "line_name": "Tokyo Metro Hanzomon Line", "duration_min": 31, "distance_km": 15.2},
+    {"from_station_id": "ST_SHIBUYA", "to_station_id": "ST_OMOTESANDO", "line_id": "LN_HANZOMON", "line_name": "Tokyo Metro Hanzomon Line", "duration_min": 2, "distance_km": 1.3},
+    {"from_station_id": "ST_OMOTESANDO", "to_station_id": "ST_OSHIAGE", "line_id": "LN_HANZOMON", "line_name": "Tokyo Metro Hanzomon Line", "duration_min": 29, "distance_km": 13.9},
 
-    # 6. Toei Oedo Line (เชื่อม Roppongi, Shinjuku, Hamamatsucho)
+    # 6. Toei Oedo Line
     {"from_station_id": "ST_SHINJUKU", "to_station_id": "ST_ROPPONGI", "line_id": "LN_OEDO", "line_name": "Toei Oedo Line", "duration_min": 9, "distance_km": 4.5},
     {"from_station_id": "ST_ROPPONGI", "to_station_id": "ST_HAMAMATSUCHO", "line_id": "LN_OEDO", "line_name": "Toei Oedo Line", "duration_min": 6, "distance_km": 2.8},
+    {"from_station_id": "ST_KORAKUEN", "to_station_id": "ST_SHINJUKU", "line_id": "LN_OEDO", "line_name": "Toei Oedo Line", "duration_min": 14, "distance_km": 6.2},
 
-    # 7. Yurikamome Line (ไป Odaiba & Toyosu)
+    # 7. JR Chuo-Sobu Line
+    {"from_station_id": "ST_SHINJUKU", "to_station_id": "ST_AKIHABARA", "line_id": "LN_CHUO_SOBU", "line_name": "JR Chuo-Sobu Line", "duration_min": 12, "distance_km": 6.7},
+
+    # 8. Yurikamome Line
     {"from_station_id": "ST_SHIMBASHI", "to_station_id": "ST_ODAIBA_KAIHINKOEN", "line_id": "LN_YURIKAMOME", "line_name": "Yurikamome Line", "duration_min": 13, "distance_km": 5.0},
-    {"from_station_id": "ST_ODAIBA_KAIHINKOEN", "to_station_id": "ST_TOYOSU", "line_id": "LN_YURIKAMOME", "line_name": "Yurikamome Line", "duration_min": 16, "distance_km": 6.9}
+    {"from_station_id": "ST_ODAIBA_KAIHINKOEN", "to_station_id": "ST_SHIJO_MAE", "line_id": "LN_YURIKAMOME", "line_name": "Yurikamome Line", "duration_min": 9, "distance_km": 3.9},
+    {"from_station_id": "ST_SHIJO_MAE", "to_station_id": "ST_TOYOSU", "line_id": "LN_YURIKAMOME", "line_name": "Yurikamome Line", "duration_min": 4, "distance_km": 1.8}
 ]
 
-# ข้อมูลสถานที่ท่องเที่ยว (Places Data) พร้อมเนื้อหาเชิงลึก
 PLACES_DATA = [
     {
         "place_id": "P_SENSOJI",
@@ -309,7 +360,7 @@ PLACES_DATA = [
         "category": "Temple & Shrine",
         "latitude": 35.714765,
         "longitude": 139.796655,
-        "description_th": "วัดเซ็นโซจิเป็นวัดพุทธที่เก่าแก่ที่สุดในกรุงโตเกียว สร้างขึ้นในปี ค.ศ. 628 มีเอกลักษณ์คือประตูคามินาริโมง (Kaminarimon) ที่แขวนโคมแดงยักษ์อันเลื่องชื่อ ภายในมีถนนคนเดินนากามิเสะ (Nakamise-dori) ทอดยาวกว่า 250 เมตร เต็มไปด้วยร้านขายขนมพื้นเมือง เช่น ขนมเซมเบ้ มันจูทอด และของที่ระลึกดั้งเดิม เป็นจุดหมายยอดนิยมที่ผู้คนมาสักการะองค์เจ้าแม่กวนอิมเพื่อขอพรเรื่องความสุขและความสำเร็จ",
+        "description_th": "วัดเซ็นโซจิเป็นวัดพุทธที่เก่าแก่ที่สุดในกรุงโตเกียว สร้างขึ้นในปี ค.ศ. 628 มีเอกลักษณ์คือประตูคามินาริโมง (Kaminarimon) ที่แขวนโคมแดงยักษ์อันเลื่องชื่อ ภายในมีถนนคนเดินนากามิเสะ (Nakamise-dori) ทอดยาวกว่า 250 เมตร เต็มไปด้วยร้านขายขนมพื้นเมือง เช่น ขนมเซมเบ้ มันจูทอด ขนมปังเมลอน และของที่ระลึกดั้งเดิม เป็นจุดหมายยอดนิยมที่ผู้คนมาสักการะองค์เจ้าแม่กวนอิมเพื่อขอพรเรื่องความสุขและความสำเร็จ",
         "description_en": "Senso-ji is Tokyo's oldest and most significant Buddhist temple, founded in 628 AD. Famous for its colossal red paper lantern at the Kaminarimon (Thunder Gate) and the vibrant Nakamise shopping street offering traditional snacks and souvenirs.",
         "opening_hours": "06:00 - 17:00 (ตัวโบสถ์หลัก) / บริเวณวัดเปิด 24 ชั่วโมง",
         "admission_fee": "เข้าชมฟรี",
@@ -491,10 +542,138 @@ PLACES_DATA = [
         "admission_fee": "ชมฟรี",
         "nearest_station_id": "ST_ODAIBA_KAIHINKOEN",
         "walk_time_min": 5
+    },
+    # --- ข้อมูลเพิ่มเติมรอบใหม่ 8 แห่ง (จาก JTA Sightseeing Database & OSM) ---
+    {
+        "place_id": "P_IMPERIAL_PALACE",
+        "name_th": "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ",
+        "name_en": "Tokyo Imperial Palace & East Gardens",
+        "name_ja": "皇居",
+        "ward": "Chiyoda",
+        "category": "Culture & History",
+        "latitude": 35.685175,
+        "longitude": 139.752800,
+        "description_th": "พระราชวังอิมพีเรียลเป็นที่ประทับหลักของสมเด็จพระจักรพรรดิแห่งญี่ปุ่น ตั้งอยู่ใจกลางกรุงโตเกียวบนพื้นที่เดิมของปราสาทเอโดะ (Edo Castle) ล้อมรอบด้วยคูน้ำโบราณ กำแพงหินขนาดยักษ์ และสะพานแว่นตานิจูบาชิ (Nijubashi Bridge) อันเลื่องชื่อ บริเวณสวนฝั่งตะวันออก (East Gardens) เปิดให้นักท่องเที่ยวเข้าชมฟรี มีซากฐานป้อมปราการหอคอยปราสาทเอโดะ สวนสไตล์ญี่ปุ่นดั้งเดิม และต้นซากุระมากมาย เหมาะสำหรับการเดินเล่นและเรียนรู้ประวัติศาสตร์",
+        "description_en": "The Imperial Palace is the primary residence of the Emperor of Japan, built on the former site of Edo Castle. Surrounded by scenic moats, massive stone ramparts, and the iconic Nijubashi Bridge. The East Gardens are open to the public free of charge, showcasing historic castle foundations and tranquil Japanese gardens.",
+        "opening_hours": "09:00 - 17:00 (ปิดวันจันทร์และวันศุกร์)",
+        "admission_fee": "เข้าชมสวนฟรี (การเข้าชมพระราชวังด้านในต้องจองล่วงหน้า)",
+        "nearest_station_id": "ST_TOKYO",
+        "walk_time_min": 10
+    },
+    {
+        "place_id": "P_TEAMLAB_PLANETS",
+        "name_th": "พิพิธภัณฑ์ศิลปะดิจิทัลทีมแล็บ แพลเน็ตส์ โตเกียว",
+        "name_en": "teamLab Planets TOKYO DMM",
+        "name_ja": "チームラボプラネッツ TOKYO",
+        "ward": "Koto",
+        "category": "Culture & Art",
+        "latitude": 35.649067,
+        "longitude": 139.789725,
+        "description_th": "พิพิธภัณฑ์ศิลปะดิจิทัลแบบอินเทอร์แอคทีฟระดับโลกที่ผู้เข้าชมต้องถอดรองเท้าเดินลุยน้ำ มีแนวคิด 'Body Immersive' ผสานร่างกายเข้ากับงานศิลปะแสง สี เสียง ไฮไลต์เด่นได้แก่ ห้องสวนดอกกล้วยไม้มีชีวิตลอยได้ (Floating Flower Garden) ห้องคริสตัลกระจกไร้ที่สิ้นสุด (The Infinite Crystal Universe) และผืนน้ำที่ฉายภาพปลาคาร์ปแหวกว่ายเปลี่ยนเป็นดอกไม้เมื่อสัมผัส",
+        "description_en": "A world-renowned immersive digital art museum where visitors walk barefoot through water. Features iconic exhibits including The Infinite Crystal Universe, Floating Flower Garden with thousands of living orchids, and interactive water installations.",
+        "opening_hours": "09:00 - 22:00 (รอบสุดท้าย 21:00)",
+        "admission_fee": "ผู้ใหญ่เริ่มต้น 3,800 - 4,200 เยน (แนะนำจองตั๋วออนไลน์ล่วงหน้า)",
+        "nearest_station_id": "ST_TOYOSU",
+        "walk_time_min": 10
+    },
+    {
+        "place_id": "P_AMEYOKO",
+        "name_th": "ตลาดอะเมโยโกะ (ถนนคนเดินอะเมยะ โยโกโจ)",
+        "name_en": "Ameyoko Shopping Street",
+        "name_ja": "アメヤ横丁",
+        "ward": "Taito",
+        "category": "Food & Market",
+        "latitude": 35.711202,
+        "longitude": 139.774577,
+        "description_th": "ถนนคนเดินและตลาดกลางแจ้งอันคึกคักใต้รางรถไฟระหว่างสถานีอุเอโนะและสถานีโอคาจิมาจิ เดิมเป็นตลาดมืดหลังสงครามโลก ปัจจุบันเต็มไปด้วยร้านขายอาหารสตรีทฟู้ด ข้าวหน้าปลาดิบราคาประหยัด ผลไม้เสียบไม้สด ผลไม้อบแห้ง เสื้อผ้า รองเท้าผ้าใบ และขนมของฝากยอดนิยมในราคาย่อมเยา มีกลิ่นอายความมีชีวิตชีวาแบบดั้งเดิมของโตเกียว",
+        "description_en": "A vibrant open-air market street running along the elevated train tracks between Ueno and Okachimachi stations. Famous for bustling street food vendors, fresh seafood stalls, inexpensive sneakers, cosmetics, and traditional sweets.",
+        "opening_hours": "10:00 - 20:00 (ขึ้นอยู่กับแต่ละร้านค้า)",
+        "admission_fee": "เข้าชมฟรี",
+        "nearest_station_id": "ST_UENO",
+        "walk_time_min": 2
+    },
+    {
+        "place_id": "P_TAKESHITA_STREET",
+        "name_th": "ถนนทาเคชิตะ ย่านฮาราจูกุ",
+        "name_en": "Takeshita Street Harajuku",
+        "name_ja": "竹下通り",
+        "ward": "Shibuya",
+        "category": "Shopping & Entertainment",
+        "latitude": 35.671607,
+        "longitude": 139.703247,
+        "description_th": "ศูนย์กลางแฟชั่นวัยรุ่นและวัฒนธรรมคาวาอี้ (Kawaii Culture) ระดับตำนานของญี่ปุ่น ถนนคนเดินความยาว 400 เมตร แน่นขนัดไปด้วยร้านเสื้อผ้าแฟชั่นสตรีทแวร์ ร้านขายของกุ๊กกิ๊ก คาเฟ่สัตว์เลี้ยง และร้านเครปญี่ปุ่นม้วนสดชื่อดังอย่าง Marion Crepes และ Santa Monica Crepes รวมถึงสายไหมสีรุ้งขนาดยักษ์",
+        "description_en": "The pulsating epicenter of Japanese youth pop culture and kawaii fashion. This 400-meter pedestrian avenue is packed with quirky boutiques, trendy streetwear, vintage shops, rainbow cotton candy, and Harajuku's legendary sweet crepe stalls.",
+        "opening_hours": "10:00 - 20:00",
+        "admission_fee": "เข้าชมฟรี",
+        "nearest_station_id": "ST_HARAJUKU",
+        "walk_time_min": 1
+    },
+    {
+        "place_id": "P_HAMARIKYU_GARDENS",
+        "name_th": "สวนฮามาริคิว (สวนหลวงริมอ่าวโตเกียว)",
+        "name_en": "Hamarikyu Gardens",
+        "name_ja": "浜離宮恩賜庭園",
+        "ward": "Chuo",
+        "category": "Nature & Park",
+        "latitude": 35.659722,
+        "longitude": 139.763333,
+        "description_th": "สวนสาธารณะสไตล์ญี่ปุ่นโบราณในยุคเอโดะของตระกูลโชกุนโทกูงาวะ มีเอกลักษณ์โดดเด่นคือสระน้ำชิโออิริ (Shioiri-no-ike) ซึ่งเป็นสระน้ำเค็มที่รับน้ำขึ้นน้ำลงจากอ่าวโตเกียวโดยตรง กลางสระมีโรงน้ำชาโบราณ Nakajima no Ochaya ที่นักท่องเที่ยวสามารถนั่งจิบชาเขียวมัทฉะคู่กับขนมวากาชิ พร้อมชมทิวทัศน์ความตัดกันระหว่างสวนโบราณกับตึกระฟ้าของย่านชิโอโดเมะ",
+        "description_en": "A tranquil traditional Edo-period Japanese landscape garden on Tokyo Bay, formerly belonging to the Tokugawa Shogun family. Features tidal seawater ponds and a charming teahouse on the water serving matcha tea against a dramatic backdrop of Shiodome skyscrapers.",
+        "opening_hours": "09:00 - 17:00",
+        "admission_fee": "ผู้ใหญ่ 300 เยน",
+        "nearest_station_id": "ST_SHIMBASHI",
+        "walk_time_min": 10
+    },
+    {
+        "place_id": "P_TOKYO_DOME_CITY",
+        "name_th": "โตเกียวโดมซิตี้และสปาลาคัว",
+        "name_en": "Tokyo Dome City & Spa LaQua",
+        "name_ja": "東京ドームシティ",
+        "ward": "Bunkyo",
+        "category": "Shopping & Entertainment",
+        "latitude": 35.705639,
+        "longitude": 139.751889,
+        "description_th": "อาณาจักรความบันเทิงครบวงจรใจกลางโตเกียว ประกอบด้วยสนามเบสบอลและฮอลล์คอนเสิร์ตระดับโลก 'Tokyo Dome' สวนสนุก Tokyo Dome City Attractions ที่มีรถไฟเหาะ Thunder Dolphin ทะลุตึก และชิงช้าสวรรค์ Big O รวมถึงคอมเพล็กซ์ 'Spa LaQua' บ่อน้ำพุร้อนออนเซ็นธรรมชาติแท้ๆ จากใต้ดินลึก 1,700 เมตร พร้อมซาวน่าและร้านอาหารเพื่อการผ่อนคลาย",
+        "description_en": "A vast entertainment and leisure hub featuring the iconic Tokyo Dome baseball stadium and concert venue, an amusement park with the Thunder Dolphin rollercoaster through a building, and Spa LaQua luxury natural hot springs onsen complex.",
+        "opening_hours": "10:00 - 21:00 (Spa LaQua เปิด 11:00 - 09:00 เช้าวันถัดไป)",
+        "admission_fee": "เข้าบริเวณฟรี / ค่าเครื่องเล่นหรือค่าสปาแยกตามจุดบริการ (Spa LaQua ประมาณ 3,230 เยน)",
+        "nearest_station_id": "ST_KORAKUEN",
+        "walk_time_min": 3
+    },
+    {
+        "place_id": "P_TOYOSU_MARKET",
+        "name_th": "ตลาดปลาโทโยสุและคอมเพล็กซ์เซ็นเคียคุบันไร",
+        "name_en": "Toyosu Fish Market & Toyosu Senkyaku Banrai",
+        "name_ja": "豊洲市場・千客万来",
+        "ward": "Koto",
+        "category": "Food & Market",
+        "latitude": 35.646111,
+        "longitude": 139.785278,
+        "description_th": "ตลาดค้าส่งสัตว์น้ำและอาหารที่ใหญ่และทันสมัยที่สุดในโลกที่ย้ายมาจากสึกิจิ มีจุดชมการประมูลปลาทูน่ายามเช้าอันเลื่องชื่อ และโซนเปิดใหม่ 'Toyosu Senkyaku Banrai' ซึ่งเป็นเมืองจำลองสไตล์เอโดะย้อนยุค รวมร้านอาหารซูชิ ซาชิมิระดับพรีเมียม อาหารทะเลปิ้งย่างกว่า 60 ร้าน พร้อมอาคารบ่อออนเซ็นแช่น้ำแร่ธรรมชาติชมวิวอ่าวโตเกียว",
+        "description_en": "The world's largest state-of-the-art wholesale seafood market, successor to historic Tsukiji. Features the famous early-morning tuna auctions, top-tier sushi eateries, and the newly opened Senkyaku Banrai Edo-themed dining and natural onsen hot spring promenade.",
+        "opening_hours": "05:00 - 15:00 (ตลาดค้าส่ง) / 10:00 - 22:00 (โซน Senkyaku Banrai)",
+        "admission_fee": "เข้าชมฟรี",
+        "nearest_station_id": "ST_SHIJO_MAE",
+        "walk_time_min": 2
+    },
+    {
+        "place_id": "P_OMOTESANDO_HILLS",
+        "name_th": "ถนนสายช้อปปิ้งโอโมเตะซันโดและห้างโอโมเตะซันโดฮิลส์",
+        "name_en": "Omotesando Boulevard & Omotesando Hills",
+        "name_ja": "表参道ヒルズ",
+        "ward": "Shibuya",
+        "category": "Shopping & Entertainment",
+        "latitude": 35.667111,
+        "longitude": 139.709972,
+        "description_th": "ถนนสายช้อปปิ้งต้นเซลโคว่าอันร่มรื่นที่ได้รับการขนานนามว่าเป็น 'ช็องเซลิเซ่แห่งโตเกียว' ศูนย์รวมแฟลกชิปสโตร์ของแบรนด์แฟชั่นระดับไฮเอนด์และสถาปัตยกรรมระดับมาสเตอร์พีซ ออกแบบโดยสถาปนิกชื่อดังระดับโลก เช่น Tadao Ando ผู้รังสรรค์ห้าง Omotesando Hills ที่มีทางลาดวนอันเป็นเอกลักษณ์ รายล้อมด้วยคาเฟ่เบเกอรี่สไตล์ยุโรปและร้านกาแฟบูทีก",
+        "description_en": "Tokyo's leafy 'Champs-Elysees', renowned for striking avant-garde architecture, world-class luxury brand flagships, and the Tadao Ando-designed Omotesando Hills shopping complex with its continuous spiraling ramp and chic European cafes.",
+        "opening_hours": "11:00 - 21:00",
+        "admission_fee": "เข้าชมฟรี",
+        "nearest_station_id": "ST_OMOTESANDO",
+        "walk_time_min": 2
     }
 ]
 
-# ความสัมพันธ์การเดินระหว่างสถานที่และสถานีรถไฟ (Place to Station Edges)
 PLACE_STATION_EDGES = [
     {"place_id": "P_SENSOJI", "station_id": "ST_ASAKUSA", "walk_time_min": 5, "distance_m": 350, "exit_info": "Exit 1 (Tokyo Metro Ginza Line)"},
     {"place_id": "P_TOKYO_SKYTREE", "station_id": "ST_OSHIAGE", "walk_time_min": 2, "distance_m": 150, "exit_info": "Direct Underground Link to Solamachi"},
@@ -507,5 +686,158 @@ PLACE_STATION_EDGES = [
     {"place_id": "P_UENO_PARK", "station_id": "ST_UENO", "walk_time_min": 2, "distance_m": 120, "exit_info": "Park Exit"},
     {"place_id": "P_ROPPONGI_HILLS", "station_id": "ST_ROPPONGI", "walk_time_min": 3, "distance_m": 250, "exit_info": "Exit 1C (Direct Concourse)"},
     {"place_id": "P_GINZA_SIX", "station_id": "ST_GINZA", "walk_time_min": 2, "distance_m": 180, "exit_info": "Exit A3"},
-    {"place_id": "P_ODAIBA_GUNDAM", "station_id": "ST_ODAIBA_KAIHINKOEN", "walk_time_min": 5, "distance_m": 400, "exit_info": "North Exit"}
+    {"place_id": "P_ODAIBA_GUNDAM", "station_id": "ST_ODAIBA_KAIHINKOEN", "walk_time_min": 5, "distance_m": 400, "exit_info": "North Exit"},
+    # --- เส้นเชื่อมใหม่ 8 แห่ง ---
+    {"place_id": "P_IMPERIAL_PALACE", "station_id": "ST_TOKYO", "walk_time_min": 10, "distance_m": 800, "exit_info": "Marunouchi Central Exit"},
+    {"place_id": "P_TEAMLAB_PLANETS", "station_id": "ST_TOYOSU", "walk_time_min": 10, "distance_m": 750, "exit_info": "Exit 7 (or 1 min from Shin-Toyosu Station)"},
+    {"place_id": "P_AMEYOKO", "station_id": "ST_UENO", "walk_time_min": 2, "distance_m": 150, "exit_info": "Shinobazu Exit"},
+    {"place_id": "P_TAKESHITA_STREET", "station_id": "ST_HARAJUKU", "walk_time_min": 1, "distance_m": 50, "exit_info": "Takeshita Exit"},
+    {"place_id": "P_HAMARIKYU_GARDENS", "station_id": "ST_SHIMBASHI", "walk_time_min": 10, "distance_m": 750, "exit_info": "Shiodome Exit"},
+    {"place_id": "P_TOKYO_DOME_CITY", "station_id": "ST_KORAKUEN", "walk_time_min": 3, "distance_m": 200, "exit_info": "Exit 2"},
+    {"place_id": "P_TOYOSU_MARKET", "station_id": "ST_SHIJO_MAE", "walk_time_min": 2, "distance_m": 100, "exit_info": "Direct Covered Pedestrian Concourse"},
+    {"place_id": "P_OMOTESANDO_HILLS", "station_id": "ST_OMOTESANDO", "walk_time_min": 2, "distance_m": 180, "exit_info": "Exit A2"}
+]
+
+# ข้อมูลโรงแรมและที่พัก (Hotels & Accommodations Dataset) จาก e-Gov Syukuhaku & Tokyo Tourism Data
+HOTELS_DATA = [
+    {
+        "hotel_id": "H_GRACERY_SHINJUKU",
+        "name_th": "โรงแรมเกรเซอรี ชินจูกุ (โรงแรมก็อดซิลล่า)",
+        "name_en": "Hotel Gracery Shinjuku",
+        "name_ja": "ホテルグレイスリー新宿",
+        "ward": "Shinjuku",
+        "tier": "Mid-Scale / Business",
+        "price_range": "3,500 - 6,500 บาท/คืน",
+        "nearest_station_id": "ST_SHINJUKU",
+        "walk_time_min": 5,
+        "highlights": "หัวก็อดซิลล่าขนาดยักษ์บนระเบียงชั้น 8 ย่านคาบูกิโจ เดินทางสะดวกใกล้สถานีชินจูกุ",
+        "description_th": "โรงแรมแลนด์มาร์กยอดนิยมใจกลางย่านคาบูกิโจ ชินจูกุ มีหัวก็อดซิลล่าขนาดยักษ์พ่นควันส่งเสียงคำราม ห้องพักสะอาดทันสมัย แยกห้องอาบน้ำและห้องส้วมสไตล์ญี่ปุ่น ใกล้ร้านอาหาร แหล่งช้อปปิ้ง และสถานีรถไฟชินจูกุ",
+        "description_en": "Iconic hotel in Kabukicho, Shinjuku featuring a life-sized Godzilla head on the terrace. Modern rooms with Japanese-style bathrooms, walking distance to Shinjuku Station."
+    },
+    {
+        "hotel_id": "H_TOKYO_STATION_HOTEL",
+        "name_th": "โรงแรมเดอะ โตเกียว สเตชั่น โฮเทล",
+        "name_en": "The Tokyo Station Hotel",
+        "name_ja": "東京ステーションホテル",
+        "ward": "Chiyoda",
+        "tier": "Luxury",
+        "price_range": "15,000 - 30,000 บาท/คืน",
+        "nearest_station_id": "ST_TOKYO",
+        "walk_time_min": 1,
+        "highlights": "โรงแรมระดับ 5 ดาวภายในอาคารอิฐแดงสถานีโตเกียว สถาปัตยกรรมคลาสสิกตั้งแต่ปี 1915",
+        "description_th": "โรงแรมหรูระดับตำนานตั้งอยู่ภายในอาคารประวัติศาสตร์อิฐแดงของสถานีโตเกียว ออกแบบสไตล์ยุโรปคลาสสิก เพดานสูง โปร่งสบาย บริการระดับเวิลด์คลาส เชื่อมต่อกับรถไฟชินคันเซ็นและสายต่างๆ ได้ทันที",
+        "description_en": "A prestigious 5-star luxury hotel located inside the iconic red-brick Tokyo Station building dating back to 1915. Direct access to Shinkansen and Tokyo Metro."
+    },
+    {
+        "hotel_id": "H_SHIBUYA_STREAM_EXCEL",
+        "name_th": "ชิบูย่า สตรีม เอ็กเซล โฮเทล โทคิว",
+        "name_en": "Shibuya Stream Excel Hotel Tokyu",
+        "name_ja": "渋谷ストリームエクセルホテル東急",
+        "ward": "Shibuya",
+        "tier": "Mid-Scale / Business",
+        "price_range": "5,500 - 9,500 บาท/คืน",
+        "nearest_station_id": "ST_SHIBUYA",
+        "walk_time_min": 2,
+        "highlights": "เชื่อมตรงกับสถานีชิบูย่า ดีไซน์โมเดิร์นวินเทจ อยู่ในคอมเพล็กซ์ Shibuya Stream",
+        "description_th": "โรงแรมทันสมัยใจกลางชิบูย่า เชื่อมตรงสู่สถานีชิบูย่าโดยไม่ต้องออกนอกอาคาร รายล้อมด้วยร้านอาหาร คาเฟ่ริมลำธารชิบูย่า และห้าแยกชิบูย่า",
+        "description_en": "Stylish design hotel directly connected to Shibuya Station, featuring vintage-modern decor and convenient access to Shibuya Crossing and dining complexes."
+    },
+    {
+        "hotel_id": "H_ASAKUSA_VIEW",
+        "name_th": "โรงแรมอาซากุสะ วิว โฮเทล",
+        "name_en": "Asakusa View Hotel",
+        "name_ja": "浅草ビューホテル",
+        "ward": "Taito",
+        "tier": "Mid-Scale / Business",
+        "price_range": "3,000 - 6,000 บาท/คืน",
+        "nearest_station_id": "ST_ASAKUSA",
+        "walk_time_min": 6,
+        "highlights": "วิวพาโนรามาเห็นทั้งวัดเซ็นโซจิและโตเกียวสกายทรี อาหารเช้าบุฟเฟต์ชื่อดัง",
+        "description_th": "โรงแรมสูงเด่นในย่านอาซากุสะ มีห้องพักที่สามารถชมวิววัดเซ็นโซจิและโตเกียวสกายทรีได้อย่างชัดเจน ใกล้ถนนคนเดินนากามิเสะและสถานีรถไฟ",
+        "description_en": "Renowned hotel offering panoramic views of Senso-ji Temple and Tokyo Skytree, famous breakfast buffet and close to traditional shopping streets."
+    },
+    {
+        "hotel_id": "H_CANDEO_UENO",
+        "name_th": "คันเดโอ โฮเทลส์ อุเอโนะ พาร์ค",
+        "name_en": "Candeo Hotels Ueno Park",
+        "name_ja": "カンデオホテルズ上野公園",
+        "ward": "Taito",
+        "tier": "Budget / Mid-Scale",
+        "price_range": "2,500 - 4,500 บาท/คืน",
+        "nearest_station_id": "ST_UENO",
+        "walk_time_min": 6,
+        "highlights": "ราคาย่อมเยา ใกล้สวนอุเอโนะ ตลาดอะเมโยโกะ และรถไฟ Keisei Skyliner สู่สนามบินนาริตะ",
+        "description_th": "ที่พักคุณภาพเยี่ยมราคาสบายกระเป๋า เตียงนอนสบายตามมาตรฐาน Candeo เดินเพียงไม่กี่นาทีถึงสวนอุเอโนะและตลาดอะเมโยโกะ เหมาะสำหรับนักเดินทางที่ต้องเดินทางไป-กลับสนามบินนาริตะ",
+        "description_en": "Comfortable and budget-friendly hotel near Ueno Park, Ameyoko Market, and Keisei Skyliner with swift access to Narita Airport."
+    },
+    {
+        "hotel_id": "H_MITSUI_GARDEN_GINZA",
+        "name_th": "โรงแรมมิตซุย การ์เดน กินซ่า พรีเมียร์",
+        "name_en": "Mitsui Garden Hotel Ginza Premier",
+        "name_ja": "三井ガーデンホテル銀座プレミア",
+        "ward": "Chuo",
+        "tier": "Luxury / Upper-Scale",
+        "price_range": "7,000 - 13,000 บาท/คืน",
+        "nearest_station_id": "ST_GINZA",
+        "walk_time_min": 7,
+        "highlights": "ล็อบบี้ลอยฟ้าชั้น 16 มองเห็นวิวอ่าวโตเกียวและโตเกียวทาวเวอร์ เดินถึงย่านช้อปปิ้งกินซ่า",
+        "description_th": "โรงแรมระดับพรีเมียมในย่านกินซ่า ล็อบบี้และบาร์ตั้งอยู่บนชั้นสูงพร้อมวิวระฟ้าอันงดงามของโตเกียวทาวเวอร์ ห้องน้ำมีอ่างแช่ตัวชมวิวเมือง ย่านช้อปปิ้งหรูหรา",
+        "description_en": "Chic premier hotel in Ginza with a 16th-floor sky lobby overlooking Tokyo Tower and Tokyo Bay, offering stylish rooms with skyline bathroom views."
+    },
+    {
+        "hotel_id": "H_DORM_INN_AKIHABARA",
+        "name_th": "ดอร์มี อินน์ อากิฮาบาระ (พร้อมบ่อออนเซ็น)",
+        "name_en": "Dormy Inn Akihabara Hot Springs",
+        "name_ja": "すえひろの湯 ドーミーイン秋葉原",
+        "ward": "Chiyoda",
+        "tier": "Budget / Mid-Scale",
+        "price_range": "2,800 - 4,800 บาท/คืน",
+        "nearest_station_id": "ST_AKIHABARA",
+        "walk_time_min": 5,
+        "highlights": "มีบ่อออนเซ็นกลางแจ้งบนดาดฟ้า บริการราเมนราตรี (Yonaki Soba) ฟรีทุกคืน",
+        "description_th": "โรงแรมยอดนิยมขวัญใจนักท่องเที่ยว มีบ่อน้ำพุร้อนออนเซ็นกลางแจ้งบนชั้นดาดฟ้าและห้องซาวน่า พร้อมเสิร์ฟราเมงซีอิ๊วญี่ปุ่นร้อนๆ ฟรีช่วงดึก อยู่ใจกลางย่านอนิเมะอากิฮาบาระ",
+        "description_en": "Popular hotel in Akihabara featuring open-air rooftop hot spring baths, saunas, and complimentary evening Yonaki Soba ramen."
+    },
+    {
+        "hotel_id": "H_PRINCE_GALLERY_KIOICHO",
+        "name_th": "เดอะ ปรินซ์ แกลเลอรี โตเกียว คิโออิโจ (โรงแรม 5 ดาว)",
+        "name_en": "The Prince Gallery Tokyo Kioicho, Luxury Collection",
+        "name_ja": "ザ・プリンスギャラリー 東京紀尾井町",
+        "ward": "Chiyoda",
+        "tier": "Ultra Luxury",
+        "price_range": "18,000 - 35,000 บาท/คืน",
+        "nearest_station_id": "ST_ROPPONGI",
+        "walk_time_min": 10,
+        "highlights": "โรงแรมหรูบนชั้น 30-36 วิวเมืองโตเกียวแบบพาโนรามา สปา สระว่ายน้ำในร่มกระจกสูง",
+        "description_th": "โรงแรมหรูระดับแนวหน้าของโตเกียว ตั้งอยู่บนชั้น 30-36 ของ Tokyo Garden Terrace Kioicho มองเห็นทิวทัศน์มุมกว้างของมหานคร พร้อมสปาระดับไฮเอนด์และห้องอาหารหรู",
+        "description_en": "An ultra-luxury hotel on floors 30-36 of Tokyo Garden Terrace Kioicho, offering breathtaking skyline vistas, world-class dining, and an indoor glass swimming pool."
+    },
+    {
+        "hotel_id": "H_SUPER_HOTEL_SHINJUKU",
+        "name_th": "ซูเปอร์ โฮเทล ชินจูกุ คาบูกิโจ",
+        "name_en": "Super Hotel Shinjuku Kabukicho",
+        "name_ja": "スーパーホテル新宿・歌舞伎町",
+        "ward": "Shinjuku",
+        "tier": "Budget",
+        "price_range": "2,000 - 3,500 บาท/คืน",
+        "nearest_station_id": "ST_SHINJUKU",
+        "walk_time_min": 7,
+        "highlights": "บ่อออนเซ็นธรรมชาติในโรงแรม มีหมอนให้เลือก 8 แบบ ราคาสุดคุ้มใจกลางชินจูกุ",
+        "description_th": "ที่พักราคาย่อมเยายอดนิยมใจกลางชินจูกุ มีบ่อน้ำพุร้อนออนเซ็นธรรมชาติแยกชาย-หญิงให้แช่ฟรี มีหมอนให้เลือกตามสรีระ อาหารเช้าออร์แกนิกฟรี",
+        "description_en": "Excellent value budget hotel in Shinjuku featuring natural hot spring baths, custom pillow selections, and healthy buffet breakfasts."
+    },
+    {
+        "hotel_id": "H_HOTEL_VILLA_FONTAINE_ROPPONGI",
+        "name_th": "โรงแรมวิลล่า ฟอนเทน แกรนด์ รปปงงิ",
+        "name_en": "Hotel Villa Fontaine Grand Tokyo-Roppongi",
+        "name_ja": "ホテルヴィラフォンテーヌグランド東京六本木",
+        "ward": "Minato",
+        "tier": "Mid-Scale / Business",
+        "price_range": "4,000 - 7,000 บาท/คืน",
+        "nearest_station_id": "ST_ROPPONGI",
+        "walk_time_min": 5,
+        "highlights": "เชื่อมต่อตรงสถานีรถไฟ สะดวก ปลอดภัย ใกล้ Roppongi Hills และย่านกินดื่มราตรี",
+        "description_th": "โรงแรมสไตล์บิสซิเนสระดับพรีเมียม เชื่อมต่อโดยตรงกับทางออกสถานีรถไฟ สะดวกสบาย เงียบสงบ ปลอดภัย ใกล้ศูนย์การค้า Roppongi Hills และพิพิธภัณฑ์ศิลปะ",
+        "description_en": "Business-chic hotel directly connected to the subway station, walking distance to Roppongi Hills and cultural landmarks."
+    }
 ]

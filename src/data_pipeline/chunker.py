@@ -110,3 +110,45 @@ class TokyoDocumentChunker:
         chunks.append(info_chunk)
 
         return chunks
+
+    def chunk_hotel(self, hotel: Dict[str, Any]) -> List[DocumentChunkModel]:
+        """
+        แปลงข้อมูลโรงแรมเป็น Document Chunk สำหรับ Vector DB และ BM25
+        """
+        hotel_id = hotel["hotel_id"]
+        name_th = hotel["name_th"]
+        name_en = hotel["name_en"]
+        ward = hotel.get("ward", "")
+        tier = hotel.get("tier", "")
+        price = hotel.get("price_range", "")
+        nearest_station = hotel.get("nearest_station_id", "")
+        walk_min = hotel.get("walk_time_min", 0)
+        highlights = hotel.get("highlights", "")
+        desc_th = clean_text(hotel.get("description_th", ""))
+        desc_en = clean_text(hotel.get("description_en", ""))
+
+        content_th = (
+            f"โรงแรม {name_th} ({name_en}): ที่พักระดับ {tier} ในเขต {ward} โตเกียว "
+            f"ช่วงราคาประมาณ {price} ตั้งอยู่ใกล้สถานี {nearest_station} เดินประมาณ {walk_min} นาที "
+            f"จุดเด่น: {highlights} รายละเอียด: {desc_th}"
+        )
+        content_en = (
+            f"Hotel {name_en} ({name_th}): A {tier} accommodation in {ward} Ward, Tokyo. "
+            f"Price range: {price}. Located near {nearest_station} station ({walk_min} mins walk). "
+            f"Highlights: {highlights}. Details: {desc_en}"
+        )
+
+        chunk_obj = DocumentChunkModel(
+            chunk_id=f"C_{hotel_id}",
+            place_id=hotel_id,
+            title=f"โรงแรม {name_th} ({name_en}) - ที่พักย่าน {ward}",
+            content_th=content_th,
+            content_en=content_en,
+            ward=ward,
+            category=f"Hotel & Accommodation ({tier})",
+            nearest_station=nearest_station,
+            walk_time_min=walk_min,
+            tags=[name_th, name_en, "โรงแรม", "ที่พัก", tier, ward, nearest_station, "hotel", "accommodation"]
+        )
+        return [chunk_obj]
+

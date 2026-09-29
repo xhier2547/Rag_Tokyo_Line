@@ -24,6 +24,7 @@ class TokyoGraphBuilder:
         self.lines_file = os.path.join(data_dir, "lines.csv")
         self.stations_file = os.path.join(data_dir, "stations.csv")
         self.places_file = os.path.join(data_dir, "places.csv")
+        self.hotels_file = os.path.join(data_dir, "hotels.csv")
         self.transit_file = os.path.join(data_dir, "transit_edges.csv")
         self.ps_edges_file = os.path.join(data_dir, "place_station_edges.csv")
 
@@ -106,6 +107,37 @@ class TokyoGraphBuilder:
                     exit_info=r["exit_info"]
                 )
 
+        # 5. โหลด Hotels (โรงแรมและที่พัก)
+        if os.path.exists(self.hotels_file):
+            df_ht = pd.read_csv(self.hotels_file)
+            for _, r in df_ht.iterrows():
+                G.add_node(
+                    r["hotel_id"],
+                    type="Hotel",
+                    name_th=r["name_th"],
+                    name_en=r["name_en"],
+                    ward=r["ward"],
+                    tier=r["tier"],
+                    price_range=r["price_range"],
+                    nearest_station_id=r["nearest_station_id"],
+                    walk_time_min=r["walk_time_min"],
+                    highlights=r["highlights"]
+                )
+                G.add_edge(
+                    r["hotel_id"],
+                    r["nearest_station_id"],
+                    relation="NEAR_STATION",
+                    weight=float(r["walk_time_min"]),
+                    walk_time_min=int(r["walk_time_min"])
+                )
+                G.add_edge(
+                    r["nearest_station_id"],
+                    r["hotel_id"],
+                    relation="NEAR_HOTEL",
+                    weight=float(r["walk_time_min"]),
+                    walk_time_min=int(r["walk_time_min"])
+                )
+
         return G
 
     def save_graph_cache(self, G: nx.DiGraph, output_file: str = GRAPH_CACHE_PATH):
@@ -149,6 +181,7 @@ class TokyoGraphBuilder:
             session.run("CREATE CONSTRAINT IF NOT EXISTS FOR (p:Place) REQUIRE p.place_id IS UNIQUE")
             session.run("CREATE CONSTRAINT IF NOT EXISTS FOR (s:Station) REQUIRE s.station_id IS UNIQUE")
             session.run("CREATE CONSTRAINT IF NOT EXISTS FOR (l:Line) REQUIRE l.line_id IS UNIQUE")
+            session.run("CREATE CONSTRAINT IF NOT EXISTS FOR (h:Hotel) REQUIRE h.hotel_id IS UNIQUE")
 
             # 1. Ingest Lines
             df_lines = pd.read_csv(self.lines_file)
@@ -287,6 +320,39 @@ class TokyoGraphBuilder:
                     distance_m=int(r["distance_m"]),
                     exit_info=r["exit_info"]
                 )
+
+            # 6. Ingest Hotels
+            if os.path.exists(self.hotels_file):
+                df_hotels = pd.read_csv(self.hotels_file)
+                for _, r in df_hotels.iterrows():
+                    session.run(
+                        """
+                        MERGE (h:Hotel {hotel_id: $hotel_id})
+                        SET h.name_th = $name_th,
+                            h.name_en = $name_en,
+                            h.ward = $ward,
+                            h.tier = $tier,
+                            h.price_range = $price_range,
+                            h.highlights = $highlights,
+                            h.description_th = $description_th
+                        WITH h
+                        MATCH (s:Station {station_id: $station_id})
+                        MERGE (h)-[r1:NEAR_STATION]->(s)
+                        SET r1.walk_min = $walk_time_min
+                        MERGE (s)-[r2:NEAR_HOTEL]->(h)
+                        SET r2.walk_min = $walk_time_min
+                        """,
+                        hotel_id=r["hotel_id"],
+                        name_th=r["name_th"],
+                        name_en=r["name_en"],
+                        ward=r["ward"],
+                        tier=r["tier"],
+                        price_range=r["price_range"],
+                        highlights=r["highlights"],
+                        description_th=r["description_th"],
+                        station_id=r["nearest_station_id"],
+                        walk_time_min=int(r["walk_time_min"])
+                    )
 
             # ตรวจสอบจำนวนโหนดและความสัมพันธ์ในฐานข้อมูล
             node_count = session.run("MATCH (n) RETURN count(n) AS c").single()["c"]

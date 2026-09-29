@@ -65,3 +65,18 @@ class DocumentChunkModel(BaseModel):
     nearest_station: str = Field(..., description="สถานีใกล้เคียง")
     walk_time_min: int = Field(..., description="เวลาเดิน (นาที)")
     tags: List[str] = Field(default_factory=list, description="แท็กสำหรับค้นหา")
+
+class HotelModel(BaseModel):
+    hotel_id: str = Field(..., description="รหัสโรงแรม เช่น H_GRACERY_SHINJUKU")
+    name_th: str = Field(..., description="ชื่อโรงแรมภาษาไทย")
+    name_en: str = Field(..., description="ชื่อโรงแรมภาษาอังกฤษ")
+    name_ja: str = Field(..., description="ชื่อโรงแรมภาษาญี่ปุ่น")
+    ward: str = Field(..., description="เขตในโตเกียว เช่น Shinjuku, Chiyoda")
+    tier: str = Field(..., description="ระดับที่พัก: Budget, Mid-Scale / Business, Luxury")
+    price_range: str = Field(..., description="ช่วงราคาต่อคืน เช่น 2,000 - 3,500 บาท")
+    nearest_station_id: str = Field(..., description="รหัสสถานีที่ใกล้ที่สุด")
+    walk_time_min: int = Field(..., ge=0, description="เวลาเดินจากสถานี (นาที)")
+    highlights: str = Field(..., description="จุดเด่นของโรงแรม")
+    description_th: str = Field(..., description="คำอธิบายภาษาไทย")
+    description_en: str = Field(..., description="คำอธิบายภาษาอังกฤษ")
+

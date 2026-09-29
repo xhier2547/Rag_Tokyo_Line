@@ -153,6 +153,33 @@
       "lon": 139.796338,
       "lines": "LN_YURIKAMOME"
     },
+    "ST_OMOTESANDO": {
+      "type": "Station",
+      "name_th": "สถานีโอโมเตะซันโด",
+      "name_en": "Omotesando Station",
+      "ward": "Minato",
+      "lat": 35.665247,
+      "lon": 139.712314,
+      "lines": "LN_GINZA;LN_HANZOMON;LN_CHIYODA"
+    },
+    "ST_KORAKUEN": {
+      "type": "Station",
+      "name_th": "สถานีโคระคุเอ็น (โตเกียวโดม)",
+      "name_en": "Korakuen Station",
+      "ward": "Bunkyo",
+      "lat": 35.707328,
+      "lon": 139.751682,
+      "lines": "LN_MARUNOUCHI;LN_NAMBOKU;LN_OEDO"
+    },
+    "ST_SHIJO_MAE": {
+      "type": "Station",
+      "name_th": "สถานีชิโจมาเอะ (ตลาดปลาโทโยสุ)",
+      "name_en": "Shijo-mae Station",
+      "ward": "Koto",
+      "lat": 35.645389,
+      "lon": 139.784444,
+      "lines": "LN_YURIKAMOME"
+    },
     "P_SENSOJI": {
       "type": "Place",
       "name_th": "วัดเซ็นโซจิ (วัดอาซากุสะ)",
@@ -308,6 +335,220 @@
       "walk_time_min": 5,
       "opening_hours": "ชมหุ่นยนต์เปิด 24 ชั่วโมง / การแสดงแสงสีเสียงช่วงค่ำ (19:00 - 21:30)",
       "admission_fee": "ชมฟรี"
+    },
+    "P_IMPERIAL_PALACE": {
+      "type": "Place",
+      "name_th": "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ",
+      "name_en": "Tokyo Imperial Palace & East Gardens",
+      "ward": "Chiyoda",
+      "category": "Culture & History",
+      "lat": 35.685175,
+      "lon": 139.7528,
+      "nearest_station_id": "ST_TOKYO",
+      "walk_time_min": 10,
+      "opening_hours": "09:00 - 17:00 (ปิดวันจันทร์และวันศุกร์)",
+      "admission_fee": "เข้าชมสวนฟรี (การเข้าชมพระราชวังด้านในต้องจองล่วงหน้า)"
+    },
+    "P_TEAMLAB_PLANETS": {
+      "type": "Place",
+      "name_th": "พิพิธภัณฑ์ศิลปะดิจิทัลทีมแล็บ แพลเน็ตส์ โตเกียว",
+      "name_en": "teamLab Planets TOKYO DMM",
+      "ward": "Koto",
+      "category": "Culture & Art",
+      "lat": 35.649067,
+      "lon": 139.789725,
+      "nearest_station_id": "ST_TOYOSU",
+      "walk_time_min": 10,
+      "opening_hours": "09:00 - 22:00 (รอบสุดท้าย 21:00)",
+      "admission_fee": "ผู้ใหญ่เริ่มต้น 3,800 - 4,200 เยน (แนะนำจองตั๋วออนไลน์ล่วงหน้า)"
+    },
+    "P_AMEYOKO": {
+      "type": "Place",
+      "name_th": "ตลาดอะเมโยโกะ (ถนนคนเดินอะเมยะ โยโกโจ)",
+      "name_en": "Ameyoko Shopping Street",
+      "ward": "Taito",
+      "category": "Food & Market",
+      "lat": 35.711202,
+      "lon": 139.774577,
+      "nearest_station_id": "ST_UENO",
+      "walk_time_min": 2,
+      "opening_hours": "10:00 - 20:00 (ขึ้นอยู่กับแต่ละร้านค้า)",
+      "admission_fee": "เข้าชมฟรี"
+    },
+    "P_TAKESHITA_STREET": {
+      "type": "Place",
+      "name_th": "ถนนทาเคชิตะ ย่านฮาราจูกุ",
+      "name_en": "Takeshita Street Harajuku",
+      "ward": "Shibuya",
+      "category": "Shopping & Entertainment",
+      "lat": 35.671607,
+      "lon": 139.703247,
+      "nearest_station_id": "ST_HARAJUKU",
+      "walk_time_min": 1,
+      "opening_hours": "10:00 - 20:00",
+      "admission_fee": "เข้าชมฟรี"
+    },
+    "P_HAMARIKYU_GARDENS": {
+      "type": "Place",
+      "name_th": "สวนฮามาริคิว (สวนหลวงริมอ่าวโตเกียว)",
+      "name_en": "Hamarikyu Gardens",
+      "ward": "Chuo",
+      "category": "Nature & Park",
+      "lat": 35.659722,
+      "lon": 139.763333,
+      "nearest_station_id": "ST_SHIMBASHI",
+      "walk_time_min": 10,
+      "opening_hours": "09:00 - 17:00",
+      "admission_fee": "ผู้ใหญ่ 300 เยน"
+    },
+    "P_TOKYO_DOME_CITY": {
+      "type": "Place",
+      "name_th": "โตเกียวโดมซิตี้และสปาลาคัว",
+      "name_en": "Tokyo Dome City & Spa LaQua",
+      "ward": "Bunkyo",
+      "category": "Shopping & Entertainment",
+      "lat": 35.705639,
+      "lon": 139.751889,
+      "nearest_station_id": "ST_KORAKUEN",
+      "walk_time_min": 3,
+      "opening_hours": "10:00 - 21:00 (Spa LaQua เปิด 11:00 - 09:00 เช้าวันถัดไป)",
+      "admission_fee": "เข้าบริเวณฟรี / ค่าเครื่องเล่นหรือค่าสปาแยกตามจุดบริการ (Spa LaQua ประมาณ 3,230 เยน)"
+    },
+    "P_TOYOSU_MARKET": {
+      "type": "Place",
+      "name_th": "ตลาดปลาโทโยสุและคอมเพล็กซ์เซ็นเคียคุบันไร",
+      "name_en": "Toyosu Fish Market & Toyosu Senkyaku Banrai",
+      "ward": "Koto",
+      "category": "Food & Market",
+      "lat": 35.646111,
+      "lon": 139.785278,
+      "nearest_station_id": "ST_SHIJO_MAE",
+      "walk_time_min": 2,
+      "opening_hours": "05:00 - 15:00 (ตลาดค้าส่ง) / 10:00 - 22:00 (โซน Senkyaku Banrai)",
+      "admission_fee": "เข้าชมฟรี"
+    },
+    "P_OMOTESANDO_HILLS": {
+      "type": "Place",
+      "name_th": "ถนนสายช้อปปิ้งโอโมเตะซันโดและห้างโอโมเตะซันโดฮิลส์",
+      "name_en": "Omotesando Boulevard & Omotesando Hills",
+      "ward": "Shibuya",
+      "category": "Shopping & Entertainment",
+      "lat": 35.667111,
+      "lon": 139.709972,
+      "nearest_station_id": "ST_OMOTESANDO",
+      "walk_time_min": 2,
+      "opening_hours": "11:00 - 21:00",
+      "admission_fee": "เข้าชมฟรี"
+    },
+    "H_GRACERY_SHINJUKU": {
+      "type": "Hotel",
+      "name_th": "โรงแรมเกรเซอรี ชินจูกุ (โรงแรมก็อดซิลล่า)",
+      "name_en": "Hotel Gracery Shinjuku",
+      "ward": "Shinjuku",
+      "tier": "Mid-Scale / Business",
+      "price_range": "3,500 - 6,500 บาท/คืน",
+      "nearest_station_id": "ST_SHINJUKU",
+      "walk_time_min": 5,
+      "highlights": "หัวก็อดซิลล่าขนาดยักษ์บนระเบียงชั้น 8 ย่านคาบูกิโจ เดินทางสะดวกใกล้สถานีชินจูกุ"
+    },
+    "H_TOKYO_STATION_HOTEL": {
+      "type": "Hotel",
+      "name_th": "โรงแรมเดอะ โตเกียว สเตชั่น โฮเทล",
+      "name_en": "The Tokyo Station Hotel",
+      "ward": "Chiyoda",
+      "tier": "Luxury",
+      "price_range": "15,000 - 30,000 บาท/คืน",
+      "nearest_station_id": "ST_TOKYO",
+      "walk_time_min": 1,
+      "highlights": "โรงแรมระดับ 5 ดาวภายในอาคารอิฐแดงสถานีโตเกียว สถาปัตยกรรมคลาสสิกตั้งแต่ปี 1915"
+    },
+    "H_SHIBUYA_STREAM_EXCEL": {
+      "type": "Hotel",
+      "name_th": "ชิบูย่า สตรีม เอ็กเซล โฮเทล โทคิว",
+      "name_en": "Shibuya Stream Excel Hotel Tokyu",
+      "ward": "Shibuya",
+      "tier": "Mid-Scale / Business",
+      "price_range": "5,500 - 9,500 บาท/คืน",
+      "nearest_station_id": "ST_SHIBUYA",
+      "walk_time_min": 2,
+      "highlights": "เชื่อมตรงกับสถานีชิบูย่า ดีไซน์โมเดิร์นวินเทจ อยู่ในคอมเพล็กซ์ Shibuya Stream"
+    },
+    "H_ASAKUSA_VIEW": {
+      "type": "Hotel",
+      "name_th": "โรงแรมอาซากุสะ วิว โฮเทล",
+      "name_en": "Asakusa View Hotel",
+      "ward": "Taito",
+      "tier": "Mid-Scale / Business",
+      "price_range": "3,000 - 6,000 บาท/คืน",
+      "nearest_station_id": "ST_ASAKUSA",
+      "walk_time_min": 6,
+      "highlights": "วิวพาโนรามาเห็นทั้งวัดเซ็นโซจิและโตเกียวสกายทรี อาหารเช้าบุฟเฟต์ชื่อดัง"
+    },
+    "H_CANDEO_UENO": {
+      "type": "Hotel",
+      "name_th": "คันเดโอ โฮเทลส์ อุเอโนะ พาร์ค",
+      "name_en": "Candeo Hotels Ueno Park",
+      "ward": "Taito",
+      "tier": "Budget / Mid-Scale",
+      "price_range": "2,500 - 4,500 บาท/คืน",
+      "nearest_station_id": "ST_UENO",
+      "walk_time_min": 6,
+      "highlights": "ราคาย่อมเยา ใกล้สวนอุเอโนะ ตลาดอะเมโยโกะ และรถไฟ Keisei Skyliner สู่สนามบินนาริตะ"
+    },
+    "H_MITSUI_GARDEN_GINZA": {
+      "type": "Hotel",
+      "name_th": "โรงแรมมิตซุย การ์เดน กินซ่า พรีเมียร์",
+      "name_en": "Mitsui Garden Hotel Ginza Premier",
+      "ward": "Chuo",
+      "tier": "Luxury / Upper-Scale",
+      "price_range": "7,000 - 13,000 บาท/คืน",
+      "nearest_station_id": "ST_GINZA",
+      "walk_time_min": 7,
+      "highlights": "ล็อบบี้ลอยฟ้าชั้น 16 มองเห็นวิวอ่าวโตเกียวและโตเกียวทาวเวอร์ เดินถึงย่านช้อปปิ้งกินซ่า"
+    },
+    "H_DORM_INN_AKIHABARA": {
+      "type": "Hotel",
+      "name_th": "ดอร์มี อินน์ อากิฮาบาระ (พร้อมบ่อออนเซ็น)",
+      "name_en": "Dormy Inn Akihabara Hot Springs",
+      "ward": "Chiyoda",
+      "tier": "Budget / Mid-Scale",
+      "price_range": "2,800 - 4,800 บาท/คืน",
+      "nearest_station_id": "ST_AKIHABARA",
+      "walk_time_min": 5,
+      "highlights": "มีบ่อออนเซ็นกลางแจ้งบนดาดฟ้า บริการราเมนราตรี (Yonaki Soba) ฟรีทุกคืน"
+    },
+    "H_PRINCE_GALLERY_KIOICHO": {
+      "type": "Hotel",
+      "name_th": "เดอะ ปรินซ์ แกลเลอรี โตเกียว คิโออิโจ (โรงแรม 5 ดาว)",
+      "name_en": "The Prince Gallery Tokyo Kioicho, Luxury Collection",
+      "ward": "Chiyoda",
+      "tier": "Ultra Luxury",
+      "price_range": "18,000 - 35,000 บาท/คืน",
+      "nearest_station_id": "ST_ROPPONGI",
+      "walk_time_min": 10,
+      "highlights": "โรงแรมหรูบนชั้น 30-36 วิวเมืองโตเกียวแบบพาโนรามา สปา สระว่ายน้ำในร่มกระจกสูง"
+    },
+    "H_SUPER_HOTEL_SHINJUKU": {
+      "type": "Hotel",
+      "name_th": "ซูเปอร์ โฮเทล ชินจูกุ คาบูกิโจ",
+      "name_en": "Super Hotel Shinjuku Kabukicho",
+      "ward": "Shinjuku",
+      "tier": "Budget",
+      "price_range": "2,000 - 3,500 บาท/คืน",
+      "nearest_station_id": "ST_SHINJUKU",
+      "walk_time_min": 7,
+      "highlights": "บ่อออนเซ็นธรรมชาติในโรงแรม มีหมอนให้เลือก 8 แบบ ราคาสุดคุ้มใจกลางชินจูกุ"
+    },
+    "H_HOTEL_VILLA_FONTAINE_ROPPONGI": {
+      "type": "Hotel",
+      "name_th": "โรงแรมวิลล่า ฟอนเทน แกรนด์ รปปงงิ",
+      "name_en": "Hotel Villa Fontaine Grand Tokyo-Roppongi",
+      "ward": "Minato",
+      "tier": "Mid-Scale / Business",
+      "price_range": "4,000 - 7,000 บาท/คืน",
+      "nearest_station_id": "ST_ROPPONGI",
+      "walk_time_min": 5,
+      "highlights": "เชื่อมต่อตรงสถานีรถไฟ สะดวก ปลอดภัย ใกล้ Roppongi Hills และย่านกินดื่มราตรี"
     }
   },
   "edges": [
@@ -333,13 +574,13 @@
     },
     {
       "from": "ST_TOKYO",
-      "to": "ST_IKEBUKURO",
+      "to": "ST_KORAKUEN",
       "relation": "CONNECTED_TO",
       "line_id": "LN_MARUNOUCHI",
       "line_name": "Tokyo Metro Marunouchi Line",
-      "weight": 17.0,
-      "duration_min": 17,
-      "distance_km": 8.7
+      "weight": 9.0,
+      "duration_min": 9,
+      "distance_km": 4.2
     },
     {
       "from": "ST_TOKYO",
@@ -350,6 +591,22 @@
       "weight": 3.0,
       "duration_min": 3,
       "distance_km": 1.1
+    },
+    {
+      "from": "ST_TOKYO",
+      "to": "P_IMPERIAL_PALACE",
+      "relation": "NEAR_PLACE",
+      "weight": 10.0,
+      "walk_time_min": 10,
+      "distance_m": 800,
+      "exit_info": "Marunouchi Central Exit"
+    },
+    {
+      "from": "ST_TOKYO",
+      "to": "H_TOKYO_STATION_HOTEL",
+      "relation": "NEAR_HOTEL",
+      "weight": 1.0,
+      "walk_time_min": 1
     },
     {
       "from": "ST_SHINJUKU",
@@ -392,6 +649,40 @@
       "distance_km": 4.5
     },
     {
+      "from": "ST_SHINJUKU",
+      "to": "ST_KORAKUEN",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_OEDO",
+      "line_name": "Toei Oedo Line",
+      "weight": 14.0,
+      "duration_min": 14,
+      "distance_km": 6.2
+    },
+    {
+      "from": "ST_SHINJUKU",
+      "to": "ST_AKIHABARA",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_CHUO_SOBU",
+      "line_name": "JR Chuo-Sobu Line",
+      "weight": 12.0,
+      "duration_min": 12,
+      "distance_km": 6.7
+    },
+    {
+      "from": "ST_SHINJUKU",
+      "to": "H_GRACERY_SHINJUKU",
+      "relation": "NEAR_HOTEL",
+      "weight": 5.0,
+      "walk_time_min": 5
+    },
+    {
+      "from": "ST_SHINJUKU",
+      "to": "H_SUPER_HOTEL_SHINJUKU",
+      "relation": "NEAR_HOTEL",
+      "weight": 7.0,
+      "walk_time_min": 7
+    },
+    {
       "from": "ST_SHIBUYA",
       "to": "ST_HAMAMATSUCHO",
       "relation": "CONNECTED_TO",
@@ -413,23 +704,13 @@
     },
     {
       "from": "ST_SHIBUYA",
-      "to": "ST_GINZA",
-      "relation": "CONNECTED_TO",
-      "line_id": "LN_GINZA",
-      "line_name": "Tokyo Metro Ginza Line",
-      "weight": 16.0,
-      "duration_min": 16,
-      "distance_km": 6.7
-    },
-    {
-      "from": "ST_SHIBUYA",
-      "to": "ST_OSHIAGE",
+      "to": "ST_OMOTESANDO",
       "relation": "CONNECTED_TO",
       "line_id": "LN_HANZOMON",
       "line_name": "Tokyo Metro Hanzomon Line",
-      "weight": 31.0,
-      "duration_min": 31,
-      "distance_km": 15.2
+      "weight": 2.0,
+      "duration_min": 2,
+      "distance_km": 1.3
     },
     {
       "from": "ST_SHIBUYA",
@@ -439,6 +720,13 @@
       "walk_time_min": 1,
       "distance_m": 50,
       "exit_info": "Hachiko Exit"
+    },
+    {
+      "from": "ST_SHIBUYA",
+      "to": "H_SHIBUYA_STREAM_EXCEL",
+      "relation": "NEAR_HOTEL",
+      "weight": 2.0,
+      "walk_time_min": 2
     },
     {
       "from": "ST_ASAKUSA",
@@ -478,6 +766,13 @@
       "walk_time_min": 5,
       "distance_m": 350,
       "exit_info": "Exit 1 (Tokyo Metro Ginza Line)"
+    },
+    {
+      "from": "ST_ASAKUSA",
+      "to": "H_ASAKUSA_VIEW",
+      "relation": "NEAR_HOTEL",
+      "weight": 6.0,
+      "walk_time_min": 6
     },
     {
       "from": "ST_UENO",
@@ -529,6 +824,22 @@
       "exit_info": "Park Exit"
     },
     {
+      "from": "ST_UENO",
+      "to": "P_AMEYOKO",
+      "relation": "NEAR_PLACE",
+      "weight": 2.0,
+      "walk_time_min": 2,
+      "distance_m": 150,
+      "exit_info": "Shinobazu Exit"
+    },
+    {
+      "from": "ST_UENO",
+      "to": "H_CANDEO_UENO",
+      "relation": "NEAR_HOTEL",
+      "weight": 6.0,
+      "walk_time_min": 6
+    },
+    {
       "from": "ST_AKIHABARA",
       "to": "ST_UENO",
       "relation": "CONNECTED_TO",
@@ -560,6 +871,16 @@
     },
     {
       "from": "ST_AKIHABARA",
+      "to": "ST_SHINJUKU",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_CHUO_SOBU",
+      "line_name": "JR Chuo-Sobu Line",
+      "weight": 12.0,
+      "duration_min": 12,
+      "distance_km": 6.7
+    },
+    {
+      "from": "ST_AKIHABARA",
       "to": "P_AKIHABARA_ELECTRIC",
       "relation": "NEAR_PLACE",
       "weight": 1.0,
@@ -568,14 +889,21 @@
       "exit_info": "Electric Town Exit"
     },
     {
+      "from": "ST_AKIHABARA",
+      "to": "H_DORM_INN_AKIHABARA",
+      "relation": "NEAR_HOTEL",
+      "weight": 5.0,
+      "walk_time_min": 5
+    },
+    {
       "from": "ST_GINZA",
-      "to": "ST_SHIBUYA",
+      "to": "ST_OMOTESANDO",
       "relation": "CONNECTED_TO",
       "line_id": "LN_GINZA",
       "line_name": "Tokyo Metro Ginza Line",
-      "weight": 16.0,
-      "duration_min": 16,
-      "distance_km": 6.7
+      "weight": 14.0,
+      "duration_min": 14,
+      "distance_km": 5.4
     },
     {
       "from": "ST_GINZA",
@@ -657,6 +985,13 @@
       "exit_info": "Exit A3"
     },
     {
+      "from": "ST_GINZA",
+      "to": "H_MITSUI_GARDEN_GINZA",
+      "relation": "NEAR_HOTEL",
+      "weight": 7.0,
+      "walk_time_min": 7
+    },
+    {
       "from": "ST_ROPPONGI",
       "to": "ST_GINZA",
       "relation": "CONNECTED_TO",
@@ -696,6 +1031,20 @@
       "exit_info": "Exit 1C (Direct Concourse)"
     },
     {
+      "from": "ST_ROPPONGI",
+      "to": "H_PRINCE_GALLERY_KIOICHO",
+      "relation": "NEAR_HOTEL",
+      "weight": 10.0,
+      "walk_time_min": 10
+    },
+    {
+      "from": "ST_ROPPONGI",
+      "to": "H_HOTEL_VILLA_FONTAINE_ROPPONGI",
+      "relation": "NEAR_HOTEL",
+      "weight": 5.0,
+      "walk_time_min": 5
+    },
+    {
       "from": "ST_OSHIAGE",
       "to": "ST_ASAKUSA",
       "relation": "CONNECTED_TO",
@@ -707,13 +1056,13 @@
     },
     {
       "from": "ST_OSHIAGE",
-      "to": "ST_SHIBUYA",
+      "to": "ST_OMOTESANDO",
       "relation": "CONNECTED_TO",
       "line_id": "LN_HANZOMON",
       "line_name": "Tokyo Metro Hanzomon Line",
-      "weight": 31.0,
-      "duration_min": 31,
-      "distance_km": 15.2
+      "weight": 29.0,
+      "duration_min": 29,
+      "distance_km": 13.9
     },
     {
       "from": "ST_OSHIAGE",
@@ -752,6 +1101,15 @@
       "walk_time_min": 3,
       "distance_m": 200,
       "exit_info": "Omotesando Exit"
+    },
+    {
+      "from": "ST_HARAJUKU",
+      "to": "P_TAKESHITA_STREET",
+      "relation": "NEAR_PLACE",
+      "weight": 1.0,
+      "walk_time_min": 1,
+      "distance_m": 50,
+      "exit_info": "Takeshita Exit"
     },
     {
       "from": "ST_SHIMBASHI",
@@ -802,6 +1160,15 @@
       "weight": 13.0,
       "duration_min": 13,
       "distance_km": 5.0
+    },
+    {
+      "from": "ST_SHIMBASHI",
+      "to": "P_HAMARIKYU_GARDENS",
+      "relation": "NEAR_PLACE",
+      "weight": 10.0,
+      "walk_time_min": 10,
+      "distance_m": 750,
+      "exit_info": "Shiodome Exit"
     },
     {
       "from": "ST_HAMAMATSUCHO",
@@ -864,13 +1231,13 @@
     },
     {
       "from": "ST_IKEBUKURO",
-      "to": "ST_TOKYO",
+      "to": "ST_KORAKUEN",
       "relation": "CONNECTED_TO",
       "line_id": "LN_MARUNOUCHI",
       "line_name": "Tokyo Metro Marunouchi Line",
-      "weight": 17.0,
-      "duration_min": 17,
-      "distance_km": 8.7
+      "weight": 7.0,
+      "duration_min": 7,
+      "distance_km": 3.8
     },
     {
       "from": "ST_ODAIBA_KAIHINKOEN",
@@ -884,13 +1251,13 @@
     },
     {
       "from": "ST_ODAIBA_KAIHINKOEN",
-      "to": "ST_TOYOSU",
+      "to": "ST_SHIJO_MAE",
       "relation": "CONNECTED_TO",
       "line_id": "LN_YURIKAMOME",
       "line_name": "Yurikamome Line",
-      "weight": 16.0,
-      "duration_min": 16,
-      "distance_km": 6.9
+      "weight": 9.0,
+      "duration_min": 9,
+      "distance_km": 3.9
     },
     {
       "from": "ST_ODAIBA_KAIHINKOEN",
@@ -951,13 +1318,129 @@
     },
     {
       "from": "ST_TOYOSU",
+      "to": "ST_SHIJO_MAE",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YURIKAMOME",
+      "line_name": "Yurikamome Line",
+      "weight": 4.0,
+      "duration_min": 4,
+      "distance_km": 1.8
+    },
+    {
+      "from": "ST_TOYOSU",
+      "to": "P_TEAMLAB_PLANETS",
+      "relation": "NEAR_PLACE",
+      "weight": 10.0,
+      "walk_time_min": 10,
+      "distance_m": 750,
+      "exit_info": "Exit 7 (or 1 min from Shin-Toyosu Station)"
+    },
+    {
+      "from": "ST_OMOTESANDO",
+      "to": "ST_SHIBUYA",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_HANZOMON",
+      "line_name": "Tokyo Metro Hanzomon Line",
+      "weight": 2.0,
+      "duration_min": 2,
+      "distance_km": 1.3
+    },
+    {
+      "from": "ST_OMOTESANDO",
+      "to": "ST_GINZA",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_GINZA",
+      "line_name": "Tokyo Metro Ginza Line",
+      "weight": 14.0,
+      "duration_min": 14,
+      "distance_km": 5.4
+    },
+    {
+      "from": "ST_OMOTESANDO",
+      "to": "ST_OSHIAGE",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_HANZOMON",
+      "line_name": "Tokyo Metro Hanzomon Line",
+      "weight": 29.0,
+      "duration_min": 29,
+      "distance_km": 13.9
+    },
+    {
+      "from": "ST_OMOTESANDO",
+      "to": "P_OMOTESANDO_HILLS",
+      "relation": "NEAR_PLACE",
+      "weight": 2.0,
+      "walk_time_min": 2,
+      "distance_m": 180,
+      "exit_info": "Exit A2"
+    },
+    {
+      "from": "ST_KORAKUEN",
+      "to": "ST_IKEBUKURO",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_MARUNOUCHI",
+      "line_name": "Tokyo Metro Marunouchi Line",
+      "weight": 7.0,
+      "duration_min": 7,
+      "distance_km": 3.8
+    },
+    {
+      "from": "ST_KORAKUEN",
+      "to": "ST_TOKYO",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_MARUNOUCHI",
+      "line_name": "Tokyo Metro Marunouchi Line",
+      "weight": 9.0,
+      "duration_min": 9,
+      "distance_km": 4.2
+    },
+    {
+      "from": "ST_KORAKUEN",
+      "to": "ST_SHINJUKU",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_OEDO",
+      "line_name": "Toei Oedo Line",
+      "weight": 14.0,
+      "duration_min": 14,
+      "distance_km": 6.2
+    },
+    {
+      "from": "ST_KORAKUEN",
+      "to": "P_TOKYO_DOME_CITY",
+      "relation": "NEAR_PLACE",
+      "weight": 3.0,
+      "walk_time_min": 3,
+      "distance_m": 200,
+      "exit_info": "Exit 2"
+    },
+    {
+      "from": "ST_SHIJO_MAE",
       "to": "ST_ODAIBA_KAIHINKOEN",
       "relation": "CONNECTED_TO",
       "line_id": "LN_YURIKAMOME",
       "line_name": "Yurikamome Line",
-      "weight": 16.0,
-      "duration_min": 16,
-      "distance_km": 6.9
+      "weight": 9.0,
+      "duration_min": 9,
+      "distance_km": 3.9
+    },
+    {
+      "from": "ST_SHIJO_MAE",
+      "to": "ST_TOYOSU",
+      "relation": "CONNECTED_TO",
+      "line_id": "LN_YURIKAMOME",
+      "line_name": "Yurikamome Line",
+      "weight": 4.0,
+      "duration_min": 4,
+      "distance_km": 1.8
+    },
+    {
+      "from": "ST_SHIJO_MAE",
+      "to": "P_TOYOSU_MARKET",
+      "relation": "NEAR_PLACE",
+      "weight": 2.0,
+      "walk_time_min": 2,
+      "distance_m": 100,
+      "exit_info": "Direct Covered Pedestrian Concourse"
     },
     {
       "from": "P_SENSOJI",
@@ -1066,6 +1549,148 @@
       "walk_time_min": 5,
       "distance_m": 400,
       "exit_info": "North Exit"
+    },
+    {
+      "from": "P_IMPERIAL_PALACE",
+      "to": "ST_TOKYO",
+      "relation": "NEAR_STATION",
+      "weight": 10.0,
+      "walk_time_min": 10,
+      "distance_m": 800,
+      "exit_info": "Marunouchi Central Exit"
+    },
+    {
+      "from": "P_TEAMLAB_PLANETS",
+      "to": "ST_TOYOSU",
+      "relation": "NEAR_STATION",
+      "weight": 10.0,
+      "walk_time_min": 10,
+      "distance_m": 750,
+      "exit_info": "Exit 7 (or 1 min from Shin-Toyosu Station)"
+    },
+    {
+      "from": "P_AMEYOKO",
+      "to": "ST_UENO",
+      "relation": "NEAR_STATION",
+      "weight": 2.0,
+      "walk_time_min": 2,
+      "distance_m": 150,
+      "exit_info": "Shinobazu Exit"
+    },
+    {
+      "from": "P_TAKESHITA_STREET",
+      "to": "ST_HARAJUKU",
+      "relation": "NEAR_STATION",
+      "weight": 1.0,
+      "walk_time_min": 1,
+      "distance_m": 50,
+      "exit_info": "Takeshita Exit"
+    },
+    {
+      "from": "P_HAMARIKYU_GARDENS",
+      "to": "ST_SHIMBASHI",
+      "relation": "NEAR_STATION",
+      "weight": 10.0,
+      "walk_time_min": 10,
+      "distance_m": 750,
+      "exit_info": "Shiodome Exit"
+    },
+    {
+      "from": "P_TOKYO_DOME_CITY",
+      "to": "ST_KORAKUEN",
+      "relation": "NEAR_STATION",
+      "weight": 3.0,
+      "walk_time_min": 3,
+      "distance_m": 200,
+      "exit_info": "Exit 2"
+    },
+    {
+      "from": "P_TOYOSU_MARKET",
+      "to": "ST_SHIJO_MAE",
+      "relation": "NEAR_STATION",
+      "weight": 2.0,
+      "walk_time_min": 2,
+      "distance_m": 100,
+      "exit_info": "Direct Covered Pedestrian Concourse"
+    },
+    {
+      "from": "P_OMOTESANDO_HILLS",
+      "to": "ST_OMOTESANDO",
+      "relation": "NEAR_STATION",
+      "weight": 2.0,
+      "walk_time_min": 2,
+      "distance_m": 180,
+      "exit_info": "Exit A2"
+    },
+    {
+      "from": "H_GRACERY_SHINJUKU",
+      "to": "ST_SHINJUKU",
+      "relation": "NEAR_STATION",
+      "weight": 5.0,
+      "walk_time_min": 5
+    },
+    {
+      "from": "H_TOKYO_STATION_HOTEL",
+      "to": "ST_TOKYO",
+      "relation": "NEAR_STATION",
+      "weight": 1.0,
+      "walk_time_min": 1
+    },
+    {
+      "from": "H_SHIBUYA_STREAM_EXCEL",
+      "to": "ST_SHIBUYA",
+      "relation": "NEAR_STATION",
+      "weight": 2.0,
+      "walk_time_min": 2
+    },
+    {
+      "from": "H_ASAKUSA_VIEW",
+      "to": "ST_ASAKUSA",
+      "relation": "NEAR_STATION",
+      "weight": 6.0,
+      "walk_time_min": 6
+    },
+    {
+      "from": "H_CANDEO_UENO",
+      "to": "ST_UENO",
+      "relation": "NEAR_STATION",
+      "weight": 6.0,
+      "walk_time_min": 6
+    },
+    {
+      "from": "H_MITSUI_GARDEN_GINZA",
+      "to": "ST_GINZA",
+      "relation": "NEAR_STATION",
+      "weight": 7.0,
+      "walk_time_min": 7
+    },
+    {
+      "from": "H_DORM_INN_AKIHABARA",
+      "to": "ST_AKIHABARA",
+      "relation": "NEAR_STATION",
+      "weight": 5.0,
+      "walk_time_min": 5
+    },
+    {
+      "from": "H_PRINCE_GALLERY_KIOICHO",
+      "to": "ST_ROPPONGI",
+      "relation": "NEAR_STATION",
+      "weight": 10.0,
+      "walk_time_min": 10
+    },
+    {
+      "from": "H_SUPER_HOTEL_SHINJUKU",
+      "to": "ST_SHINJUKU",
+      "relation": "NEAR_STATION",
+      "weight": 7.0,
+      "walk_time_min": 7
+    },
+    {
+      "from": "H_HOTEL_VILLA_FONTAINE_ROPPONGI",
+      "to": "ST_ROPPONGI",
+      "relation": "NEAR_STATION",
+      "weight": 5.0,
+      "walk_time_min": 5
     }
   ]
 }

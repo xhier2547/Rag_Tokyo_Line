@@ -15,7 +15,8 @@ from src.data_pipeline.models import (
     LineModel,
     TransitEdgeModel,
     PlaceStationEdgeModel,
-    DocumentChunkModel
+    DocumentChunkModel,
+    HotelModel
 )
 from src.data_pipeline.chunker import TokyoDocumentChunker
 from src.data_pipeline.tokyo_data import (
@@ -23,7 +24,8 @@ from src.data_pipeline.tokyo_data import (
     STATIONS_DATA,
     LINES_DATA,
     TRANSIT_EDGES_DATA,
-    PLACE_STATION_EDGES
+    PLACE_STATION_EDGES,
+    HOTELS_DATA
 )
 
 PROCESSED_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "data", "processed")
@@ -153,12 +155,40 @@ def process_and_export_all(output_dir: str = PROCESSED_DIR) -> Dict[str, Any]:
     df_ps_edges.to_csv(ps_csv_path, index=False, encoding="utf-8-sig")
     print(f" Saved {len(df_ps_edges)} place-station edges to '{ps_csv_path}'")
 
-    # 6. ประมวลผล Chunking สำหรับ Vector DB & BM25
+    # 6. ประมวลผลและตรวจสอบ Hotels (โรงแรมและที่พัก)
+    validated_hotels: List[HotelModel] = []
+    for item in HOTELS_DATA:
+        h_obj = HotelModel(
+            hotel_id=item["hotel_id"],
+            name_th=clean_text(item["name_th"]),
+            name_en=clean_text(item["name_en"]),
+            name_ja=clean_text(item["name_ja"]),
+            ward=item["ward"],
+            tier=item["tier"],
+            price_range=clean_text(item["price_range"]),
+            nearest_station_id=item["nearest_station_id"],
+            walk_time_min=int(item["walk_time_min"]),
+            highlights=clean_text(item["highlights"]),
+            description_th=clean_text(item["description_th"]),
+            description_en=clean_text(item["description_en"])
+        )
+        validated_hotels.append(h_obj)
+
+    df_hotels = pd.DataFrame([h.model_dump() for h in validated_hotels])
+    hotels_csv_path = os.path.join(output_dir, "hotels.csv")
+    df_hotels.to_csv(hotels_csv_path, index=False, encoding="utf-8-sig")
+    print(f" Saved {len(df_hotels)} hotels to '{hotels_csv_path}'")
+
+    # 7. ประมวลผล Chunking สำหรับ Vector DB & BM25 (Places + Hotels)
     chunker = TokyoDocumentChunker(chunk_size=350, chunk_overlap=70)
     all_chunks: List[DocumentChunkModel] = []
     for place_dict in PLACES_DATA:
         chunks = chunker.chunk_place(place_dict)
         all_chunks.extend(chunks)
+
+    for hotel_dict in HOTELS_DATA:
+        h_chunks = chunker.chunk_hotel(hotel_dict)
+        all_chunks.extend(h_chunks)
 
     chunks_json_path = os.path.join(output_dir, "documents_chunks.json")
     with open(chunks_json_path, "w", encoding="utf-8") as f:
@@ -169,6 +199,7 @@ def process_and_export_all(output_dir: str = PROCESSED_DIR) -> Dict[str, Any]:
         "lines_count": len(df_lines),
         "stations_count": len(df_stations),
         "places_count": len(df_places),
+        "hotels_count": len(df_hotels),
         "transit_edges_count": len(df_edges),
         "place_station_edges_count": len(df_ps_edges),
         "chunks_count": len(all_chunks),
@@ -179,3 +210,4 @@ def process_and_export_all(output_dir: str = PROCESSED_DIR) -> Dict[str, Any]:
 
 if __name__ == "__main__":
     process_and_export_all()
+

@@ -16,3 +16,6 @@ ST_ODAIBA_KAIHINKOEN,สถานีโอไดบะ ไคฮินโคเ�
 ST_SHINJUKU_GYOEMMAE,สถานีชินจูกุเกียวเอ็นมาเอะ,Shinjuku-gyoemmae Station,新宿御苑前駅,LN_MARUNOUCHI,Shinjuku,35.688647,139.710928
 ST_TSUKIJI,สถานีสึกิจิ,Tsukiji Station,築地駅,LN_HIBIYA,Chuo,35.667794,139.772591
 ST_TOYOSU,สถานีโทโยสุ,Toyosu Station,豊洲駅,LN_YURIKAMOME,Koto,35.654824,139.796338
+ST_OMOTESANDO,สถานีโอโมเตะซันโด,Omotesando Station,表参道駅,LN_GINZA;LN_HANZOMON;LN_CHIYODA,Minato,35.665247,139.712314
+ST_KORAKUEN,สถานีโคระคุเอ็น (โตเกียวโดม),Korakuen Station,後楽園駅,LN_MARUNOUCHI;LN_NAMBOKU;LN_OEDO,Bunkyo,35.707328,139.751682
+ST_SHIJO_MAE,สถานีชิโจมาเอะ (ตลาดปลาโทโยสุ),Shijo-mae Station,市場前駅,LN_YURIKAMOME,Koto,35.645389,139.784444

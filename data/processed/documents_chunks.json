@@ -3,7 +3,7 @@
     "chunk_id": "C_P_SENSOJI_01",
     "place_id": "P_SENSOJI",
     "title": "วัดเซ็นโซจิ (วัดอาซากุสะ) (Senso-ji Temple) - ส่วนที่ 1",
-    "content_th": "วัดเซ็นโซจิเป็นวัดพุทธที่เก่าแก่ที่สุดในกรุงโตเกียว สร้างขึ้นในปี ค.ศ. 628 มีเอกลักษณ์คือประตูคามินาริโมง (Kaminarimon) ที่แขวนโคมแดงยักษ์อันเลื่องชื่อ ภายในมีถนนคนเดินนากามิเสะ (Nakamise-dori) ทอดยาวกว่า 250 เมตร เต็มไปด้วยร้านขายขนมพื้นเมือง เช่น ขนมเซมเบ้ มันจูทอด และของที่ระลึกดั้งเดิม",
+    "content_th": "วัดเซ็นโซจิเป็นวัดพุทธที่เก่าแก่ที่สุดในกรุงโตเกียว สร้างขึ้นในปี ค.ศ. 628 มีเอกลักษณ์คือประตูคามินาริโมง (Kaminarimon) ที่แขวนโคมแดงยักษ์อันเลื่องชื่อ ภายในมีถนนคนเดินนากามิเสะ (Nakamise-dori) ทอดยาวกว่า 250 เมตร เต็มไปด้วยร้านขายขนมพื้นเมือง เช่น ขนมเซมเบ้ มันจูทอด ขนมปังเมลอน และของที่ระลึกดั้งเดิม",
     "content_en": "Senso-ji is Tokyo's oldest and most significant Buddhist temple, founded in 628 AD. Famous for its colossal red paper lantern at the Kaminarimon (Thunder Gate) and the vibrant Nakamise shopping street offering traditional snacks and souvenirs.",
     "ward": "Taito",
     "category": "Temple & Shrine",
@@ -22,7 +22,7 @@
     "chunk_id": "C_P_SENSOJI_02",
     "place_id": "P_SENSOJI",
     "title": "วัดเซ็นโซจิ (วัดอาซากุสะ) (Senso-ji Temple) - ส่วนที่ 2",
-    "content_th": "เช่น ขนมเซมเบ้ มันจูทอด และของที่ระลึกดั้งเดิม เป็นจุดหมายยอดนิยมที่ผู้คนมาสักการะองค์เจ้าแม่กวนอิมเพื่อขอพรเรื่องความสุขและความสำเร็จ",
+    "content_th": "เช่น ขนมเซมเบ้ มันจูทอด ขนมปังเมลอน และของที่ระลึกดั้งเดิม เป็นจุดหมายยอดนิยมที่ผู้คนมาสักการะองค์เจ้าแม่กวนอิมเพื่อขอพรเรื่องความสุขและความสำเร็จ",
     "content_en": "",
     "ward": "Taito",
     "category": "Temple & Shrine",
@@ -503,6 +503,557 @@
       "ค่าเข้าชม",
       "ST_ODAIBA_KAIHINKOEN",
       "Minato"
+    ]
+  },
+  {
+    "chunk_id": "C_P_IMPERIAL_PALACE_01",
+    "place_id": "P_IMPERIAL_PALACE",
+    "title": "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ (Tokyo Imperial Palace & East Gardens) - ส่วนที่ 1",
+    "content_th": "พระราชวังอิมพีเรียลเป็นที่ประทับหลักของสมเด็จพระจักรพรรดิแห่งญี่ปุ่น ตั้งอยู่ใจกลางกรุงโตเกียวบนพื้นที่เดิมของปราสาทเอโดะ (Edo Castle) ล้อมรอบด้วยคูน้ำโบราณ กำแพงหินขนาดยักษ์ และสะพานแว่นตานิจูบาชิ (Nijubashi Bridge) อันเลื่องชื่อ บริเวณสวนฝั่งตะวันออก (East Gardens) เปิดให้นักท่องเที่ยวเข้าชมฟรี มีซากฐานป้อมปราการหอคอยปราสาทเอโดะ",
+    "content_en": "The Imperial Palace is the primary residence of the Emperor of Japan, built on the former site of Edo Castle. Surrounded by scenic moats, massive stone ramparts, and the iconic Nijubashi Bridge. The East Gardens are open to the public free of charge, showcasing historic castle foundations and tranquil Japanese gardens.",
+    "ward": "Chiyoda",
+    "category": "Culture & History",
+    "nearest_station": "ST_TOKYO",
+    "walk_time_min": 10,
+    "tags": [
+      "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ",
+      "Tokyo Imperial Palace & East Gardens",
+      "皇居",
+      "Chiyoda",
+      "Culture & History",
+      "ST_TOKYO"
+    ]
+  },
+  {
+    "chunk_id": "C_P_IMPERIAL_PALACE_02",
+    "place_id": "P_IMPERIAL_PALACE",
+    "title": "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ (Tokyo Imperial Palace & East Gardens) - ส่วนที่ 2",
+    "content_th": "เปิดให้นักท่องเที่ยวเข้าชมฟรี มีซากฐานป้อมปราการหอคอยปราสาทเอโดะ สวนสไตล์ญี่ปุ่นดั้งเดิม และต้นซากุระมากมาย เหมาะสำหรับการเดินเล่นและเรียนรู้ประวัติศาสตร์",
+    "content_en": "",
+    "ward": "Chiyoda",
+    "category": "Culture & History",
+    "nearest_station": "ST_TOKYO",
+    "walk_time_min": 10,
+    "tags": [
+      "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ",
+      "Tokyo Imperial Palace & East Gardens",
+      "皇居",
+      "Chiyoda",
+      "Culture & History",
+      "ST_TOKYO"
+    ]
+  },
+  {
+    "chunk_id": "C_P_IMPERIAL_PALACE_INFO",
+    "place_id": "P_IMPERIAL_PALACE",
+    "title": "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ - ข้อมูลการเดินทางและการเยี่ยมชม",
+    "content_th": "ข้อมูลการเยี่ยมชมและการเดินทางสู่ พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ (Tokyo Imperial Palace & East Gardens): ตั้งอยู่ในเขต Chiyoda หมวดหมู่ Culture & History สถานีรถไฟที่ใกล้ที่สุดคือ ST_TOKYO โดยใช้เวลาเดินประมาณ 10 นาที เวลาเปิดทำการ: 09:00 - 17:00 (ปิดวันจันทร์และวันศุกร์) และอัตราค่าเข้าชม: เข้าชมสวนฟรี (การเข้าชมพระราชวังด้านในต้องจองล่วงหน้า)",
+    "content_en": "Visiting & Transit Guide for Tokyo Imperial Palace & East Gardens: Located in Chiyoda Ward, Category: Culture & History. Nearest station is ST_TOKYO, approximately 10 minutes walk. Opening hours: 09:00 - 17:00 (ปิดวันจันทร์และวันศุกร์), Admission fee: เข้าชมสวนฟรี (การเข้าชมพระราชวังด้านในต้องจองล่วงหน้า).",
+    "ward": "Chiyoda",
+    "category": "Culture & History",
+    "nearest_station": "ST_TOKYO",
+    "walk_time_min": 10,
+    "tags": [
+      "พระราชวังอิมพีเรียลโตเกียวและสวนโคเคียวฮิกาชิ",
+      "Tokyo Imperial Palace & East Gardens",
+      "การเดินทาง",
+      "เวลาทำการ",
+      "ค่าเข้าชม",
+      "ST_TOKYO",
+      "Chiyoda"
+    ]
+  },
+  {
+    "chunk_id": "C_P_TEAMLAB_PLANETS_01",
+    "place_id": "P_TEAMLAB_PLANETS",
+    "title": "พิพิธภัณฑ์ศิลปะดิจิทัลทีมแล็บ แพลเน็ตส์ โตเกียว (teamLab Planets TOKYO DMM) - ส่วนที่ 1",
+    "content_th": "พิพิธภัณฑ์ศิลปะดิจิทัลแบบอินเทอร์แอคทีฟระดับโลกที่ผู้เข้าชมต้องถอดรองเท้าเดินลุยน้ำ มีแนวคิด 'Body Immersive' ผสานร่างกายเข้ากับงานศิลปะแสง สี เสียง ไฮไลต์เด่นได้แก่ ห้องสวนดอกกล้วยไม้มีชีวิตลอยได้ (Floating Flower Garden) ห้องคริสตัลกระจกไร้ที่สิ้นสุด (The Infinite Crystal Universe) และผืนน้ำที่ฉายภาพปลาคาร์ปแหวกว่ายเปลี่ยนเป็นดอกไม้เมื่อสัมผัส",
+    "content_en": "A world-renowned immersive digital art museum where visitors walk barefoot through water. Features iconic exhibits including The Infinite Crystal Universe, Floating Flower Garden with thousands of living orchids, and interactive water installations.",
+    "ward": "Koto",
+    "category": "Culture & Art",
+    "nearest_station": "ST_TOYOSU",
+    "walk_time_min": 10,
+    "tags": [
+      "พิพิธภัณฑ์ศิลปะดิจิทัลทีมแล็บ แพลเน็ตส์ โตเกียว",
+      "teamLab Planets TOKYO DMM",
+      "チームラボプラネッツ TOKYO",
+      "Koto",
+      "Culture & Art",
+      "ST_TOYOSU"
+    ]
+  },
+  {
+    "chunk_id": "C_P_TEAMLAB_PLANETS_INFO",
+    "place_id": "P_TEAMLAB_PLANETS",
+    "title": "พิพิธภัณฑ์ศิลปะดิจิทัลทีมแล็บ แพลเน็ตส์ โตเกียว - ข้อมูลการเดินทางและการเยี่ยมชม",
+    "content_th": "ข้อมูลการเยี่ยมชมและการเดินทางสู่ พิพิธภัณฑ์ศิลปะดิจิทัลทีมแล็บ แพลเน็ตส์ โตเกียว (teamLab Planets TOKYO DMM): ตั้งอยู่ในเขต Koto หมวดหมู่ Culture & Art สถานีรถไฟที่ใกล้ที่สุดคือ ST_TOYOSU โดยใช้เวลาเดินประมาณ 10 นาที เวลาเปิดทำการ: 09:00 - 22:00 (รอบสุดท้าย 21:00) และอัตราค่าเข้าชม: ผู้ใหญ่เริ่มต้น 3,800 - 4,200 เยน (แนะนำจองตั๋วออนไลน์ล่วงหน้า)",
+    "content_en": "Visiting & Transit Guide for teamLab Planets TOKYO DMM: Located in Koto Ward, Category: Culture & Art. Nearest station is ST_TOYOSU, approximately 10 minutes walk. Opening hours: 09:00 - 22:00 (รอบสุดท้าย 21:00), Admission fee: ผู้ใหญ่เริ่มต้น 3,800 - 4,200 เยน (แนะนำจองตั๋วออนไลน์ล่วงหน้า).",
+    "ward": "Koto",
+    "category": "Culture & Art",
+    "nearest_station": "ST_TOYOSU",
+    "walk_time_min": 10,
+    "tags": [
+      "พิพิธภัณฑ์ศิลปะดิจิทัลทีมแล็บ แพลเน็ตส์ โตเกียว",
+      "teamLab Planets TOKYO DMM",
+      "การเดินทาง",
+      "เวลาทำการ",
+      "ค่าเข้าชม",
+      "ST_TOYOSU",
+      "Koto"
+    ]
+  },
+  {
+    "chunk_id": "C_P_AMEYOKO_01",
+    "place_id": "P_AMEYOKO",
+    "title": "ตลาดอะเมโยโกะ (ถนนคนเดินอะเมยะ โยโกโจ) (Ameyoko Shopping Street) - ส่วนที่ 1",
+    "content_th": "ถนนคนเดินและตลาดกลางแจ้งอันคึกคักใต้รางรถไฟระหว่างสถานีอุเอโนะและสถานีโอคาจิมาจิ เดิมเป็นตลาดมืดหลังสงครามโลก ปัจจุบันเต็มไปด้วยร้านขายอาหารสตรีทฟู้ด ข้าวหน้าปลาดิบราคาประหยัด ผลไม้เสียบไม้สด ผลไม้อบแห้ง เสื้อผ้า รองเท้าผ้าใบ และขนมของฝากยอดนิยมในราคาย่อมเยา มีกลิ่นอายความมีชีวิตชีวาแบบดั้งเดิมของโตเกียว",
+    "content_en": "A vibrant open-air market street running along the elevated train tracks between Ueno and Okachimachi stations. Famous for bustling street food vendors, fresh seafood stalls, inexpensive sneakers, cosmetics, and traditional sweets.",
+    "ward": "Taito",
+    "category": "Food & Market",
+    "nearest_station": "ST_UENO",
+    "walk_time_min": 2,
+    "tags": [
+      "ตลาดอะเมโยโกะ (ถนนคนเดินอะเมยะ โยโกโจ)",
+      "Ameyoko Shopping Street",
+      "アメヤ横丁",
+      "Taito",
+      "Food & Market",
+      "ST_UENO"
+    ]
+  },
+  {
+    "chunk_id": "C_P_AMEYOKO_INFO",
+    "place_id": "P_AMEYOKO",
+    "title": "ตลาดอะเมโยโกะ (ถนนคนเดินอะเมยะ โยโกโจ) - ข้อมูลการเดินทางและการเยี่ยมชม",
+    "content_th": "ข้อมูลการเยี่ยมชมและการเดินทางสู่ ตลาดอะเมโยโกะ (ถนนคนเดินอะเมยะ โยโกโจ) (Ameyoko Shopping Street): ตั้งอยู่ในเขต Taito หมวดหมู่ Food & Market สถานีรถไฟที่ใกล้ที่สุดคือ ST_UENO โดยใช้เวลาเดินประมาณ 2 นาที เวลาเปิดทำการ: 10:00 - 20:00 (ขึ้นอยู่กับแต่ละร้านค้า) และอัตราค่าเข้าชม: เข้าชมฟรี",
+    "content_en": "Visiting & Transit Guide for Ameyoko Shopping Street: Located in Taito Ward, Category: Food & Market. Nearest station is ST_UENO, approximately 2 minutes walk. Opening hours: 10:00 - 20:00 (ขึ้นอยู่กับแต่ละร้านค้า), Admission fee: เข้าชมฟรี.",
+    "ward": "Taito",
+    "category": "Food & Market",
+    "nearest_station": "ST_UENO",
+    "walk_time_min": 2,
+    "tags": [
+      "ตลาดอะเมโยโกะ (ถนนคนเดินอะเมยะ โยโกโจ)",
+      "Ameyoko Shopping Street",
+      "การเดินทาง",
+      "เวลาทำการ",
+      "ค่าเข้าชม",
+      "ST_UENO",
+      "Taito"
+    ]
+  },
+  {
+    "chunk_id": "C_P_TAKESHITA_STREET_01",
+    "place_id": "P_TAKESHITA_STREET",
+    "title": "ถนนทาเคชิตะ ย่านฮาราจูกุ (Takeshita Street Harajuku) - ส่วนที่ 1",
+    "content_th": "ศูนย์กลางแฟชั่นวัยรุ่นและวัฒนธรรมคาวาอี้ (Kawaii Culture) ระดับตำนานของญี่ปุ่น ถนนคนเดินความยาว 400 เมตร แน่นขนัดไปด้วยร้านเสื้อผ้าแฟชั่นสตรีทแวร์ ร้านขายของกุ๊กกิ๊ก คาเฟ่สัตว์เลี้ยง และร้านเครปญี่ปุ่นม้วนสดชื่อดังอย่าง Marion Crepes และ Santa Monica Crepes รวมถึงสายไหมสีรุ้งขนาดยักษ์",
+    "content_en": "The pulsating epicenter of Japanese youth pop culture and kawaii fashion. This 400-meter pedestrian avenue is packed with quirky boutiques, trendy streetwear, vintage shops, rainbow cotton candy, and Harajuku's legendary sweet crepe stalls.",
+    "ward": "Shibuya",
+    "category": "Shopping & Entertainment",
+    "nearest_station": "ST_HARAJUKU",
+    "walk_time_min": 1,
+    "tags": [
+      "ถนนทาเคชิตะ ย่านฮาราจูกุ",
+      "Takeshita Street Harajuku",
+      "竹下通り",
+      "Shibuya",
+      "Shopping & Entertainment",
+      "ST_HARAJUKU"
+    ]
+  },
+  {
+    "chunk_id": "C_P_TAKESHITA_STREET_INFO",
+    "place_id": "P_TAKESHITA_STREET",
+    "title": "ถนนทาเคชิตะ ย่านฮาราจูกุ - ข้อมูลการเดินทางและการเยี่ยมชม",
+    "content_th": "ข้อมูลการเยี่ยมชมและการเดินทางสู่ ถนนทาเคชิตะ ย่านฮาราจูกุ (Takeshita Street Harajuku): ตั้งอยู่ในเขต Shibuya หมวดหมู่ Shopping & Entertainment สถานีรถไฟที่ใกล้ที่สุดคือ ST_HARAJUKU โดยใช้เวลาเดินประมาณ 1 นาที เวลาเปิดทำการ: 10:00 - 20:00 และอัตราค่าเข้าชม: เข้าชมฟรี",
+    "content_en": "Visiting & Transit Guide for Takeshita Street Harajuku: Located in Shibuya Ward, Category: Shopping & Entertainment. Nearest station is ST_HARAJUKU, approximately 1 minutes walk. Opening hours: 10:00 - 20:00, Admission fee: เข้าชมฟรี.",
+    "ward": "Shibuya",
+    "category": "Shopping & Entertainment",
+    "nearest_station": "ST_HARAJUKU",
+    "walk_time_min": 1,
+    "tags": [
+      "ถนนทาเคชิตะ ย่านฮาราจูกุ",
+      "Takeshita Street Harajuku",
+      "การเดินทาง",
+      "เวลาทำการ",
+      "ค่าเข้าชม",
+      "ST_HARAJUKU",
+      "Shibuya"
+    ]
+  },
+  {
+    "chunk_id": "C_P_HAMARIKYU_GARDENS_01",
+    "place_id": "P_HAMARIKYU_GARDENS",
+    "title": "สวนฮามาริคิว (สวนหลวงริมอ่าวโตเกียว) (Hamarikyu Gardens) - ส่วนที่ 1",
+    "content_th": "สวนสาธารณะสไตล์ญี่ปุ่นโบราณในยุคเอโดะของตระกูลโชกุนโทกูงาวะ มีเอกลักษณ์โดดเด่นคือสระน้ำชิโออิริ (Shioiri-no-ike) ซึ่งเป็นสระน้ำเค็มที่รับน้ำขึ้นน้ำลงจากอ่าวโตเกียวโดยตรง กลางสระมีโรงน้ำชาโบราณ Nakajima no Ochaya ที่นักท่องเที่ยวสามารถนั่งจิบชาเขียวมัทฉะคู่กับขนมวากาชิ พร้อมชมทิวทัศน์ความตัดกันระหว่างสวนโบราณกับตึกระฟ้าของย่านชิโอโดเมะ",
+    "content_en": "A tranquil traditional Edo-period Japanese landscape garden on Tokyo Bay, formerly belonging to the Tokugawa Shogun family. Features tidal seawater ponds and a charming teahouse on the water serving matcha tea against a dramatic backdrop of Shiodome skyscrapers.",
+    "ward": "Chuo",
+    "category": "Nature & Park",
+    "nearest_station": "ST_SHIMBASHI",
+    "walk_time_min": 10,
+    "tags": [
+      "สวนฮามาริคิว (สวนหลวงริมอ่าวโตเกียว)",
+      "Hamarikyu Gardens",
+      "浜離宮恩賜庭園",
+      "Chuo",
+      "Nature & Park",
+      "ST_SHIMBASHI"
+    ]
+  },
+  {
+    "chunk_id": "C_P_HAMARIKYU_GARDENS_INFO",
+    "place_id": "P_HAMARIKYU_GARDENS",
+    "title": "สวนฮามาริคิว (สวนหลวงริมอ่าวโตเกียว) - ข้อมูลการเดินทางและการเยี่ยมชม",
+    "content_th": "ข้อมูลการเยี่ยมชมและการเดินทางสู่ สวนฮามาริคิว (สวนหลวงริมอ่าวโตเกียว) (Hamarikyu Gardens): ตั้งอยู่ในเขต Chuo หมวดหมู่ Nature & Park สถานีรถไฟที่ใกล้ที่สุดคือ ST_SHIMBASHI โดยใช้เวลาเดินประมาณ 10 นาที เวลาเปิดทำการ: 09:00 - 17:00 และอัตราค่าเข้าชม: ผู้ใหญ่ 300 เยน",
+    "content_en": "Visiting & Transit Guide for Hamarikyu Gardens: Located in Chuo Ward, Category: Nature & Park. Nearest station is ST_SHIMBASHI, approximately 10 minutes walk. Opening hours: 09:00 - 17:00, Admission fee: ผู้ใหญ่ 300 เยน.",
+    "ward": "Chuo",
+    "category": "Nature & Park",
+    "nearest_station": "ST_SHIMBASHI",
+    "walk_time_min": 10,
+    "tags": [
+      "สวนฮามาริคิว (สวนหลวงริมอ่าวโตเกียว)",
+      "Hamarikyu Gardens",
+      "การเดินทาง",
+      "เวลาทำการ",
+      "ค่าเข้าชม",
+      "ST_SHIMBASHI",
+      "Chuo"
+    ]
+  },
+  {
+    "chunk_id": "C_P_TOKYO_DOME_CITY_01",
+    "place_id": "P_TOKYO_DOME_CITY",
+    "title": "โตเกียวโดมซิตี้และสปาลาคัว (Tokyo Dome City & Spa LaQua) - ส่วนที่ 1",
+    "content_th": "อาณาจักรความบันเทิงครบวงจรใจกลางโตเกียว ประกอบด้วยสนามเบสบอลและฮอลล์คอนเสิร์ตระดับโลก 'Tokyo Dome' สวนสนุก Tokyo Dome City Attractions ที่มีรถไฟเหาะ Thunder Dolphin ทะลุตึก และชิงช้าสวรรค์ Big O รวมถึงคอมเพล็กซ์ 'Spa LaQua' บ่อน้ำพุร้อนออนเซ็นธรรมชาติแท้ๆ จากใต้ดินลึก 1,700 เมตร พร้อมซาวน่าและร้านอาหารเพื่อการผ่อนคลาย",
+    "content_en": "A vast entertainment and leisure hub featuring the iconic Tokyo Dome baseball stadium and concert venue, an amusement park with the Thunder Dolphin rollercoaster through a building, and Spa LaQua luxury natural hot springs onsen complex.",
+    "ward": "Bunkyo",
+    "category": "Shopping & Entertainment",
+    "nearest_station": "ST_KORAKUEN",
+    "walk_time_min": 3,
+    "tags": [
+      "โตเกียวโดมซิตี้และสปาลาคัว",
+      "Tokyo Dome City & Spa LaQua",
+      "東京ドームシティ",
+      "Bunkyo",
+      "Shopping & Entertainment",
+      "ST_KORAKUEN"
+    ]
+  },
+  {
+    "chunk_id": "C_P_TOKYO_DOME_CITY_INFO",
+    "place_id": "P_TOKYO_DOME_CITY",
+    "title": "โตเกียวโดมซิตี้และสปาลาคัว - ข้อมูลการเดินทางและการเยี่ยมชม",
+    "content_th": "ข้อมูลการเยี่ยมชมและการเดินทางสู่ โตเกียวโดมซิตี้และสปาลาคัว (Tokyo Dome City & Spa LaQua): ตั้งอยู่ในเขต Bunkyo หมวดหมู่ Shopping & Entertainment สถานีรถไฟที่ใกล้ที่สุดคือ ST_KORAKUEN โดยใช้เวลาเดินประมาณ 3 นาที เวลาเปิดทำการ: 10:00 - 21:00 (Spa LaQua เปิด 11:00 - 09:00 เช้าวันถัดไป) และอัตราค่าเข้าชม: เข้าบริเวณฟรี / ค่าเครื่องเล่นหรือค่าสปาแยกตามจุดบริการ (Spa LaQua ประมาณ 3,230 เยน)",
+    "content_en": "Visiting & Transit Guide for Tokyo Dome City & Spa LaQua: Located in Bunkyo Ward, Category: Shopping & Entertainment. Nearest station is ST_KORAKUEN, approximately 3 minutes walk. Opening hours: 10:00 - 21:00 (Spa LaQua เปิด 11:00 - 09:00 เช้าวันถัดไป), Admission fee: เข้าบริเวณฟรี / ค่าเครื่องเล่นหรือค่าสปาแยกตามจุดบริการ (Spa LaQua ประมาณ 3,230 เยน).",
+    "ward": "Bunkyo",
+    "category": "Shopping & Entertainment",
+    "nearest_station": "ST_KORAKUEN",
+    "walk_time_min": 3,
+    "tags": [
+      "โตเกียวโดมซิตี้และสปาลาคัว",
+      "Tokyo Dome City & Spa LaQua",
+      "การเดินทาง",
+      "เวลาทำการ",
+      "ค่าเข้าชม",
+      "ST_KORAKUEN",
+      "Bunkyo"
+    ]
+  },
+  {
+    "chunk_id": "C_P_TOYOSU_MARKET_01",
+    "place_id": "P_TOYOSU_MARKET",
+    "title": "ตลาดปลาโทโยสุและคอมเพล็กซ์เซ็นเคียคุบันไร (Toyosu Fish Market & Toyosu Senkyaku Banrai) - ส่วนที่ 1",
+    "content_th": "ตลาดค้าส่งสัตว์น้ำและอาหารที่ใหญ่และทันสมัยที่สุดในโลกที่ย้ายมาจากสึกิจิ มีจุดชมการประมูลปลาทูน่ายามเช้าอันเลื่องชื่อ และโซนเปิดใหม่ 'Toyosu Senkyaku Banrai' ซึ่งเป็นเมืองจำลองสไตล์เอโดะย้อนยุค รวมร้านอาหารซูชิ ซาชิมิระดับพรีเมียม อาหารทะเลปิ้งย่างกว่า 60 ร้าน พร้อมอาคารบ่อออนเซ็นแช่น้ำแร่ธรรมชาติชมวิวอ่าวโตเกียว",
+    "content_en": "The world's largest state-of-the-art wholesale seafood market, successor to historic Tsukiji. Features the famous early-morning tuna auctions, top-tier sushi eateries, and the newly opened Senkyaku Banrai Edo-themed dining and natural onsen hot spring promenade.",
+    "ward": "Koto",
+    "category": "Food & Market",
+    "nearest_station": "ST_SHIJO_MAE",
+    "walk_time_min": 2,
+    "tags": [
+      "ตลาดปลาโทโยสุและคอมเพล็กซ์เซ็นเคียคุบันไร",
+      "Toyosu Fish Market & Toyosu Senkyaku Banrai",
+      "豊洲市場・千客万来",
+      "Koto",
+      "Food & Market",
+      "ST_SHIJO_MAE"
+    ]
+  },
+  {
+    "chunk_id": "C_P_TOYOSU_MARKET_INFO",
+    "place_id": "P_TOYOSU_MARKET",
+    "title": "ตลาดปลาโทโยสุและคอมเพล็กซ์เซ็นเคียคุบันไร - ข้อมูลการเดินทางและการเยี่ยมชม",
+    "content_th": "ข้อมูลการเยี่ยมชมและการเดินทางสู่ ตลาดปลาโทโยสุและคอมเพล็กซ์เซ็นเคียคุบันไร (Toyosu Fish Market & Toyosu Senkyaku Banrai): ตั้งอยู่ในเขต Koto หมวดหมู่ Food & Market สถานีรถไฟที่ใกล้ที่สุดคือ ST_SHIJO_MAE โดยใช้เวลาเดินประมาณ 2 นาที เวลาเปิดทำการ: 05:00 - 15:00 (ตลาดค้าส่ง) / 10:00 - 22:00 (โซน Senkyaku Banrai) และอัตราค่าเข้าชม: เข้าชมฟรี",
+    "content_en": "Visiting & Transit Guide for Toyosu Fish Market & Toyosu Senkyaku Banrai: Located in Koto Ward, Category: Food & Market. Nearest station is ST_SHIJO_MAE, approximately 2 minutes walk. Opening hours: 05:00 - 15:00 (ตลาดค้าส่ง) / 10:00 - 22:00 (โซน Senkyaku Banrai), Admission fee: เข้าชมฟรี.",
+    "ward": "Koto",
+    "category": "Food & Market",
+    "nearest_station": "ST_SHIJO_MAE",
+    "walk_time_min": 2,
+    "tags": [
+      "ตลาดปลาโทโยสุและคอมเพล็กซ์เซ็นเคียคุบันไร",
+      "Toyosu Fish Market & Toyosu Senkyaku Banrai",
+      "การเดินทาง",
+      "เวลาทำการ",
+      "ค่าเข้าชม",
+      "ST_SHIJO_MAE",
+      "Koto"
+    ]
+  },
+  {
+    "chunk_id": "C_P_OMOTESANDO_HILLS_01",
+    "place_id": "P_OMOTESANDO_HILLS",
+    "title": "ถนนสายช้อปปิ้งโอโมเตะซันโดและห้างโอโมเตะซันโดฮิลส์ (Omotesando Boulevard & Omotesando Hills) - ส่วนที่ 1",
+    "content_th": "ถนนสายช้อปปิ้งต้นเซลโคว่าอันร่มรื่นที่ได้รับการขนานนามว่าเป็น 'ช็องเซลิเซ่แห่งโตเกียว' ศูนย์รวมแฟลกชิปสโตร์ของแบรนด์แฟชั่นระดับไฮเอนด์และสถาปัตยกรรมระดับมาสเตอร์พีซ ออกแบบโดยสถาปนิกชื่อดังระดับโลก เช่น Tadao Ando ผู้รังสรรค์ห้าง Omotesando Hills ที่มีทางลาดวนอันเป็นเอกลักษณ์ รายล้อมด้วยคาเฟ่เบเกอรี่สไตล์ยุโรปและร้านกาแฟบูทีก",
+    "content_en": "Tokyo's leafy 'Champs-Elysees', renowned for striking avant-garde architecture, world-class luxury brand flagships, and the Tadao Ando-designed Omotesando Hills shopping complex with its continuous spiraling ramp and chic European cafes.",
+    "ward": "Shibuya",
+    "category": "Shopping & Entertainment",
+    "nearest_station": "ST_OMOTESANDO",
+    "walk_time_min": 2,
+    "tags": [
+      "ถนนสายช้อปปิ้งโอโมเตะซันโดและห้างโอโมเตะซันโดฮิลส์",
+      "Omotesando Boulevard & Omotesando Hills",
+      "表参道ヒルズ",
+      "Shibuya",
+      "Shopping & Entertainment",
+      "ST_OMOTESANDO"
+    ]
+  },
+  {
+    "chunk_id": "C_P_OMOTESANDO_HILLS_INFO",
+    "place_id": "P_OMOTESANDO_HILLS",
+    "title": "ถนนสายช้อปปิ้งโอโมเตะซันโดและห้างโอโมเตะซันโดฮิลส์ - ข้อมูลการเดินทางและการเยี่ยมชม",
+    "content_th": "ข้อมูลการเยี่ยมชมและการเดินทางสู่ ถนนสายช้อปปิ้งโอโมเตะซันโดและห้างโอโมเตะซันโดฮิลส์ (Omotesando Boulevard & Omotesando Hills): ตั้งอยู่ในเขต Shibuya หมวดหมู่ Shopping & Entertainment สถานีรถไฟที่ใกล้ที่สุดคือ ST_OMOTESANDO โดยใช้เวลาเดินประมาณ 2 นาที เวลาเปิดทำการ: 11:00 - 21:00 และอัตราค่าเข้าชม: เข้าชมฟรี",
+    "content_en": "Visiting & Transit Guide for Omotesando Boulevard & Omotesando Hills: Located in Shibuya Ward, Category: Shopping & Entertainment. Nearest station is ST_OMOTESANDO, approximately 2 minutes walk. Opening hours: 11:00 - 21:00, Admission fee: เข้าชมฟรี.",
+    "ward": "Shibuya",
+    "category": "Shopping & Entertainment",
+    "nearest_station": "ST_OMOTESANDO",
+    "walk_time_min": 2,
+    "tags": [
+      "ถนนสายช้อปปิ้งโอโมเตะซันโดและห้างโอโมเตะซันโดฮิลส์",
+      "Omotesando Boulevard & Omotesando Hills",
+      "การเดินทาง",
+      "เวลาทำการ",
+      "ค่าเข้าชม",
+      "ST_OMOTESANDO",
+      "Shibuya"
+    ]
+  },
+  {
+    "chunk_id": "C_H_GRACERY_SHINJUKU",
+    "place_id": "H_GRACERY_SHINJUKU",
+    "title": "โรงแรม โรงแรมเกรเซอรี ชินจูกุ (โรงแรมก็อดซิลล่า) (Hotel Gracery Shinjuku) - ที่พักย่าน Shinjuku",
+    "content_th": "โรงแรม โรงแรมเกรเซอรี ชินจูกุ (โรงแรมก็อดซิลล่า) (Hotel Gracery Shinjuku): ที่พักระดับ Mid-Scale / Business ในเขต Shinjuku โตเกียว ช่วงราคาประมาณ 3,500 - 6,500 บาท/คืน ตั้งอยู่ใกล้สถานี ST_SHINJUKU เดินประมาณ 5 นาที จุดเด่น: หัวก็อดซิลล่าขนาดยักษ์บนระเบียงชั้น 8 ย่านคาบูกิโจ เดินทางสะดวกใกล้สถานีชินจูกุ รายละเอียด: โรงแรมแลนด์มาร์กยอดนิยมใจกลางย่านคาบูกิโจ ชินจูกุ มีหัวก็อดซิลล่าขนาดยักษ์พ่นควันส่งเสียงคำราม ห้องพักสะอาดทันสมัย แยกห้องอาบน้ำและห้องส้วมสไตล์ญี่ปุ่น ใกล้ร้านอาหาร แหล่งช้อปปิ้ง และสถานีรถไฟชินจูกุ",
+    "content_en": "Hotel Hotel Gracery Shinjuku (โรงแรมเกรเซอรี ชินจูกุ (โรงแรมก็อดซิลล่า)): A Mid-Scale / Business accommodation in Shinjuku Ward, Tokyo. Price range: 3,500 - 6,500 บาท/คืน. Located near ST_SHINJUKU station (5 mins walk). Highlights: หัวก็อดซิลล่าขนาดยักษ์บนระเบียงชั้น 8 ย่านคาบูกิโจ เดินทางสะดวกใกล้สถานีชินจูกุ. Details: Iconic hotel in Kabukicho, Shinjuku featuring a life-sized Godzilla head on the terrace. Modern rooms with Japanese-style bathrooms, walking distance to Shinjuku Station.",
+    "ward": "Shinjuku",
+    "category": "Hotel & Accommodation (Mid-Scale / Business)",
+    "nearest_station": "ST_SHINJUKU",
+    "walk_time_min": 5,
+    "tags": [
+      "โรงแรมเกรเซอรี ชินจูกุ (โรงแรมก็อดซิลล่า)",
+      "Hotel Gracery Shinjuku",
+      "โรงแรม",
+      "ที่พัก",
+      "Mid-Scale / Business",
+      "Shinjuku",
+      "ST_SHINJUKU",
+      "hotel",
+      "accommodation"
+    ]
+  },
+  {
+    "chunk_id": "C_H_TOKYO_STATION_HOTEL",
+    "place_id": "H_TOKYO_STATION_HOTEL",
+    "title": "โรงแรม โรงแรมเดอะ โตเกียว สเตชั่น โฮเทล (The Tokyo Station Hotel) - ที่พักย่าน Chiyoda",
+    "content_th": "โรงแรม โรงแรมเดอะ โตเกียว สเตชั่น โฮเทล (The Tokyo Station Hotel): ที่พักระดับ Luxury ในเขต Chiyoda โตเกียว ช่วงราคาประมาณ 15,000 - 30,000 บาท/คืน ตั้งอยู่ใกล้สถานี ST_TOKYO เดินประมาณ 1 นาที จุดเด่น: โรงแรมระดับ 5 ดาวภายในอาคารอิฐแดงสถานีโตเกียว สถาปัตยกรรมคลาสสิกตั้งแต่ปี 1915 รายละเอียด: โรงแรมหรูระดับตำนานตั้งอยู่ภายในอาคารประวัติศาสตร์อิฐแดงของสถานีโตเกียว ออกแบบสไตล์ยุโรปคลาสสิก เพดานสูง โปร่งสบาย บริการระดับเวิลด์คลาส เชื่อมต่อกับรถไฟชินคันเซ็นและสายต่างๆ ได้ทันที",
+    "content_en": "Hotel The Tokyo Station Hotel (โรงแรมเดอะ โตเกียว สเตชั่น โฮเทล): A Luxury accommodation in Chiyoda Ward, Tokyo. Price range: 15,000 - 30,000 บาท/คืน. Located near ST_TOKYO station (1 mins walk). Highlights: โรงแรมระดับ 5 ดาวภายในอาคารอิฐแดงสถานีโตเกียว สถาปัตยกรรมคลาสสิกตั้งแต่ปี 1915. Details: A prestigious 5-star luxury hotel located inside the iconic red-brick Tokyo Station building dating back to 1915. Direct access to Shinkansen and Tokyo Metro.",
+    "ward": "Chiyoda",
+    "category": "Hotel & Accommodation (Luxury)",
+    "nearest_station": "ST_TOKYO",
+    "walk_time_min": 1,
+    "tags": [
+      "โรงแรมเดอะ โตเกียว สเตชั่น โฮเทล",
+      "The Tokyo Station Hotel",
+      "โรงแรม",
+      "ที่พัก",
+      "Luxury",
+      "Chiyoda",
+      "ST_TOKYO",
+      "hotel",
+      "accommodation"
+    ]
+  },
+  {
+    "chunk_id": "C_H_SHIBUYA_STREAM_EXCEL",
+    "place_id": "H_SHIBUYA_STREAM_EXCEL",
+    "title": "โรงแรม ชิบูย่า สตรีม เอ็กเซล โฮเทล โทคิว (Shibuya Stream Excel Hotel Tokyu) - ที่พักย่าน Shibuya",
+    "content_th": "โรงแรม ชิบูย่า สตรีม เอ็กเซล โฮเทล โทคิว (Shibuya Stream Excel Hotel Tokyu): ที่พักระดับ Mid-Scale / Business ในเขต Shibuya โตเกียว ช่วงราคาประมาณ 5,500 - 9,500 บาท/คืน ตั้งอยู่ใกล้สถานี ST_SHIBUYA เดินประมาณ 2 นาที จุดเด่น: เชื่อมตรงกับสถานีชิบูย่า ดีไซน์โมเดิร์นวินเทจ อยู่ในคอมเพล็กซ์ Shibuya Stream รายละเอียด: โรงแรมทันสมัยใจกลางชิบูย่า เชื่อมตรงสู่สถานีชิบูย่าโดยไม่ต้องออกนอกอาคาร รายล้อมด้วยร้านอาหาร คาเฟ่ริมลำธารชิบูย่า และห้าแยกชิบูย่า",
+    "content_en": "Hotel Shibuya Stream Excel Hotel Tokyu (ชิบูย่า สตรีม เอ็กเซล โฮเทล โทคิว): A Mid-Scale / Business accommodation in Shibuya Ward, Tokyo. Price range: 5,500 - 9,500 บาท/คืน. Located near ST_SHIBUYA station (2 mins walk). Highlights: เชื่อมตรงกับสถานีชิบูย่า ดีไซน์โมเดิร์นวินเทจ อยู่ในคอมเพล็กซ์ Shibuya Stream. Details: Stylish design hotel directly connected to Shibuya Station, featuring vintage-modern decor and convenient access to Shibuya Crossing and dining complexes.",
+    "ward": "Shibuya",
+    "category": "Hotel & Accommodation (Mid-Scale / Business)",
+    "nearest_station": "ST_SHIBUYA",
+    "walk_time_min": 2,
+    "tags": [
+      "ชิบูย่า สตรีม เอ็กเซล โฮเทล โทคิว",
+      "Shibuya Stream Excel Hotel Tokyu",
+      "โรงแรม",
+      "ที่พัก",
+      "Mid-Scale / Business",
+      "Shibuya",
+      "ST_SHIBUYA",
+      "hotel",
+      "accommodation"
+    ]
+  },
+  {
+    "chunk_id": "C_H_ASAKUSA_VIEW",
+    "place_id": "H_ASAKUSA_VIEW",
+    "title": "โรงแรม โรงแรมอาซากุสะ วิว โฮเทล (Asakusa View Hotel) - ที่พักย่าน Taito",
+    "content_th": "โรงแรม โรงแรมอาซากุสะ วิว โฮเทล (Asakusa View Hotel): ที่พักระดับ Mid-Scale / Business ในเขต Taito โตเกียว ช่วงราคาประมาณ 3,000 - 6,000 บาท/คืน ตั้งอยู่ใกล้สถานี ST_ASAKUSA เดินประมาณ 6 นาที จุดเด่น: วิวพาโนรามาเห็นทั้งวัดเซ็นโซจิและโตเกียวสกายทรี อาหารเช้าบุฟเฟต์ชื่อดัง รายละเอียด: โรงแรมสูงเด่นในย่านอาซากุสะ มีห้องพักที่สามารถชมวิววัดเซ็นโซจิและโตเกียวสกายทรีได้อย่างชัดเจน ใกล้ถนนคนเดินนากามิเสะและสถานีรถไฟ",
+    "content_en": "Hotel Asakusa View Hotel (โรงแรมอาซากุสะ วิว โฮเทล): A Mid-Scale / Business accommodation in Taito Ward, Tokyo. Price range: 3,000 - 6,000 บาท/คืน. Located near ST_ASAKUSA station (6 mins walk). Highlights: วิวพาโนรามาเห็นทั้งวัดเซ็นโซจิและโตเกียวสกายทรี อาหารเช้าบุฟเฟต์ชื่อดัง. Details: Renowned hotel offering panoramic views of Senso-ji Temple and Tokyo Skytree, famous breakfast buffet and close to traditional shopping streets.",
+    "ward": "Taito",
+    "category": "Hotel & Accommodation (Mid-Scale / Business)",
+    "nearest_station": "ST_ASAKUSA",
+    "walk_time_min": 6,
+    "tags": [
+      "โรงแรมอาซากุสะ วิว โฮเทล",
+      "Asakusa View Hotel",
+      "โรงแรม",
+      "ที่พัก",
+      "Mid-Scale / Business",
+      "Taito",
+      "ST_ASAKUSA",
+      "hotel",
+      "accommodation"
+    ]
+  },
+  {
+    "chunk_id": "C_H_CANDEO_UENO",
+    "place_id": "H_CANDEO_UENO",
+    "title": "โรงแรม คันเดโอ โฮเทลส์ อุเอโนะ พาร์ค (Candeo Hotels Ueno Park) - ที่พักย่าน Taito",
+    "content_th": "โรงแรม คันเดโอ โฮเทลส์ อุเอโนะ พาร์ค (Candeo Hotels Ueno Park): ที่พักระดับ Budget / Mid-Scale ในเขต Taito โตเกียว ช่วงราคาประมาณ 2,500 - 4,500 บาท/คืน ตั้งอยู่ใกล้สถานี ST_UENO เดินประมาณ 6 นาที จุดเด่น: ราคาย่อมเยา ใกล้สวนอุเอโนะ ตลาดอะเมโยโกะ และรถไฟ Keisei Skyliner สู่สนามบินนาริตะ รายละเอียด: ที่พักคุณภาพเยี่ยมราคาสบายกระเป๋า เตียงนอนสบายตามมาตรฐาน Candeo เดินเพียงไม่กี่นาทีถึงสวนอุเอโนะและตลาดอะเมโยโกะ เหมาะสำหรับนักเดินทางที่ต้องเดินทางไป-กลับสนามบินนาริตะ",
+    "content_en": "Hotel Candeo Hotels Ueno Park (คันเดโอ โฮเทลส์ อุเอโนะ พาร์ค): A Budget / Mid-Scale accommodation in Taito Ward, Tokyo. Price range: 2,500 - 4,500 บาท/คืน. Located near ST_UENO station (6 mins walk). Highlights: ราคาย่อมเยา ใกล้สวนอุเอโนะ ตลาดอะเมโยโกะ และรถไฟ Keisei Skyliner สู่สนามบินนาริตะ. Details: Comfortable and budget-friendly hotel near Ueno Park, Ameyoko Market, and Keisei Skyliner with swift access to Narita Airport.",
+    "ward": "Taito",
+    "category": "Hotel & Accommodation (Budget / Mid-Scale)",
+    "nearest_station": "ST_UENO",
+    "walk_time_min": 6,
+    "tags": [
+      "คันเดโอ โฮเทลส์ อุเอโนะ พาร์ค",
+      "Candeo Hotels Ueno Park",
+      "โรงแรม",
+      "ที่พัก",
+      "Budget / Mid-Scale",
+      "Taito",
+      "ST_UENO",
+      "hotel",
+      "accommodation"
+    ]
+  },
+  {
+    "chunk_id": "C_H_MITSUI_GARDEN_GINZA",
+    "place_id": "H_MITSUI_GARDEN_GINZA",
+    "title": "โรงแรม โรงแรมมิตซุย การ์เดน กินซ่า พรีเมียร์ (Mitsui Garden Hotel Ginza Premier) - ที่พักย่าน Chuo",
+    "content_th": "โรงแรม โรงแรมมิตซุย การ์เดน กินซ่า พรีเมียร์ (Mitsui Garden Hotel Ginza Premier): ที่พักระดับ Luxury / Upper-Scale ในเขต Chuo โตเกียว ช่วงราคาประมาณ 7,000 - 13,000 บาท/คืน ตั้งอยู่ใกล้สถานี ST_GINZA เดินประมาณ 7 นาที จุดเด่น: ล็อบบี้ลอยฟ้าชั้น 16 มองเห็นวิวอ่าวโตเกียวและโตเกียวทาวเวอร์ เดินถึงย่านช้อปปิ้งกินซ่า รายละเอียด: โรงแรมระดับพรีเมียมในย่านกินซ่า ล็อบบี้และบาร์ตั้งอยู่บนชั้นสูงพร้อมวิวระฟ้าอันงดงามของโตเกียวทาวเวอร์ ห้องน้ำมีอ่างแช่ตัวชมวิวเมือง ย่านช้อปปิ้งหรูหรา",
+    "content_en": "Hotel Mitsui Garden Hotel Ginza Premier (โรงแรมมิตซุย การ์เดน กินซ่า พรีเมียร์): A Luxury / Upper-Scale accommodation in Chuo Ward, Tokyo. Price range: 7,000 - 13,000 บาท/คืน. Located near ST_GINZA station (7 mins walk). Highlights: ล็อบบี้ลอยฟ้าชั้น 16 มองเห็นวิวอ่าวโตเกียวและโตเกียวทาวเวอร์ เดินถึงย่านช้อปปิ้งกินซ่า. Details: Chic premier hotel in Ginza with a 16th-floor sky lobby overlooking Tokyo Tower and Tokyo Bay, offering stylish rooms with skyline bathroom views.",
+    "ward": "Chuo",
+    "category": "Hotel & Accommodation (Luxury / Upper-Scale)",
+    "nearest_station": "ST_GINZA",
+    "walk_time_min": 7,
+    "tags": [
+      "โรงแรมมิตซุย การ์เดน กินซ่า พรีเมียร์",
+      "Mitsui Garden Hotel Ginza Premier",
+      "โรงแรม",
+      "ที่พัก",
+      "Luxury / Upper-Scale",
+      "Chuo",
+      "ST_GINZA",
+      "hotel",
+      "accommodation"
+    ]
+  },
+  {
+    "chunk_id": "C_H_DORM_INN_AKIHABARA",
+    "place_id": "H_DORM_INN_AKIHABARA",
+    "title": "โรงแรม ดอร์มี อินน์ อากิฮาบาระ (พร้อมบ่อออนเซ็น) (Dormy Inn Akihabara Hot Springs) - ที่พักย่าน Chiyoda",
+    "content_th": "โรงแรม ดอร์มี อินน์ อากิฮาบาระ (พร้อมบ่อออนเซ็น) (Dormy Inn Akihabara Hot Springs): ที่พักระดับ Budget / Mid-Scale ในเขต Chiyoda โตเกียว ช่วงราคาประมาณ 2,800 - 4,800 บาท/คืน ตั้งอยู่ใกล้สถานี ST_AKIHABARA เดินประมาณ 5 นาที จุดเด่น: มีบ่อออนเซ็นกลางแจ้งบนดาดฟ้า บริการราเมนราตรี (Yonaki Soba) ฟรีทุกคืน รายละเอียด: โรงแรมยอดนิยมขวัญใจนักท่องเที่ยว มีบ่อน้ำพุร้อนออนเซ็นกลางแจ้งบนชั้นดาดฟ้าและห้องซาวน่า พร้อมเสิร์ฟราเมงซีอิ๊วญี่ปุ่นร้อนๆ ฟรีช่วงดึก อยู่ใจกลางย่านอนิเมะอากิฮาบาระ",
+    "content_en": "Hotel Dormy Inn Akihabara Hot Springs (ดอร์มี อินน์ อากิฮาบาระ (พร้อมบ่อออนเซ็น)): A Budget / Mid-Scale accommodation in Chiyoda Ward, Tokyo. Price range: 2,800 - 4,800 บาท/คืน. Located near ST_AKIHABARA station (5 mins walk). Highlights: มีบ่อออนเซ็นกลางแจ้งบนดาดฟ้า บริการราเมนราตรี (Yonaki Soba) ฟรีทุกคืน. Details: Popular hotel in Akihabara featuring open-air rooftop hot spring baths, saunas, and complimentary evening Yonaki Soba ramen.",
+    "ward": "Chiyoda",
+    "category": "Hotel & Accommodation (Budget / Mid-Scale)",
+    "nearest_station": "ST_AKIHABARA",
+    "walk_time_min": 5,
+    "tags": [
+      "ดอร์มี อินน์ อากิฮาบาระ (พร้อมบ่อออนเซ็น)",
+      "Dormy Inn Akihabara Hot Springs",
+      "โรงแรม",
+      "ที่พัก",
+      "Budget / Mid-Scale",
+      "Chiyoda",
+      "ST_AKIHABARA",
+      "hotel",
+      "accommodation"
+    ]
+  },
+  {
+    "chunk_id": "C_H_PRINCE_GALLERY_KIOICHO",
+    "place_id": "H_PRINCE_GALLERY_KIOICHO",
+    "title": "โรงแรม เดอะ ปรินซ์ แกลเลอรี โตเกียว คิโออิโจ (โรงแรม 5 ดาว) (The Prince Gallery Tokyo Kioicho, Luxury Collection) - ที่พักย่าน Chiyoda",
+    "content_th": "โรงแรม เดอะ ปรินซ์ แกลเลอรี โตเกียว คิโออิโจ (โรงแรม 5 ดาว) (The Prince Gallery Tokyo Kioicho, Luxury Collection): ที่พักระดับ Ultra Luxury ในเขต Chiyoda โตเกียว ช่วงราคาประมาณ 18,000 - 35,000 บาท/คืน ตั้งอยู่ใกล้สถานี ST_ROPPONGI เดินประมาณ 10 นาที จุดเด่น: โรงแรมหรูบนชั้น 30-36 วิวเมืองโตเกียวแบบพาโนรามา สปา สระว่ายน้ำในร่มกระจกสูง รายละเอียด: โรงแรมหรูระดับแนวหน้าของโตเกียว ตั้งอยู่บนชั้น 30-36 ของ Tokyo Garden Terrace Kioicho มองเห็นทิวทัศน์มุมกว้างของมหานคร พร้อมสปาระดับไฮเอนด์และห้องอาหารหรู",
+    "content_en": "Hotel The Prince Gallery Tokyo Kioicho, Luxury Collection (เดอะ ปรินซ์ แกลเลอรี โตเกียว คิโออิโจ (โรงแรม 5 ดาว)): A Ultra Luxury accommodation in Chiyoda Ward, Tokyo. Price range: 18,000 - 35,000 บาท/คืน. Located near ST_ROPPONGI station (10 mins walk). Highlights: โรงแรมหรูบนชั้น 30-36 วิวเมืองโตเกียวแบบพาโนรามา สปา สระว่ายน้ำในร่มกระจกสูง. Details: An ultra-luxury hotel on floors 30-36 of Tokyo Garden Terrace Kioicho, offering breathtaking skyline vistas, world-class dining, and an indoor glass swimming pool.",
+    "ward": "Chiyoda",
+    "category": "Hotel & Accommodation (Ultra Luxury)",
+    "nearest_station": "ST_ROPPONGI",
+    "walk_time_min": 10,
+    "tags": [
+      "เดอะ ปรินซ์ แกลเลอรี โตเกียว คิโออิโจ (โรงแรม 5 ดาว)",
+      "The Prince Gallery Tokyo Kioicho, Luxury Collection",
+      "โรงแรม",
+      "ที่พัก",
+      "Ultra Luxury",
+      "Chiyoda",
+      "ST_ROPPONGI",
+      "hotel",
+      "accommodation"
+    ]
+  },
+  {
+    "chunk_id": "C_H_SUPER_HOTEL_SHINJUKU",
+    "place_id": "H_SUPER_HOTEL_SHINJUKU",
+    "title": "โรงแรม ซูเปอร์ โฮเทล ชินจูกุ คาบูกิโจ (Super Hotel Shinjuku Kabukicho) - ที่พักย่าน Shinjuku",
+    "content_th": "โรงแรม ซูเปอร์ โฮเทล ชินจูกุ คาบูกิโจ (Super Hotel Shinjuku Kabukicho): ที่พักระดับ Budget ในเขต Shinjuku โตเกียว ช่วงราคาประมาณ 2,000 - 3,500 บาท/คืน ตั้งอยู่ใกล้สถานี ST_SHINJUKU เดินประมาณ 7 นาที จุดเด่น: บ่อออนเซ็นธรรมชาติในโรงแรม มีหมอนให้เลือก 8 แบบ ราคาสุดคุ้มใจกลางชินจูกุ รายละเอียด: ที่พักราคาย่อมเยายอดนิยมใจกลางชินจูกุ มีบ่อน้ำพุร้อนออนเซ็นธรรมชาติแยกชาย-หญิงให้แช่ฟรี มีหมอนให้เลือกตามสรีระ อาหารเช้าออร์แกนิกฟรี",
+    "content_en": "Hotel Super Hotel Shinjuku Kabukicho (ซูเปอร์ โฮเทล ชินจูกุ คาบูกิโจ): A Budget accommodation in Shinjuku Ward, Tokyo. Price range: 2,000 - 3,500 บาท/คืน. Located near ST_SHINJUKU station (7 mins walk). Highlights: บ่อออนเซ็นธรรมชาติในโรงแรม มีหมอนให้เลือก 8 แบบ ราคาสุดคุ้มใจกลางชินจูกุ. Details: Excellent value budget hotel in Shinjuku featuring natural hot spring baths, custom pillow selections, and healthy buffet breakfasts.",
+    "ward": "Shinjuku",
+    "category": "Hotel & Accommodation (Budget)",
+    "nearest_station": "ST_SHINJUKU",
+    "walk_time_min": 7,
+    "tags": [
+      "ซูเปอร์ โฮเทล ชินจูกุ คาบูกิโจ",
+      "Super Hotel Shinjuku Kabukicho",
+      "โรงแรม",
+      "ที่พัก",
+      "Budget",
+      "Shinjuku",
+      "ST_SHINJUKU",
+      "hotel",
+      "accommodation"
+    ]
+  },
+  {
+    "chunk_id": "C_H_HOTEL_VILLA_FONTAINE_ROPPONGI",
+    "place_id": "H_HOTEL_VILLA_FONTAINE_ROPPONGI",
+    "title": "โรงแรม โรงแรมวิลล่า ฟอนเทน แกรนด์ รปปงงิ (Hotel Villa Fontaine Grand Tokyo-Roppongi) - ที่พักย่าน Minato",
+    "content_th": "โรงแรม โรงแรมวิลล่า ฟอนเทน แกรนด์ รปปงงิ (Hotel Villa Fontaine Grand Tokyo-Roppongi): ที่พักระดับ Mid-Scale / Business ในเขต Minato โตเกียว ช่วงราคาประมาณ 4,000 - 7,000 บาท/คืน ตั้งอยู่ใกล้สถานี ST_ROPPONGI เดินประมาณ 5 นาที จุดเด่น: เชื่อมต่อตรงสถานีรถไฟ สะดวก ปลอดภัย ใกล้ Roppongi Hills และย่านกินดื่มราตรี รายละเอียด: โรงแรมสไตล์บิสซิเนสระดับพรีเมียม เชื่อมต่อโดยตรงกับทางออกสถานีรถไฟ สะดวกสบาย เงียบสงบ ปลอดภัย ใกล้ศูนย์การค้า Roppongi Hills และพิพิธภัณฑ์ศิลปะ",
+    "content_en": "Hotel Hotel Villa Fontaine Grand Tokyo-Roppongi (โรงแรมวิลล่า ฟอนเทน แกรนด์ รปปงงิ): A Mid-Scale / Business accommodation in Minato Ward, Tokyo. Price range: 4,000 - 7,000 บาท/คืน. Located near ST_ROPPONGI station (5 mins walk). Highlights: เชื่อมต่อตรงสถานีรถไฟ สะดวก ปลอดภัย ใกล้ Roppongi Hills และย่านกินดื่มราตรี. Details: Business-chic hotel directly connected to the subway station, walking distance to Roppongi Hills and cultural landmarks.",
+    "ward": "Minato",
+    "category": "Hotel & Accommodation (Mid-Scale / Business)",
+    "nearest_station": "ST_ROPPONGI",
+    "walk_time_min": 5,
+    "tags": [
+      "โรงแรมวิลล่า ฟอนเทน แกรนด์ รปปงงิ",
+      "Hotel Villa Fontaine Grand Tokyo-Roppongi",
+      "โรงแรม",
+      "ที่พัก",
+      "Mid-Scale / Business",
+      "Minato",
+      "ST_ROPPONGI",
+      "hotel",
+      "accommodation"
     ]
   }
 ]
