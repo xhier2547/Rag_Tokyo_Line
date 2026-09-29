@@ -1,6 +1,7 @@
 # Implementation & System Architecture Plan: Tokyo Smart Transit & Tourism Hybrid Graph RAG
 
-**เป้าหมายของระบบ:** พัฒนาระบบแนะนำเส้นทาง สถานที่ท่องเที่ยว และการเดินทางในกรุงโตเกียว (Tokyo) โดยบูรณาการ **Dense RAG (FAISS/ChromaDB)**, **Sparse Search (BM25)**, **Knowledge Graph (Neo4j)**, **Local LLM (Ollama 3B/4B/8B)** และ **API LLM (Gemini API)** มุ่งสู่ระดับคุณภาพสูงสุด **Level 5 (Advanced / Excellent)** ตามเกณฑ์ใน [rubic.md](file:///c:/Users/wator/Documents/Y4/SOCIAL/Final_01/rubic.md)
+**เป้าหมายของระบบ:** พัฒนาระบบแนะนำเส้นทาง สถานที่ท่องเที่ยว และการเดินทางในกรุงโตเกียว (Tokyo) โดยบูรณาการ **Dense RAG (FAISS/ChromaDB)**, **Sparse Search (BM25)**, **Knowledge Graph (Neo4j)**, **Local LLM (Ollama 3B/4B/8B)** และ **API LLM (Gemini API)** มุ่งสู่ระดับคุณภาพสูงสุด **Level 5 (Advanced / Excellent)** ตามเกณฑ์ใน [rubic.md](./rubic.md)
+
 
 ---
 

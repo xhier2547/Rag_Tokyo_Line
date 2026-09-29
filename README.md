@@ -2,7 +2,7 @@
 
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Architecture](https://img.shields.io/badge/Architecture-Hybrid%20Graph%20RAG-orange.svg)](#2-system-architecture)
-[![Evaluation](https://img.shields.io/badge/Rubric%20Level-Level%205%20(Excellent)-green.svg)](file:///c:/Users/wator/Documents/Y4/SOCIAL/Final_01/evaluation_report.md)
+[![Evaluation](https://img.shields.io/badge/Rubric%20Level-Level%205%20(Excellent)-green.svg)](./evaluation_report.md)
 [![Tests](https://img.shields.io/badge/Automated%20Tests-Passing-brightgreen.svg)](#7-automated-testing)
 
 ระบบแนะนำการเดินทาง เส้นทางรถไฟ และสถานที่ท่องเที่ยวในกรุงโตเกียว (Tokyo Metropolitan Area) โดยบูรณาการ **Dense Vector Retrieval (FAISS & ChromaDB)**, **Sparse Keyword Search (BM25)**, **Knowledge Graph Database (Neo4j / NetworkX Fallback)**, **Local LLM (Ollama 3B/4B)** และ **Cloud API LLM (Google Gemini)** ได้รับการออกแบบตามเกณฑ์ **Rubric Level 5 (100 คะแนนเต็ม)**
@@ -13,7 +13,8 @@
 
 | ด้านการประเมิน | คะแนน | การนำไปประยุกต์ใช้งานในระบบ |
 | :---| :---: | :---|
-| **1. Data & Knowledge Base** | 10 | คัดกรองและสกัดข้อมูล POI จาก [JTA Sightseeing Database](file:///c:/Users/wator/Documents/Y4/SOCIAL/Final_01/data/data_sources.md) และโครงข่ายรถไฟโตเกียว (JR Yamanote, Tokyo Metro, Toei) ทำ Data Cleaning, Chunking และบันทึก Metadata ละเอียด |
+| **1. Data & Knowledge Base** | 10 | คัดกรองและสกัดข้อมูล POI จาก [แหล่งข้อมูลทางการ (Data Provenance)](./data/data_provenance.md) และโครงข่ายรถไฟโตเกียว (JR Yamanote, Tokyo Metro, Toei) ทำ Data Cleaning, Chunking และบันทึก Metadata ละเอียด |
+
 | **2. Dense RAG** | 15 | พัฒนาทั้ง FAISS (Cosine Similarity) และ ChromaDB (Native Metadata Filtering) พร้อมการทดลองเปรียบเทียบหลาย Embedding Model |
 | **3. Graph RAG** | 15 | ออกแบบ Schema โครงข่าย Node `(:Place)`, `(:Station)`, `(:Line)` และคำนวณ Shortest Path & Travel Duration แบบ Multi-hop พิสูจน์จุดเด่นที่ Dense ทำไม่ได้ |
 | **4. Hybrid RAG (หัวใจสำคัญ)** | 20 | **Query Intent Router** จำแนกเจตนาคำถาม, ผสานผลลัพธ์ด้วย **Reciprocal Rank Fusion (RRF)** และทำ **Cross-Modal Semantic Re-ranking** Top-3 |
@@ -231,7 +232,8 @@ python evaluate.py --all --mode gemini
 python evaluate.py --generate-report
 ```
 
-*ดูรายงานผลการทดลองฉบับเต็มได้ที่:* [evaluation_report.md](file:///c:/Users/wator/Documents/Y4/SOCIAL/Final_01/evaluation_report.md)
+*ดูรายงานผลการทดลองฉบับเต็มได้ที่:* [evaluation_report.md](./evaluation_report.md)
+
 
 ---
 
