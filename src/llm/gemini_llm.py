@@ -124,13 +124,28 @@ class GeminiLLMClient:
                 system_instruction=system_prompt or SYSTEM_PROMPT
             )
 
-            response = self._client.models.generate_content(
-                model=self.model_name,
-                contents=prompt,
-                config=config
-            )
-            latency = time.time() - start_time
+            actual_model = self.model_name
+            try:
+                response = self._client.models.generate_content(
+                    model=actual_model,
+                    contents=prompt,
+                    config=config
+                )
+            except Exception as api_err:
+                # ตรวจสอบว่าเป็นกรณี Quota Exceeded (429) หรือไม่ หากใช่ให้ Fallback ไปโมเดล Lite อัตโนมัติ
+                err_str = str(api_err)
+                if ("429" in err_str or "RESOURCE_EXHAUSTED" in err_str) and actual_model != "gemini-2.5-flash-lite":
+                    logger.warning(f"[GeminiLLM] โมเดล {actual_model} ติด Quota (429) สลับไปใช้ 'gemini-2.5-flash-lite' อัตโนมัติ")
+                    actual_model = "gemini-2.5-flash-lite"
+                    response = self._client.models.generate_content(
+                        model=actual_model,
+                        contents=prompt,
+                        config=config
+                    )
+                else:
+                    raise api_err
 
+            latency = time.time() - start_time
             response_text = response.text.strip() if response.text else ""
             
             # ดึงข้อมูล Token Usage
@@ -146,7 +161,7 @@ class GeminiLLMClient:
 
             return LLMResponse(
                 text=response_text,
-                model=self.model_name,
+                model=actual_model,
                 latency_sec=round(latency, 3),
                 prompt_tokens=prompt_tokens,
                 completion_tokens=candidate_tokens,

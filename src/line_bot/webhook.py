@@ -63,16 +63,21 @@ def get_rag_service() -> TokyoRAGService:
 
 
 def build_quick_replies() -> QuickReply:
-    """สร้างปุ่ม Quick Reply ให้ผู้ใช้กดถามต่อได้สะดวกรวดเร็ว"""
+    """สร้างปุ่ม Quick Reply ให้ผู้ใช้กดถามต่อได้สะดวกรวดเร็ว (จำกัดความยาว label <= 20 ตัวอักษรตามข้อกำหนดของ LINE)"""
+    raw_buttons = [
+        ("🗼 ที่เที่ยวฮิต", "แนะนำ 5 สถานที่ท่องเที่ยวยอดนิยมใน Tokyo"),
+        ("⛩️ วัด Senso-ji", "วัด Sensō-ji มีประวัติและความสำคัญอย่างไร?"),
+        ("🚆 รถไฟ Shinjuku", "เดินทางจาก Shinjuku ไป Shibuya ใช้สายอะไรและกี่นาที?"),
+        ("🍣 ตลาดปลา Tsukiji", "Tsukiji Outer Market มีอะไรน่าสนใจ และไปยังไง?"),
+        ("🎌 Akihabara Anime", "Akihabara มีสถานที่อะไรที่เหมาะกับแฟน Anime?"),
+        ("🗺️ ทริป 1 วัน", "ช่วยจัดทริป Tokyo 1 วันสำหรับคนมาครั้งแรก")
+    ]
     items = [
-        QuickReplyButton(action=MessageAction(label="🗼 ที่เที่ยวฮิต", text="แนะนำ 5 สถานที่ท่องเที่ยวยอดนิยมใน Tokyo")),
-        QuickReplyButton(action=MessageAction(label="⛩️ วัด Senso-ji", text="วัด Sensō-ji มีประวัติและความสำคัญอย่างไร?")),
-        QuickReplyButton(action=MessageAction(label="🚆 Shinjuku ไป Shibuya", text="เดินทางจาก Shinjuku ไป Shibuya ใช้สายอะไรและกี่นาที?")),
-        QuickReplyButton(action=MessageAction(label="🍣 ตลาดปลา Tsukiji", text="Tsukiji Outer Market มีอะไรน่าสนใจ และไปยังไง?")),
-        QuickReplyButton(action=MessageAction(label="🎌 Akihabara Anime", text="Akihabara มีสถานที่อะไรที่เหมาะกับแฟน Anime?")),
-        QuickReplyButton(action=MessageAction(label="🗺️ ทริป 1 วัน", text="ช่วยจัดทริป Tokyo 1 วันสำหรับคนมาครั้งแรก"))
+        QuickReplyButton(action=MessageAction(label=label[:20], text=text))
+        for label, text in raw_buttons
     ]
     return QuickReply(items=items)
+
 
 
 @app.on_event("startup")
