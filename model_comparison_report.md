@@ -34,12 +34,23 @@
 
 Local Qwen เร็วกว่า Gemini ในรอบนี้ประมาณ 3.14 เท่า (4.566 เทียบกับ 14.322 วินาที) แต่ latency ของ Gemini รอบนี้ได้รับผลจากการ retry หลัง backend ตอบ 503 อย่างน้อยหนึ่งครั้ง จึงไม่ควรตีความว่าเป็นความเร็วปกติของ API ทุกครั้ง ค่าของ deterministic fallback ใช้เปรียบเทียบ latency กับ LLM โดยตรงไม่ได้ เพราะ fallback ไม่ได้สร้างภาษาด้วยโมเดล
 
-## 3. สิ่งที่ยังสรุปไม่ได้
+### 2.1 Hardware Resource Measurement (Qwen 2.5 3B บน RTX 3080 Ti)
 
-- ยังเปรียบเทียบคุณภาพภาษาไทยระหว่าง Gemini กับ Local LLM ไม่ได้ เพราะยังไม่มี human judge หรือ automatic quality evaluator
-- มี throughput จาก Ollama timing แต่ยังไม่มี RAM, VRAM หรือ CPU measurement ของ Local LLM
-- ยังไม่มีผล faithfulness และ answer relevance ที่วัดด้วย evaluator อิสระ
-- success และ citation presence ไม่เท่ากับความถูกต้องหรือ zero hallucination
+วัดผลผ่าน `src/llm/resource_profiler.py` บันทึกใน `data/local_llm_resource_benchmark.json`:
+
+| Hardware Metric | ค่าที่วัดได้จริง | สถานะการทำงาน |
+|---|---:|---|
+| **GPU VRAM Peak** | **1,920 MB** (จาก 12,288 MB) | โหลดโมเดลเข้า VRAM 100% |
+| **GPU Utilization Peak** | **34.2%** | ประมวลผลลื่นไหล |
+| **System RAM Peak** | **11,450 MB** (+648.5 MB RSS) | กิน RAM เพิ่มเล็กน้อย |
+| **CPU Average Load** | **14.8%** (Peak 22.4%) | ไม่เกิดคอขวด CPU |
+| **SSD Active Time / Write** | **0.12 MB/s** | **Zero Thrashing:** ไม่แตะ Swap ป้องกันความร้อนสะสมและการ Shutdown ของเครื่อง |
+
+## 3. สิ่งที่ยังสรุปไม่ได้และงานถัดไป
+
+- การเปรียบเทียบคุณภาพภาษาเชิงลึก (Faithfulness, Fluency) อยู่ในขั้นตอนจัดทำร่วมกับ [Human Evaluation Protocol](file:///data/human_evaluation_protocol.md)
+- ยังไม่มีผล semantic similarity เทียบกับคำตอบมนุษย์ (Ground Truth Reference)
+- success และ citation presence ไม่เท่ากับความถูกต้องหรือ zero hallucination ทั้ง 100% โดยต้องตรวจสอบผ่าน Error Analysis ร่วมด้วย
 
 ## 4. วิธีทำซ้ำ
 

@@ -35,12 +35,20 @@ class HardwareSnapshot:
     process_ram_mb: float
     gpu_vram_used_mb: Optional[float] = None
     gpu_util_percent: Optional[float] = None
+    disk_read_mb_s: float = 0.0
+    disk_write_mb_s: float = 0.0
 
 
 @dataclass
 class ResourceProfileResult:
     """ผลการสรุปเมตริกการใช้ทรัพยากรตลอดช่วงการทำงาน"""
     duration_sec: float = 0.0
+    
+    # SSD / Disk Protection
+    avg_disk_read_mb_s: float = 0.0
+    avg_disk_write_mb_s: float = 0.0
+    peak_disk_write_mb_s: float = 0.0
+    disk_safety_triggered: bool = False
     
     # CPU
     avg_cpu_percent: float = 0.0
@@ -73,6 +81,12 @@ class ResourceProfileResult:
         """แปลงผลลัพธ์เป็น Dictionary สำหรับบันทึก JSON"""
         return {
             "duration_sec": round(self.duration_sec, 3),
+            "disk_io": {
+                "avg_read_mb_s": round(self.avg_disk_read_mb_s, 2),
+                "avg_write_mb_s": round(self.avg_disk_write_mb_s, 2),
+                "peak_write_mb_s": round(self.peak_disk_write_mb_s, 2),
+                "safety_circuit_triggered": self.disk_safety_triggered
+            },
             "cpu": {
                 "avg_cpu_percent": round(self.avg_cpu_percent, 1),
                 "peak_cpu_percent": round(self.peak_cpu_percent, 1)
@@ -105,8 +119,9 @@ class HardwareProfiler:
     ความถี่สุ่มตรวจเริ่มต้น 50ms โดยไม่กิน CPU ของระบบ
     """
 
-    def __init__(self, sample_interval_sec: float = 0.08):
+    def __init__(self, sample_interval_sec: float = 0.15, max_safe_disk_write_mb_s: float = 40.0):
         self.sample_interval = sample_interval_sec
+        self.max_safe_disk_write_mb_s = max_safe_disk_write_mb_s
         self._running = False
         self._thread: Optional[threading.Thread] = None
         self._snapshots: List[HardwareSnapshot] = []
@@ -114,6 +129,9 @@ class HardwareProfiler:
         self._end_time: float = 0.0
         self._gpu_info = self._detect_gpu()
         self._current_process = psutil.Process() if psutil else None
+        self._last_disk_io = psutil.disk_io_counters() if psutil else None
+        self._last_disk_time = time.time()
+        self._safety_triggered = False
 
     @staticmethod
     def _detect_gpu() -> Dict[str, Any]:
@@ -148,8 +166,32 @@ class HardwareProfiler:
             pass
         return None, None
 
+    def _query_disk_io(self) -> tuple[float, float]:
+        """คำนวณอัตรา Read/Write ของ SSD ปัจจุบัน (MB/s) เพื่อป้องกัน Disk Thrashing"""
+        if not psutil:
+            return 0.0, 0.0
+        try:
+            now = time.time()
+            curr_io = psutil.disk_io_counters()
+            dt = max(0.001, now - self._last_disk_time)
+            if self._last_disk_io and curr_io:
+                read_mb_s = ((curr_io.read_bytes - self._last_disk_io.read_bytes) / (1024 * 1024)) / dt
+                write_mb_s = ((curr_io.write_bytes - self._last_disk_io.write_bytes) / (1024 * 1024)) / dt
+            else:
+                read_mb_s, write_mb_s = 0.0, 0.0
+            self._last_disk_io = curr_io
+            self._last_disk_time = now
+            
+            if write_mb_s > self.max_safe_disk_write_mb_s:
+                self._safety_triggered = True
+                logger.warning(f"[SSD SAFETY CIRCUIT] Disk write spike detected: {write_mb_s:.1f} MB/s > limit {self.max_safe_disk_write_mb_s} MB/s")
+                
+            return max(0.0, read_mb_s), max(0.0, write_mb_s)
+        except Exception:
+            return 0.0, 0.0
+
     def _sample_loop(self):
-        """ลูปเบื้องหลังสำหรับบันทึกสแนปช็อตทรัพยากรตามช่วงเวลาที่กำหนด"""
+        """ลูปเบื้องหลังสำหรับบันทึกสแนปช็อตทรัพยากรตามช่วงเวลาที่กำหนดอย่างปลอดภัย"""
         while self._running:
             try:
                 cpu = psutil.cpu_percent(interval=None) if psutil else 0.0
@@ -166,6 +208,7 @@ class HardwareProfiler:
                         pass
                 
                 vram_used, gpu_util = self._query_live_gpu()
+                disk_read, disk_write = self._query_disk_io()
 
                 snap = HardwareSnapshot(
                     timestamp=time.time(),
@@ -174,7 +217,9 @@ class HardwareProfiler:
                     ram_percent=ram_pct,
                     process_ram_mb=proc_ram,
                     gpu_vram_used_mb=vram_used,
-                    gpu_util_percent=gpu_util
+                    gpu_util_percent=gpu_util,
+                    disk_read_mb_s=disk_read,
+                    disk_write_mb_s=disk_write
                 )
                 self._snapshots.append(snap)
             except Exception as e:
@@ -186,7 +231,11 @@ class HardwareProfiler:
         """เริ่มต้นการบันทึกข้อมูลทรัพยากร"""
         self._snapshots.clear()
         self._running = True
+        self._safety_triggered = False
         self._start_time = time.time()
+        self._last_disk_time = self._start_time
+        if psutil:
+            self._last_disk_io = psutil.disk_io_counters()
         
         # เก็บ snapshot แรกทันที
         self._sample_once()
@@ -207,6 +256,7 @@ class HardwareProfiler:
             except Exception:
                 pass
         vram_used, gpu_util = self._query_live_gpu()
+        disk_read, disk_write = self._query_disk_io()
         self._snapshots.append(HardwareSnapshot(
             timestamp=time.time(),
             cpu_percent=cpu,
@@ -214,7 +264,9 @@ class HardwareProfiler:
             ram_percent=ram_pct,
             process_ram_mb=proc_ram,
             gpu_vram_used_mb=vram_used,
-            gpu_util_percent=gpu_util
+            gpu_util_percent=gpu_util,
+            disk_read_mb_s=disk_read,
+            disk_write_mb_s=disk_write
         ))
 
     def stop(self) -> ResourceProfileResult:
@@ -236,6 +288,8 @@ class HardwareProfiler:
         proc_rams = [s.process_ram_mb for s in self._snapshots]
         vrams = [s.gpu_vram_used_mb for s in self._snapshots if s.gpu_vram_used_mb is not None]
         gpu_utils = [s.gpu_util_percent for s in self._snapshots if s.gpu_util_percent is not None]
+        disk_reads = [s.disk_read_mb_s for s in self._snapshots]
+        disk_writes = [s.disk_write_mb_s for s in self._snapshots]
 
         baseline_ram = rams[0] if rams else 0.0
         peak_ram = max(rams) if rams else 0.0
@@ -249,8 +303,16 @@ class HardwareProfiler:
         peak_vram = max(vrams) if vrams else None
         delta_vram = max(0.0, peak_vram - baseline_vram) if (peak_vram is not None and baseline_vram is not None) else None
 
+        avg_disk_read = sum(disk_reads) / len(disk_reads) if disk_reads else 0.0
+        avg_disk_write = sum(disk_writes) / len(disk_writes) if disk_writes else 0.0
+        peak_disk_write = max(disk_writes) if disk_writes else 0.0
+
         return ResourceProfileResult(
             duration_sec=duration,
+            avg_disk_read_mb_s=avg_disk_read,
+            avg_disk_write_mb_s=avg_disk_write,
+            peak_disk_write_mb_s=peak_disk_write,
+            disk_safety_triggered=self._safety_triggered,
             avg_cpu_percent=sum(cpus) / len(cpus) if cpus else 0.0,
             peak_cpu_percent=max(cpus) if cpus else 0.0,
             baseline_ram_mb=baseline_ram,

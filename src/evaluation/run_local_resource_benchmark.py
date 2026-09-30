@@ -116,7 +116,12 @@ def run_benchmark() -> Dict[str, Any]:
             "hardware_profile": hw
         }
         results.append(record)
-        time.sleep(0.3)
+        
+        # 3. Safe Cooldown Throttle: ป้องกัน SSD 100% และ CPU 100% โดยการพักระบบให้ I/O และความร้อนลดลง
+        time.sleep(1.5)
+        if hw.get("disk_io", {}).get("safety_circuit_triggered"):
+            print("   ⚠️ SSD write spike detected; cooling down for 3 seconds...")
+            time.sleep(3.0)
 
     summary = {
         "model": client.model_name,

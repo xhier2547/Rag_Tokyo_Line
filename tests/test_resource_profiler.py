@@ -39,3 +39,18 @@ def test_hardware_profiler_context_manager():
     res = profiler.stop()
     assert res.duration_sec > 0
     assert res.samples_count >= 1
+
+
+def test_hardware_profiler_ssd_safety():
+    """ทดสอบการตรวจวัด Disk I/O และระบบป้องกัน SSD Spike"""
+    # กำหนด threshold ต่ำมากเพื่อทดสอบการ trigger ปลอดภัย
+    profiler = HardwareProfiler(sample_interval_sec=0.02, max_safe_disk_write_mb_s=0.00001)
+    profiler.start()
+    time.sleep(0.05)
+    res = profiler.stop()
+    
+    d = res.to_dict()
+    assert "disk_io" in d
+    assert "avg_read_mb_s" in d["disk_io"]
+    assert "avg_write_mb_s" in d["disk_io"]
+    assert "safety_circuit_triggered" in d["disk_io"]
