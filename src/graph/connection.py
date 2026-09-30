@@ -56,11 +56,8 @@ class Neo4jConnection:
         """ดึง instance ของ Driver หากยังไม่มีจะทำการสร้างใหม่"""
         if cls._driver is not None:
             return cls._driver
-        if cls._checked:
-            return None
 
-        cls._checked = True
-        if not is_neo4j_port_open(timeout=0.2):
+        if not is_neo4j_port_open(timeout=0.1):
             return None
 
         try:
