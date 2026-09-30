@@ -18,8 +18,9 @@ import re
 import logging
 from typing import Optional
 from dotenv import load_dotenv
+from pydantic import BaseModel
 from fastapi import FastAPI, Request, Header, HTTPException, BackgroundTasks
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, HTMLResponse
 
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
@@ -318,4 +319,96 @@ if handler:
                 )
             except Exception:
                 pass
+
+
+# ==========================================
+# Web Application & Interactive Demo Endpoints
+# ==========================================
+
+class WebChatRequest(BaseModel):
+    message: str
+    session_id: Optional[str] = "web_session_default"
+
+
+class WebChatResetRequest(BaseModel):
+    session_id: Optional[str] = "web_session_default"
+
+
+@app.get("/", response_class=HTMLResponse)
+@app.get("/demo", response_class=HTMLResponse)
+async def serve_demo_web_app():
+    """เสิร์ฟหน้าเว็บแอปพลิเคชัน Interactive Web Chat (React + Modern Japanese Clean)"""
+    web_file_path = os.path.join(os.path.dirname(__file__), "..", "web", "index.html")
+    if os.path.exists(web_file_path):
+        with open(web_file_path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read())
+    return HTMLResponse(content="<h1>Tokyo RAG Web UI is loading... Please ensure src/web/index.html exists.</h1>")
+
+
+@app.post("/api/chat")
+async def handle_web_chat(req: WebChatRequest):
+    """
+    API สำหรับ Web Chat:
+    - รองรับ Multi-turn Conversation และ Query Contextualization
+    - ดึงข้อมูลผ่าน Hybrid RAG (Graph + Vector + BM25)
+    - ส่งกลับผลลัพธ์คำตอบ, เมตริก Telemetry (Intent, Latency, Graph Path, Citations) และการ์ดสถานที่จริง
+    """
+    query = req.message.strip()
+    session_id = req.session_id or "web_session_default"
+
+    if not query:
+        raise HTTPException(status_code=400, detail="Message cannot be empty")
+
+    session_mgr = get_session_manager()
+    rag = get_rag_service()
+
+    # 1. จัดการคำถามต่อเนื่อง (Query Contextualization)
+    resolved_query, hint = session_mgr.resolve_contextual_query(
+        user_id=session_id,
+        current_query=query
+    )
+
+    # 2. ค้นคืนข้อมูลผ่าน RAG Service
+    response = rag.answer_query(resolved_query, mode="gemini")
+
+    # 3. ตรวจจับ Entity สถานที่จริงเพื่อแสดงการ์ดภาพ
+    matched_entities = find_matched_entities(
+        text=response.answer,
+        citations=response.citations,
+        query=resolved_query
+    )
+
+    # 4. บันทึก Session
+    session_mgr.update_session(
+        user_id=session_id,
+        query=query,
+        resolved_query=resolved_query,
+        answer=response.answer,
+        matched_entities=matched_entities
+    )
+
+    return {
+        "status": "success",
+        "query": query,
+        "resolved_query": resolved_query,
+        "answer": response.answer,
+        "intent": response.intent,
+        "citations": response.citations,
+        "latency_sec": response.latency_sec,
+        "mode_used": response.mode_used,
+        "model_name": response.model_name,
+        "graph_context": response.graph_context,
+        "cards": matched_entities
+    }
+
+
+@app.post("/api/chat/reset")
+async def reset_web_session(req: WebChatResetRequest):
+    """ล้างประวัติการสนทนาของ Session"""
+    session_id = req.session_id or "web_session_default"
+    session_mgr = get_session_manager()
+    if session_id in session_mgr.sessions:
+        del session_mgr.sessions[session_id]
+    return {"status": "success", "message": f"Session '{session_id}' cleared"}
+
 

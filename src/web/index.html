@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tokyo RAG - Smart Transit & Tourism Concierge</title>
+  <meta name="description" content="ระบบผู้ช่วยอัจฉริยะแนะนำการท่องเที่ยวและการเดินทางในโตเกียวด้วย Hybrid Graph RAG">
+  <!-- Google Fonts: Inter, Noto Sans JP, Noto Sans Thai -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- React 18 & Babel Standalone CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Noto Sans Thai"', '"Inter"', '"Noto Sans JP"', 'sans-serif'],
+          },
+          colors: {
+            vermilion: {
+              50: '#FDF2F2',
+              100: '#FDE8E8',
+              500: '#D93829',
+              600: '#C52B1D',
+              700: '#9B1C10',
+            },
+            washi: '#F8F9FA',
+            sumi: '#181A1B',
+            tatami: '#EFEFEA'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom Scrollbar & Japanese Pattern Watermark */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.02);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D9382933;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #D9382988;
+    }
+    .seigaiha-pattern {
+      background-color: #F8F9FA;
+      background-image: radial-gradient(#D938290D 0.75px, transparent 0.75px), radial-gradient(#181A1B0D 0.75px, #F8F9FA 0.75px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(230, 230, 235, 0.8);
+    }
+  </style>
+</head>
+<body class="seigaiha-pattern text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+  <div id="root" class="flex-1 flex flex-col"></div>
+
+  <!-- React Application Logic -->
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    function App() {
+      const [messages, setMessages] = useState([
+        {
+          id: 'welcome',
+          sender: 'bot',
+          text: 'こんにちは! ยินดีต้อนรับสู่ **Tokyo Smart Transit & Tourism Concierge** 🗼⛩️\n\nผมคือผู้ช่วยอัจฉริยะผสานพลัง **Hybrid Graph RAG** และ **Knowledge Graph (Neo4j)** สามารถสอบถามข้อมูลสถานที่ท่องเที่ยว เส้นทางรถไฟใต้ดิน หรือคำนวณเส้นทางต่อรถในโตเกียวได้เลยครับ',
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          meta: null,
+          cards: []
+        }
+      ]);
+      const [inputQuery, setInputQuery] = useState('');
+      const [isLoading, setIsLoading] = useState(false);
+      const [latestMeta, setLatestMeta] = useState(null);
+      const [activeTab, setActiveTab] = useState('chat'); // For mobile: 'chat' | 'inspector'
+      const messagesEndRef = useRef(null);
+
+      const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      };
+
+      useEffect(() => {
+        scrollToBottom();
+      }, [messages, isLoading]);
+
+      // Quick Suggestions
+      const quickSuggestions = [
+        "⛩️ แนะนำวัดเซ็นโซจิ",
+        "🗼 ไฮไลต์โตเกียวทาวเวอร์",
+        "🚆 จากชินจูกุไปวัดเซ็นโซจิ",
+        "ฉันอยู่ที่อิเคะโบะคุโระ ต้องการไปที่นี่ ต้องไปอย่างไร",
+        "🍣 ของกินใกล้ตลาดปลาสึกิจิ",
+        "🏨 โรงแรมใกล้สถานี Shibuya"
+      ];
+
+      const handleSend = async (textToSend) => {
+        const query = (textToSend || inputQuery).trim();
+        if (!query || isLoading) return;
+
+        const userMsg = {
+          id: Date.now().toString(),
+          sender: 'user',
+          text: query,
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        };
+
+        setMessages((prev) => [...prev, userMsg]);
+        setInputQuery('');
+        setIsLoading(true);
+
+        try {
+          const res = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: query, session_id: 'web_session_demo' })
+          });
+
+          if (!res.ok) {
+            throw new Error(`HTTP error ${res.status}`);
+          }
+
+          const data = await res.json();
+          const botMsg = {
+            id: (Date.now() + 1).toString(),
+            sender: 'bot',
+            text: data.answer,
+            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            meta: {
+              intent: data.intent,
+              latency: data.latency_sec,
+              model: data.model_name,
+              mode: data.mode_used,
+              citations: data.citations || [],
+              graph_context: data.graph_context || '',
+              resolved_query: data.resolved_query || query
+            },
+            cards: data.cards || []
+          };
+
+          setMessages((prev) => [...prev, botMsg]);
+          setLatestMeta(botMsg.meta);
+        } catch (err) {
+          console.error(err);
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: (Date.now() + 1).toString(),
+              sender: 'bot',
+              text: 'ขออภัยครับ เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์ RAG กรุณาลองใหม่อีกครั้ง',
+              timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            }
+          ]);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+
+      const handleResetSession = async () => {
+        try {
+          await fetch('/api/chat/reset', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ session_id: 'web_session_demo' })
+          });
+          setMessages([
+            {
+              id: Date.now().toString(),
+              sender: 'bot',
+              text: 'ล้างประวัติการสนทนาในหน่วยความจำเรียบร้อยแล้วครับ 🌸 เริ่มต้นคำถามใหม่ได้ทันที',
+              timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            }
+          ]);
+          setLatestMeta(null);
+        } catch (e) {
+          console.error(e);
+        }
+      };
+
+      return (
+        <div className="flex flex-col h-screen max-w-7xl mx-auto w-full px-2 sm:px-4 py-2 sm:py-3">
+          {/* Header */}
+          <header className="glass-card rounded-2xl px-5 py-3.5 mb-3 flex items-center justify-between shadow-sm border border-slate-200/80">
+            <div className="flex items-center space-x-3.5">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-vermilion-500 to-vermilion-700 flex items-center justify-center text-white shadow-md shadow-vermilion-500/20 text-lg">
+                ⛩️
+              </div>
+              <div>
+                <div className="flex items-center space-x-2">
+                  <h1 className="font-bold text-slate-800 text-base sm:text-lg tracking-tight">Tokyo Transit & Tourism AI</h1>
+                  <span className="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded-full bg-vermilion-50 text-vermilion-600 border border-vermilion-200">
+                    Hybrid Graph RAG
+                  </span>
+                </div>
+                <p className="text-xs text-slate-500 hidden sm:block">
+                  Zero-Hallucination Tokyo Metro & Attraction Intelligence Concierge
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <button 
+                onClick={handleResetSession}
+                className="text-xs text-slate-600 hover:text-vermilion-600 px-3 py-1.5 rounded-lg border border-slate-200 hover:border-vermilion-200 bg-white/80 transition-all flex items-center space-x-1"
+                title="ล้างบริบทคำถามเดิมใน Session"
+              >
+                <span>🔄</span>
+                <span className="hidden sm:inline">ล้าง Session</span>
+              </button>
+              <div className="flex items-center space-x-1 text-xs text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span className="font-medium">Online</span>
+              </div>
+            </div>
+          </header>
+
+          {/* Main Dual-View Layout */}
+          <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-3 min-h-0">
+            {/* Left Column: Chat Conversation Panel (7 Cols) */}
+            <section className="lg:col-span-7 flex flex-col glass-card rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden min-h-0">
+              {/* Chat Messages Scroll Area */}
+              <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4">
+                {messages.map((msg) => (
+                  <div key={msg.id} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    {msg.sender === 'bot' && (
+                      <div className="w-8 h-8 rounded-full bg-slate-100 border border-slate-300/80 flex items-center justify-center text-sm mr-2.5 mt-0.5 flex-shrink-0 shadow-sm">
+                        🌸
+                      </div>
+                    )}
+                    <div className={`max-w-[85%] sm:max-w-[78%] rounded-2xl px-4 py-3 text-sm shadow-sm ${
+                      msg.sender === 'user' 
+                        ? 'bg-vermilion-500 text-white rounded-tr-none' 
+                        : 'bg-white border border-slate-200/90 text-slate-800 rounded-tl-none'
+                    }`}>
+                      <div className="whitespace-pre-line leading-relaxed">
+                        {msg.text}
+                      </div>
+
+                      {/* Flex Cards Carousel (if any) */}
+                      {msg.cards && msg.cards.length > 0 && (
+                        <div className="mt-3.5 pt-3 border-t border-slate-100">
+                          <p className="text-[11px] font-semibold text-slate-500 mb-2 flex items-center space-x-1">
+                            <span>📸</span>
+                            <span>สถานที่จริงที่เกี่ยวข้อง:</span>
+                          </p>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                            {msg.cards.map((c, i) => (
+                              <div key={i} className="group rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white overflow-hidden shadow-xs hover:shadow-md transition-all">
+                                <div className="h-28 w-full overflow-hidden bg-slate-200 relative">
+                                  <img 
+                                    src={c.image_url} 
+                                    alt={c.name_th} 
+                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                    onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=600&q=80'; }}
+                                  />
+                                  <span className="absolute bottom-1.5 left-1.5 text-[10px] bg-black/60 text-white px-2 py-0.5 rounded backdrop-blur-sm">
+                                    {c.category}
+                                  </span>
+                                </div>
+                                <div className="p-2.5">
+                                  <h4 className="font-bold text-slate-800 text-xs truncate">{c.name_th}</h4>
+                                  <p className="text-[10px] text-slate-500 truncate">{c.name_en}</p>
+                                  <div className="mt-1.5 text-[11px] text-slate-600 flex items-center justify-between">
+                                    <span>🚆 {c.nearest_station}</span>
+                                    <span className="text-vermilion-600 font-semibold">{c.walk_time_min} นาที</span>
+                                  </div>
+                                  <button
+                                    onClick={() => handleSend(`สถานีใกล้เคียงและวิธีเดินทางไป ${c.name_th}`)}
+                                    className="w-full mt-2 py-1 px-2 text-[10px] font-medium text-vermilion-600 hover:text-white bg-vermilion-50 hover:bg-vermilion-500 rounded border border-vermilion-200 hover:border-vermilion-500 transition-colors"
+                                  >
+                                    🚆 ขอเส้นทางไปที่นี่
+                                  </button>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      <div className={`mt-1.5 text-[10px] text-right ${msg.sender === 'user' ? 'text-vermilion-100' : 'text-slate-400'}`}>
+                        {msg.timestamp}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+                {isLoading && (
+                  <div className="flex justify-start items-center space-x-2">
+                    <div className="w-8 h-8 rounded-full bg-slate-100 border border-slate-300 flex items-center justify-center text-sm">
+                      🌸
+                    </div>
+                    <div className="bg-white border border-slate-200 rounded-2xl rounded-tl-none px-4 py-3 shadow-sm flex items-center space-x-2">
+                      <span className="w-2 h-2 rounded-full bg-vermilion-500 animate-bounce"></span>
+                      <span className="w-2 h-2 rounded-full bg-vermilion-500 animate-bounce [animation-delay:0.2s]"></span>
+                      <span className="w-2 h-2 rounded-full bg-vermilion-500 animate-bounce [animation-delay:0.4s]"></span>
+                      <span className="text-xs text-slate-500 ml-1 font-medium">กำลังคำนวณเส้นทางและค้นคืนข้อมูล...</span>
+                    </div>
+                  </div>
+                )}
+                <div ref={messagesEndRef} />
+              </div>
+
+              {/* Quick Suggestion Pills */}
+              <div className="px-4 py-2 bg-slate-50/70 border-t border-slate-100 flex items-center space-x-1.5 overflow-x-auto text-xs whitespace-nowrap">
+                <span className="text-slate-400 text-[11px] font-medium mr-1">💡 คำถามด่วน:</span>
+                {quickSuggestions.map((q, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleSend(q)}
+                    disabled={isLoading}
+                    className="px-2.5 py-1 bg-white hover:bg-vermilion-50 text-slate-700 hover:text-vermilion-600 rounded-full border border-slate-200/80 hover:border-vermilion-200 transition-all text-[11px] shadow-2xs disabled:opacity-50"
+                  >
+                    {q}
+                  </button>
+                ))}
+              </div>
+
+              {/* Input Bar */}
+              <form 
+                onSubmit={(e) => { e.preventDefault(); handleSend(); }} 
+                className="p-3 bg-white border-t border-slate-200/80 flex items-center space-x-2"
+              >
+                <input
+                  type="text"
+                  value={inputQuery}
+                  onChange={(e) => setInputQuery(e.target.value)}
+                  placeholder="พิมพ์คำถามท่องเที่ยว หรือเส้นทาง เช่น 'ฉันอยู่ที่อิเคะโบะคุโระ ต้องการไปที่นี่'..."
+                  disabled={isLoading}
+                  className="flex-1 bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-vermilion-500 focus:ring-1 focus:ring-vermilion-500 transition-all"
+                />
+                <button
+                  type="submit"
+                  disabled={isLoading || !inputQuery.trim()}
+                  className="bg-vermilion-500 hover:bg-vermilion-600 disabled:bg-slate-300 text-white font-medium px-4 py-2.5 rounded-xl text-sm transition-all shadow-sm hover:shadow flex items-center space-x-1"
+                >
+                  <span>ส่ง</span>
+                  <span>➔</span>
+                </button>
+              </form>
+            </section>
+
+            {/* Right Column: RAG & Knowledge Graph Inspector Panel (5 Cols) */}
+            <aside className="lg:col-span-5 flex flex-col glass-card rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden min-h-0">
+              <div className="bg-slate-900 text-white px-4 py-3 flex items-center justify-between border-b border-slate-800">
+                <div className="flex items-center space-x-2">
+                  <span className="text-base">🔬</span>
+                  <h3 className="font-semibold text-xs tracking-wider uppercase text-slate-200">
+                    RAG & Graph X-Ray Inspector
+                  </h3>
+                </div>
+                {latestMeta && (
+                  <span className="text-[10px] px-2 py-0.5 rounded bg-vermilion-600 font-mono text-white">
+                    {latestMeta.latency}s
+                  </span>
+                )}
+              </div>
+
+              <div className="flex-1 overflow-y-auto p-4 space-y-4 text-xs font-sans">
+                {latestMeta ? (
+                  <>
+                    {/* 1. Query Analysis & Intent Routing */}
+                    <div className="bg-white rounded-xl p-3.5 border border-slate-200/80 shadow-2xs">
+                      <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2 flex items-center justify-between">
+                        <span>🎯 Intent Routing</span>
+                        <span className="px-2 py-0.5 rounded-md font-mono text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200">
+                          {latestMeta.intent}
+                        </span>
+                      </div>
+                      <div className="bg-slate-50 p-2.5 rounded-lg border border-slate-200/60 font-mono text-[11px] text-slate-700">
+                        <span className="text-slate-400">Contextual Query:</span><br/>
+                        "{latestMeta.resolved_query}"
+                      </div>
+                    </div>
+
+                    {/* 2. Knowledge Graph Paths & Relationships */}
+                    <div className="bg-white rounded-xl p-3.5 border border-slate-200/80 shadow-2xs">
+                      <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2 flex items-center justify-between">
+                        <span>🕸️ Knowledge Graph Context (Neo4j)</span>
+                        <span className="text-[10px] text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded font-mono border border-emerald-200">
+                          Active Path
+                        </span>
+                      </div>
+                      <div className="bg-slate-900 text-emerald-400 p-3 rounded-lg font-mono text-[11px] leading-relaxed max-h-48 overflow-y-auto whitespace-pre-wrap">
+                        {latestMeta.graph_context || '// No direct transit path needed for this query'}
+                      </div>
+                    </div>
+
+                    {/* 3. Citations & Provenance */}
+                    <div className="bg-white rounded-xl p-3.5 border border-slate-200/80 shadow-2xs">
+                      <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">
+                        📚 Traceable Citations ({latestMeta.citations.length})
+                      </div>
+                      {latestMeta.citations.length > 0 ? (
+                        <div className="space-y-1.5">
+                          {latestMeta.citations.map((cite, i) => (
+                            <div key={i} className="flex items-center space-x-2 text-[11px] bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200/70 text-slate-700">
+                              <span className="text-vermilion-500 font-bold">[{i+1}]</span>
+                              <span className="truncate">{cite}</span>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="text-slate-400 italic text-[11px]">ไม่พบแหล่งอ้างอิงตรง</p>
+                      )}
+                    </div>
+
+                    {/* 4. Model & Latency Telemetry */}
+                    <div className="bg-white rounded-xl p-3.5 border border-slate-200/80 shadow-2xs">
+                      <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">
+                        ⚡ Execution Telemetry
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 text-[11px]">
+                        <div className="bg-slate-50 p-2 rounded border border-slate-200/60">
+                          <span className="text-slate-400 block text-[10px]">Model Used:</span>
+                          <span className="font-semibold text-slate-700">{latestMeta.model}</span>
+                        </div>
+                        <div className="bg-slate-50 p-2 rounded border border-slate-200/60">
+                          <span className="text-slate-400 block text-[10px]">Execution Mode:</span>
+                          <span className="font-semibold text-slate-700">{latestMeta.mode}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div className="h-full flex flex-col items-center justify-center text-center p-6 text-slate-400">
+                    <span className="text-3xl mb-2">⛩️</span>
+                    <p className="font-medium text-xs text-slate-600 mb-1">Tokyo RAG Inspector พร้อมทำงาน</p>
+                    <p className="text-[11px] text-slate-400 max-w-xs">
+                      เมื่อท่านพิมพ์ถามคำถาม กล่องนี้จะแสดงกระบวนการทำงานจริง เช่น Intent, Graph Path และ Citations ให้เห็นทันที
+                    </p>
+                  </div>
+                )}
+              </div>
+            </aside>
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
