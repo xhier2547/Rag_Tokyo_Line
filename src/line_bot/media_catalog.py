@@ -181,7 +181,7 @@ PLACE_MEDIA_CATALOG: Dict[str, Dict[str, Any]] = {
         "id": "P_TAKESHITA_STREET",
         "name_th": "ถนนทาเคชิตะ ย่านฮาราจูกุ",
         "name_en": "Takeshita Street Harajuku",
-        "image_url": "https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?w=800&q=80",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Takeshita_Street_in_Harajuku.jpg/1280px-Takeshita_Street_in_Harajuku.jpg",
         "category": "🥞 แฟชั่นวัยรุ่น เครป & คาวาอี้",
         "ward": "Shibuya",
         "nearest_station": "สถานี Harajuku",

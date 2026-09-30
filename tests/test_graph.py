@@ -4,6 +4,7 @@ Automated Tests for Graph RAG & Neo4j Pathfinding Engine
 การวางแผนการเดินทางแบบ End-to-End (เดิน + รถไฟ + เดิน) และการดึง Graph Context
 """
 import pytest
+import src.graph.connection as graph_connection
 from src.graph.connection import Neo4jConnection
 from src.graph.builder import TokyoGraphBuilder
 from src.graph.pathfinder import TokyoGraphPathfinder
@@ -25,6 +26,18 @@ def test_neo4j_connection():
         with driver.session() as session:
             val = session.run("RETURN 1 AS n").single()["n"]
             assert val == 1
+
+
+def test_configured_endpoint_supports_aura(monkeypatch):
+    monkeypatch.setattr(
+        graph_connection,
+        "NEO4J_URI",
+        "neo4j+s://example.databases.neo4j.io",
+    )
+    assert graph_connection._configured_endpoint() == (
+        "example.databases.neo4j.io",
+        7687,
+    )
 
 # 2. ทดสอบการสร้างและตรวจสอบขนาดของ Graph
 def test_graph_builder_ingestion():

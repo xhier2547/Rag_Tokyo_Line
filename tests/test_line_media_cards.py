@@ -39,6 +39,9 @@ class TestLineMediaCards(unittest.TestCase):
             self.assertTrue(len(data["name_th"]) > 0, f"{hid} must have Thai name")
             self.assertTrue("price_range" in data, f"{hid} must have price_range")
 
+        takeshita_image = PLACE_MEDIA_CATALOG["P_TAKESHITA_STREET"]["image_url"]
+        self.assertIn("Takeshita_Street_in_Harajuku", takeshita_image)
+
     def test_02_matched_entities_detection(self):
         """ทดสอบฟังก์ชันตรวจจับสถานที่และโรงแรมจากข้อความคำตอบและ Citations"""
         # เคส 1: วัดเซ็นโซจิ

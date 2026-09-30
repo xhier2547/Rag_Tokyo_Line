@@ -5,6 +5,7 @@ Neo4j Graph Database Connection Manager
 """
 import os
 import socket
+from urllib.parse import urlparse
 from typing import Optional, Tuple
 from dotenv import load_dotenv
 from neo4j import GraphDatabase, Driver
@@ -19,9 +20,22 @@ if "localhost" in NEO4J_URI:
 NEO4J_USERNAME = os.getenv("NEO4J_USERNAME", "neo4j")
 NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD", "yuE5Qlvzd_8FkZKM26rZtnSQjOmdIdTq")
 
-def is_neo4j_port_open(host: str = "127.0.0.1", port: int = 7687, timeout: float = 1.0) -> bool:
+def _configured_endpoint() -> Tuple[str, int]:
+    """Return the host and Bolt port from the configured local or Aura URI."""
+    parsed = urlparse(NEO4J_URI)
+    return parsed.hostname or "127.0.0.1", parsed.port or 7687
+
+
+def is_neo4j_port_open(
+    host: Optional[str] = None,
+    port: Optional[int] = None,
+    timeout: float = 1.0,
+) -> bool:
     """ตรวจสอบว่า Port ของ Neo4j เปิดพร้อมรับการเชื่อมต่อหรือไม่"""
     try:
+        configured_host, configured_port = _configured_endpoint()
+        host = host or configured_host
+        port = port or configured_port
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout(timeout)
         result = sock.connect_ex((host, port))
