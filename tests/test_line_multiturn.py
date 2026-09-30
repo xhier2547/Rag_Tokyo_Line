@@ -89,5 +89,47 @@ class TestLineMultiTurn(unittest.TestCase):
         self.assertNotIn("P_GINZA_SIX", matched_ids)
 
 
+    def test_04_ikebukuro_phonetic_variant_resolution(self):
+        """ทดสอบการขยายบริบทเมื่อผู้ใช้สะกดชื่อสถานีด้วยคำอ่านสัทศาสตร์ เช่น อิเคะโบะคุโระ และถาม 'ไปที่นี่'"""
+        user_id = "test_user_ikebukuro"
+
+        # Turn 1: ผู้ใช้สอบถามเกี่ยวกับวัดเซ็นโซจิ
+        turn1_query = "วัดเซ็นโซจิมีอะไรน่าสนใจบ้าง"
+        turn1_answer = "วัดเซ็นโซจิ (วัดอาซากุสะ) เป็นวัดเก่าแก่ที่สุดในโตเกียว ใกล้สถานี Asakusa"
+        matched_t1 = [
+            {
+                "id": "P_SENSOJI",
+                "name_th": "วัดเซ็นโซจิ (วัดอาซากุสะ)",
+                "nearest_station": "สถานี Asakusa"
+            }
+        ]
+
+        self.session_mgr.update_session(
+            user_id=user_id,
+            query=turn1_query,
+            resolved_query=turn1_query,
+            answer=turn1_answer,
+            matched_entities=matched_t1
+        )
+
+        # Turn 2: ผู้ใช้พิมพ์ด้วยคำสะกด "อิเคะโบะคุโระ"
+        turn2_query = "ฉันอยู่ที่อิเคะโบะคุโระ ต้องการไปที่นี่ ต้องไปอย่างไร"
+        resolved_q, hint = self.session_mgr.resolve_contextual_query(user_id, turn2_query)
+
+        self.assertIn("อิเคะบุคุโระ", resolved_q)
+        self.assertIn("วัดเซ็นโซจิ", resolved_q)
+        self.assertIsNotNone(hint)
+
+    def test_05_ikebukuro_to_sensoji_pathfinder(self):
+        """ทดสอบว่า Pathfinder สามารถแปลง 'อิเคะโบะคุโระ' และคำนวณเส้นทางไปยัง Asakusa ได้"""
+        resolved_query = "เดินทางจาก สถานีอิเคะบุคุโระ (Ikebukuro) ไปยัง วัดเซ็นโซจิ (วัดอาซากุสะ) สถานี Asakusa ต้องไปอย่างไรและใช้สายรถไฟอะไร"
+        graph_context = self.pathfinder.extract_graph_context_for_rag(resolved_query)
+
+        self.assertIn("[ข้อมูลเส้นทางรถไฟจาก Knowledge Graph]", graph_context)
+        self.assertIn("สถานีอิเคะบุคุโระ", graph_context)
+        self.assertIn("สถานีอาซากุสะ", graph_context)
+
+
 if __name__ == "__main__":
     unittest.main()
+

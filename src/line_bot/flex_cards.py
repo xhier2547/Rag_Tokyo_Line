@@ -29,10 +29,10 @@ def create_entity_bubble(entity: Dict[str, Any]) -> Dict[str, Any]:
 
     # Action texts เมื่อผู้ใช้กดปุ่ม
     if is_hotel:
-        action_route = f"เดินทางไป{name_th}ยังไง"
+        action_route = f"สถานีใกล้เคียงและวิธีเดินทางไป{name_th}"
         action_explore = f"ที่เที่ยวใกล้{nearest_station}"
     else:
-        action_route = f"เดินทางไป{name_th}ยังไง"
+        action_route = f"สถานีใกล้เคียงและวิธีเดินทางไป{name_th}"
         action_explore = f"ของกินแนะนำใกล้{name_th}"
 
     bubble: Dict[str, Any] = {

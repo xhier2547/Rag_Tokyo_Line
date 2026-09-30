@@ -27,6 +27,27 @@ class TokyoGraphPathfinder:
         q = query_name.lower().strip()
         q = re.sub(r'สถานที่|สถานี|station|駅', '', q).strip()
 
+        aliases = {
+            "อิเคะโบะคุโระ": "ST_IKEBUKURO",
+            "อิเคโบะคุโระ": "ST_IKEBUKURO",
+            "อิเคะโบคุโระ": "ST_IKEBUKURO",
+            "อิเคโบคุโระ": "ST_IKEBUKURO",
+            "อิเคบุคุโระ": "ST_IKEBUKURO",
+            "อิเคะ": "ST_IKEBUKURO",
+            "อิเค": "ST_IKEBUKURO",
+            "โตโยสุ": "ST_TOYOSU",
+            "ชิบุยะ": "ST_SHIBUYA",
+            "ชิบูยะ": "ST_SHIBUYA",
+            "อากิบะ": "ST_AKIHABARA",
+            "สกายทรี": "ST_OSHIAGE",
+            "โคราคุเอ็น": "ST_KORAKUEN",
+            "ชิมบาชิ": "ST_SHIMBASHI",
+            "ชินบาชิ": "ST_SHIMBASHI"
+        }
+        for alias, target_id in aliases.items():
+            if alias in q or q in alias:
+                return target_id
+
         for node, data in self.nx_graph.nodes(data=True):
             if data.get("type") == "Station":
                 if node.lower() == q or data.get("name_en", "").lower() == q or data.get("name_th", "").lower() == q:
