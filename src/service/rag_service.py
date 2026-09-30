@@ -20,6 +20,7 @@ from typing import Dict, Any, Optional, List
 from pydantic import BaseModel, Field
 from dotenv import load_dotenv
 
+import psutil
 from src.hybrid.engine import TokyoHybridRAGEngine, HybridContextResult
 from src.llm.gemini_llm import GeminiLLMClient
 from src.llm.local_llm import LocalLLMClient, LLMResponse
@@ -43,6 +44,12 @@ class RAGResponse(BaseModel):
     is_cached: bool = Field(False, description="ผลลัพธ์นี้มาจาก Memory Cache หรือไม่")
     graph_context: str = Field("", description="บริบทเส้นทางหรือความสัมพันธ์จาก Knowledge Graph")
     comparison: Optional[ComparisonResult] = Field(None, description="ผลการเปรียบเทียบกรณีรันในโหมด compare")
+    prompt_tokens: int = Field(0, description="จำนวน Token ของ Prompt")
+    completion_tokens: int = Field(0, description="จำนวน Token ของคำตอบ")
+    total_tokens: int = Field(0, description="จำนวน Token รวมทั้งหมด")
+    tokens_per_sec: float = Field(0.0, description="ความเร็วสร้างคำตอบ (Tokens/วินาที)")
+    ram_usage_mb: float = Field(0.0, description="ขนาด RAM ของ Process ปัจจุบัน (MB)")
+    ram_percent: float = Field(0.0, description="การใช้ RAM ทั้งหมดของระบบ (%)")
 
 
 class TokyoRAGService:
@@ -169,6 +176,11 @@ class TokyoRAGService:
         # 3. ส่งต่อ LLM ตาม Mode
         clean_mode = mode.lower().strip()
 
+        prompt_tokens = 0
+        completion_tokens = 0
+        total_tokens = 0
+        tokens_per_sec = 0.0
+
         # --- MODE 1: Google Gemini API (Recommended / Zero Machine Overhead) ---
         if clean_mode == "gemini":
             gemini_resp = self.gemini_client.answer_rag_query(query, context)
@@ -177,14 +189,28 @@ class TokyoRAGService:
                 citations = gemini_resp.citations or extract_citations(answer)
                 model_used = gemini_resp.model
                 mode_used = "gemini"
+                prompt_tokens = gemini_resp.prompt_tokens
+                completion_tokens = gemini_resp.completion_tokens
+                total_tokens = gemini_resp.total_tokens
+                tokens_per_sec = gemini_resp.tokens_per_sec
             else:
                 # Fallback: หาก API ติดขัด ให้สังเคราะห์คำตอบภาษาไทยจาก Graph และ Vector โดยตัดภาษาอังกฤษออก
                 citations = hybrid_res.citations or extract_citations(context)
                 answer = self._format_offline_fallback(query, context, graph_ctx)
                 model_used = "Tokyo-Hybrid-Retriever (Offline)"
                 mode_used = "context_fallback"
+                prompt_tokens = len(context) // 4
+                completion_tokens = len(answer) // 4
+                total_tokens = prompt_tokens + completion_tokens
 
-
+            # วัดการใช้งาน RAM ของ Process ปัจจุบันและระบบ
+            try:
+                proc = psutil.Process()
+                ram_mb = round(proc.memory_info().rss / (1024 * 1024), 2)
+                ram_pct = round(psutil.virtual_memory().percent, 1)
+            except Exception:
+                ram_mb = 0.0
+                ram_pct = 0.0
 
             total_lat = round(time.time() - start_time, 3)
             result = RAGResponse(
@@ -196,7 +222,13 @@ class TokyoRAGService:
                 model_name=model_used,
                 latency_sec=total_lat,
                 is_cached=False,
-                graph_context=graph_ctx
+                graph_context=graph_ctx,
+                prompt_tokens=prompt_tokens,
+                completion_tokens=completion_tokens,
+                total_tokens=total_tokens,
+                tokens_per_sec=tokens_per_sec,
+                ram_usage_mb=ram_mb,
+                ram_percent=ram_pct
             )
 
         # --- MODE 2: Local LLM (Ollama 3B/4B Safe Throttling) ---
@@ -214,6 +246,10 @@ class TokyoRAGService:
                     citations = gemini_fallback.citations or extract_citations(answer)
                     model_used = f"{gemini_fallback.model} (Auto-fallback)"
                     mode_used = "gemini"
+                    prompt_tokens = gemini_fallback.prompt_tokens
+                    completion_tokens = gemini_fallback.completion_tokens
+                    total_tokens = gemini_fallback.total_tokens
+                    tokens_per_sec = gemini_fallback.tokens_per_sec
                 else:
                     answer = (
                         f"⚠️ (Ollama ปิดอยู่และไม่มี Gemini API Key)\n\n"
@@ -222,6 +258,9 @@ class TokyoRAGService:
                     citations = hybrid_res.citations
                     model_used = "fallback-retrieval"
                     mode_used = "context_fallback"
+                    prompt_tokens = len(context) // 4
+                    completion_tokens = len(answer) // 4
+                    total_tokens = prompt_tokens + completion_tokens
             else:
                 local_resp = self.local_client.answer_rag_query(query, context)
                 if local_resp.success:
@@ -229,11 +268,23 @@ class TokyoRAGService:
                     citations = local_resp.citations or extract_citations(answer)
                     model_used = local_resp.model
                     mode_used = "local"
+                    prompt_tokens = local_resp.prompt_tokens
+                    completion_tokens = local_resp.completion_tokens
+                    total_tokens = local_resp.total_tokens
+                    tokens_per_sec = local_resp.tokens_per_sec
                 else:
                     answer = f"⚠️ เกิดข้อผิดพลาดในการประมวลผล Local LLM: {local_resp.error}\n\n{context}"
                     citations = hybrid_res.citations
                     model_used = "fallback-retrieval"
                     mode_used = "context_fallback"
+
+            try:
+                proc = psutil.Process()
+                ram_mb = round(proc.memory_info().rss / (1024 * 1024), 2)
+                ram_pct = round(psutil.virtual_memory().percent, 1)
+            except Exception:
+                ram_mb = 0.0
+                ram_pct = 0.0
 
             total_lat = round(time.time() - start_time, 3)
             result = RAGResponse(
@@ -245,7 +296,13 @@ class TokyoRAGService:
                 model_name=model_used,
                 latency_sec=total_lat,
                 is_cached=False,
-                graph_context=graph_ctx
+                graph_context=graph_ctx,
+                prompt_tokens=prompt_tokens,
+                completion_tokens=completion_tokens,
+                total_tokens=total_tokens,
+                tokens_per_sec=tokens_per_sec,
+                ram_usage_mb=ram_mb,
+                ram_percent=ram_pct
             )
 
         # --- MODE 3: Side-by-Side Comparison ---

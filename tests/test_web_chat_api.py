@@ -39,6 +39,15 @@ class TestWebChatAPI(unittest.TestCase):
         self.assertIn("intent", data)
         self.assertIn("cards", data)
         self.assertIsInstance(data["cards"], list)
+        self.assertIn("telemetry", data)
+        telemetry = data["telemetry"]
+        self.assertIn("latency_sec", telemetry)
+        self.assertIn("total_tokens", telemetry)
+        self.assertIn("prompt_tokens", telemetry)
+        self.assertIn("completion_tokens", telemetry)
+        self.assertIn("ram_usage_mb", telemetry)
+        self.assertIn("ram_percent", telemetry)
+        self.assertGreaterEqual(telemetry["ram_usage_mb"], 0.0)
 
     def test_03_web_multiturn_flow(self):
         """ทดสอบคำถามต่อเนื่อง (Multi-turn) ผ่าน Web API"""

@@ -398,7 +398,16 @@ async def handle_web_chat(req: WebChatRequest):
         "mode_used": response.mode_used,
         "model_name": response.model_name,
         "graph_context": response.graph_context,
-        "cards": matched_entities
+        "cards": matched_entities,
+        "telemetry": {
+            "latency_sec": response.latency_sec,
+            "prompt_tokens": response.prompt_tokens,
+            "completion_tokens": response.completion_tokens,
+            "total_tokens": response.total_tokens,
+            "tokens_per_sec": response.tokens_per_sec,
+            "ram_usage_mb": response.ram_usage_mb,
+            "ram_percent": response.ram_percent
+        }
     }
 
 

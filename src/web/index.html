@@ -152,7 +152,16 @@
               mode: data.mode_used,
               citations: data.citations || [],
               graph_context: data.graph_context || '',
-              resolved_query: data.resolved_query || query
+              resolved_query: data.resolved_query || query,
+              telemetry: data.telemetry || {
+                latency_sec: data.latency_sec,
+                prompt_tokens: 0,
+                completion_tokens: 0,
+                total_tokens: 0,
+                tokens_per_sec: 0,
+                ram_usage_mb: 0,
+                ram_percent: 0
+              }
             },
             cards: data.cards || []
           };
@@ -423,20 +432,62 @@
                       )}
                     </div>
 
-                    {/* 4. Model & Latency Telemetry */}
+                    {/* 4. Token & Computation Telemetry */}
                     <div className="bg-white rounded-xl p-3.5 border border-slate-200/80 shadow-2xs">
-                      <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">
-                        ⚡ Execution Telemetry
+                      <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2 flex items-center justify-between">
+                        <span>🧮 Token & Computation Telemetry</span>
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200">
+                          {latestMeta.telemetry?.tokens_per_sec || 0} tok/s
+                        </span>
                       </div>
                       <div className="grid grid-cols-2 gap-2 text-[11px]">
-                        <div className="bg-slate-50 p-2 rounded border border-slate-200/60">
-                          <span className="text-slate-400 block text-[10px]">Model Used:</span>
-                          <span className="font-semibold text-slate-700">{latestMeta.model}</span>
+                        <div className="bg-slate-50 p-2 rounded-lg border border-slate-200/60">
+                          <span className="text-slate-400 block text-[10px]">เวลาคำนวณ (Latency):</span>
+                          <span className="font-bold text-slate-800 text-xs">{latestMeta.telemetry?.latency_sec || latestMeta.latency} วินาที</span>
                         </div>
-                        <div className="bg-slate-50 p-2 rounded border border-slate-200/60">
-                          <span className="text-slate-400 block text-[10px]">Execution Mode:</span>
-                          <span className="font-semibold text-slate-700">{latestMeta.mode}</span>
+                        <div className="bg-slate-50 p-2 rounded-lg border border-slate-200/60">
+                          <span className="text-slate-400 block text-[10px]">Tokens รวมทั้งหมด:</span>
+                          <span className="font-bold text-vermilion-600 text-xs">{latestMeta.telemetry?.total_tokens || 0} tokens</span>
                         </div>
+                        <div className="bg-slate-50 p-2 rounded-lg border border-slate-200/60">
+                          <span className="text-slate-400 block text-[10px]">Prompt Tokens (Input):</span>
+                          <span className="font-semibold text-slate-700">{latestMeta.telemetry?.prompt_tokens || 0}</span>
+                        </div>
+                        <div className="bg-slate-50 p-2 rounded-lg border border-slate-200/60">
+                          <span className="text-slate-400 block text-[10px]">Completion (Output):</span>
+                          <span className="font-semibold text-slate-700">{latestMeta.telemetry?.completion_tokens || 0}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 5. Memory & RAM Profiler */}
+                    <div className="bg-white rounded-xl p-3.5 border border-slate-200/80 shadow-2xs">
+                      <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2 flex items-center justify-between">
+                        <span>💾 Resource & RAM Profiler</span>
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200">
+                          Memory Stats
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 text-[11px]">
+                        <div className="bg-slate-50 p-2 rounded-lg border border-slate-200/60">
+                          <span className="text-slate-400 block text-[10px]">Process RAM (RSS):</span>
+                          <span className="font-bold text-slate-800 text-xs">{latestMeta.telemetry?.ram_usage_mb || 0} MB</span>
+                        </div>
+                        <div className="bg-slate-50 p-2 rounded-lg border border-slate-200/60">
+                          <span className="text-slate-400 block text-[10px]">System RAM Usage:</span>
+                          <span className="font-bold text-indigo-600 text-xs">{latestMeta.telemetry?.ram_percent || 0}%</span>
+                        </div>
+                      </div>
+                      {/* RAM Load Bar */}
+                      <div className="mt-2 w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                        <div 
+                          className="bg-indigo-500 h-1.5 rounded-full transition-all duration-500" 
+                          style={{ width: `${Math.min(latestMeta.telemetry?.ram_percent || 0, 100)}%` }}
+                        ></div>
+                      </div>
+                      <div className="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400">
+                        <span>AI Model: <strong className="text-slate-600 font-mono">{latestMeta.model}</strong></span>
+                        <span className="uppercase font-mono text-[9px] bg-slate-100 px-1.5 py-0.5 rounded">{latestMeta.mode}</span>
                       </div>
                     </div>
                   </>
