@@ -16,6 +16,7 @@ import requests
 from dotenv import load_dotenv
 
 from src.llm.prompts import SYSTEM_PROMPT, build_rag_prompt, extract_citations
+from src.llm.resource_profiler import HardwareProfiler
 
 load_dotenv()
 logger = logging.getLogger(__name__)
@@ -45,6 +46,7 @@ class LLMResponse:
     citations: List[str] = field(default_factory=list)
     success: bool = True
     error_message: Optional[str] = None
+    hardware_profile: Optional[Dict[str, Any]] = None
 
     @property
     def error(self) -> Optional[str]:
@@ -118,7 +120,8 @@ class LocalLLMClient:
         prompt: str,
         system_prompt: Optional[str] = None,
         temperature: float = 0.2,
-        max_tokens: int = 1024
+        max_tokens: int = 1024,
+        profile_hardware: bool = False
     ) -> LLMResponse:
         """
         ส่งคำสั่งให้ Local LLM (Ollama) ประมวลผลและสร้างคำตอบ
@@ -128,9 +131,10 @@ class LocalLLMClient:
             system_prompt: System prompt (หากมี)
             temperature: ค่าความสร้างสรรค์ (0.0-1.0 แนะนำ 0.1-0.3 สำหรับความแม่นยำสูง)
             max_tokens: จำนวน token สูงสุดที่ตอบ
+            profile_hardware: หากเป็น True จะทำการวัด CPU/RAM/VRAM แบบ Real-time
             
         Returns:
-            LLMResponse: ผลลัพธ์พร้อมเวลาและสถิติ token
+            LLMResponse: ผลลัพธ์พร้อมเวลาและสถิติ token และ hardware profile (หากเปิด)
         """
         url = f"{self.base_url}/api/generate"
         payload = {
@@ -145,10 +149,15 @@ class LocalLLMClient:
         if system_prompt:
             payload["system"] = system_prompt
 
+        profiler = HardwareProfiler(sample_interval_sec=0.05) if profile_hardware else None
+        if profiler:
+            profiler.start()
+
         start_time = time.time()
         try:
             resp = requests.post(url, json=payload, timeout=self.timeout)
             latency = time.time() - start_time
+            hw_result = profiler.stop().to_dict() if profiler else None
             
             if resp.status_code != 200:
                 return LLMResponse(
@@ -161,7 +170,8 @@ class LocalLLMClient:
                     tokens_per_sec=0.0,
                     citations=[],
                     success=False,
-                    error_message=f"Ollama API Error HTTP {resp.status_code}: {resp.text}"
+                    error_message=f"Ollama API Error HTTP {resp.status_code}: {resp.text}",
+                    hardware_profile=hw_result
                 )
 
             data = resp.json()
@@ -184,11 +194,13 @@ class LocalLLMClient:
                 total_tokens=prompt_eval_count + eval_count,
                 tokens_per_sec=round(tps, 2),
                 citations=citations,
-                success=True
+                success=True,
+                hardware_profile=hw_result
             )
 
         except requests.exceptions.ConnectionError:
             latency = time.time() - start_time
+            hw_result = profiler.stop().to_dict() if profiler else None
             return LLMResponse(
                 text="[ระบบแจ้งเตือน] ไม่สามารถเชื่อมต่อ Local Ollama ได้ กรุณาเปิดโปรแกรม Ollama หรือตรวจสอบ URL",
                 model=self.model_name,
@@ -199,10 +211,12 @@ class LocalLLMClient:
                 tokens_per_sec=0.0,
                 citations=[],
                 success=False,
-                error_message="ConnectionError: Ollama daemon is not responding."
+                error_message="ConnectionError: Ollama daemon is not responding.",
+                hardware_profile=hw_result
             )
         except Exception as e:
             latency = time.time() - start_time
+            hw_result = profiler.stop().to_dict() if profiler else None
             return LLMResponse(
                 text=f"[เกิดข้อผิดพลาดในการประมวลผล Local LLM: {str(e)}]",
                 model=self.model_name,
@@ -213,17 +227,19 @@ class LocalLLMClient:
                 tokens_per_sec=0.0,
                 citations=[],
                 success=False,
-                error_message=str(e)
+                error_message=str(e),
+                hardware_profile=hw_result
             )
 
     def answer_rag_query(
         self,
         query: str,
         context: str,
-        temperature: float = 0.2
+        temperature: float = 0.2,
+        profile_hardware: bool = False
     ) -> LLMResponse:
         """
         ฟังก์ชันสะดวกสำหรับรับ query + context แล้วสร้าง RAG Prompt ส่งให้ Local LLM ทันที
         """
         full_prompt = build_rag_prompt(query=query, context=context)
-        return self.generate(prompt=full_prompt, temperature=temperature)
+        return self.generate(prompt=full_prompt, temperature=temperature, profile_hardware=profile_hardware)
