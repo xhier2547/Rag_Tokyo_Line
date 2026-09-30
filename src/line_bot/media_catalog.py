@@ -148,7 +148,7 @@ PLACE_MEDIA_CATALOG: Dict[str, Dict[str, Any]] = {
         "id": "P_IMPERIAL_PALACE",
         "name_th": "พระราชวังอิมพีเรียลโตเกียว (Imperial Palace)",
         "name_en": "Tokyo Imperial Palace",
-        "image_url": "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800&q=80",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Imperial_Palace_Tokyo_Nijubashi_Bridge.JPG",
         "category": "🏯 พระราชวังโบราณ & ปราสาทเอโดะ",
         "ward": "Chiyoda",
         "nearest_station": "สถานี Tokyo",
