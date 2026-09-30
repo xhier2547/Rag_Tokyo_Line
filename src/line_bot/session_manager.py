@@ -140,7 +140,19 @@ class SessionManager:
             "โอไดบะ": "สถานีโอไดบะ (Odaiba)",
             "odaiba": "สถานีโอไดบะ (Odaiba)",
             "ฮาราจูกุ": "สถานีฮาราจูกุ (Harajuku)",
-            "harajuku": "สถานีฮาราจูกุ (Harajuku)"
+            "harajuku": "สถานีฮาราจูกุ (Harajuku)",
+            "โทโยสุ": "สถานีโทโยสุ (Toyosu)",
+            "toyosu": "สถานีโทโยสุ (Toyosu)",
+            "โอชิอาเกะ": "สถานีโอชิอาเกะ (Oshiage)",
+            "oshiage": "สถานีโอชิอาเกะ (Oshiage)",
+            "อิเคะบุคุโระ": "สถานีอิเคะบุคุโระ (Ikebukuro)",
+            "ikebukuro": "สถานีอิเคะบุคุโระ (Ikebukuro)",
+            "ชินากาวะ": "สถานีชินากาวะ (Shinagawa)",
+            "shinagawa": "สถานีชินากาวะ (Shinagawa)",
+            "สึกิจิ": "สถานีสึกิจิ (Tsukiji)",
+            "tsukiji": "สถานีสึกิจิ (Tsukiji)",
+            "ฮามามัตสึโจ": "สถานีฮามามัตสึโจ (Hamamatsucho)",
+            "hamamatsucho": "สถานีฮามามัตสึโจ (Hamamatsucho)"
         }
 
         detected_origin = None

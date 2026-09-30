@@ -25,7 +25,7 @@ class TokyoGraphPathfinder:
     def _resolve_station_id(self, query_name: str) -> Optional[str]:
         """แปลงชื่อสถานี (ไทย/อังกฤษ/รหัส) เป็น station_id ที่ถูกต้อง"""
         q = query_name.lower().strip()
-        q = re.sub(r'สถานี|station|駅', '', q).strip()
+        q = re.sub(r'สถานที่|สถานี|station|駅', '', q).strip()
 
         for node, data in self.nx_graph.nodes(data=True):
             if data.get("type") == "Station":
@@ -39,7 +39,7 @@ class TokyoGraphPathfinder:
     def _resolve_place_id(self, query_name: str) -> Optional[str]:
         """แปลงชื่อสถานที่ (ไทย/อังกฤษ/รหัส) เป็น place_id ที่ถูกต้อง"""
         q = query_name.lower().strip()
-        q = re.sub(r'วัด|สวน|ตลาด|หอคอย|ห้าง|ศาลเจ้า|temple|shrine|park|tower|market', '', q).strip()
+        q = re.sub(r'สถานที่|วัด|สวน|ตลาด|หอคอย|ห้าง|ศาลเจ้า|temple|shrine|park|tower|market', '', q).strip()
 
         for node, data in self.nx_graph.nodes(data=True):
             if data.get("type") == "Place":
