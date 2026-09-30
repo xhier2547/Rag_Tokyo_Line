@@ -40,7 +40,8 @@ class TestLineMediaCards(unittest.TestCase):
             self.assertTrue("price_range" in data, f"{hid} must have price_range")
 
         takeshita_image = PLACE_MEDIA_CATALOG["P_TAKESHITA_STREET"]["image_url"]
-        self.assertIn("Takeshita_Street_in_Harajuku", takeshita_image)
+        self.assertIn("P_TAKESHITA_STREET.jpg", takeshita_image)
+        self.assertIn("data/images", takeshita_image)
 
     def test_02_matched_entities_detection(self):
         """ทดสอบฟังก์ชันตรวจจับสถานที่และโรงแรมจากข้อความคำตอบและ Citations"""
