@@ -216,9 +216,9 @@ graph LR
 
 | เกณฑ์การประเมิน (Metrics) | Dense Vector Only (Chroma) | Knowledge Graph Only (Neo4j) | **Hybrid Graph RAG (โครงงานนี้)** |
 |---|:---:|:---:|:---:|
-| **Hit@1** | 42% | 53% | **60%** |
-| **Hit@3** | 64% | 54% | **76%** |
-| **MRR** | 0.5183 | 0.5358 | **0.6883** |
+| **Hit@1** | 42% | 53% | **59%** |
+| **Hit@3** | 64% | 54% | **78%** |
+| **MRR** | 0.5183 | 0.5358 | **0.6933** |
 | **Graph coverage** | 0% | 80% | 80% |
 
 > ตารางนี้เป็น retrieval evaluation 100 ข้อ ไม่ใช่ generation evaluation จึงยังไม่สรุป hallucination rate จนกว่าจะมี human/automatic judge แยกต่างหาก

@@ -16,17 +16,29 @@
 
 | Architecture | Hit@1 | Hit@3 | MRR | Graph coverage | Retrieval latency |
 |---|---:|---:|---:|---:|---:|
-| Dense only | 42% | 64% | 0.5183 | 0% | 15.36 ms |
-| Graph only | 53% | 54% | 0.5358 | 80% | 0.18 ms |
-| **Hybrid RAG** | **60%** | **76%** | **0.6883** | 80% | 46.86 ms |
+| Dense only | 42% | 64% | 0.5183 | 0% | 15.62 ms |
+| Graph only | 53% | 54% | 0.5358 | 80% | 0.17 ms |
+| **Hybrid RAG** | **59%** | **78%** | **0.6933** | 80% | 47.76 ms |
 
 ### การตีความ
 
-- Hybrid เพิ่ม Hit@1 จาก Dense 18 จุดเปอร์เซ็นต์ และเพิ่ม Hit@3 12 จุดเปอร์เซ็นต์
-- Hybrid เพิ่ม MRR จาก Dense 0.5183 เป็น 0.6883 หรือประมาณ 32.8%
+- Hybrid เพิ่ม Hit@1 จาก Dense 17 จุดเปอร์เซ็นต์ และเพิ่ม Hit@3 14 จุดเปอร์เซ็นต์
+- Hybrid เพิ่ม MRR จาก Dense 0.5183 เป็น 0.6933 หรือประมาณ 33.8%
 - Graph ให้ Hit@1 สูงกว่า Dense แต่ Hit@3 ต่ำกว่า แสดงว่า heuristic ของกราฟมักคืนคำตอบหลักได้เร็ว แต่มี candidate ที่เกี่ยวข้องในสามอันดับแรกไม่หลากหลายพอ
-- Hybrid ใช้เวลามากกว่า Dense เพราะรวม Dense, BM25, Graph, weighted RRF และ semantic reranking ผลด้านคุณภาพจึงแลกกับ latencyเพิ่มประมาณ 31.5 ms ในการรันครั้งล่าสุด
+- Hybrid ใช้เวลามากกว่า Dense เพราะรวม Dense, BM25, Graph, weighted RRF, structured constraints และ semantic reranking ผลด้านคุณภาพจึงแลกกับ latency เพิ่มประมาณ 32.1 ms ในการรันครั้งล่าสุด
 - Graph coverage 80% หมายความว่า 20% ของคำถามไม่มี graph signal ที่เข้าเกณฑ์ ไม่ควรตีความว่า graph ตอบถูก 80%
+
+### 2.1 Held-out Test Split
+
+เพื่อไม่ใช้คำถามชุดเดียวกันทั้งจูนน้ำหนักและรายงานผล ระบบแบ่งแบบ stratified เป็น development 60 ข้อและ held-out test 40 ข้อ หมวดละ 6/4 ข้อ ผลบน test set คือ:
+
+| Architecture | Hit@1 | Hit@3 | MRR | Latency |
+|---|---:|---:|---:|---:|
+| Dense only | 30.0% | 52.5% | 0.3958 | 15.76 ms |
+| Graph only | 40.0% | 40.0% | 0.4000 | 0.18 ms |
+| **Hybrid RAG** | **45.0%** | **65.0%** | **0.5571** | 63.23 ms |
+
+Hybrid ยังเหนือกว่า retrieval เดี่ยวบนคำถามที่กันออกจาก development set แต่คะแนนต่ำกว่าผลรวม 100 ข้อ จึงควรใช้ตาราง held-out นี้เมื่อกล่าวถึงความสามารถในการ generalize
 
 ## 3. Embedding Benchmark
 
@@ -84,6 +96,10 @@ E5-small ให้ retrieval accuracy สูงกว่าในการทด
 - **การทดสอบแบบ Double-Blind:** สลับชุดคำตอบโดยไม่เปิดเผยโมเดล
 - **เกณฑ์ความเชื่อถือได้ทางสถิติ:** การคำนวณ Inter-Annotator Agreement ด้วยค่า Cohen’s Kappa ($\kappa > 0.60$)
 
+### Automatic generation screening
+
+`data/generation_quality_proxies.json` ตรวจคำตอบที่บันทึกไว้ 30 ข้อโดยไม่ใช้ LLM judge พบ citation ใน 66.7% ของคำตอบ และ citation ที่มีอยู่ทั้งหมดตรงกับชื่อแหล่งข้อมูลใน knowledge base ตาม name-matching proxy ส่วน lexical answer relevance เฉลี่ย 0.4723 มี 10 ข้อที่ไม่มี citation และต้องให้มนุษย์ตรวจต่อ เมตริกนี้เป็นเพียงตัวกรองเบื้องต้น ไม่ใช่หลักฐานยืนยัน faithfulness หรือ factual correctness
+
 ## 8. ข้อจำกัดและงานในอนาคต
 
 1. การประเมิน Human Evaluation ยังอยู่ในขั้นตอนเตรียมชุดคำถามและเกณฑ์การให้คะแนนสำหรับให้ผู้ประเมินอิสระลงคะแนนจริง
@@ -92,4 +108,4 @@ E5-small ให้ retrieval accuracy สูงกว่าในการทด
 
 ## 9. สรุป
 
-ระบบ Tokyo Hybrid Graph RAG ได้รับการทดสอบในระดับ **Retrieval Layer** 100 ข้อ โดย Hybrid ได้ Hit@1 60%, Hit@3 76% และ MRR 0.6883 พร้อมผลแยกหมวด A–J และ systematic error analysis ส่วน generation quality และ hardware profiling แบบมี raw samples ยังเป็นงานที่ต้องเก็บหลักฐานเพิ่ม
+ระบบ Tokyo Hybrid Graph RAG ได้รับการทดสอบในระดับ **Retrieval Layer** 100 ข้อ โดย Hybrid ได้ Hit@1 59%, Hit@3 78% และ MRR 0.6933 พร้อม held-out test 40 ข้อ ผลแยกหมวด A–J และ systematic error analysis ส่วน human generation quality และ hardware profiling แบบมี raw samples ยังเป็นงานที่ต้องเก็บหลักฐานเพิ่ม

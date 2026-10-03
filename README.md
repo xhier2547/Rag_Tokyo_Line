@@ -171,9 +171,11 @@ flowchart TD
 | :---| :---: | :---: | :---: | :---: |
 | **Dense Vector Only (FAISS)** | 42% | 64% | 0.5183 | 0% |
 | **Knowledge Graph Only** | 53% | 54% | 0.5358 | 80% |
-| **Hybrid Graph RAG** | **60%** | **76%** | **0.6883** | 80% |
+| **Hybrid Graph RAG** | **59%** | **78%** | **0.6933** | 80% |
 
 ตัวเลขชุดนี้วัด retrieval เท่านั้น จึงไม่ใช้สรุป hallucination rate หรือความถูกต้องของข้อความที่ LLM สร้าง โดยผล Hybrid ล่าสุดมาจาก query expansion, weighted RRF, semantic similarity และ Graph entity boost
+
+เพื่อประเมินการ generalize แยกต่างหาก มี stratified held-out test 40 ข้อ ซึ่ง Hybrid ได้ Hit@1 **45.0%**, Hit@3 **65.0%** และ MRR **0.5571** สูงกว่า Dense และ Graph เดี่ยวบน split เดียวกัน ไฟล์ผลดิบคือ `data/ablation_test_40_results.json`
 
 ### 5.2 การทดสอบ Embedding Models: MiniLM vs E5-small
 
@@ -319,7 +321,7 @@ python -m unittest tests/test_service.py -v          # ทดสอบ RAG Orche
 | **1. Data & Knowledge Base** | 10 | ข้อมูลจริงจาก JTA และ Ekidata, ผ่าน Data Cleaning, Chunking, และมี [Data Provenance](./data/data_provenance.md) ครบถ้วน |
 | **2. Dense RAG** | 15 | มีทั้ง FAISS และ ChromaDB (พร้อม Metadata Filtering) มีผล Benchmark เทียบ MiniLM vs E5-small 30 คำถาม |
 | **3. Graph RAG** | 15 | Neo4j + NetworkX Fallback มี Node `(:Place)`, `(:Station)`, `(:Line)` พร้อมการคำนวณ Multi-hop Path |
-| **4. Hybrid RAG (หัวใจสำคัญ)** | 20 | Query Intent Router ผสานผลด้วย RRF, semantic score และ Graph boost; ผลที่ตรวจสอบย้อนหลังได้ปัจจุบันคือ Hit@1 60%, Hit@3 76% และ MRR 0.6883 จาก 100 ข้อ |
+| **4. Hybrid RAG (หัวใจสำคัญ)** | 20 | Query Intent Router ผสานผลด้วย RRF, semantic score, structured constraints และ Graph boost; ผลล่าสุดคือ Hit@1 59%, Hit@3 78% และ MRR 0.6933 จาก 100 ข้อ |
 | **5. Local LLM + API LLM** | 15 | รันจริงทั้ง Google Gemini และ Local Ollama (`Qwen 2.5 3B`), มี Side-by-Side Comparator และ Graceful Fallback |
 | **6. System Integration** | 10 | เชื่อมต่อครบวงจรทั้ง LINE Bot (Flex Cards, Quick Replies), Web Application (React Modern Japanese Clean), และ In-Memory Caching |
 | **7. Evaluation & Analysis** | 10 | ชุดทดสอบ 100 ข้อ (A–J), ตารางเปรียบเทียบ Latency, Throughput, Token Cost, RAM Profiling และกราฟวิเคราะห์ครบถ้วน |

@@ -120,7 +120,10 @@ def extract_expected_keywords(query: str, category: str) -> List[str]:
     return entities or ["tokyo"]
 
 
-def run_ablation_study(questions: List[Dict[str, Any]]) -> Dict[str, Any]:
+def run_ablation_study(
+    questions: List[Dict[str, Any]],
+    raw_output_path: str = "data/ablation_per_query_results.json",
+) -> Dict[str, Any]:
     """
     รันการทดลอง Retrieval Ablation Study เปรียบเทียบ 3 สถาปัตยกรรม:
     1. Dense Only (FAISS Top-3 Retrieval)
@@ -134,7 +137,7 @@ def run_ablation_study(questions: List[Dict[str, Any]]) -> Dict[str, Any]:
     - Per-Query Raw Results: บันทึกผลลัพธ์รายข้อ 100 ข้อลง data/ablation_per_query_results.json
     """
     print("\n" + "=" * 70)
-    print("🔬 RUNNING SCIENTIFIC RETRIEVAL ABLATION EXPERIMENT (100 Questions)")
+    print(f"🔬 RUNNING SCIENTIFIC RETRIEVAL ABLATION EXPERIMENT ({len(questions)} Questions)")
     print("=" * 70)
 
     os.environ["HF_HUB_OFFLINE"] = "1"
@@ -313,7 +316,7 @@ def run_ablation_study(questions: List[Dict[str, Any]]) -> Dict[str, Any]:
         }
 
     # บันทึกผลลัพธ์ดิบรายข้อลงไฟล์ data/ablation_per_query_results.json
-    ablation_raw_path = "data/ablation_per_query_results.json"
+    ablation_raw_path = raw_output_path
     with open(ablation_raw_path, "w", encoding="utf-8") as f:
         json.dump({
             "total_questions": n,
@@ -321,7 +324,7 @@ def run_ablation_study(questions: List[Dict[str, Any]]) -> Dict[str, Any]:
             "details": per_query_records
         }, f, ensure_ascii=False, indent=2)
 
-    print(f"💾 บันทึกผลการทดลอง Ablation รายข้อทั้ง 100 ข้อลงที่: {ablation_raw_path}")
+    print(f"💾 บันทึกผลการทดลอง Ablation รายข้อทั้ง {n} ข้อลงที่: {ablation_raw_path}")
     return summary
 
 
@@ -480,17 +483,29 @@ def main():
         action="store_true",
         help="Run the local 100-question retrieval ablation without calling Gemini",
     )
+    parser.add_argument(
+        "--benchmark-file",
+        default="data/benchmark_100_questions.json",
+        help="Benchmark JSON to evaluate (for example the held-out test split)",
+    )
+    parser.add_argument(
+        "--raw-output",
+        default="data/ablation_per_query_results.json",
+        help="Path for per-query retrieval results",
+    )
     args = parser.parse_args()
-    questions = load_benchmark()
+    questions = load_benchmark(args.benchmark_file)
     
     # 1. รัน Ablation Study
-    ablation_results = run_ablation_study(questions)
+    ablation_results = run_ablation_study(questions, raw_output_path=args.raw_output)
     print("\n📊 ผลการทดลอง Ablation Study สรุปผล:")
     print(json.dumps(ablation_results, indent=2, ensure_ascii=False))
 
     if args.ablation_only:
         # Keep previously measured end-to-end outputs, but replace their stale
         # retrieval section with the ablation produced by this exact run.
+        if args.benchmark_file != "data/benchmark_100_questions.json":
+            return
         for output_path in (
             "data/benchmark_results_comprehensive.json",
             "data/benchmark_results_gemini.json",

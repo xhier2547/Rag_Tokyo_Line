@@ -1,0 +1,315 @@
+{
+  "metadata": {
+    "source": "data/benchmark_results_comprehensive.json",
+    "items": 30,
+    "limitations": "Automatic screening proxies only. Citation validity checks whether a named source exists; lexical relevance measures token overlap. Neither metric proves factual faithfulness."
+  },
+  "summary": {
+    "citation_presence_rate": 0.6667,
+    "avg_citation_validity_proxy_when_present": 1.0,
+    "avg_lexical_answer_relevance_proxy": 0.4723,
+    "items_needing_human_review": 10
+  },
+  "details": [
+    {
+      "question_id": 1,
+      "category": "A",
+      "query": "มีสถานที่ท่องเที่ยวอะไรที่ห้ามพลาดเมื่อมา Tokyo ครั้งแรก?",
+      "citation_count": 5,
+      "known_citation_count": 5,
+      "citation_validity_proxy": 1.0,
+      "lexical_answer_relevance_proxy": 0.7,
+      "needs_human_review": false
+    },
+    {
+      "question_id": 2,
+      "category": "A",
+      "query": "แนะนำ 5 สถานที่ท่องเที่ยวยอดนิยมใน Tokyo",
+      "citation_count": 5,
+      "known_citation_count": 5,
+      "citation_validity_proxy": 1.0,
+      "lexical_answer_relevance_proxy": 0.8,
+      "needs_human_review": false
+    },
+    {
+      "question_id": 3,
+      "category": "A",
+      "query": "ถ้ามีเวลาเที่ยว Tokyo เพียง 1 วัน ควรไปที่ไหนบ้าง?",
+      "citation_count": 0,
+      "known_citation_count": 0,
+      "citation_validity_proxy": 0.0,
+      "lexical_answer_relevance_proxy": 0.1,
+      "needs_human_review": true
+    },
+    {
+      "question_id": 11,
+      "category": "B",
+      "query": "แนะนำวัดที่มีชื่อเสียงใน Tokyo",
+      "citation_count": 3,
+      "known_citation_count": 3,
+      "citation_validity_proxy": 1.0,
+      "lexical_answer_relevance_proxy": 0.8333,
+      "needs_human_review": false
+    },
+    {
+      "question_id": 12,
+      "category": "B",
+      "query": "วัด Sensō-ji มีประวัติและความสำคัญอย่างไร?",
+      "citation_count": 8,
+      "known_citation_count": 8,
+      "citation_validity_proxy": 1.0,
+      "lexical_answer_relevance_proxy": 0.4286,
+      "needs_human_review": false
+    },
+    {
+      "question_id": 13,
+      "category": "B",
+      "query": "มีศาลเจ้าที่น่าสนใจใกล้ Shibuya หรือ Harajuku หรือไม่?",
+      "citation_count": 0,
+      "known_citation_count": 0,
+      "citation_validity_proxy": 0.0,
+      "lexical_answer_relevance_proxy": 0.1111,
+      "needs_human_review": true
+    },
+    {
+      "question_id": 21,
+      "category": "C",
+      "query": "ถ้าชอบ Anime ควรไปเที่ยวบริเวณไหนใน Tokyo?",
+      "citation_count": 0,
+      "known_citation_count": 0,
+      "citation_validity_proxy": 0.0,
+      "lexical_answer_relevance_proxy": 0.1111,
+      "needs_human_review": true
+    },
+    {
+      "question_id": 22,
+      "category": "C",
+      "query": "Akihabara มีสถานที่อะไรที่เหมาะกับแฟน Anime และ Gaming?",
+      "citation_count": 6,
+      "known_citation_count": 6,
+      "citation_validity_proxy": 1.0,
+      "lexical_answer_relevance_proxy": 0.8,
+      "needs_human_review": false
+    },
+    {
+      "question_id": 23,
+      "category": "C",
+      "query": "นอกจาก Akihabara แล้ว มีแหล่ง Anime ที่ไหนอีก?",
+      "citation_count": 0,
+      "known_citation_count": 0,
+      "citation_validity_proxy": 0.0,
+      "lexical_answer_relevance_proxy": 0.25,
+      "needs_human_review": true
+    },
+    {
+      "question_id": 31,
+      "category": "D",
+      "query": "แนะนำสวนสาธารณะที่สวยที่สุดใน Tokyo",
+      "citation_count": 5,
+      "known_citation_count": 5,
+      "citation_validity_proxy": 1.0,
+      "lexical_answer_relevance_proxy": 0.4286,
+      "needs_human_review": false
+    },
+    {
+      "question_id": 32,
+      "category": "D",
+      "query": "มีสถานที่ชมดอกซากุระที่ไหนบ้าง?",
+      "citation_count": 0,
+      "known_citation_count": 0,
+      "citation_validity_proxy": 0.0,
+      "lexical_answer_relevance_proxy": 0.1667,
+      "needs_human_review": true
+    },
+    {
+      "question_id": 33,
+      "category": "D",
+      "query": "ถ้าไม่อยากเจอคนเยอะ ควรไปชมซากุระที่ไหน?",
+      "citation_count": 0,
+      "known_citation_count": 0,
+      "citation_validity_proxy": 0.0,
+      "lexical_answer_relevance_proxy": 0.0909,
+      "needs_human_review": true
+    },
+    {
+      "question_id": 41,
+      "category": "E",
+      "query": "แนะนำย่านที่มี Street Food ใน Tokyo",
+      "citation_count": 5,
+      "known_citation_count": 5,
+      "citation_validity_proxy": 1.0,
+      "lexical_answer_relevance_proxy": 0.75,
+      "needs_human_review": false
+    },
+    {
+      "question_id": 42,
+      "category": "E",
+      "query": "ถ้าอยากกินอาหารทะเลควรไปที่ไหน?",
+      "citation_count": 3,
+      "known_citation_count": 3,
+      "citation_validity_proxy": 1.0,
+      "lexical_answer_relevance_proxy": 0.2857,
+      "needs_human_review": false
+    },
+    {
+      "question_id": 43,
+      "category": "E",
+      "query": "Tsukiji Outer Market มีอะไรน่าสนใจ?",
+      "citation_count": 3,
+      "known_citation_count": 3,
+      "citation_validity_proxy": 1.0,
+      "lexical_answer_relevance_proxy": 0.6667,
+      "needs_human_review": false
+    },
+    {
+      "question_id": 51,
+      "category": "F",
+      "query": "มีสถานที่ท่องเที่ยวอะไรอยู่ใกล้ Tokyo Station?",
+      "citation_count": 11,
+      "known_citation_count": 11,
+      "citation_validity_proxy": 1.0,
+      "lexical_answer_relevance_proxy": 0.5714,
+      "needs_human_review": false
+    },
+    {
+      "question_id": 52,
+      "category": "F",
+      "query": "มีสถานที่อะไรอยู่ในระยะเดินจาก Sensō-ji?",
+      "citation_count": 0,
+      "known_citation_count": 0,
+      "citation_validity_proxy": 0.0,
+      "lexical_answer_relevance_proxy": 0.4,
+      "needs_human_review": true
+    },
+    {
+      "question_id": 53,
+      "category": "F",
+      "query": "หลังจากเที่ยว Meiji Jingu แล้วควรไปที่ไหนต่อโดยไม่ต้องนั่งรถไฟ?",
+      "citation_count": 3,
+      "known_citation_count": 3,
+      "citation_validity_proxy": 1.0,
+      "lexical_answer_relevance_proxy": 0.6154,
+      "needs_human_review": false
+    },
+    {
+      "question_id": 61,
+      "category": "G",
+      "query": "จาก Tokyo Station ไป Sensō-ji ควรเดินทางอย่างไร?",
+      "citation_count": 0,
+      "known_citation_count": 0,
+      "citation_validity_proxy": 0.0,
+      "lexical_answer_relevance_proxy": 0.0,
+      "needs_human_review": true
+    },
+    {
+      "question_id": 62,
+      "category": "G",
+      "query": "จาก Shinjuku ไป Meiji Jingu ใช้เส้นทางไหนสะดวก?",
+      "citation_count": 1,
+      "known_citation_count": 1,
+      "citation_validity_proxy": 1.0,
+      "lexical_answer_relevance_proxy": 0.6667,
+      "needs_human_review": false
+    },
+    {
+      "question_id": 63,
+      "category": "G",
+      "query": "จาก Asakusa ไป Tokyo Skytree ไปอย่างไร?",
+      "citation_count": 6,
+      "known_citation_count": 6,
+      "citation_validity_proxy": 1.0,
+      "lexical_answer_relevance_proxy": 0.6667,
+      "needs_human_review": false
+    },
+    {
+      "question_id": 71,
+      "category": "H",
+      "query": "ช่วยจัดทริป Tokyo 1 วันสำหรับคนมาครั้งแรก",
+      "citation_count": 8,
+      "known_citation_count": 8,
+      "citation_validity_proxy": 1.0,
+      "lexical_answer_relevance_proxy": 0.5556,
+      "needs_human_review": false
+    },
+    {
+      "question_id": 72,
+      "category": "H",
+      "query": "ช่วยจัดทริป Tokyo 2 วัน เน้นวัฒนธรรมและอาหาร",
+      "citation_count": 6,
+      "known_citation_count": 6,
+      "citation_validity_proxy": 1.0,
+      "lexical_answer_relevance_proxy": 0.6667,
+      "needs_human_review": false
+    },
+    {
+      "question_id": 73,
+      "category": "H",
+      "query": "ช่วยจัดทริป 3 วัน โดยไม่ให้สถานที่ในแต่ละวันอยู่ไกลกันเกินไป",
+      "citation_count": 8,
+      "known_citation_count": 8,
+      "citation_validity_proxy": 1.0,
+      "lexical_answer_relevance_proxy": 0.5714,
+      "needs_human_review": false
+    },
+    {
+      "question_id": 81,
+      "category": "I",
+      "query": "ฉันชอบประวัติศาสตร์และไม่สนใจ Shopping ควรไปที่ไหน?",
+      "citation_count": 0,
+      "known_citation_count": 0,
+      "citation_validity_proxy": 0.0,
+      "lexical_answer_relevance_proxy": 0.1,
+      "needs_human_review": true
+    },
+    {
+      "question_id": 82,
+      "category": "I",
+      "query": "ฉันชอบ Anime และอาหารญี่ปุ่น ช่วยจัดเส้นทางหนึ่งวันให้หน่อย",
+      "citation_count": 3,
+      "known_citation_count": 3,
+      "citation_validity_proxy": 1.0,
+      "lexical_answer_relevance_proxy": 0.3077,
+      "needs_human_review": false
+    },
+    {
+      "question_id": 83,
+      "category": "I",
+      "query": "ฉันชอบถ่ายรูป มีสถานที่ไหนเหมาะสำหรับ Photography?",
+      "citation_count": 9,
+      "known_citation_count": 9,
+      "citation_validity_proxy": 1.0,
+      "lexical_answer_relevance_proxy": 0.25,
+      "needs_human_review": false
+    },
+    {
+      "question_id": 91,
+      "category": "J",
+      "query": "หาวัดที่อยู่ใกล้สถานีรถไฟและมีสถานที่ทางประวัติศาสตร์อื่นอยู่ในระยะเดินถึง",
+      "citation_count": 4,
+      "known_citation_count": 4,
+      "citation_validity_proxy": 1.0,
+      "lexical_answer_relevance_proxy": 0.6875,
+      "needs_human_review": false
+    },
+    {
+      "question_id": 92,
+      "category": "J",
+      "query": "แนะนำสถานที่ชมวิวที่สามารถเดินทางต่อไปยังย่านอาหารได้ง่ายโดยรถไฟไม่เกินหนึ่งต่อ",
+      "citation_count": 5,
+      "known_citation_count": 5,
+      "citation_validity_proxy": 1.0,
+      "lexical_answer_relevance_proxy": 0.8947,
+      "needs_human_review": false
+    },
+    {
+      "question_id": 93,
+      "category": "J",
+      "query": "หาสถานที่ท่องเที่ยวทางวัฒนธรรม 3 แห่งที่อยู่ในเขตเดียวกันและมีสถานีรถไฟอยู่ใกล้",
+      "citation_count": 0,
+      "known_citation_count": 0,
+      "citation_validity_proxy": 0.0,
+      "lexical_answer_relevance_proxy": 0.6923,
+      "needs_human_review": true
+    }
+  ]
+}

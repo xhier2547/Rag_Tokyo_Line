@@ -5,21 +5,21 @@
       "hit_rate_top1_pct": 42.0,
       "hit_rate_top3_pct": 64.0,
       "mrr": 0.5183,
-      "avg_latency_ms": 15.36,
+      "avg_latency_ms": 15.62,
       "graph_coverage_pct": 0.0
     },
     "graph_only": {
       "hit_rate_top1_pct": 53.0,
       "hit_rate_top3_pct": 54.0,
       "mrr": 0.5358,
-      "avg_latency_ms": 0.18,
+      "avg_latency_ms": 0.17,
       "graph_coverage_pct": 80.0
     },
     "hybrid_rag": {
-      "hit_rate_top1_pct": 60.0,
-      "hit_rate_top3_pct": 76.0,
-      "mrr": 0.6883,
-      "avg_latency_ms": 46.86,
+      "hit_rate_top1_pct": 59.0,
+      "hit_rate_top3_pct": 78.0,
+      "mrr": 0.6933,
+      "avg_latency_ms": 47.76,
       "graph_coverage_pct": 80.0
     }
   },
@@ -31,9 +31,9 @@
       "requires_graph": false,
       "ground_truth_entities": [
         "P_TOKYO_SKYTREE",
+        "P_SHIBUYA_CROSSING",
         "P_SENSOJI",
         "P_IMPERIAL_PALACE",
-        "P_SHIBUYA_CROSSING",
         "P_MEIJI_JINGU"
       ],
       "dense_only": {
@@ -46,7 +46,7 @@
           "C_P_TOKYO_DOME_CITY_01",
           "C_P_TOKYO_DOME_CITY_INFO"
         ],
-        "latency_ms": 15.33
+        "latency_ms": 15.4
       },
       "graph_only": {
         "ranked_entities": [
@@ -56,7 +56,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.5
+        "latency_ms": 0.52
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -70,7 +70,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 708.95
+        "latency_ms": 712.76
       }
     },
     {
@@ -80,10 +80,10 @@
       "requires_graph": false,
       "ground_truth_entities": [
         "P_TOKYO_SKYTREE",
-        "P_TOKYO_TOWER",
+        "P_SHIBUYA_CROSSING",
         "P_SENSOJI",
         "P_IMPERIAL_PALACE",
-        "P_SHIBUYA_CROSSING"
+        "P_TOKYO_TOWER"
       ],
       "dense_only": {
         "rank": 1,
@@ -95,7 +95,7 @@
           "C_P_TOKYO_DOME_CITY_01",
           "C_P_ROPPONGI_HILLS_INFO"
         ],
-        "latency_ms": 16.8
+        "latency_ms": 17.84
       },
       "graph_only": {
         "ranked_entities": [
@@ -121,7 +121,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 28.91
+        "latency_ms": 29.35
       }
     },
     {
@@ -130,9 +130,9 @@
       "query": "ถ้ามีเวลาเที่ยว Tokyo เพียง 1 วัน ควรไปที่ไหนบ้าง?",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_MEIJI_JINGU",
         "P_SHIBUYA_CROSSING",
         "P_SENSOJI",
+        "P_MEIJI_JINGU",
         "P_IMPERIAL_PALACE"
       ],
       "dense_only": {
@@ -145,7 +145,7 @@
           "C_P_TOKYO_DOME_CITY_INFO",
           "C_P_ROPPONGI_HILLS_INFO"
         ],
-        "latency_ms": 17.0
+        "latency_ms": 17.39
       },
       "graph_only": {
         "ranked_entities": [
@@ -170,7 +170,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 30.59
+        "latency_ms": 35.29
       }
     },
     {
@@ -179,9 +179,9 @@
       "query": "สถานที่ไหนเหมาะสำหรับคนที่อยากเห็นทั้ง Tokyo แบบดั้งเดิมและสมัยใหม่?",
       "requires_graph": false,
       "ground_truth_entities": [
-        "P_TOKYO_SKYTREE",
         "P_SHIBUYA_CROSSING",
-        "P_SENSOJI"
+        "P_SENSOJI",
+        "P_TOKYO_SKYTREE"
       ],
       "dense_only": {
         "rank": null,
@@ -193,7 +193,7 @@
           "C_P_IMPERIAL_PALACE_INFO",
           "C_P_IMPERIAL_PALACE_02"
         ],
-        "latency_ms": 14.74
+        "latency_ms": 16.98
       },
       "graph_only": {
         "ranked_entities": [
@@ -203,7 +203,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.15
+        "latency_ms": 0.14
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -217,7 +217,7 @@
         "rr": 0.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 30.75
+        "latency_ms": 32.92
       }
     },
     {
@@ -227,10 +227,10 @@
       "requires_graph": false,
       "ground_truth_entities": [
         "P_TOKYO_SKYTREE",
-        "P_TOKYO_TOWER",
+        "P_SHIBUYA_CROSSING",
         "P_SENSOJI",
         "P_IMPERIAL_PALACE",
-        "P_SHIBUYA_CROSSING"
+        "P_TOKYO_TOWER"
       ],
       "dense_only": {
         "rank": 1,
@@ -242,7 +242,7 @@
           "C_P_TOKYO_DOME_CITY_01",
           "C_P_IMPERIAL_PALACE_02"
         ],
-        "latency_ms": 14.76
+        "latency_ms": 16.49
       },
       "graph_only": {
         "ranked_entities": [
@@ -252,7 +252,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.16
+        "latency_ms": 0.13
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -268,7 +268,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 27.86
+        "latency_ms": 31.36
       }
     },
     {
@@ -277,11 +277,11 @@
       "query": "มีสถานที่ท่องเที่ยวฟรีอะไรบ้างใน Tokyo?",
       "requires_graph": false,
       "ground_truth_entities": [
-        "P_UENO_PARK",
+        "P_SHIBUYA_CROSSING",
         "P_SENSOJI",
         "P_IMPERIAL_PALACE",
-        "P_SHIBUYA_CROSSING",
-        "P_MEIJI_JINGU"
+        "P_MEIJI_JINGU",
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": 1,
@@ -293,7 +293,7 @@
           "C_P_IMPERIAL_PALACE_02",
           "C_P_TOKYO_DOME_CITY_01"
         ],
-        "latency_ms": 14.55
+        "latency_ms": 14.8
       },
       "graph_only": {
         "ranked_entities": [
@@ -317,7 +317,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 29.58
+        "latency_ms": 32.68
       }
     },
     {
@@ -327,8 +327,8 @@
       "requires_graph": false,
       "ground_truth_entities": [
         "P_SHINJUKU_GYOEN",
-        "P_UENO_PARK",
         "P_MEIJI_JINGU",
+        "P_UENO_PARK",
         "P_HAMARIKYU_GARDENS"
       ],
       "dense_only": {
@@ -341,7 +341,7 @@
           "C_P_OMOTESANDO_HILLS_01",
           "C_H_HOTEL_VILLA_FONTAINE_ROPPONGI"
         ],
-        "latency_ms": 12.44
+        "latency_ms": 14.49
       },
       "graph_only": {
         "ranked_entities": [],
@@ -349,7 +349,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.17
+        "latency_ms": 0.19
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -364,7 +364,7 @@
         "rr": 0.0,
         "graph_used": false,
         "citations_count": 5,
-        "latency_ms": 28.53
+        "latency_ms": 32.59
       }
     },
     {
@@ -373,10 +373,10 @@
       "query": "แนะนำสถานที่ที่ไม่ใช่แหล่งท่องเที่ยวยอดนิยมแต่มีความน่าสนใจ",
       "requires_graph": false,
       "ground_truth_entities": [
+        "P_OMOTESANDO_HILLS",
         "P_TOKYO_DOME_CITY",
         "P_TEAMLAB_PLANETS",
-        "P_HAMARIKYU_GARDENS",
-        "P_OMOTESANDO_HILLS"
+        "P_HAMARIKYU_GARDENS"
       ],
       "dense_only": {
         "rank": 1,
@@ -388,7 +388,7 @@
           "C_P_OMOTESANDO_HILLS_INFO",
           "C_P_ROPPONGI_HILLS_INFO"
         ],
-        "latency_ms": 12.71
+        "latency_ms": 14.38
       },
       "graph_only": {
         "ranked_entities": [],
@@ -396,7 +396,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.15
+        "latency_ms": 0.19
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -412,7 +412,7 @@
         "rr": 0.5,
         "graph_used": false,
         "citations_count": 8,
-        "latency_ms": 28.66
+        "latency_ms": 31.34
       }
     },
     {
@@ -422,8 +422,8 @@
       "requires_graph": false,
       "ground_truth_entities": [
         "P_SHINJUKU_GYOEN",
-        "P_UENO_PARK",
-        "P_SENSOJI"
+        "P_SENSOJI",
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": null,
@@ -435,7 +435,7 @@
           "C_P_OMOTESANDO_HILLS_INFO",
           "C_P_ROPPONGI_HILLS_INFO"
         ],
-        "latency_ms": 14.23
+        "latency_ms": 14.84
       },
       "graph_only": {
         "ranked_entities": [],
@@ -443,7 +443,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.2
+        "latency_ms": 0.21
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -458,7 +458,7 @@
         "rr": 0.0,
         "graph_used": false,
         "citations_count": 5,
-        "latency_ms": 32.29
+        "latency_ms": 33.67
       }
     },
     {
@@ -481,7 +481,7 @@
           "C_P_IMPERIAL_PALACE_INFO",
           "C_P_ROPPONGI_HILLS_INFO"
         ],
-        "latency_ms": 14.67
+        "latency_ms": 15.32
       },
       "graph_only": {
         "ranked_entities": [
@@ -506,7 +506,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 34.14
+        "latency_ms": 35.06
       }
     },
     {
@@ -515,8 +515,8 @@
       "query": "แนะนำวัดที่มีชื่อเสียงใน Tokyo",
       "requires_graph": false,
       "ground_truth_entities": [
-        "P_MEIJI_JINGU",
-        "P_SENSOJI"
+        "P_SENSOJI",
+        "P_MEIJI_JINGU"
       ],
       "dense_only": {
         "rank": null,
@@ -528,7 +528,7 @@
           "C_P_ROPPONGI_HILLS_01",
           "C_P_IMPERIAL_PALACE_INFO"
         ],
-        "latency_ms": 13.9
+        "latency_ms": 15.04
       },
       "graph_only": {
         "ranked_entities": [
@@ -538,23 +538,23 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.15
+        "latency_ms": 0.14
       },
       "hybrid_rag": {
         "ranked_entities": [
           "P_IMPERIAL_PALACE",
+          "P_SENSOJI",
           "P_ROPPONGI_HILLS",
           "P_TOKYO_DOME_CITY",
-          "P_SENSOJI",
           "P_TOKYO_TOWER"
         ],
-        "rank": 4,
+        "rank": 2,
         "hit1": 0,
-        "hit3": 0,
-        "rr": 0.25,
+        "hit3": 1,
+        "rr": 0.5,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 28.2
+        "latency_ms": 29.44
       }
     },
     {
@@ -575,7 +575,7 @@
           "C_P_SENSOJI_01",
           "C_P_SENSOJI_INFO"
         ],
-        "latency_ms": 15.01
+        "latency_ms": 15.4
       },
       "graph_only": {
         "ranked_entities": [
@@ -589,7 +589,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.19
+        "latency_ms": 0.2
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -605,7 +605,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 28.67
+        "latency_ms": 30.94
       }
     },
     {
@@ -626,7 +626,7 @@
           "C_P_MEIJI_JINGU_INFO",
           "C_P_SHIBUYA_CROSSING_INFO"
         ],
-        "latency_ms": 13.94
+        "latency_ms": 14.7
       },
       "graph_only": {
         "ranked_entities": [
@@ -638,22 +638,21 @@
         "hit1": 0,
         "hit3": 1,
         "rr": 0.3333,
-        "latency_ms": 0.18
+        "latency_ms": 0.14
       },
       "hybrid_rag": {
         "ranked_entities": [
           "P_SHIBUYA_CROSSING",
-          "P_TAKESHITA_STREET",
           "P_MEIJI_JINGU",
-          "H_SHIBUYA_STREAM_EXCEL"
+          "P_TAKESHITA_STREET"
         ],
-        "rank": 3,
+        "rank": 2,
         "hit1": 0,
         "hit3": 1,
-        "rr": 0.3333,
+        "rr": 0.5,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 34.07
+        "latency_ms": 35.58
       }
     },
     {
@@ -662,8 +661,8 @@
       "query": "Meiji Jingu แตกต่างจาก Sensō-ji อย่างไร?",
       "requires_graph": false,
       "ground_truth_entities": [
-        "P_MEIJI_JINGU",
-        "P_SENSOJI"
+        "P_SENSOJI",
+        "P_MEIJI_JINGU"
       ],
       "dense_only": {
         "rank": 1,
@@ -675,7 +674,7 @@
           "C_P_MEIJI_JINGU_01",
           "C_P_SENSOJI_02"
         ],
-        "latency_ms": 16.1
+        "latency_ms": 15.18
       },
       "graph_only": {
         "ranked_entities": [],
@@ -698,7 +697,7 @@
         "rr": 1.0,
         "graph_used": false,
         "citations_count": 5,
-        "latency_ms": 28.14
+        "latency_ms": 32.76
       }
     },
     {
@@ -720,7 +719,7 @@
           "C_P_SENSOJI_01",
           "C_P_IMPERIAL_PALACE_INFO"
         ],
-        "latency_ms": 13.4
+        "latency_ms": 14.62
       },
       "graph_only": {
         "ranked_entities": [
@@ -734,7 +733,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.18
+        "latency_ms": 0.19
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -750,7 +749,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 28.57
+        "latency_ms": 30.23
       }
     },
     {
@@ -759,8 +758,8 @@
       "query": "มีสถานที่ใดที่สามารถเรียนรู้เกี่ยวกับวัฒนธรรมญี่ปุ่นแบบดั้งเดิมได้?",
       "requires_graph": false,
       "ground_truth_entities": [
-        "P_MEIJI_JINGU",
         "P_SENSOJI",
+        "P_MEIJI_JINGU",
         "P_IMPERIAL_PALACE"
       ],
       "dense_only": {
@@ -773,7 +772,7 @@
           "C_P_MEIJI_JINGU_01",
           "C_P_TAKESHITA_STREET_01"
         ],
-        "latency_ms": 14.46
+        "latency_ms": 14.76
       },
       "graph_only": {
         "ranked_entities": [],
@@ -781,7 +780,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.21
+        "latency_ms": 0.19
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -789,7 +788,7 @@
           "P_IMPERIAL_PALACE",
           "P_MEIJI_JINGU",
           "P_TAKESHITA_STREET",
-          "P_HAMARIKYU_GARDENS"
+          "P_AKIHABARA_ELECTRIC"
         ],
         "rank": 1,
         "hit1": 1,
@@ -797,7 +796,7 @@
         "rr": 1.0,
         "graph_used": false,
         "citations_count": 5,
-        "latency_ms": 30.14
+        "latency_ms": 31.74
       }
     },
     {
@@ -818,7 +817,7 @@
           "C_P_IMPERIAL_PALACE_02",
           "C_P_IMPERIAL_PALACE_INFO"
         ],
-        "latency_ms": 13.53
+        "latency_ms": 13.82
       },
       "graph_only": {
         "ranked_entities": [
@@ -828,23 +827,23 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.15
+        "latency_ms": 0.17
       },
       "hybrid_rag": {
         "ranked_entities": [
           "P_IMPERIAL_PALACE",
-          "P_ROPPONGI_HILLS",
           "P_UENO_PARK",
+          "P_ROPPONGI_HILLS",
           "P_TOKYO_SKYTREE",
           "P_TOKYO_DOME_CITY"
         ],
-        "rank": 3,
+        "rank": 2,
         "hit1": 0,
         "hit3": 1,
-        "rr": 0.3333,
+        "rr": 0.5,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 26.63
+        "latency_ms": 28.62
       }
     },
     {
@@ -854,8 +853,8 @@
       "requires_graph": false,
       "ground_truth_entities": [
         "P_SHINJUKU_GYOEN",
-        "P_HAMARIKYU_GARDENS",
-        "P_IMPERIAL_PALACE"
+        "P_IMPERIAL_PALACE",
+        "P_HAMARIKYU_GARDENS"
       ],
       "dense_only": {
         "rank": 1,
@@ -867,7 +866,7 @@
           "C_P_IMPERIAL_PALACE_02",
           "C_P_HAMARIKYU_GARDENS_01"
         ],
-        "latency_ms": 14.86
+        "latency_ms": 15.46
       },
       "graph_only": {
         "ranked_entities": [
@@ -892,7 +891,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 32.88
+        "latency_ms": 33.31
       }
     },
     {
@@ -901,8 +900,8 @@
       "query": "ถ้าต้องการเที่ยววัดและศาลเจ้าหลายแห่งในหนึ่งวัน ควรจัดเส้นทางอย่างไร?",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_MEIJI_JINGU",
-        "P_SENSOJI"
+        "P_SENSOJI",
+        "P_MEIJI_JINGU"
       ],
       "dense_only": {
         "rank": 1,
@@ -914,7 +913,7 @@
           "C_P_SENSOJI_02",
           "C_P_MEIJI_JINGU_INFO"
         ],
-        "latency_ms": 13.48
+        "latency_ms": 14.91
       },
       "graph_only": {
         "ranked_entities": [
@@ -944,7 +943,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 28.26
+        "latency_ms": 29.99
       }
     },
     {
@@ -965,7 +964,7 @@
           "C_H_ASAKUSA_VIEW",
           "C_P_AKIHABARA_ELECTRIC_INFO"
         ],
-        "latency_ms": 13.88
+        "latency_ms": 14.73
       },
       "graph_only": {
         "ranked_entities": [
@@ -975,13 +974,13 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.13
+        "latency_ms": 0.15
       },
       "hybrid_rag": {
         "ranked_entities": [
           "P_SENSOJI",
-          "P_AKIHABARA_ELECTRIC",
           "H_ASAKUSA_VIEW",
+          "P_AKIHABARA_ELECTRIC",
           "H_HOTEL_VILLA_FONTAINE_ROPPONGI",
           "P_AMEYOKO"
         ],
@@ -991,7 +990,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 35.02
+        "latency_ms": 35.01
       }
     },
     {
@@ -1000,8 +999,8 @@
       "query": "ถ้าชอบ Anime ควรไปเที่ยวบริเวณไหนใน Tokyo?",
       "requires_graph": false,
       "ground_truth_entities": [
-        "P_ODAIBA_GUNDAM",
-        "P_AKIHABARA_ELECTRIC"
+        "P_AKIHABARA_ELECTRIC",
+        "P_ODAIBA_GUNDAM"
       ],
       "dense_only": {
         "rank": null,
@@ -1013,7 +1012,7 @@
           "C_P_TOKYO_DOME_CITY_01",
           "C_P_ROPPONGI_HILLS_INFO"
         ],
-        "latency_ms": 14.53
+        "latency_ms": 14.29
       },
       "graph_only": {
         "ranked_entities": [
@@ -1023,22 +1022,21 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.15
+        "latency_ms": 0.16
       },
       "hybrid_rag": {
         "ranked_entities": [
           "P_IMPERIAL_PALACE",
-          "P_TOKYO_DOME_CITY",
           "P_AKIHABARA_ELECTRIC",
-          "P_TAKESHITA_STREET"
+          "P_TOKYO_DOME_CITY"
         ],
-        "rank": 3,
+        "rank": 2,
         "hit1": 0,
         "hit3": 1,
-        "rr": 0.3333,
+        "rr": 0.5,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 32.12
+        "latency_ms": 32.03
       }
     },
     {
@@ -1059,7 +1057,7 @@
           "C_P_AKIHABARA_ELECTRIC_INFO",
           "C_H_ASAKUSA_VIEW"
         ],
-        "latency_ms": 15.37
+        "latency_ms": 45.54
       },
       "graph_only": {
         "ranked_entities": [
@@ -1069,13 +1067,13 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.13
+        "latency_ms": 0.17
       },
       "hybrid_rag": {
         "ranked_entities": [
           "P_AKIHABARA_ELECTRIC",
-          "P_TAKESHITA_STREET",
           "H_DORM_INN_AKIHABARA",
+          "P_TAKESHITA_STREET",
           "P_AMEYOKO"
         ],
         "rank": 1,
@@ -1084,7 +1082,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 33.68
+        "latency_ms": 41.51
       }
     },
     {
@@ -1105,7 +1103,7 @@
           "C_P_AKIHABARA_ELECTRIC_INFO",
           "C_P_ODAIBA_GUNDAM_INFO"
         ],
-        "latency_ms": 14.77
+        "latency_ms": 14.82
       },
       "graph_only": {
         "ranked_entities": [
@@ -1130,7 +1128,7 @@
         "rr": 0.5,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 31.19
+        "latency_ms": 33.78
       }
     },
     {
@@ -1139,8 +1137,8 @@
       "query": "Ikebukuro กับ Akihabara ต่างกันอย่างไรสำหรับแฟน Anime?",
       "requires_graph": false,
       "ground_truth_entities": [
-        "P_ODAIBA_GUNDAM",
-        "P_AKIHABARA_ELECTRIC"
+        "P_AKIHABARA_ELECTRIC",
+        "P_ODAIBA_GUNDAM"
       ],
       "dense_only": {
         "rank": 1,
@@ -1152,7 +1150,7 @@
           "C_P_ODAIBA_GUNDAM_01",
           "C_P_ODAIBA_GUNDAM_INFO"
         ],
-        "latency_ms": 15.88
+        "latency_ms": 16.19
       },
       "graph_only": {
         "ranked_entities": [
@@ -1162,14 +1160,14 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.2
+        "latency_ms": 0.18
       },
       "hybrid_rag": {
         "ranked_entities": [
           "P_AKIHABARA_ELECTRIC",
+          "H_DORM_INN_AKIHABARA",
           "P_TAKESHITA_STREET",
-          "P_HAMARIKYU_GARDENS",
-          "H_DORM_INN_AKIHABARA"
+          "P_HAMARIKYU_GARDENS"
         ],
         "rank": 1,
         "hit1": 1,
@@ -1177,7 +1175,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 149.94
+        "latency_ms": 133.44
       }
     },
     {
@@ -1199,7 +1197,7 @@
           "C_P_ODAIBA_GUNDAM_01",
           "C_P_IMPERIAL_PALACE_INFO"
         ],
-        "latency_ms": 14.45
+        "latency_ms": 14.81
       },
       "graph_only": {
         "ranked_entities": [
@@ -1209,7 +1207,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.13
+        "latency_ms": 0.16
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -1223,7 +1221,7 @@
         "rr": 0.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 28.86
+        "latency_ms": 30.71
       }
     },
     {
@@ -1244,7 +1242,7 @@
           "C_P_TOYOSU_MARKET_INFO",
           "C_P_TAKESHITA_STREET_01"
         ],
-        "latency_ms": 13.85
+        "latency_ms": 14.71
       },
       "graph_only": {
         "ranked_entities": [],
@@ -1267,7 +1265,7 @@
         "rr": 0.25,
         "graph_used": false,
         "citations_count": 5,
-        "latency_ms": 28.52
+        "latency_ms": 31.17
       }
     },
     {
@@ -1288,7 +1286,7 @@
           "C_P_ODAIBA_GUNDAM_INFO",
           "C_P_ROPPONGI_HILLS_INFO"
         ],
-        "latency_ms": 12.88
+        "latency_ms": 15.17
       },
       "graph_only": {
         "ranked_entities": [],
@@ -1296,7 +1294,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.14
+        "latency_ms": 0.19
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -1311,7 +1309,7 @@
         "rr": 1.0,
         "graph_used": false,
         "citations_count": 5,
-        "latency_ms": 28.63
+        "latency_ms": 30.32
       }
     },
     {
@@ -1320,9 +1318,9 @@
       "query": "แนะนำเส้นทาง Anime Tour 1 วันใน Tokyo",
       "requires_graph": true,
       "ground_truth_entities": [
+        "P_AKIHABARA_ELECTRIC",
         "P_TEAMLAB_PLANETS",
-        "P_ODAIBA_GUNDAM",
-        "P_AKIHABARA_ELECTRIC"
+        "P_ODAIBA_GUNDAM"
       ],
       "dense_only": {
         "rank": null,
@@ -1334,7 +1332,7 @@
           "C_P_ROPPONGI_HILLS_INFO",
           "C_P_TOKYO_DOME_CITY_INFO"
         ],
-        "latency_ms": 13.67
+        "latency_ms": 14.41
       },
       "graph_only": {
         "ranked_entities": [
@@ -1349,18 +1347,18 @@
       "hybrid_rag": {
         "ranked_entities": [
           "P_IMPERIAL_PALACE",
+          "P_AKIHABARA_ELECTRIC",
           "P_TAKESHITA_STREET",
           "P_TOKYO_DOME_CITY",
-          "P_TEAMLAB_PLANETS",
-          "P_AKIHABARA_ELECTRIC"
+          "P_TEAMLAB_PLANETS"
         ],
-        "rank": 4,
+        "rank": 2,
         "hit1": 0,
-        "hit3": 0,
-        "rr": 0.25,
+        "hit3": 1,
+        "rr": 0.5,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 30.43
+        "latency_ms": 33.85
       }
     },
     {
@@ -1369,8 +1367,8 @@
       "query": "มีสถานที่เกี่ยวกับเทคโนโลยีหรือวิทยาศาสตร์ที่น่าสนใจไหม?",
       "requires_graph": false,
       "ground_truth_entities": [
-        "P_TEAMLAB_PLANETS",
-        "P_AKIHABARA_ELECTRIC"
+        "P_AKIHABARA_ELECTRIC",
+        "P_TEAMLAB_PLANETS"
       ],
       "dense_only": {
         "rank": 1,
@@ -1382,7 +1380,7 @@
           "C_P_AKIHABARA_ELECTRIC_01",
           "C_P_TEAMLAB_PLANETS_INFO"
         ],
-        "latency_ms": 14.21
+        "latency_ms": 14.01
       },
       "graph_only": {
         "ranked_entities": [],
@@ -1390,7 +1388,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.19
+        "latency_ms": 0.14
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -1405,7 +1403,7 @@
         "rr": 1.0,
         "graph_used": false,
         "citations_count": 5,
-        "latency_ms": 29.83
+        "latency_ms": 31.79
       }
     },
     {
@@ -1426,7 +1424,7 @@
           "C_H_DORM_INN_AKIHABARA",
           "C_P_TOKYO_DOME_CITY_INFO"
         ],
-        "latency_ms": 15.3
+        "latency_ms": 17.02
       },
       "graph_only": {
         "ranked_entities": [
@@ -1436,7 +1434,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.16
+        "latency_ms": 0.12
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -1452,7 +1450,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 33.56
+        "latency_ms": 36.33
       }
     },
     {
@@ -1475,7 +1473,7 @@
           "C_P_SHINJUKU_GYOEN_01",
           "C_P_HAMARIKYU_GARDENS_01"
         ],
-        "latency_ms": 11.42
+        "latency_ms": 14.04
       },
       "graph_only": {
         "ranked_entities": [
@@ -1485,7 +1483,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.13
+        "latency_ms": 0.23
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -1493,7 +1491,7 @@
           "P_SHINJUKU_GYOEN",
           "P_HAMARIKYU_GARDENS",
           "P_UENO_PARK",
-          "P_ROPPONGI_HILLS"
+          "P_TOKYO_DOME_CITY"
         ],
         "rank": 2,
         "hit1": 0,
@@ -1501,7 +1499,7 @@
         "rr": 0.5,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 30.04
+        "latency_ms": 32.85
       }
     },
     {
@@ -1523,7 +1521,7 @@
           "C_P_SHINJUKU_GYOEN_01",
           "C_P_OMOTESANDO_HILLS_INFO"
         ],
-        "latency_ms": 14.74
+        "latency_ms": 14.61
       },
       "graph_only": {
         "ranked_entities": [
@@ -1534,7 +1532,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.2
+        "latency_ms": 0.21
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -1548,7 +1546,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 32.3
+        "latency_ms": 34.33
       }
     },
     {
@@ -1570,7 +1568,7 @@
           "C_P_OMOTESANDO_HILLS_01",
           "C_P_ROPPONGI_HILLS_INFO"
         ],
-        "latency_ms": 14.89
+        "latency_ms": 16.06
       },
       "graph_only": {
         "ranked_entities": [
@@ -1595,7 +1593,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 32.87
+        "latency_ms": 37.88
       }
     },
     {
@@ -1618,7 +1616,7 @@
           "C_P_SHINJUKU_GYOEN_01",
           "C_P_IMPERIAL_PALACE_02"
         ],
-        "latency_ms": 15.35
+        "latency_ms": 15.17
       },
       "graph_only": {
         "ranked_entities": [
@@ -1642,7 +1640,7 @@
         "rr": 0.5,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 31.17
+        "latency_ms": 30.71
       }
     },
     {
@@ -1652,8 +1650,8 @@
       "requires_graph": false,
       "ground_truth_entities": [
         "P_TOKYO_SKYTREE",
-        "P_TOKYO_TOWER",
-        "P_ROPPONGI_HILLS"
+        "P_ROPPONGI_HILLS",
+        "P_TOKYO_TOWER"
       ],
       "dense_only": {
         "rank": 1,
@@ -1665,7 +1663,7 @@
           "C_P_ROPPONGI_HILLS_INFO",
           "C_P_TOKYO_DOME_CITY_01"
         ],
-        "latency_ms": 11.81
+        "latency_ms": 14.95
       },
       "graph_only": {
         "ranked_entities": [
@@ -1675,7 +1673,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.12
+        "latency_ms": 0.15
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -1689,7 +1687,7 @@
         "rr": 0.5,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 28.82
+        "latency_ms": 29.88
       }
     },
     {
@@ -1699,8 +1697,8 @@
       "requires_graph": false,
       "ground_truth_entities": [
         "P_TOKYO_SKYTREE",
-        "P_TOKYO_TOWER",
-        "P_ROPPONGI_HILLS"
+        "P_ROPPONGI_HILLS",
+        "P_TOKYO_TOWER"
       ],
       "dense_only": {
         "rank": 1,
@@ -1712,7 +1710,7 @@
           "C_P_TOKYO_SKYTREE_01",
           "C_P_TOKYO_SKYTREE_02"
         ],
-        "latency_ms": 14.79
+        "latency_ms": 14.4
       },
       "graph_only": {
         "ranked_entities": [
@@ -1724,7 +1722,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.17
+        "latency_ms": 0.13
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -1738,7 +1736,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 29.7
+        "latency_ms": 30.92
       }
     },
     {
@@ -1760,7 +1758,7 @@
           "C_P_IMPERIAL_PALACE_INFO",
           "C_P_TOKYO_DOME_CITY_INFO"
         ],
-        "latency_ms": 12.67
+        "latency_ms": 14.0
       },
       "graph_only": {
         "ranked_entities": [
@@ -1770,13 +1768,13 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.12
+        "latency_ms": 0.14
       },
       "hybrid_rag": {
         "ranked_entities": [
           "P_IMPERIAL_PALACE",
-          "P_ROPPONGI_HILLS",
-          "P_TOKYO_DOME_CITY"
+          "P_TOKYO_DOME_CITY",
+          "P_OMOTESANDO_HILLS"
         ],
         "rank": null,
         "hit1": 0,
@@ -1784,7 +1782,7 @@
         "rr": 0.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 27.79
+        "latency_ms": 32.31
       }
     },
     {
@@ -1794,8 +1792,8 @@
       "requires_graph": false,
       "ground_truth_entities": [
         "P_TOKYO_SKYTREE",
-        "P_TOKYO_TOWER",
-        "P_ROPPONGI_HILLS"
+        "P_ROPPONGI_HILLS",
+        "P_TOKYO_TOWER"
       ],
       "dense_only": {
         "rank": 3,
@@ -1807,7 +1805,7 @@
           "C_P_OMOTESANDO_HILLS_01",
           "C_P_ROPPONGI_HILLS_INFO"
         ],
-        "latency_ms": 13.89
+        "latency_ms": 14.9
       },
       "graph_only": {
         "ranked_entities": [],
@@ -1815,7 +1813,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.14
+        "latency_ms": 0.13
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -1831,7 +1829,7 @@
         "rr": 0.25,
         "graph_used": false,
         "citations_count": 5,
-        "latency_ms": 27.56
+        "latency_ms": 29.35
       }
     },
     {
@@ -1854,7 +1852,7 @@
           "C_P_IMPERIAL_PALACE_INFO",
           "C_P_HAMARIKYU_GARDENS_INFO"
         ],
-        "latency_ms": 14.67
+        "latency_ms": 15.3
       },
       "graph_only": {
         "ranked_entities": [
@@ -1865,7 +1863,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.2
+        "latency_ms": 0.19
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -1879,7 +1877,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 36.13
+        "latency_ms": 37.68
       }
     },
     {
@@ -1902,7 +1900,7 @@
           "C_P_HAMARIKYU_GARDENS_INFO",
           "C_P_ROPPONGI_HILLS_INFO"
         ],
-        "latency_ms": 14.77
+        "latency_ms": 14.49
       },
       "graph_only": {
         "ranked_entities": [
@@ -1926,7 +1924,7 @@
         "rr": 0.5,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 31.84
+        "latency_ms": 33.18
       }
     },
     {
@@ -1935,8 +1933,8 @@
       "query": "แนะนำย่านที่มี Street Food ใน Tokyo",
       "requires_graph": false,
       "ground_truth_entities": [
-        "P_TSUKIJI_OUTER",
-        "P_AMEYOKO"
+        "P_AMEYOKO",
+        "P_TSUKIJI_OUTER"
       ],
       "dense_only": {
         "rank": 1,
@@ -1948,7 +1946,7 @@
           "C_P_TSUKIJI_OUTER_01",
           "C_P_TAKESHITA_STREET_01"
         ],
-        "latency_ms": 14.07
+        "latency_ms": 15.09
       },
       "graph_only": {
         "ranked_entities": [
@@ -1958,7 +1956,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.17
+        "latency_ms": 0.15
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -1974,7 +1972,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 32.67
+        "latency_ms": 34.23
       }
     },
     {
@@ -1983,8 +1981,8 @@
       "query": "ถ้าอยากกินอาหารทะเลควรไปที่ไหน?",
       "requires_graph": false,
       "ground_truth_entities": [
-        "P_TSUKIJI_OUTER",
-        "P_TOYOSU_MARKET"
+        "P_TOYOSU_MARKET",
+        "P_TSUKIJI_OUTER"
       ],
       "dense_only": {
         "rank": 1,
@@ -1996,7 +1994,7 @@
           "C_P_TSUKIJI_OUTER_01",
           "C_P_TOYOSU_MARKET_INFO"
         ],
-        "latency_ms": 14.32
+        "latency_ms": 14.59
       },
       "graph_only": {
         "ranked_entities": [
@@ -2022,7 +2020,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 31.93
+        "latency_ms": 34.33
       }
     },
     {
@@ -2043,7 +2041,7 @@
           "C_P_TSUKIJI_OUTER_INFO",
           "C_P_AMEYOKO_01"
         ],
-        "latency_ms": 14.35
+        "latency_ms": 14.29
       },
       "graph_only": {
         "ranked_entities": [
@@ -2053,7 +2051,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.17
+        "latency_ms": 0.16
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -2067,7 +2065,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 29.61
+        "latency_ms": 30.34
       }
     },
     {
@@ -2076,8 +2074,8 @@
       "query": "มีตลาดอาหารที่สามารถเดินทางจาก Ginza ได้ง่ายหรือไม่?",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_TSUKIJI_OUTER",
-        "P_TOYOSU_MARKET"
+        "P_TOYOSU_MARKET",
+        "P_TSUKIJI_OUTER"
       ],
       "dense_only": {
         "rank": null,
@@ -2089,7 +2087,7 @@
           "C_P_GINZA_SIX_01",
           "C_H_MITSUI_GARDEN_GINZA"
         ],
-        "latency_ms": 14.66
+        "latency_ms": 14.96
       },
       "graph_only": {
         "ranked_entities": [
@@ -2113,7 +2111,7 @@
         "rr": 0.3333,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 33.06
+        "latency_ms": 34.58
       }
     },
     {
@@ -2122,9 +2120,9 @@
       "query": "แนะนำย่านสำหรับกินอาหารญี่ปุ่นราคาประหยัด",
       "requires_graph": false,
       "ground_truth_entities": [
-        "P_TSUKIJI_OUTER",
         "P_TOYOSU_MARKET",
-        "P_AMEYOKO"
+        "P_AMEYOKO",
+        "P_TSUKIJI_OUTER"
       ],
       "dense_only": {
         "rank": 1,
@@ -2136,7 +2134,7 @@
           "C_P_TSUKIJI_OUTER_01",
           "C_P_AMEYOKO_INFO"
         ],
-        "latency_ms": 12.48
+        "latency_ms": 15.08
       },
       "graph_only": {
         "ranked_entities": [
@@ -2148,7 +2146,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.2
+        "latency_ms": 0.19
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -2164,7 +2162,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 32.68
+        "latency_ms": 34.46
       }
     },
     {
@@ -2173,8 +2171,8 @@
       "query": "ถ้าเที่ยว Asakusa ตอนเช้า มีร้านหรือบริเวณอาหารอะไรใกล้ ๆ?",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_AMEYOKO",
-        "P_SENSOJI"
+        "P_SENSOJI",
+        "P_AMEYOKO"
       ],
       "dense_only": {
         "rank": 1,
@@ -2186,7 +2184,7 @@
           "C_P_AMEYOKO_INFO",
           "C_P_TOYOSU_MARKET_INFO"
         ],
-        "latency_ms": 14.33
+        "latency_ms": 15.3
       },
       "graph_only": {
         "ranked_entities": [
@@ -2196,12 +2194,12 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.17
+        "latency_ms": 0.15
       },
       "hybrid_rag": {
         "ranked_entities": [
-          "P_SENSOJI",
           "P_AMEYOKO",
+          "P_SENSOJI",
           "P_TOYOSU_MARKET",
           "P_TSUKIJI_OUTER"
         ],
@@ -2211,7 +2209,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 38.03
+        "latency_ms": 39.99
       }
     },
     {
@@ -2220,8 +2218,8 @@
       "query": "ย่านไหนเหมาะสำหรับหาอาหารช่วงกลางคืน?",
       "requires_graph": false,
       "ground_truth_entities": [
-        "P_TSUKIJI_OUTER",
-        "P_AMEYOKO"
+        "P_AMEYOKO",
+        "P_TSUKIJI_OUTER"
       ],
       "dense_only": {
         "rank": 1,
@@ -2233,7 +2231,156 @@
           "C_P_TSUKIJI_OUTER_INFO",
           "C_P_AMEYOKO_01"
         ],
-        "latency_ms": 13.77
+        "latency_ms": 13.93
+      },
+      "graph_only": {
+        "ranked_entities": [
+          "P_TSUKIJI_OUTER",
+          "P_AMEYOKO",
+          "P_TOYOSU_MARKET"
+        ],
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.18
+      },
+      "hybrid_rag": {
+        "ranked_entities": [
+          "P_TSUKIJI_OUTER",
+          "P_TOYOSU_MARKET",
+          "P_AMEYOKO"
+        ],
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 34.4
+      }
+    },
+    {
+      "question_id": 48,
+      "category": "E",
+      "query": "ถ้าต้องการเที่ยวตลาดและวัดในช่วงเช้า ควรจัดเส้นทางอย่างไร?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_SENSOJI",
+        "P_TSUKIJI_OUTER"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_AMEYOKO_INFO",
+          "C_P_TOYOSU_MARKET_INFO",
+          "C_P_AMEYOKO_01"
+        ],
+        "latency_ms": 15.46
+      },
+      "graph_only": {
+        "ranked_entities": [
+          "P_SENSOJI",
+          "P_MEIJI_JINGU",
+          "P_TSUKIJI_OUTER",
+          "P_UENO_PARK",
+          "P_IMPERIAL_PALACE"
+        ],
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "latency_ms": 0.23
+      },
+      "hybrid_rag": {
+        "ranked_entities": [
+          "P_TSUKIJI_OUTER",
+          "P_SENSOJI",
+          "P_AMEYOKO",
+          "P_TOYOSU_MARKET",
+          "P_MEIJI_JINGU"
+        ],
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 33.95
+      }
+    },
+    {
+      "question_id": 49,
+      "category": "E",
+      "query": "มีสถานที่ท่องเที่ยวอะไรใกล้ Tsukiji ที่สามารถเที่ยวต่อได้?",
+      "requires_graph": true,
+      "ground_truth_entities": [
+        "P_HAMARIKYU_GARDENS",
+        "P_GINZA_SIX"
+      ],
+      "dense_only": {
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "retrieved_chunks": [
+          "C_P_TSUKIJI_OUTER_INFO",
+          "C_P_AMEYOKO_INFO",
+          "C_P_TSUKIJI_OUTER_01"
+        ],
+        "latency_ms": 15.25
+      },
+      "graph_only": {
+        "ranked_entities": [
+          "P_TSUKIJI_OUTER"
+        ],
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "latency_ms": 0.15
+      },
+      "hybrid_rag": {
+        "ranked_entities": [
+          "P_TSUKIJI_OUTER",
+          "P_AMEYOKO",
+          "H_HOTEL_VILLA_FONTAINE_ROPPONGI",
+          "H_TOKYO_STATION_HOTEL",
+          "P_AKIHABARA_ELECTRIC"
+        ],
+        "rank": null,
+        "hit1": 0,
+        "hit3": 0,
+        "rr": 0.0,
+        "graph_used": true,
+        "citations_count": 5,
+        "latency_ms": 34.34
+      }
+    },
+    {
+      "question_id": 50,
+      "category": "E",
+      "query": "ถ้ามีงบค่าอาหาร 3,000 เยนต่อวัน ควรเลือกเที่ยวและกินบริเวณไหน?",
+      "requires_graph": false,
+      "ground_truth_entities": [
+        "P_TOYOSU_MARKET",
+        "P_AMEYOKO",
+        "P_TSUKIJI_OUTER"
+      ],
+      "dense_only": {
+        "rank": 1,
+        "hit1": 1,
+        "hit3": 1,
+        "rr": 1.0,
+        "retrieved_chunks": [
+          "C_P_AMEYOKO_INFO",
+          "C_H_ASAKUSA_VIEW",
+          "C_P_TOYOSU_MARKET_INFO"
+        ],
+        "latency_ms": 16.17
       },
       "graph_only": {
         "ranked_entities": [
@@ -2259,156 +2406,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 32.91
-      }
-    },
-    {
-      "question_id": 48,
-      "category": "E",
-      "query": "ถ้าต้องการเที่ยวตลาดและวัดในช่วงเช้า ควรจัดเส้นทางอย่างไร?",
-      "requires_graph": true,
-      "ground_truth_entities": [
-        "P_TSUKIJI_OUTER",
-        "P_SENSOJI"
-      ],
-      "dense_only": {
-        "rank": null,
-        "hit1": 0,
-        "hit3": 0,
-        "rr": 0.0,
-        "retrieved_chunks": [
-          "C_P_AMEYOKO_INFO",
-          "C_P_TOYOSU_MARKET_INFO",
-          "C_P_AMEYOKO_01"
-        ],
-        "latency_ms": 14.87
-      },
-      "graph_only": {
-        "ranked_entities": [
-          "P_SENSOJI",
-          "P_MEIJI_JINGU",
-          "P_TSUKIJI_OUTER",
-          "P_UENO_PARK",
-          "P_IMPERIAL_PALACE"
-        ],
-        "rank": 1,
-        "hit1": 1,
-        "hit3": 1,
-        "rr": 1.0,
-        "latency_ms": 0.2
-      },
-      "hybrid_rag": {
-        "ranked_entities": [
-          "P_TSUKIJI_OUTER",
-          "P_SENSOJI",
-          "P_AMEYOKO",
-          "P_TOYOSU_MARKET",
-          "P_MEIJI_JINGU"
-        ],
-        "rank": 1,
-        "hit1": 1,
-        "hit3": 1,
-        "rr": 1.0,
-        "graph_used": true,
-        "citations_count": 5,
-        "latency_ms": 32.31
-      }
-    },
-    {
-      "question_id": 49,
-      "category": "E",
-      "query": "มีสถานที่ท่องเที่ยวอะไรใกล้ Tsukiji ที่สามารถเที่ยวต่อได้?",
-      "requires_graph": true,
-      "ground_truth_entities": [
-        "P_GINZA_SIX",
-        "P_HAMARIKYU_GARDENS"
-      ],
-      "dense_only": {
-        "rank": null,
-        "hit1": 0,
-        "hit3": 0,
-        "rr": 0.0,
-        "retrieved_chunks": [
-          "C_P_TSUKIJI_OUTER_INFO",
-          "C_P_AMEYOKO_INFO",
-          "C_P_TSUKIJI_OUTER_01"
-        ],
-        "latency_ms": 14.53
-      },
-      "graph_only": {
-        "ranked_entities": [
-          "P_TSUKIJI_OUTER"
-        ],
-        "rank": null,
-        "hit1": 0,
-        "hit3": 0,
-        "rr": 0.0,
-        "latency_ms": 0.17
-      },
-      "hybrid_rag": {
-        "ranked_entities": [
-          "P_TSUKIJI_OUTER",
-          "P_AMEYOKO",
-          "H_HOTEL_VILLA_FONTAINE_ROPPONGI",
-          "H_TOKYO_STATION_HOTEL",
-          "P_AKIHABARA_ELECTRIC"
-        ],
-        "rank": null,
-        "hit1": 0,
-        "hit3": 0,
-        "rr": 0.0,
-        "graph_used": true,
-        "citations_count": 5,
-        "latency_ms": 33.56
-      }
-    },
-    {
-      "question_id": 50,
-      "category": "E",
-      "query": "ถ้ามีงบค่าอาหาร 3,000 เยนต่อวัน ควรเลือกเที่ยวและกินบริเวณไหน?",
-      "requires_graph": false,
-      "ground_truth_entities": [
-        "P_TSUKIJI_OUTER",
-        "P_TOYOSU_MARKET",
-        "P_AMEYOKO"
-      ],
-      "dense_only": {
-        "rank": 1,
-        "hit1": 1,
-        "hit3": 1,
-        "rr": 1.0,
-        "retrieved_chunks": [
-          "C_P_AMEYOKO_INFO",
-          "C_H_ASAKUSA_VIEW",
-          "C_P_TOYOSU_MARKET_INFO"
-        ],
-        "latency_ms": 16.6
-      },
-      "graph_only": {
-        "ranked_entities": [
-          "P_TSUKIJI_OUTER",
-          "P_AMEYOKO",
-          "P_TOYOSU_MARKET"
-        ],
-        "rank": 1,
-        "hit1": 1,
-        "hit3": 1,
-        "rr": 1.0,
-        "latency_ms": 0.2
-      },
-      "hybrid_rag": {
-        "ranked_entities": [
-          "P_TSUKIJI_OUTER",
-          "P_AMEYOKO",
-          "P_TOYOSU_MARKET"
-        ],
-        "rank": 1,
-        "hit1": 1,
-        "hit3": 1,
-        "rr": 1.0,
-        "graph_used": true,
-        "citations_count": 5,
-        "latency_ms": 34.71
+        "latency_ms": 38.33
       }
     },
     {
@@ -2417,8 +2415,8 @@
       "query": "มีสถานที่ท่องเที่ยวอะไรอยู่ใกล้ Tokyo Station?",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_GINZA_SIX",
-        "P_IMPERIAL_PALACE"
+        "P_IMPERIAL_PALACE",
+        "P_GINZA_SIX"
       ],
       "dense_only": {
         "rank": 1,
@@ -2430,7 +2428,7 @@
           "C_H_TOKYO_STATION_HOTEL",
           "C_P_TOKYO_DOME_CITY_INFO"
         ],
-        "latency_ms": 14.3
+        "latency_ms": 15.05
       },
       "graph_only": {
         "ranked_entities": [
@@ -2440,7 +2438,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.15
+        "latency_ms": 0.16
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -2456,7 +2454,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 30.18
+        "latency_ms": 34.05
       }
     },
     {
@@ -2478,7 +2476,7 @@
           "C_P_SENSOJI_01",
           "C_P_AMEYOKO_INFO"
         ],
-        "latency_ms": 13.99
+        "latency_ms": 15.79
       },
       "graph_only": {
         "ranked_entities": [],
@@ -2502,7 +2500,7 @@
         "rr": 0.25,
         "graph_used": false,
         "citations_count": 5,
-        "latency_ms": 33.69
+        "latency_ms": 35.08
       }
     },
     {
@@ -2511,9 +2509,9 @@
       "query": "หลังจากเที่ยว Meiji Jingu แล้วควรไปที่ไหนต่อโดยไม่ต้องนั่งรถไฟ?",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_TAKESHITA_STREET",
+        "P_OMOTESANDO_HILLS",
         "P_MEIJI_JINGU",
-        "P_OMOTESANDO_HILLS"
+        "P_TAKESHITA_STREET"
       ],
       "dense_only": {
         "rank": 1,
@@ -2525,7 +2523,7 @@
           "C_H_HOTEL_VILLA_FONTAINE_ROPPONGI",
           "C_P_IMPERIAL_PALACE_INFO"
         ],
-        "latency_ms": 14.88
+        "latency_ms": 15.61
       },
       "graph_only": {
         "ranked_entities": [],
@@ -2533,7 +2531,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.2
+        "latency_ms": 0.18
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -2548,7 +2546,7 @@
         "rr": 1.0,
         "graph_used": false,
         "citations_count": 5,
-        "latency_ms": 31.43
+        "latency_ms": 32.11
       }
     },
     {
@@ -2570,7 +2568,7 @@
           "C_P_UENO_PARK_INFO",
           "C_P_SHINJUKU_GYOEN_01"
         ],
-        "latency_ms": 13.69
+        "latency_ms": 13.97
       },
       "graph_only": {
         "ranked_entities": [
@@ -2581,7 +2579,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.12
+        "latency_ms": 0.15
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -2597,7 +2595,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 31.53
+        "latency_ms": 33.86
       }
     },
     {
@@ -2606,9 +2604,9 @@
       "query": "สถานที่ท่องเที่ยวอะไรอยู่ใกล้ Shibuya Station?",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_TAKESHITA_STREET",
         "P_SHIBUYA_CROSSING",
-        "P_MEIJI_JINGU"
+        "P_MEIJI_JINGU",
+        "P_TAKESHITA_STREET"
       ],
       "dense_only": {
         "rank": 1,
@@ -2620,7 +2618,7 @@
           "C_H_SHIBUYA_STREAM_EXCEL",
           "C_P_TAKESHITA_STREET_INFO"
         ],
-        "latency_ms": 14.81
+        "latency_ms": 14.64
       },
       "graph_only": {
         "ranked_entities": [
@@ -2630,7 +2628,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.17
+        "latency_ms": 0.15
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -2645,7 +2643,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 31.9
+        "latency_ms": 31.16
       }
     },
     {
@@ -2666,7 +2664,7 @@
           "C_P_HAMARIKYU_GARDENS_INFO",
           "C_P_IMPERIAL_PALACE_INFO"
         ],
-        "latency_ms": 14.32
+        "latency_ms": 15.28
       },
       "graph_only": {
         "ranked_entities": [
@@ -2683,7 +2681,7 @@
         "ranked_entities": [
           "P_SHINJUKU_GYOEN",
           "P_HAMARIKYU_GARDENS",
-          "P_ROPPONGI_HILLS"
+          "H_SUPER_HOTEL_SHINJUKU"
         ],
         "rank": 1,
         "hit1": 1,
@@ -2691,7 +2689,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 35.66
+        "latency_ms": 36.52
       }
     },
     {
@@ -2713,7 +2711,7 @@
           "C_P_IMPERIAL_PALACE_01",
           "C_P_SENSOJI_01"
         ],
-        "latency_ms": 73.65
+        "latency_ms": 14.35
       },
       "graph_only": {
         "ranked_entities": [
@@ -2723,7 +2721,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.17
+        "latency_ms": 0.12
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -2737,7 +2735,7 @@
         "rr": 0.3333,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 46.89
+        "latency_ms": 35.15
       }
     },
     {
@@ -2759,7 +2757,7 @@
           "C_P_OMOTESANDO_HILLS_01",
           "C_P_ROPPONGI_HILLS_INFO"
         ],
-        "latency_ms": 19.55
+        "latency_ms": 14.36
       },
       "graph_only": {
         "ranked_entities": [
@@ -2771,7 +2769,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.22
+        "latency_ms": 0.21
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -2785,7 +2783,7 @@
         "rr": 0.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 31.54
+        "latency_ms": 35.45
       }
     },
     {
@@ -2794,8 +2792,8 @@
       "query": "ถ้าอยู่ Akihabara มีสถานที่สำคัญอะไรที่สามารถเดินไปต่อได้?",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_UENO_PARK",
-        "P_AKIHABARA_ELECTRIC"
+        "P_AKIHABARA_ELECTRIC",
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": 1,
@@ -2807,7 +2805,7 @@
           "C_P_AKIHABARA_ELECTRIC_01",
           "C_P_OMOTESANDO_HILLS_INFO"
         ],
-        "latency_ms": 14.83
+        "latency_ms": 16.81
       },
       "graph_only": {
         "ranked_entities": [
@@ -2817,7 +2815,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.19
+        "latency_ms": 0.15
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -2832,7 +2830,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 41.42
+        "latency_ms": 32.66
       }
     },
     {
@@ -2842,9 +2840,9 @@
       "requires_graph": true,
       "ground_truth_entities": [
         "P_TOKYO_SKYTREE",
+        "P_SENSOJI",
         "P_AMEYOKO",
-        "P_UENO_PARK",
-        "P_SENSOJI"
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": null,
@@ -2856,7 +2854,7 @@
           "C_P_ROPPONGI_HILLS_INFO",
           "C_P_OMOTESANDO_HILLS_01"
         ],
-        "latency_ms": 17.99
+        "latency_ms": 15.36
       },
       "graph_only": {
         "ranked_entities": [],
@@ -2864,7 +2862,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.16
+        "latency_ms": 0.19
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -2880,7 +2878,7 @@
         "rr": 0.2,
         "graph_used": false,
         "citations_count": 5,
-        "latency_ms": 37.57
+        "latency_ms": 35.75
       }
     },
     {
@@ -2902,7 +2900,7 @@
           "C_P_SENSOJI_INFO",
           "C_P_IMPERIAL_PALACE_INFO"
         ],
-        "latency_ms": 15.95
+        "latency_ms": 15.89
       },
       "graph_only": {
         "ranked_entities": [
@@ -2912,7 +2910,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.33
+        "latency_ms": 0.16
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -2927,7 +2925,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 36.17
+        "latency_ms": 32.43
       }
     },
     {
@@ -2949,7 +2947,7 @@
           "C_P_MEIJI_JINGU_INFO",
           "C_P_SENSOJI_01"
         ],
-        "latency_ms": 17.06
+        "latency_ms": 15.26
       },
       "graph_only": {
         "ranked_entities": [],
@@ -2972,7 +2970,7 @@
         "rr": 1.0,
         "graph_used": false,
         "citations_count": 5,
-        "latency_ms": 34.83
+        "latency_ms": 31.93
       }
     },
     {
@@ -2994,7 +2992,7 @@
           "C_P_TOKYO_DOME_CITY_INFO",
           "C_P_TOKYO_TOWER_INFO"
         ],
-        "latency_ms": 13.18
+        "latency_ms": 14.84
       },
       "graph_only": {
         "ranked_entities": [
@@ -3006,7 +3004,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.15
+        "latency_ms": 0.18
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -3021,7 +3019,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 139.17
+        "latency_ms": 135.46
       }
     },
     {
@@ -3030,8 +3028,8 @@
       "query": "จาก Ueno ไป Akihabara เดินทางอย่างไร?",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_UENO_PARK",
-        "P_AKIHABARA_ELECTRIC"
+        "P_AKIHABARA_ELECTRIC",
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": 1,
@@ -3043,7 +3041,7 @@
           "C_H_ASAKUSA_VIEW",
           "C_P_UENO_PARK_INFO"
         ],
-        "latency_ms": 12.01
+        "latency_ms": 15.4
       },
       "graph_only": {
         "ranked_entities": [
@@ -3055,7 +3053,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.14
+        "latency_ms": 0.19
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -3069,7 +3067,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 130.02
+        "latency_ms": 135.11
       }
     },
     {
@@ -3091,7 +3089,7 @@
           "C_P_TAKESHITA_STREET_INFO",
           "C_P_AKIHABARA_ELECTRIC_INFO"
         ],
-        "latency_ms": 15.07
+        "latency_ms": 15.85
       },
       "graph_only": {
         "ranked_entities": [
@@ -3101,7 +3099,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.12
+        "latency_ms": 0.15
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -3116,7 +3114,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 27.66
+        "latency_ms": 31.5
       }
     },
     {
@@ -3125,9 +3123,9 @@
       "query": "ถ้าจะเที่ยว Asakusa → Ueno → Akihabara ควรเรียงเส้นทางอย่างไร?",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_UENO_PARK",
         "P_SENSOJI",
-        "P_AKIHABARA_ELECTRIC"
+        "P_AKIHABARA_ELECTRIC",
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": 2,
@@ -3139,7 +3137,7 @@
           "C_P_AKIHABARA_ELECTRIC_INFO",
           "C_P_AMEYOKO_INFO"
         ],
-        "latency_ms": 15.43
+        "latency_ms": 14.68
       },
       "graph_only": {
         "ranked_entities": [
@@ -3152,7 +3150,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.2
+        "latency_ms": 0.19
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -3167,7 +3165,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 190.07
+        "latency_ms": 134.29
       }
     },
     {
@@ -3176,9 +3174,9 @@
       "query": "Tokyo Station → Imperial Palace → Ginza → Tsukiji ควรเดินทางแบบไหน?",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_GINZA_SIX",
+        "P_IMPERIAL_PALACE",
         "P_TSUKIJI_OUTER",
-        "P_IMPERIAL_PALACE"
+        "P_GINZA_SIX"
       ],
       "dense_only": {
         "rank": 1,
@@ -3190,7 +3188,7 @@
           "C_P_TOKYO_DOME_CITY_INFO",
           "C_P_TOKYO_TOWER_INFO"
         ],
-        "latency_ms": 15.99
+        "latency_ms": 16.28
       },
       "graph_only": {
         "ranked_entities": [
@@ -3202,7 +3200,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.17
+        "latency_ms": 0.21
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -3216,7 +3214,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 131.0
+        "latency_ms": 141.03
       }
     },
     {
@@ -3238,7 +3236,7 @@
           "C_P_SENSOJI_INFO",
           "C_P_AKIHABARA_ELECTRIC_INFO"
         ],
-        "latency_ms": 15.03
+        "latency_ms": 16.08
       },
       "graph_only": {
         "ranked_entities": [
@@ -3248,7 +3246,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.18
+        "latency_ms": 0.14
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -3264,7 +3262,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 134.99
+        "latency_ms": 134.08
       }
     },
     {
@@ -3273,11 +3271,11 @@
       "query": "มีสถานที่ท่องเที่ยวใดบ้างที่อยู่ตามเส้นทาง Yamanote Line?",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_TOKYO_TOWER",
-        "P_UENO_PARK",
-        "P_AKIHABARA_ELECTRIC",
         "P_SHIBUYA_CROSSING",
-        "P_MEIJI_JINGU"
+        "P_TOKYO_TOWER",
+        "P_MEIJI_JINGU",
+        "P_AKIHABARA_ELECTRIC",
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": 2,
@@ -3289,7 +3287,7 @@
           "C_P_SHIBUYA_CROSSING_01",
           "C_P_OMOTESANDO_HILLS_01"
         ],
-        "latency_ms": 14.49
+        "latency_ms": 14.72
       },
       "graph_only": {
         "ranked_entities": [],
@@ -3297,7 +3295,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.2
+        "latency_ms": 0.15
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -3313,7 +3311,7 @@
         "rr": 1.0,
         "graph_used": false,
         "citations_count": 5,
-        "latency_ms": 29.09
+        "latency_ms": 31.2
       }
     },
     {
@@ -3322,11 +3320,11 @@
       "query": "ช่วยสร้างเส้นทางที่เริ่มและจบที่ Tokyo Station โดยแวะสถานที่ท่องเที่ยว 5 แห่ง",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_UENO_PARK",
+        "P_SHIBUYA_CROSSING",
         "P_SENSOJI",
         "P_IMPERIAL_PALACE",
         "P_AKIHABARA_ELECTRIC",
-        "P_SHIBUYA_CROSSING"
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": 3,
@@ -3338,7 +3336,7 @@
           "C_P_TOKYO_DOME_CITY_INFO",
           "C_P_IMPERIAL_PALACE_INFO"
         ],
-        "latency_ms": 14.61
+        "latency_ms": 15.31
       },
       "graph_only": {
         "ranked_entities": [
@@ -3364,7 +3362,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 30.34
+        "latency_ms": 32.33
       }
     },
     {
@@ -3373,9 +3371,9 @@
       "query": "ช่วยจัดทริป Tokyo 1 วันสำหรับคนมาครั้งแรก",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_MEIJI_JINGU",
         "P_SHIBUYA_CROSSING",
         "P_SENSOJI",
+        "P_MEIJI_JINGU",
         "P_TOKYO_TOWER"
       ],
       "dense_only": {
@@ -3388,7 +3386,7 @@
           "C_P_IMPERIAL_PALACE_INFO",
           "C_P_ROPPONGI_HILLS_INFO"
         ],
-        "latency_ms": 14.25
+        "latency_ms": 14.1
       },
       "graph_only": {
         "ranked_entities": [
@@ -3398,7 +3396,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.12
+        "latency_ms": 0.15
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -3414,7 +3412,7 @@
         "rr": 0.125,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 28.97
+        "latency_ms": 30.98
       }
     },
     {
@@ -3423,8 +3421,8 @@
       "query": "ช่วยจัดทริป Tokyo 2 วัน เน้นวัฒนธรรมและอาหาร",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_MEIJI_JINGU",
         "P_SENSOJI",
+        "P_MEIJI_JINGU",
         "P_TSUKIJI_OUTER",
         "P_IMPERIAL_PALACE"
       ],
@@ -3438,7 +3436,7 @@
           "C_P_AMEYOKO_01",
           "C_P_TOYOSU_MARKET_INFO"
         ],
-        "latency_ms": 13.33
+        "latency_ms": 14.78
       },
       "graph_only": {
         "ranked_entities": [
@@ -3464,7 +3462,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 33.75
+        "latency_ms": 32.6
       }
     },
     {
@@ -3474,9 +3472,9 @@
       "requires_graph": true,
       "ground_truth_entities": [
         "P_SHIBUYA_CROSSING",
-        "P_UENO_PARK",
         "P_SENSOJI",
-        "P_AKIHABARA_ELECTRIC"
+        "P_AKIHABARA_ELECTRIC",
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": null,
@@ -3488,7 +3486,7 @@
           "C_P_TOKYO_DOME_CITY_INFO",
           "C_H_HOTEL_VILLA_FONTAINE_ROPPONGI"
         ],
-        "latency_ms": 15.51
+        "latency_ms": 14.67
       },
       "graph_only": {
         "ranked_entities": [
@@ -3500,7 +3498,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.21
+        "latency_ms": 0.2
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -3516,7 +3514,7 @@
         "rr": 0.0,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 35.68
+        "latency_ms": 35.26
       }
     },
     {
@@ -3525,9 +3523,9 @@
       "query": "จัดทริป Asakusa–Ueno–Akihabara ตั้งแต่ 09:00–18:00",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_UENO_PARK",
         "P_SENSOJI",
-        "P_AKIHABARA_ELECTRIC"
+        "P_AKIHABARA_ELECTRIC",
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": 3,
@@ -3539,7 +3537,7 @@
           "C_P_ODAIBA_GUNDAM_INFO",
           "C_P_AKIHABARA_ELECTRIC_INFO"
         ],
-        "latency_ms": 15.52
+        "latency_ms": 15.35
       },
       "graph_only": {
         "ranked_entities": [
@@ -3568,7 +3566,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 30.78
+        "latency_ms": 32.46
       }
     },
     {
@@ -3577,8 +3575,8 @@
       "query": "จัดเส้นทาง Shibuya–Harajuku–Shinjuku สำหรับช่วงบ่ายถึงกลางคืน",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_TAKESHITA_STREET",
         "P_SHIBUYA_CROSSING",
+        "P_TAKESHITA_STREET",
         "P_SHINJUKU_GYOEN"
       ],
       "dense_only": {
@@ -3591,7 +3589,7 @@
           "C_P_SHIBUYA_CROSSING_INFO",
           "C_P_TAKESHITA_STREET_INFO"
         ],
-        "latency_ms": 16.17
+        "latency_ms": 15.65
       },
       "graph_only": {
         "ranked_entities": [
@@ -3603,7 +3601,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.2
+        "latency_ms": 0.19
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -3618,7 +3616,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 131.89
+        "latency_ms": 134.22
       }
     },
     {
@@ -3628,9 +3626,9 @@
       "requires_graph": true,
       "ground_truth_entities": [
         "P_SHIBUYA_CROSSING",
-        "P_UENO_PARK",
         "P_SENSOJI",
-        "P_IMPERIAL_PALACE"
+        "P_IMPERIAL_PALACE",
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": 2,
@@ -3642,7 +3640,7 @@
           "C_P_IMPERIAL_PALACE_INFO",
           "C_P_ROPPONGI_HILLS_INFO"
         ],
-        "latency_ms": 14.31
+        "latency_ms": 15.4
       },
       "graph_only": {
         "ranked_entities": [
@@ -3652,7 +3650,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.12
+        "latency_ms": 0.17
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -3668,7 +3666,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 31.0
+        "latency_ms": 31.99
       }
     },
     {
@@ -3678,9 +3676,9 @@
       "requires_graph": true,
       "ground_truth_entities": [
         "P_SHINJUKU_GYOEN",
+        "P_SENSOJI",
         "P_TOKYO_TOWER",
-        "P_UENO_PARK",
-        "P_SENSOJI"
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": null,
@@ -3692,7 +3690,7 @@
           "C_P_MEIJI_JINGU_01",
           "C_P_HAMARIKYU_GARDENS_01"
         ],
-        "latency_ms": 15.89
+        "latency_ms": 16.82
       },
       "graph_only": {
         "ranked_entities": [
@@ -3706,23 +3704,23 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.15
+        "latency_ms": 0.2
       },
       "hybrid_rag": {
         "ranked_entities": [
-          "P_SHINJUKU_GYOEN",
           "P_MEIJI_JINGU",
           "P_UENO_PARK",
+          "P_IMPERIAL_PALACE",
           "P_TOKYO_SKYTREE",
-          "P_ROPPONGI_HILLS"
+          "P_SHINJUKU_GYOEN"
         ],
-        "rank": 1,
-        "hit1": 1,
+        "rank": 2,
+        "hit1": 0,
         "hit3": 1,
-        "rr": 1.0,
+        "rr": 0.5,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 33.88
+        "latency_ms": 38.78
       }
     },
     {
@@ -3732,8 +3730,8 @@
       "requires_graph": true,
       "ground_truth_entities": [
         "P_SHIBUYA_CROSSING",
-        "P_UENO_PARK",
-        "P_SENSOJI"
+        "P_SENSOJI",
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": 2,
@@ -3745,7 +3743,7 @@
           "C_P_SHIBUYA_CROSSING_INFO",
           "C_P_ODAIBA_GUNDAM_INFO"
         ],
-        "latency_ms": 21.28
+        "latency_ms": 14.42
       },
       "graph_only": {
         "ranked_entities": [
@@ -3757,7 +3755,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.2
+        "latency_ms": 0.15
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -3773,7 +3771,7 @@
         "rr": 0.0,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 33.56
+        "latency_ms": 36.36
       }
     },
     {
@@ -3783,8 +3781,8 @@
       "requires_graph": true,
       "ground_truth_entities": [
         "P_TOKYO_SKYTREE",
-        "P_UENO_PARK",
-        "P_SENSOJI"
+        "P_SENSOJI",
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": null,
@@ -3796,7 +3794,7 @@
           "C_P_TOKYO_DOME_CITY_INFO",
           "C_P_ROPPONGI_HILLS_INFO"
         ],
-        "latency_ms": 14.24
+        "latency_ms": 14.17
       },
       "graph_only": {
         "ranked_entities": [],
@@ -3820,7 +3818,7 @@
         "rr": 0.0,
         "graph_used": false,
         "citations_count": 5,
-        "latency_ms": 27.05
+        "latency_ms": 30.46
       }
     },
     {
@@ -3829,11 +3827,11 @@
       "query": "ช่วยจัดเส้นทางหนึ่งวันที่เที่ยวได้อย่างน้อย 5 สถานที่และไม่ย้อนเส้นทางมากเกินไป",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_UENO_PARK",
+        "P_SHIBUYA_CROSSING",
         "P_SENSOJI",
         "P_AKIHABARA_ELECTRIC",
-        "P_SHIBUYA_CROSSING",
-        "P_MEIJI_JINGU"
+        "P_MEIJI_JINGU",
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": null,
@@ -3845,7 +3843,7 @@
           "C_P_SHINJUKU_GYOEN_INFO",
           "C_H_HOTEL_VILLA_FONTAINE_ROPPONGI"
         ],
-        "latency_ms": 13.1
+        "latency_ms": 15.3
       },
       "graph_only": {
         "ranked_entities": [
@@ -3857,7 +3855,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.16
+        "latency_ms": 0.23
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -3873,7 +3871,7 @@
         "rr": 0.0,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 33.2
+        "latency_ms": 36.86
       }
     },
     {
@@ -3882,10 +3880,10 @@
       "query": "ฉันชอบประวัติศาสตร์และไม่สนใจ Shopping ควรไปที่ไหน?",
       "requires_graph": false,
       "ground_truth_entities": [
-        "P_MEIJI_JINGU",
-        "P_UENO_PARK",
         "P_SENSOJI",
-        "P_IMPERIAL_PALACE"
+        "P_IMPERIAL_PALACE",
+        "P_UENO_PARK",
+        "P_MEIJI_JINGU"
       ],
       "dense_only": {
         "rank": null,
@@ -3897,7 +3895,7 @@
           "C_P_OMOTESANDO_HILLS_INFO",
           "C_P_GINZA_SIX_01"
         ],
-        "latency_ms": 13.47
+        "latency_ms": 14.67
       },
       "graph_only": {
         "ranked_entities": [
@@ -3911,15 +3909,15 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.19
+        "latency_ms": 0.2
       },
       "hybrid_rag": {
         "ranked_entities": [
-          "P_GINZA_SIX",
+          "P_TAKESHITA_STREET",
           "P_SENSOJI",
-          "P_OMOTESANDO_HILLS",
+          "P_GINZA_SIX",
           "P_MEIJI_JINGU",
-          "P_AMEYOKO"
+          "P_OMOTESANDO_HILLS"
         ],
         "rank": 2,
         "hit1": 0,
@@ -3927,7 +3925,7 @@
         "rr": 0.5,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 31.72
+        "latency_ms": 32.15
       }
     },
     {
@@ -3936,9 +3934,9 @@
       "query": "ฉันชอบ Anime และอาหารญี่ปุ่น ช่วยจัดเส้นทางหนึ่งวันให้หน่อย",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_TSUKIJI_OUTER",
+        "P_AMEYOKO",
         "P_AKIHABARA_ELECTRIC",
-        "P_AMEYOKO"
+        "P_TSUKIJI_OUTER"
       ],
       "dense_only": {
         "rank": 2,
@@ -3950,7 +3948,7 @@
           "C_P_AKIHABARA_ELECTRIC_01",
           "C_P_TOKYO_DOME_CITY_INFO"
         ],
-        "latency_ms": 14.07
+        "latency_ms": 15.16
       },
       "graph_only": {
         "ranked_entities": [
@@ -3962,7 +3960,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.15
+        "latency_ms": 0.14
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -3976,7 +3974,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 36.8
+        "latency_ms": 38.85
       }
     },
     {
@@ -3986,9 +3984,9 @@
       "requires_graph": false,
       "ground_truth_entities": [
         "P_TOKYO_SKYTREE",
+        "P_SHIBUYA_CROSSING",
         "P_TOKYO_TOWER",
-        "P_SENSOJI",
-        "P_SHIBUYA_CROSSING"
+        "P_SENSOJI"
       ],
       "dense_only": {
         "rank": null,
@@ -4000,7 +3998,7 @@
           "C_P_ROPPONGI_HILLS_01",
           "C_P_OMOTESANDO_HILLS_01"
         ],
-        "latency_ms": 13.88
+        "latency_ms": 15.19
       },
       "graph_only": {
         "ranked_entities": [],
@@ -4008,7 +4006,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.19
+        "latency_ms": 0.18
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -4023,7 +4021,7 @@
         "rr": 0.3333,
         "graph_used": false,
         "citations_count": 5,
-        "latency_ms": 29.56
+        "latency_ms": 30.82
       }
     },
     {
@@ -4033,8 +4031,8 @@
       "requires_graph": false,
       "ground_truth_entities": [
         "P_SHINJUKU_GYOEN",
-        "P_HAMARIKYU_GARDENS",
-        "P_IMPERIAL_PALACE"
+        "P_IMPERIAL_PALACE",
+        "P_HAMARIKYU_GARDENS"
       ],
       "dense_only": {
         "rank": null,
@@ -4046,7 +4044,7 @@
           "C_P_TOKYO_DOME_CITY_INFO",
           "C_P_OMOTESANDO_HILLS_INFO"
         ],
-        "latency_ms": 14.6
+        "latency_ms": 14.82
       },
       "graph_only": {
         "ranked_entities": [],
@@ -4070,7 +4068,7 @@
         "rr": 0.0,
         "graph_used": false,
         "citations_count": 8,
-        "latency_ms": 29.45
+        "latency_ms": 29.67
       }
     },
     {
@@ -4080,9 +4078,9 @@
       "requires_graph": true,
       "ground_truth_entities": [
         "P_SHINJUKU_GYOEN",
+        "P_SENSOJI",
         "P_MEIJI_JINGU",
-        "P_HAMARIKYU_GARDENS",
-        "P_SENSOJI"
+        "P_HAMARIKYU_GARDENS"
       ],
       "dense_only": {
         "rank": null,
@@ -4094,7 +4092,7 @@
           "C_P_AMEYOKO_01",
           "C_P_AMEYOKO_INFO"
         ],
-        "latency_ms": 14.91
+        "latency_ms": 15.5
       },
       "graph_only": {
         "ranked_entities": [
@@ -4108,7 +4106,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.2
+        "latency_ms": 0.14
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -4116,7 +4114,7 @@
           "P_SHINJUKU_GYOEN",
           "P_HAMARIKYU_GARDENS",
           "P_MEIJI_JINGU",
-          "P_OMOTESANDO_HILLS"
+          "P_GINZA_SIX"
         ],
         "rank": 1,
         "hit1": 1,
@@ -4124,7 +4122,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 35.21
+        "latency_ms": 37.01
       }
     },
     {
@@ -4133,9 +4131,9 @@
       "query": "ถ้าเดินได้ไม่เกิน 5 กิโลเมตรต่อวัน ควรเที่ยวบริเวณไหน?",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_GINZA_SIX",
+        "P_IMPERIAL_PALACE",
         "P_TSUKIJI_OUTER",
-        "P_IMPERIAL_PALACE"
+        "P_GINZA_SIX"
       ],
       "dense_only": {
         "rank": null,
@@ -4147,7 +4145,7 @@
           "C_P_SHINJUKU_GYOEN_INFO",
           "C_P_SHIBUYA_CROSSING_01"
         ],
-        "latency_ms": 13.59
+        "latency_ms": 15.36
       },
       "graph_only": {
         "ranked_entities": [
@@ -4159,7 +4157,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.15
+        "latency_ms": 0.2
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -4175,7 +4173,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 31.82
+        "latency_ms": 34.71
       }
     },
     {
@@ -4184,9 +4182,9 @@
       "query": "ถ้าเดินทางกับผู้สูงอายุ ควรเลือกสถานที่และเส้นทางแบบไหน?",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_UENO_PARK",
         "P_SENSOJI",
-        "P_IMPERIAL_PALACE"
+        "P_IMPERIAL_PALACE",
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": 3,
@@ -4198,7 +4196,7 @@
           "C_P_ROPPONGI_HILLS_INFO",
           "C_P_IMPERIAL_PALACE_INFO"
         ],
-        "latency_ms": 13.13
+        "latency_ms": 14.75
       },
       "graph_only": {
         "ranked_entities": [],
@@ -4206,7 +4204,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.23
+        "latency_ms": 0.14
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -4222,7 +4220,7 @@
         "rr": 0.3333,
         "graph_used": false,
         "citations_count": 5,
-        "latency_ms": 27.53
+        "latency_ms": 33.02
       }
     },
     {
@@ -4245,7 +4243,7 @@
           "C_H_HOTEL_VILLA_FONTAINE_ROPPONGI",
           "C_P_AMEYOKO_INFO"
         ],
-        "latency_ms": 14.1
+        "latency_ms": 14.94
       },
       "graph_only": {
         "ranked_entities": [],
@@ -4253,7 +4251,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.19
+        "latency_ms": 0.18
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -4269,7 +4267,7 @@
         "rr": 0.0,
         "graph_used": false,
         "citations_count": 5,
-        "latency_ms": 36.04
+        "latency_ms": 35.34
       }
     },
     {
@@ -4278,10 +4276,10 @@
       "query": "ถ้ามีงบประมาณจำกัด ควรจัดทริป Tokyo 1 วันอย่างไร?",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_MEIJI_JINGU",
         "P_SHIBUYA_CROSSING",
-        "P_UENO_PARK",
-        "P_SENSOJI"
+        "P_SENSOJI",
+        "P_MEIJI_JINGU",
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": null,
@@ -4293,7 +4291,7 @@
           "C_P_IMPERIAL_PALACE_INFO",
           "C_H_TOKYO_STATION_HOTEL"
         ],
-        "latency_ms": 15.51
+        "latency_ms": 14.97
       },
       "graph_only": {
         "ranked_entities": [
@@ -4303,7 +4301,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.15
+        "latency_ms": 0.14
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -4319,7 +4317,7 @@
         "rr": 0.0,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 29.24
+        "latency_ms": 31.3
       }
     },
     {
@@ -4329,9 +4327,9 @@
       "requires_graph": true,
       "ground_truth_entities": [
         "P_TOKYO_SKYTREE",
-        "P_TOKYO_TOWER",
+        "P_SHIBUYA_CROSSING",
         "P_ROPPONGI_HILLS",
-        "P_SHIBUYA_CROSSING"
+        "P_TOKYO_TOWER"
       ],
       "dense_only": {
         "rank": 1,
@@ -4343,7 +4341,7 @@
           "C_P_TOKYO_DOME_CITY_INFO",
           "C_H_ASAKUSA_VIEW"
         ],
-        "latency_ms": 15.23
+        "latency_ms": 15.92
       },
       "graph_only": {
         "ranked_entities": [
@@ -4359,8 +4357,8 @@
         "ranked_entities": [
           "P_IMPERIAL_PALACE",
           "P_ROPPONGI_HILLS",
-          "P_TAKESHITA_STREET",
-          "H_ASAKUSA_VIEW"
+          "H_ASAKUSA_VIEW",
+          "P_TOKYO_TOWER"
         ],
         "rank": 2,
         "hit1": 0,
@@ -4368,7 +4366,7 @@
         "rr": 0.5,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 31.07
+        "latency_ms": 34.92
       }
     },
     {
@@ -4389,7 +4387,7 @@
           "C_P_OMOTESANDO_HILLS_INFO",
           "C_P_TOKYO_DOME_CITY_INFO"
         ],
-        "latency_ms": 14.92
+        "latency_ms": 16.3
       },
       "graph_only": {
         "ranked_entities": [
@@ -4403,14 +4401,14 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.2
+        "latency_ms": 0.16
       },
       "hybrid_rag": {
         "ranked_entities": [
           "P_SENSOJI",
-          "P_AKIHABARA_ELECTRIC",
+          "P_IMPERIAL_PALACE",
           "P_MEIJI_JINGU",
-          "H_HOTEL_VILLA_FONTAINE_ROPPONGI",
+          "P_AKIHABARA_ELECTRIC",
           "P_UENO_PARK"
         ],
         "rank": 1,
@@ -4419,7 +4417,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 35.78
+        "latency_ms": 36.88
       }
     },
     {
@@ -4429,8 +4427,8 @@
       "requires_graph": true,
       "ground_truth_entities": [
         "P_TOKYO_SKYTREE",
-        "P_TOKYO_TOWER",
-        "P_ROPPONGI_HILLS"
+        "P_ROPPONGI_HILLS",
+        "P_TOKYO_TOWER"
       ],
       "dense_only": {
         "rank": 3,
@@ -4442,7 +4440,7 @@
           "C_P_TOKYO_DOME_CITY_INFO",
           "C_P_ROPPONGI_HILLS_INFO"
         ],
-        "latency_ms": 14.2
+        "latency_ms": 15.77
       },
       "graph_only": {
         "ranked_entities": [
@@ -4456,15 +4454,15 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.22
+        "latency_ms": 0.23
       },
       "hybrid_rag": {
         "ranked_entities": [
           "P_TOKYO_SKYTREE",
-          "P_TSUKIJI_OUTER",
           "P_SHIBUYA_CROSSING",
-          "P_AMEYOKO",
-          "P_TOYOSU_MARKET"
+          "P_TSUKIJI_OUTER",
+          "P_TOYOSU_MARKET",
+          "P_AMEYOKO"
         ],
         "rank": 1,
         "hit1": 1,
@@ -4472,7 +4470,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 35.36
+        "latency_ms": 35.03
       }
     },
     {
@@ -4481,9 +4479,9 @@
       "query": "หาสถานที่ท่องเที่ยวทางวัฒนธรรม 3 แห่งที่อยู่ในเขตเดียวกันและมีสถานีรถไฟอยู่ใกล้",
       "requires_graph": true,
       "ground_truth_entities": [
+        "P_SENSOJI",
         "P_AMEYOKO",
-        "P_UENO_PARK",
-        "P_SENSOJI"
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": null,
@@ -4495,7 +4493,7 @@
           "C_P_OMOTESANDO_HILLS_INFO",
           "C_P_AKIHABARA_ELECTRIC_INFO"
         ],
-        "latency_ms": 14.17
+        "latency_ms": 16.12
       },
       "graph_only": {
         "ranked_entities": [],
@@ -4503,7 +4501,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.14
+        "latency_ms": 0.2
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -4519,7 +4517,7 @@
         "rr": 0.25,
         "graph_used": false,
         "citations_count": 5,
-        "latency_ms": 35.21
+        "latency_ms": 36.64
       }
     },
     {
@@ -4529,8 +4527,8 @@
       "requires_graph": true,
       "ground_truth_entities": [
         "P_TOKYO_SKYTREE",
-        "P_UENO_PARK",
-        "P_SENSOJI"
+        "P_SENSOJI",
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": null,
@@ -4542,7 +4540,7 @@
           "C_P_ROPPONGI_HILLS_INFO",
           "C_P_ODAIBA_GUNDAM_INFO"
         ],
-        "latency_ms": 18.3
+        "latency_ms": 17.26
       },
       "graph_only": {
         "ranked_entities": [
@@ -4552,7 +4550,7 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.16
+        "latency_ms": 0.12
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -4566,7 +4564,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 35.05
+        "latency_ms": 34.89
       }
     },
     {
@@ -4576,8 +4574,8 @@
       "requires_graph": true,
       "ground_truth_entities": [
         "P_SHINJUKU_GYOEN",
-        "P_TAKESHITA_STREET",
         "P_MEIJI_JINGU",
+        "P_TAKESHITA_STREET",
         "P_OMOTESANDO_HILLS"
       ],
       "dense_only": {
@@ -4590,7 +4588,7 @@
           "C_P_MEIJI_JINGU_01",
           "C_P_SENSOJI_01"
         ],
-        "latency_ms": 16.23
+        "latency_ms": 16.48
       },
       "graph_only": {
         "ranked_entities": [
@@ -4611,8 +4609,8 @@
           "P_SENSOJI",
           "P_MEIJI_JINGU",
           "P_SHINJUKU_GYOEN",
-          "P_HAMARIKYU_GARDENS",
-          "P_TOKYO_SKYTREE"
+          "P_TOKYO_SKYTREE",
+          "P_GINZA_SIX"
         ],
         "rank": 2,
         "hit1": 0,
@@ -4620,7 +4618,7 @@
         "rr": 0.5,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 35.95
+        "latency_ms": 41.41
       }
     },
     {
@@ -4629,9 +4627,9 @@
       "query": "หาสถานที่ที่มีความเกี่ยวข้องกับประวัติศาสตร์ Edo และอยู่ใกล้สถานที่ท่องเที่ยวอื่นอย่างน้อย 2 แห่ง",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_UENO_PARK",
         "P_SENSOJI",
-        "P_IMPERIAL_PALACE"
+        "P_IMPERIAL_PALACE",
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": 1,
@@ -4643,7 +4641,7 @@
           "C_P_IMPERIAL_PALACE_02",
           "C_H_ASAKUSA_VIEW"
         ],
-        "latency_ms": 15.23
+        "latency_ms": 16.81
       },
       "graph_only": {
         "ranked_entities": [
@@ -4664,7 +4662,7 @@
           "P_SENSOJI",
           "P_IMPERIAL_PALACE",
           "P_MEIJI_JINGU",
-          "P_AKIHABARA_ELECTRIC",
+          "H_ASAKUSA_VIEW",
           "P_UENO_PARK"
         ],
         "rank": 1,
@@ -4673,7 +4671,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 37.92
+        "latency_ms": 37.35
       }
     },
     {
@@ -4682,10 +4680,10 @@
       "query": "ถ้าเริ่มที่ Tokyo Station เวลา 09:00 ต้องการไปวัด 1 แห่ง ตลาด 1 แห่ง พิพิธภัณฑ์ 1 แห่ง และชมวิวกลางคืน ควรจัดเส้นทางอย่างไร?",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_TSUKIJI_OUTER",
-        "P_UENO_PARK",
         "P_SENSOJI",
-        "P_IMPERIAL_PALACE"
+        "P_IMPERIAL_PALACE",
+        "P_TSUKIJI_OUTER",
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": null,
@@ -4697,7 +4695,7 @@
           "C_P_ROPPONGI_HILLS_INFO",
           "C_P_TEAMLAB_PLANETS_INFO"
         ],
-        "latency_ms": 18.93
+        "latency_ms": 18.19
       },
       "graph_only": {
         "ranked_entities": [
@@ -4707,13 +4705,14 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.16
+        "latency_ms": 0.15
       },
       "hybrid_rag": {
         "ranked_entities": [
           "P_IMPERIAL_PALACE",
-          "P_AMEYOKO",
-          "P_TOYOSU_MARKET"
+          "P_TOYOSU_MARKET",
+          "P_ROPPONGI_HILLS",
+          "P_AMEYOKO"
         ],
         "rank": 1,
         "hit1": 1,
@@ -4721,7 +4720,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 5,
-        "latency_ms": 42.09
+        "latency_ms": 41.66
       }
     },
     {
@@ -4730,9 +4729,9 @@
       "query": "แนะนำเส้นทางสำหรับคนที่ชอบ Japanese culture, Anime และอาหาร โดยแต่ละจุดควรเชื่อมต่อด้วยระบบขนส่งสาธารณะได้สะดวก",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_TSUKIJI_OUTER",
         "P_SENSOJI",
-        "P_AKIHABARA_ELECTRIC"
+        "P_AKIHABARA_ELECTRIC",
+        "P_TSUKIJI_OUTER"
       ],
       "dense_only": {
         "rank": null,
@@ -4744,7 +4743,7 @@
           "C_P_TOKYO_DOME_CITY_INFO",
           "C_P_AMEYOKO_01"
         ],
-        "latency_ms": 16.19
+        "latency_ms": 17.32
       },
       "graph_only": {
         "ranked_entities": [
@@ -4756,15 +4755,15 @@
         "hit1": 1,
         "hit3": 1,
         "rr": 1.0,
-        "latency_ms": 0.21
+        "latency_ms": 0.17
       },
       "hybrid_rag": {
         "ranked_entities": [
           "P_TSUKIJI_OUTER",
           "P_AMEYOKO",
           "P_TOYOSU_MARKET",
-          "P_TAKESHITA_STREET",
-          "P_AKIHABARA_ELECTRIC"
+          "P_AKIHABARA_ELECTRIC",
+          "P_TAKESHITA_STREET"
         ],
         "rank": 1,
         "hit1": 1,
@@ -4772,7 +4771,7 @@
         "rr": 1.0,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 40.36
+        "latency_ms": 40.05
       }
     },
     {
@@ -4782,10 +4781,10 @@
       "requires_graph": true,
       "ground_truth_entities": [
         "P_TOKYO_SKYTREE",
-        "P_UENO_PARK",
         "P_SENSOJI",
         "P_IMPERIAL_PALACE",
-        "P_AKIHABARA_ELECTRIC"
+        "P_AKIHABARA_ELECTRIC",
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": null,
@@ -4797,7 +4796,7 @@
           "C_P_ROPPONGI_HILLS_INFO",
           "C_P_SHIBUYA_CROSSING_01"
         ],
-        "latency_ms": 15.67
+        "latency_ms": 16.44
       },
       "graph_only": {
         "ranked_entities": [
@@ -4809,7 +4808,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.16
+        "latency_ms": 0.21
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -4825,7 +4824,7 @@
         "rr": 0.0,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 33.54
+        "latency_ms": 39.54
       }
     },
     {
@@ -4834,11 +4833,11 @@
       "query": "ฉันมีเวลา 10 ชั่วโมงใน Tokyo ช่วยสร้างเส้นทางที่เหมาะสมที่สุด โดยพิจารณาประเภทสถานที่ เวลาเปิด–ปิด ระยะทาง เวลาเดินทาง ค่าใช้จ่าย และหลีกเลี่ยงการย้อนเส้นทาง",
       "requires_graph": true,
       "ground_truth_entities": [
-        "P_TOKYO_TOWER",
-        "P_UENO_PARK",
+        "P_SHIBUYA_CROSSING",
         "P_SENSOJI",
+        "P_TOKYO_TOWER",
         "P_AKIHABARA_ELECTRIC",
-        "P_SHIBUYA_CROSSING"
+        "P_UENO_PARK"
       ],
       "dense_only": {
         "rank": null,
@@ -4850,7 +4849,7 @@
           "C_P_IMPERIAL_PALACE_INFO",
           "C_P_ROPPONGI_HILLS_INFO"
         ],
-        "latency_ms": 17.68
+        "latency_ms": 18.66
       },
       "graph_only": {
         "ranked_entities": [
@@ -4860,7 +4859,7 @@
         "hit1": 0,
         "hit3": 0,
         "rr": 0.0,
-        "latency_ms": 0.16
+        "latency_ms": 0.15
       },
       "hybrid_rag": {
         "ranked_entities": [
@@ -4876,7 +4875,7 @@
         "rr": 0.1667,
         "graph_used": true,
         "citations_count": 8,
-        "latency_ms": 33.64
+        "latency_ms": 36.37
       }
     }
   ]

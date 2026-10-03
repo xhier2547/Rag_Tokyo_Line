@@ -11,6 +11,7 @@ from src.vector.faiss_store import TokyoFAISSStore
 from src.vector.chroma_store import TokyoChromaStore
 from src.vector.bm25_store import TokyoBM25Store, tokenize_corpus_text
 from src.hybrid.engine import TokyoHybridRAGEngine
+from src.hybrid.query_constraints import extract_query_constraints
 
 # 1. ทดสอบ FAISS Vector Store
 def test_faiss_store_search():
@@ -117,6 +118,16 @@ def test_weighted_rrf_can_follow_intent():
         sparse_weight=1.5,
     )
     assert fused[0].metadata["chunk_id"] == "S"
+
+
+def test_structured_query_constraints():
+    constraints = extract_query_constraints(
+        "ขอที่เที่ยวฟรีสำหรับครอบครัว เดินจากสถานีไม่เกิน 10 นาที ภายใน 3 ชั่วโมง"
+    )
+    assert constraints.free_only is True
+    assert constraints.companions == "family"
+    assert constraints.max_walk_minutes == 10
+    assert constraints.duration_hours == 3.0
 
 # 6. ทดสอบ End-to-End Hybrid Context Retrieval
 def test_end_to_end_hybrid_retrieval():

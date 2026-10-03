@@ -13,6 +13,7 @@ from langchain_core.documents import Document
 from src.vector.faiss_store import TokyoFAISSStore
 from src.vector.bm25_store import TokyoBM25Store
 from src.graph.pathfinder import TokyoGraphPathfinder
+from src.hybrid.query_constraints import QueryConstraints, extract_query_constraints
 
 class HybridContextResult(BaseModel):
     intent: str = Field(..., description="ประเภทเจตนาของคำถาม (ROUTE_TRANSIT, FACT_RETRIEVAL, HYBRID_COMPLEX)")
@@ -174,6 +175,7 @@ class TokyoHybridRAGEngine:
         top_n: int = 3,
         intent: str = "FACT_RETRIEVAL",
         graph_ranked_entities: Optional[List[str]] = None,
+        constraints: Optional[QueryConstraints] = None,
     ) -> List[Document]:
         """
         Semantic re-ranking using the same embedding model as the FAISS index.
@@ -184,6 +186,7 @@ class TokyoHybridRAGEngine:
         if not candidates:
             return []
         graph_ranked_entities = graph_ranked_entities or []
+        constraints = constraints or extract_query_constraints(query)
         graph_rank = {entity_id: rank for rank, entity_id in enumerate(graph_ranked_entities, start=1)}
 
         try:
@@ -222,13 +225,32 @@ class TokyoHybridRAGEngine:
             rrf = float(doc.metadata.get("rrf_score_normalized", 0.0))
             entity_id = doc.metadata.get("place_id", "")
             graph = 1.0 / graph_rank[entity_id] if entity_id in graph_rank else 0.0
+            content = doc.page_content.lower()
+            category = str(doc.metadata.get("category", "")).lower()
+            constraint_score = 0.0
+            if constraints.free_only:
+                constraint_score += 0.15 if any(term in content for term in ("เข้าชมฟรี", "ฟรี", "free")) else -0.10
+            if constraints.max_walk_minutes is not None:
+                walk_time = int(doc.metadata.get("walk_time_min") or 999)
+                constraint_score += 0.10 if walk_time <= constraints.max_walk_minutes else -0.10
+            interest_terms = {
+                "culture": ("temple", "shrine", "culture", "วัด", "ศาลเจ้า"),
+                "food": ("food", "market", "อาหาร", "ตลาด"),
+                "nature": ("nature", "park", "สวน", "ธรรมชาติ"),
+                "anime": ("anime", "gaming", "อนิเมะ", "เกม"),
+                "shopping": ("shopping", "fashion", "ช้อป", "แฟชั่น"),
+                "viewpoint": ("viewpoint", "landmark", "ชมวิว", "หอคอย"),
+            }
+            for interest in constraints.interests:
+                if any(term in f"{category} {content}" for term in interest_terms.get(interest, ())):
+                    constraint_score += 0.08
             if intent == "ROUTE_TRANSIT":
                 weights = (0.40, 0.20, 0.40)
             elif intent == "FACT_RETRIEVAL":
                 weights = (0.65, 0.30, 0.05)
             else:
                 weights = (0.50, 0.25, 0.25)
-            final_score = weights[0] * semantic + weights[1] * rrf + weights[2] * graph
+            final_score = weights[0] * semantic + weights[1] * rrf + weights[2] * graph + constraint_score
             doc.metadata["rerank_score"] = round(final_score, 6)
             scored.append((final_score, doc))
         candidates = [doc for _, doc in sorted(scored, key=lambda item: item[0], reverse=True)]
@@ -274,6 +296,7 @@ class TokyoHybridRAGEngine:
         intent = self.route_query_intent(query)
         clean_q = query.lower()
         retrieval_query = self.expand_query(query)
+        constraints = extract_query_constraints(query)
 
         # ปรับ Top-N อัตโนมัติหากเป็นคำถามที่ต้องการคำแนะนำหลายสถานที่ (เช่น แนะนำ 5 สถานที่, ยอดนิยม)
         recommend_keywords = ["5", "10", "แนะนำ", "ยอดนิยม", "ที่เที่ยว", "จัดทริป", "มีที่ไหนบ้าง", "ไฮไลท์", "แลนด์มาร์ก"]
@@ -315,6 +338,7 @@ class TokyoHybridRAGEngine:
             top_n=top_n_rerank,
             intent=intent,
             graph_ranked_entities=graph_ranked_entities,
+            constraints=constraints,
         )
 
         # 5. ประกอบร่างบริบทเอกสาร (Context Aggregation)

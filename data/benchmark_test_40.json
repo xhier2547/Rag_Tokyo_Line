@@ -1,0 +1,834 @@
+[
+  {
+    "id": 7,
+    "category": "A",
+    "category_name": "ค้นหาและแนะนำสถานที่ทั่วไป",
+    "query": "สถานที่ไหนเหมาะสำหรับเที่ยวคนเดียว?",
+    "requires_graph": false,
+    "ground_truth_entities": [
+      "P_SHINJUKU_GYOEN",
+      "P_MEIJI_JINGU",
+      "P_UENO_PARK",
+      "P_HAMARIKYU_GARDENS"
+    ],
+    "ground_truth_chunks": [
+      "C_P_SHINJUKU_GYOEN_01",
+      "C_P_SHINJUKU_GYOEN_INFO",
+      "C_P_MEIJI_JINGU_01",
+      "C_P_MEIJI_JINGU_INFO",
+      "C_P_UENO_PARK_01",
+      "C_P_UENO_PARK_INFO",
+      "C_P_HAMARIKYU_GARDENS_01",
+      "C_P_HAMARIKYU_GARDENS_INFO"
+    ]
+  },
+  {
+    "id": 8,
+    "category": "A",
+    "category_name": "ค้นหาและแนะนำสถานที่ทั่วไป",
+    "query": "แนะนำสถานที่ที่ไม่ใช่แหล่งท่องเที่ยวยอดนิยมแต่มีความน่าสนใจ",
+    "requires_graph": false,
+    "ground_truth_entities": [
+      "P_HAMARIKYU_GARDENS",
+      "P_TEAMLAB_PLANETS",
+      "P_TOKYO_DOME_CITY",
+      "P_OMOTESANDO_HILLS"
+    ],
+    "ground_truth_chunks": [
+      "C_P_HAMARIKYU_GARDENS_01",
+      "C_P_HAMARIKYU_GARDENS_INFO",
+      "C_P_TEAMLAB_PLANETS_01",
+      "C_P_TEAMLAB_PLANETS_INFO",
+      "C_P_TOKYO_DOME_CITY_01",
+      "C_P_TOKYO_DOME_CITY_INFO",
+      "C_P_OMOTESANDO_HILLS_01",
+      "C_P_OMOTESANDO_HILLS_INFO"
+    ]
+  },
+  {
+    "id": 9,
+    "category": "A",
+    "category_name": "ค้นหาและแนะนำสถานที่ทั่วไป",
+    "query": "มีสถานที่ไหนที่สามารถใช้เวลาเที่ยวได้ครึ่งวัน?",
+    "requires_graph": false,
+    "ground_truth_entities": [
+      "P_UENO_PARK",
+      "P_SHINJUKU_GYOEN",
+      "P_SENSOJI"
+    ],
+    "ground_truth_chunks": [
+      "C_P_UENO_PARK_01",
+      "C_P_UENO_PARK_INFO",
+      "C_P_SHINJUKU_GYOEN_01",
+      "C_P_SHINJUKU_GYOEN_INFO",
+      "C_P_SENSOJI_01",
+      "C_P_SENSOJI_02",
+      "C_P_SENSOJI_INFO"
+    ]
+  },
+  {
+    "id": 10,
+    "category": "A",
+    "category_name": "ค้นหาและแนะนำสถานที่ทั่วไป",
+    "query": "ถ้ามีเวลาเพียง 3 ชั่วโมงใน Tokyo ควรเลือกเที่ยวบริเวณไหน?",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_IMPERIAL_PALACE",
+      "P_SENSOJI",
+      "P_SHIBUYA_CROSSING"
+    ],
+    "ground_truth_chunks": [
+      "C_P_IMPERIAL_PALACE_01",
+      "C_P_IMPERIAL_PALACE_02",
+      "C_P_IMPERIAL_PALACE_INFO",
+      "C_P_SENSOJI_01",
+      "C_P_SENSOJI_02",
+      "C_P_SENSOJI_INFO",
+      "C_P_SHIBUYA_CROSSING_01",
+      "C_P_SHIBUYA_CROSSING_INFO"
+    ]
+  },
+  {
+    "id": 17,
+    "category": "B",
+    "category_name": "วัด ศาลเจ้า ประวัติศาสตร์และวัฒนธรรม",
+    "query": "แนะนำพิพิธภัณฑ์เกี่ยวกับประวัติศาสตร์ Tokyo",
+    "requires_graph": false,
+    "ground_truth_entities": [
+      "P_UENO_PARK"
+    ],
+    "ground_truth_chunks": [
+      "C_P_UENO_PARK_01",
+      "C_P_UENO_PARK_INFO"
+    ]
+  },
+  {
+    "id": 18,
+    "category": "B",
+    "category_name": "วัด ศาลเจ้า ประวัติศาสตร์และวัฒนธรรม",
+    "query": "มีสวนญี่ปุ่นแบบดั้งเดิมที่น่าเที่ยวที่ไหนบ้าง?",
+    "requires_graph": false,
+    "ground_truth_entities": [
+      "P_HAMARIKYU_GARDENS",
+      "P_SHINJUKU_GYOEN",
+      "P_IMPERIAL_PALACE"
+    ],
+    "ground_truth_chunks": [
+      "C_P_HAMARIKYU_GARDENS_01",
+      "C_P_HAMARIKYU_GARDENS_INFO",
+      "C_P_SHINJUKU_GYOEN_01",
+      "C_P_SHINJUKU_GYOEN_INFO",
+      "C_P_IMPERIAL_PALACE_01",
+      "C_P_IMPERIAL_PALACE_02",
+      "C_P_IMPERIAL_PALACE_INFO"
+    ]
+  },
+  {
+    "id": 19,
+    "category": "B",
+    "category_name": "วัด ศาลเจ้า ประวัติศาสตร์และวัฒนธรรม",
+    "query": "ถ้าต้องการเที่ยววัดและศาลเจ้าหลายแห่งในหนึ่งวัน ควรจัดเส้นทางอย่างไร?",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_MEIJI_JINGU",
+      "P_SENSOJI"
+    ],
+    "ground_truth_chunks": [
+      "C_P_MEIJI_JINGU_01",
+      "C_P_MEIJI_JINGU_INFO",
+      "C_P_SENSOJI_01",
+      "C_P_SENSOJI_02",
+      "C_P_SENSOJI_INFO"
+    ]
+  },
+  {
+    "id": 20,
+    "category": "B",
+    "category_name": "วัด ศาลเจ้า ประวัติศาสตร์และวัฒนธรรม",
+    "query": "มีสถานที่ทางประวัติศาสตร์ใกล้ Asakusa ที่สามารถเดินไปถึงได้หรือไม่?",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_SENSOJI"
+    ],
+    "ground_truth_chunks": [
+      "C_P_SENSOJI_01",
+      "C_P_SENSOJI_02",
+      "C_P_SENSOJI_INFO"
+    ]
+  },
+  {
+    "id": 27,
+    "category": "C",
+    "category_name": "Anime / Gaming / Technology",
+    "query": "ถ้าชอบ Gundam ควรไปเที่ยวบริเวณไหน?",
+    "requires_graph": false,
+    "ground_truth_entities": [
+      "P_ODAIBA_GUNDAM"
+    ],
+    "ground_truth_chunks": [
+      "C_P_ODAIBA_GUNDAM_01",
+      "C_P_ODAIBA_GUNDAM_INFO"
+    ]
+  },
+  {
+    "id": 28,
+    "category": "C",
+    "category_name": "Anime / Gaming / Technology",
+    "query": "แนะนำเส้นทาง Anime Tour 1 วันใน Tokyo",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_AKIHABARA_ELECTRIC",
+      "P_ODAIBA_GUNDAM",
+      "P_TEAMLAB_PLANETS"
+    ],
+    "ground_truth_chunks": [
+      "C_P_AKIHABARA_ELECTRIC_01",
+      "C_P_AKIHABARA_ELECTRIC_INFO",
+      "C_P_ODAIBA_GUNDAM_01",
+      "C_P_ODAIBA_GUNDAM_INFO",
+      "C_P_TEAMLAB_PLANETS_01",
+      "C_P_TEAMLAB_PLANETS_INFO"
+    ]
+  },
+  {
+    "id": 29,
+    "category": "C",
+    "category_name": "Anime / Gaming / Technology",
+    "query": "มีสถานที่เกี่ยวกับเทคโนโลยีหรือวิทยาศาสตร์ที่น่าสนใจไหม?",
+    "requires_graph": false,
+    "ground_truth_entities": [
+      "P_TEAMLAB_PLANETS",
+      "P_AKIHABARA_ELECTRIC"
+    ],
+    "ground_truth_chunks": [
+      "C_P_TEAMLAB_PLANETS_01",
+      "C_P_TEAMLAB_PLANETS_INFO",
+      "C_P_AKIHABARA_ELECTRIC_01",
+      "C_P_AKIHABARA_ELECTRIC_INFO"
+    ]
+  },
+  {
+    "id": 30,
+    "category": "C",
+    "category_name": "Anime / Gaming / Technology",
+    "query": "ถ้ามีเวลาเพียงครึ่งวันสำหรับ Akihabara ควรไปจุดไหนก่อน?",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_AKIHABARA_ELECTRIC"
+    ],
+    "ground_truth_chunks": [
+      "C_P_AKIHABARA_ELECTRIC_01",
+      "C_P_AKIHABARA_ELECTRIC_INFO"
+    ]
+  },
+  {
+    "id": 37,
+    "category": "D",
+    "category_name": "ธรรมชาติ สวน และจุดชมวิว",
+    "query": "มีจุดชมวิวฟรีใน Tokyo หรือไม่?",
+    "requires_graph": false,
+    "ground_truth_entities": [
+      "P_SHIBUYA_CROSSING",
+      "P_ODAIBA_GUNDAM"
+    ],
+    "ground_truth_chunks": [
+      "C_P_SHIBUYA_CROSSING_01",
+      "C_P_SHIBUYA_CROSSING_INFO",
+      "C_P_ODAIBA_GUNDAM_01",
+      "C_P_ODAIBA_GUNDAM_INFO"
+    ]
+  },
+  {
+    "id": 38,
+    "category": "D",
+    "category_name": "ธรรมชาติ สวน และจุดชมวิว",
+    "query": "สถานที่ไหนเหมาะสำหรับชมพระอาทิตย์ตก?",
+    "requires_graph": false,
+    "ground_truth_entities": [
+      "P_TOKYO_TOWER",
+      "P_TOKYO_SKYTREE",
+      "P_ROPPONGI_HILLS"
+    ],
+    "ground_truth_chunks": [
+      "C_P_TOKYO_TOWER_01",
+      "C_P_TOKYO_TOWER_INFO",
+      "C_P_TOKYO_SKYTREE_01",
+      "C_P_TOKYO_SKYTREE_02",
+      "C_P_TOKYO_SKYTREE_INFO",
+      "C_P_ROPPONGI_HILLS_01",
+      "C_P_ROPPONGI_HILLS_INFO"
+    ]
+  },
+  {
+    "id": 39,
+    "category": "D",
+    "category_name": "ธรรมชาติ สวน และจุดชมวิว",
+    "query": "มีสวนไหนอยู่ใกล้สถานีรถไฟและเดินทางสะดวก?",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_SHINJUKU_GYOEN",
+      "P_UENO_PARK",
+      "P_HAMARIKYU_GARDENS"
+    ],
+    "ground_truth_chunks": [
+      "C_P_SHINJUKU_GYOEN_01",
+      "C_P_SHINJUKU_GYOEN_INFO",
+      "C_P_UENO_PARK_01",
+      "C_P_UENO_PARK_INFO",
+      "C_P_HAMARIKYU_GARDENS_01",
+      "C_P_HAMARIKYU_GARDENS_INFO"
+    ]
+  },
+  {
+    "id": 40,
+    "category": "D",
+    "category_name": "ธรรมชาติ สวน และจุดชมวิว",
+    "query": "ถ้าอยากเที่ยวธรรมชาติแต่ไม่ออกนอก Tokyo ควรไปที่ไหน?",
+    "requires_graph": false,
+    "ground_truth_entities": [
+      "P_SHINJUKU_GYOEN",
+      "P_UENO_PARK",
+      "P_HAMARIKYU_GARDENS"
+    ],
+    "ground_truth_chunks": [
+      "C_P_SHINJUKU_GYOEN_01",
+      "C_P_SHINJUKU_GYOEN_INFO",
+      "C_P_UENO_PARK_01",
+      "C_P_UENO_PARK_INFO",
+      "C_P_HAMARIKYU_GARDENS_01",
+      "C_P_HAMARIKYU_GARDENS_INFO"
+    ]
+  },
+  {
+    "id": 47,
+    "category": "E",
+    "category_name": "อาหาร ตลาด และย่านกินเที่ยว",
+    "query": "ย่านไหนเหมาะสำหรับหาอาหารช่วงกลางคืน?",
+    "requires_graph": false,
+    "ground_truth_entities": [
+      "P_TSUKIJI_OUTER",
+      "P_AMEYOKO"
+    ],
+    "ground_truth_chunks": [
+      "C_P_TSUKIJI_OUTER_01",
+      "C_P_TSUKIJI_OUTER_INFO",
+      "C_P_AMEYOKO_01",
+      "C_P_AMEYOKO_INFO"
+    ]
+  },
+  {
+    "id": 48,
+    "category": "E",
+    "category_name": "อาหาร ตลาด และย่านกินเที่ยว",
+    "query": "ถ้าต้องการเที่ยวตลาดและวัดในช่วงเช้า ควรจัดเส้นทางอย่างไร?",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_TSUKIJI_OUTER",
+      "P_SENSOJI"
+    ],
+    "ground_truth_chunks": [
+      "C_P_TSUKIJI_OUTER_01",
+      "C_P_TSUKIJI_OUTER_INFO",
+      "C_P_SENSOJI_01",
+      "C_P_SENSOJI_02",
+      "C_P_SENSOJI_INFO"
+    ]
+  },
+  {
+    "id": 49,
+    "category": "E",
+    "category_name": "อาหาร ตลาด และย่านกินเที่ยว",
+    "query": "มีสถานที่ท่องเที่ยวอะไรใกล้ Tsukiji ที่สามารถเที่ยวต่อได้?",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_HAMARIKYU_GARDENS",
+      "P_GINZA_SIX"
+    ],
+    "ground_truth_chunks": [
+      "C_P_HAMARIKYU_GARDENS_01",
+      "C_P_HAMARIKYU_GARDENS_INFO",
+      "C_P_GINZA_SIX_01",
+      "C_P_GINZA_SIX_INFO"
+    ]
+  },
+  {
+    "id": 50,
+    "category": "E",
+    "category_name": "อาหาร ตลาด และย่านกินเที่ยว",
+    "query": "ถ้ามีงบค่าอาหาร 3,000 เยนต่อวัน ควรเลือกเที่ยวและกินบริเวณไหน?",
+    "requires_graph": false,
+    "ground_truth_entities": [
+      "P_TSUKIJI_OUTER",
+      "P_AMEYOKO",
+      "P_TOYOSU_MARKET"
+    ],
+    "ground_truth_chunks": [
+      "C_P_TSUKIJI_OUTER_01",
+      "C_P_TSUKIJI_OUTER_INFO",
+      "C_P_AMEYOKO_01",
+      "C_P_AMEYOKO_INFO",
+      "C_P_TOYOSU_MARKET_01",
+      "C_P_TOYOSU_MARKET_INFO"
+    ]
+  },
+  {
+    "id": 57,
+    "category": "F",
+    "category_name": "Nearby / Spatial Query",
+    "query": "มีวัดหรือศาลเจ้าอะไรอยู่ใกล้สถานที่ชมวิวใน Tokyo?",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_TOKYO_SKYTREE",
+      "P_SENSOJI"
+    ],
+    "ground_truth_chunks": [
+      "C_P_TOKYO_SKYTREE_01",
+      "C_P_TOKYO_SKYTREE_02",
+      "C_P_TOKYO_SKYTREE_INFO",
+      "C_P_SENSOJI_01",
+      "C_P_SENSOJI_02",
+      "C_P_SENSOJI_INFO"
+    ]
+  },
+  {
+    "id": 58,
+    "category": "F",
+    "category_name": "Nearby / Spatial Query",
+    "query": "สถานที่ท่องเที่ยวใดบ้างที่อยู่ห่างกันไม่เกิน 2 กิโลเมตร?",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_SENSOJI",
+      "P_TOKYO_SKYTREE"
+    ],
+    "ground_truth_chunks": [
+      "C_P_SENSOJI_01",
+      "C_P_SENSOJI_02",
+      "C_P_SENSOJI_INFO",
+      "C_P_TOKYO_SKYTREE_01",
+      "C_P_TOKYO_SKYTREE_02",
+      "C_P_TOKYO_SKYTREE_INFO"
+    ]
+  },
+  {
+    "id": 59,
+    "category": "F",
+    "category_name": "Nearby / Spatial Query",
+    "query": "ถ้าอยู่ Akihabara มีสถานที่สำคัญอะไรที่สามารถเดินไปต่อได้?",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_AKIHABARA_ELECTRIC",
+      "P_UENO_PARK"
+    ],
+    "ground_truth_chunks": [
+      "C_P_AKIHABARA_ELECTRIC_01",
+      "C_P_AKIHABARA_ELECTRIC_INFO",
+      "C_P_UENO_PARK_01",
+      "C_P_UENO_PARK_INFO"
+    ]
+  },
+  {
+    "id": 60,
+    "category": "F",
+    "category_name": "Nearby / Spatial Query",
+    "query": "ช่วยหากลุ่มสถานที่ 3–4 แห่งที่อยู่ใกล้กันและเที่ยวต่อเนื่องได้",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_SENSOJI",
+      "P_TOKYO_SKYTREE",
+      "P_UENO_PARK",
+      "P_AMEYOKO"
+    ],
+    "ground_truth_chunks": [
+      "C_P_SENSOJI_01",
+      "C_P_SENSOJI_02",
+      "C_P_SENSOJI_INFO",
+      "C_P_TOKYO_SKYTREE_01",
+      "C_P_TOKYO_SKYTREE_02",
+      "C_P_TOKYO_SKYTREE_INFO",
+      "C_P_UENO_PARK_01",
+      "C_P_UENO_PARK_INFO",
+      "C_P_AMEYOKO_01",
+      "C_P_AMEYOKO_INFO"
+    ]
+  },
+  {
+    "id": 67,
+    "category": "G",
+    "category_name": "Transportation & Route",
+    "query": "Tokyo Station → Imperial Palace → Ginza → Tsukiji ควรเดินทางแบบไหน?",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_IMPERIAL_PALACE",
+      "P_GINZA_SIX",
+      "P_TSUKIJI_OUTER"
+    ],
+    "ground_truth_chunks": [
+      "C_P_IMPERIAL_PALACE_01",
+      "C_P_IMPERIAL_PALACE_02",
+      "C_P_IMPERIAL_PALACE_INFO",
+      "C_P_GINZA_SIX_01",
+      "C_P_GINZA_SIX_INFO",
+      "C_P_TSUKIJI_OUTER_01",
+      "C_P_TSUKIJI_OUTER_INFO"
+    ]
+  },
+  {
+    "id": 68,
+    "category": "G",
+    "category_name": "Transportation & Route",
+    "query": "ถ้าต้องการเปลี่ยนรถไฟให้น้อยที่สุดจาก Shinjuku ไป Asakusa ควรไปอย่างไร?",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_SENSOJI",
+      "P_SHINJUKU_GYOEN"
+    ],
+    "ground_truth_chunks": [
+      "C_P_SENSOJI_01",
+      "C_P_SENSOJI_02",
+      "C_P_SENSOJI_INFO",
+      "C_P_SHINJUKU_GYOEN_01",
+      "C_P_SHINJUKU_GYOEN_INFO"
+    ]
+  },
+  {
+    "id": 69,
+    "category": "G",
+    "category_name": "Transportation & Route",
+    "query": "มีสถานที่ท่องเที่ยวใดบ้างที่อยู่ตามเส้นทาง Yamanote Line?",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_UENO_PARK",
+      "P_AKIHABARA_ELECTRIC",
+      "P_SHIBUYA_CROSSING",
+      "P_MEIJI_JINGU",
+      "P_TOKYO_TOWER"
+    ],
+    "ground_truth_chunks": [
+      "C_P_UENO_PARK_01",
+      "C_P_UENO_PARK_INFO",
+      "C_P_AKIHABARA_ELECTRIC_01",
+      "C_P_AKIHABARA_ELECTRIC_INFO",
+      "C_P_SHIBUYA_CROSSING_01",
+      "C_P_SHIBUYA_CROSSING_INFO",
+      "C_P_MEIJI_JINGU_01",
+      "C_P_MEIJI_JINGU_INFO",
+      "C_P_TOKYO_TOWER_01",
+      "C_P_TOKYO_TOWER_INFO"
+    ]
+  },
+  {
+    "id": 70,
+    "category": "G",
+    "category_name": "Transportation & Route",
+    "query": "ช่วยสร้างเส้นทางที่เริ่มและจบที่ Tokyo Station โดยแวะสถานที่ท่องเที่ยว 5 แห่ง",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_IMPERIAL_PALACE",
+      "P_SENSOJI",
+      "P_UENO_PARK",
+      "P_AKIHABARA_ELECTRIC",
+      "P_SHIBUYA_CROSSING"
+    ],
+    "ground_truth_chunks": [
+      "C_P_IMPERIAL_PALACE_01",
+      "C_P_IMPERIAL_PALACE_02",
+      "C_P_IMPERIAL_PALACE_INFO",
+      "C_P_SENSOJI_01",
+      "C_P_SENSOJI_02",
+      "C_P_SENSOJI_INFO",
+      "C_P_UENO_PARK_01",
+      "C_P_UENO_PARK_INFO",
+      "C_P_AKIHABARA_ELECTRIC_01",
+      "C_P_AKIHABARA_ELECTRIC_INFO",
+      "C_P_SHIBUYA_CROSSING_01",
+      "C_P_SHIBUYA_CROSSING_INFO"
+    ]
+  },
+  {
+    "id": 77,
+    "category": "H",
+    "category_name": "Itinerary Planning",
+    "query": "จัดทริปหนึ่งวันที่มี วัด 1 แห่ง พิพิธภัณฑ์ 1 แห่ง สวน 1 แห่ง และจุดชมวิว 1 แห่ง",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_SENSOJI",
+      "P_UENO_PARK",
+      "P_SHINJUKU_GYOEN",
+      "P_TOKYO_TOWER"
+    ],
+    "ground_truth_chunks": [
+      "C_P_SENSOJI_01",
+      "C_P_SENSOJI_02",
+      "C_P_SENSOJI_INFO",
+      "C_P_UENO_PARK_01",
+      "C_P_UENO_PARK_INFO",
+      "C_P_SHINJUKU_GYOEN_01",
+      "C_P_SHINJUKU_GYOEN_INFO",
+      "C_P_TOKYO_TOWER_01",
+      "C_P_TOKYO_TOWER_INFO"
+    ]
+  },
+  {
+    "id": 78,
+    "category": "H",
+    "category_name": "Itinerary Planning",
+    "query": "ช่วยจัดทริปที่เดินทางด้วยรถไฟไม่เกิน 5 ครั้งต่อวัน",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_SENSOJI",
+      "P_UENO_PARK",
+      "P_SHIBUYA_CROSSING"
+    ],
+    "ground_truth_chunks": [
+      "C_P_SENSOJI_01",
+      "C_P_SENSOJI_02",
+      "C_P_SENSOJI_INFO",
+      "C_P_UENO_PARK_01",
+      "C_P_UENO_PARK_INFO",
+      "C_P_SHIBUYA_CROSSING_01",
+      "C_P_SHIBUYA_CROSSING_INFO"
+    ]
+  },
+  {
+    "id": 79,
+    "category": "H",
+    "category_name": "Itinerary Planning",
+    "query": "ช่วยจัดเส้นทางเที่ยวโดยพยายามลดเวลาเดินทางระหว่างสถานที่",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_SENSOJI",
+      "P_TOKYO_SKYTREE",
+      "P_UENO_PARK"
+    ],
+    "ground_truth_chunks": [
+      "C_P_SENSOJI_01",
+      "C_P_SENSOJI_02",
+      "C_P_SENSOJI_INFO",
+      "C_P_TOKYO_SKYTREE_01",
+      "C_P_TOKYO_SKYTREE_02",
+      "C_P_TOKYO_SKYTREE_INFO",
+      "C_P_UENO_PARK_01",
+      "C_P_UENO_PARK_INFO"
+    ]
+  },
+  {
+    "id": 80,
+    "category": "H",
+    "category_name": "Itinerary Planning",
+    "query": "ช่วยจัดเส้นทางหนึ่งวันที่เที่ยวได้อย่างน้อย 5 สถานที่และไม่ย้อนเส้นทางมากเกินไป",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_SENSOJI",
+      "P_UENO_PARK",
+      "P_AKIHABARA_ELECTRIC",
+      "P_SHIBUYA_CROSSING",
+      "P_MEIJI_JINGU"
+    ],
+    "ground_truth_chunks": [
+      "C_P_SENSOJI_01",
+      "C_P_SENSOJI_02",
+      "C_P_SENSOJI_INFO",
+      "C_P_UENO_PARK_01",
+      "C_P_UENO_PARK_INFO",
+      "C_P_AKIHABARA_ELECTRIC_01",
+      "C_P_AKIHABARA_ELECTRIC_INFO",
+      "C_P_SHIBUYA_CROSSING_01",
+      "C_P_SHIBUYA_CROSSING_INFO",
+      "C_P_MEIJI_JINGU_01",
+      "C_P_MEIJI_JINGU_INFO"
+    ]
+  },
+  {
+    "id": 87,
+    "category": "I",
+    "category_name": "Preference / Personalized Recommendation",
+    "query": "ถ้าเดินทางกับผู้สูงอายุ ควรเลือกสถานที่และเส้นทางแบบไหน?",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_SENSOJI",
+      "P_IMPERIAL_PALACE",
+      "P_UENO_PARK"
+    ],
+    "ground_truth_chunks": [
+      "C_P_SENSOJI_01",
+      "C_P_SENSOJI_02",
+      "C_P_SENSOJI_INFO",
+      "C_P_IMPERIAL_PALACE_01",
+      "C_P_IMPERIAL_PALACE_02",
+      "C_P_IMPERIAL_PALACE_INFO",
+      "C_P_UENO_PARK_01",
+      "C_P_UENO_PARK_INFO"
+    ]
+  },
+  {
+    "id": 88,
+    "category": "I",
+    "category_name": "Preference / Personalized Recommendation",
+    "query": "ถ้าเดินทางกับเด็ก มีสถานที่ใดเหมาะสำหรับครอบครัว?",
+    "requires_graph": false,
+    "ground_truth_entities": [
+      "P_ODAIBA_GUNDAM",
+      "P_UENO_PARK",
+      "P_TOKYO_SKYTREE"
+    ],
+    "ground_truth_chunks": [
+      "C_P_ODAIBA_GUNDAM_01",
+      "C_P_ODAIBA_GUNDAM_INFO",
+      "C_P_UENO_PARK_01",
+      "C_P_UENO_PARK_INFO",
+      "C_P_TOKYO_SKYTREE_01",
+      "C_P_TOKYO_SKYTREE_02",
+      "C_P_TOKYO_SKYTREE_INFO"
+    ]
+  },
+  {
+    "id": 89,
+    "category": "I",
+    "category_name": "Preference / Personalized Recommendation",
+    "query": "ถ้ามีงบประมาณจำกัด ควรจัดทริป Tokyo 1 วันอย่างไร?",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_SENSOJI",
+      "P_MEIJI_JINGU",
+      "P_UENO_PARK",
+      "P_SHIBUYA_CROSSING"
+    ],
+    "ground_truth_chunks": [
+      "C_P_SENSOJI_01",
+      "C_P_SENSOJI_02",
+      "C_P_SENSOJI_INFO",
+      "C_P_MEIJI_JINGU_01",
+      "C_P_MEIJI_JINGU_INFO",
+      "C_P_UENO_PARK_01",
+      "C_P_UENO_PARK_INFO",
+      "C_P_SHIBUYA_CROSSING_01",
+      "C_P_SHIBUYA_CROSSING_INFO"
+    ]
+  },
+  {
+    "id": 90,
+    "category": "I",
+    "category_name": "Preference / Personalized Recommendation",
+    "query": "ฉันอยากถ่ายรูป Tokyo ตอนกลางคืน ควรไปที่ไหนและเรียงเส้นทางอย่างไร?",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_TOKYO_TOWER",
+      "P_TOKYO_SKYTREE",
+      "P_ROPPONGI_HILLS",
+      "P_SHIBUYA_CROSSING"
+    ],
+    "ground_truth_chunks": [
+      "C_P_TOKYO_TOWER_01",
+      "C_P_TOKYO_TOWER_INFO",
+      "C_P_TOKYO_SKYTREE_01",
+      "C_P_TOKYO_SKYTREE_02",
+      "C_P_TOKYO_SKYTREE_INFO",
+      "C_P_ROPPONGI_HILLS_01",
+      "C_P_ROPPONGI_HILLS_INFO",
+      "C_P_SHIBUYA_CROSSING_01",
+      "C_P_SHIBUYA_CROSSING_INFO"
+    ]
+  },
+  {
+    "id": 97,
+    "category": "J",
+    "category_name": "Complex / Multi-hop Graph RAG",
+    "query": "ถ้าเริ่มที่ Tokyo Station เวลา 09:00 ต้องการไปวัด 1 แห่ง ตลาด 1 แห่ง พิพิธภัณฑ์ 1 แห่ง และชมวิวกลางคืน ควรจัดเส้นทางอย่างไร?",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_IMPERIAL_PALACE",
+      "P_SENSOJI",
+      "P_TSUKIJI_OUTER",
+      "P_UENO_PARK"
+    ],
+    "ground_truth_chunks": [
+      "C_P_IMPERIAL_PALACE_01",
+      "C_P_IMPERIAL_PALACE_02",
+      "C_P_IMPERIAL_PALACE_INFO",
+      "C_P_SENSOJI_01",
+      "C_P_SENSOJI_02",
+      "C_P_SENSOJI_INFO",
+      "C_P_TSUKIJI_OUTER_01",
+      "C_P_TSUKIJI_OUTER_INFO",
+      "C_P_UENO_PARK_01",
+      "C_P_UENO_PARK_INFO"
+    ]
+  },
+  {
+    "id": 98,
+    "category": "J",
+    "category_name": "Complex / Multi-hop Graph RAG",
+    "query": "แนะนำเส้นทางสำหรับคนที่ชอบ Japanese culture, Anime และอาหาร โดยแต่ละจุดควรเชื่อมต่อด้วยระบบขนส่งสาธารณะได้สะดวก",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_SENSOJI",
+      "P_AKIHABARA_ELECTRIC",
+      "P_TSUKIJI_OUTER"
+    ],
+    "ground_truth_chunks": [
+      "C_P_SENSOJI_01",
+      "C_P_SENSOJI_02",
+      "C_P_SENSOJI_INFO",
+      "C_P_AKIHABARA_ELECTRIC_01",
+      "C_P_AKIHABARA_ELECTRIC_INFO",
+      "C_P_TSUKIJI_OUTER_01",
+      "C_P_TSUKIJI_OUTER_INFO"
+    ]
+  },
+  {
+    "id": 99,
+    "category": "J",
+    "category_name": "Complex / Multi-hop Graph RAG",
+    "query": "หาสถานที่ท่องเที่ยว 5 แห่งที่สามารถสร้างเส้นทางต่อเนื่องกันโดยแต่ละจุดห่างจากจุดถัดไปไม่เกิน 3 กิโลเมตร",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_SENSOJI",
+      "P_TOKYO_SKYTREE",
+      "P_UENO_PARK",
+      "P_AKIHABARA_ELECTRIC",
+      "P_IMPERIAL_PALACE"
+    ],
+    "ground_truth_chunks": [
+      "C_P_SENSOJI_01",
+      "C_P_SENSOJI_02",
+      "C_P_SENSOJI_INFO",
+      "C_P_TOKYO_SKYTREE_01",
+      "C_P_TOKYO_SKYTREE_02",
+      "C_P_TOKYO_SKYTREE_INFO",
+      "C_P_UENO_PARK_01",
+      "C_P_UENO_PARK_INFO",
+      "C_P_AKIHABARA_ELECTRIC_01",
+      "C_P_AKIHABARA_ELECTRIC_INFO",
+      "C_P_IMPERIAL_PALACE_01",
+      "C_P_IMPERIAL_PALACE_02",
+      "C_P_IMPERIAL_PALACE_INFO"
+    ]
+  },
+  {
+    "id": 100,
+    "category": "J",
+    "category_name": "Complex / Multi-hop Graph RAG",
+    "query": "ฉันมีเวลา 10 ชั่วโมงใน Tokyo ช่วยสร้างเส้นทางที่เหมาะสมที่สุด โดยพิจารณาประเภทสถานที่ เวลาเปิด–ปิด ระยะทาง เวลาเดินทาง ค่าใช้จ่าย และหลีกเลี่ยงการย้อนเส้นทาง",
+    "requires_graph": true,
+    "ground_truth_entities": [
+      "P_SENSOJI",
+      "P_UENO_PARK",
+      "P_AKIHABARA_ELECTRIC",
+      "P_SHIBUYA_CROSSING",
+      "P_TOKYO_TOWER"
+    ],
+    "ground_truth_chunks": [
+      "C_P_SENSOJI_01",
+      "C_P_SENSOJI_02",
+      "C_P_SENSOJI_INFO",
+      "C_P_UENO_PARK_01",
+      "C_P_UENO_PARK_INFO",
+      "C_P_AKIHABARA_ELECTRIC_01",
+      "C_P_AKIHABARA_ELECTRIC_INFO",
+      "C_P_SHIBUYA_CROSSING_01",
+      "C_P_SHIBUYA_CROSSING_INFO",
+      "C_P_TOKYO_TOWER_01",
+      "C_P_TOKYO_TOWER_INFO"
+    ]
+  }
+]

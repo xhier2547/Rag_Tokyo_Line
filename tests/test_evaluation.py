@@ -10,6 +10,7 @@ Automated Unit Tests สำหรับ Phase 6: Benchmark & Evaluation Module
 import os
 import pytest
 from src.evaluation.evaluator import TokyoRAGEvaluator, EvaluationItemResult, BenchmarkSummary
+from src.evaluation.create_benchmark_splits import create_splits
 
 
 def test_load_100_benchmark_questions():
@@ -39,6 +40,16 @@ def test_sample_questions():
     assert len(sample_10) == 10
     categories = set(q["category"] for q in sample_10)
     assert len(categories) == 10  # ต้องกระจายครบทั้ง 10 หมวด
+
+
+def test_stratified_dev_test_split():
+    dev, test = create_splits()
+    assert len(dev) == 60
+    assert len(test) == 40
+    assert {item["id"] for item in dev}.isdisjoint({item["id"] for item in test})
+    for category in "ABCDEFGHIJ":
+        assert sum(item["category"] == category for item in dev) == 6
+        assert sum(item["category"] == category for item in test) == 4
 
 
 def test_calculate_summary():
