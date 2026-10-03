@@ -89,6 +89,35 @@ def test_reciprocal_rank_fusion_logic():
     # ดังนั้น doc_b ต้องขึ้นเป็นอันดับที่ 1
     assert fused[0].metadata["chunk_id"] == "B"
 
+
+@pytest.mark.parametrize(
+    ("query", "expected_terms"),
+    [
+        ("มีที่เที่ยวฟรีไหม", ["free admission"]),
+        ("แนะนำที่เที่ยวคนเดียว", ["solo travel"]),
+        ("อยากได้ hidden gem คนไม่เยอะ", ["hidden gem"]),
+        ("ของกินและตลาดแถวนี้", ["food market", "nearby station"]),
+        ("ที่เที่ยวสำหรับครอบครัวมีเด็ก", ["family friendly"]),
+    ],
+)
+def test_query_expansion_supports_varied_phrasing(query, expected_terms):
+    expanded = TokyoHybridRAGEngine.expand_query(query)
+    assert expanded.startswith(query)
+    assert all(term in expanded for term in expected_terms)
+
+
+def test_weighted_rrf_can_follow_intent():
+    engine = TokyoHybridRAGEngine.__new__(TokyoHybridRAGEngine)
+    dense_doc = Document(page_content="dense", metadata={"chunk_id": "D"})
+    sparse_doc = Document(page_content="sparse", metadata={"chunk_id": "S"})
+    fused = engine.reciprocal_rank_fusion(
+        [(dense_doc, 0.9)],
+        [(sparse_doc, 8.0)],
+        dense_weight=0.5,
+        sparse_weight=1.5,
+    )
+    assert fused[0].metadata["chunk_id"] == "S"
+
 # 6. ทดสอบ End-to-End Hybrid Context Retrieval
 def test_end_to_end_hybrid_retrieval():
     engine = TokyoHybridRAGEngine()

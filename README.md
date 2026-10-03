@@ -75,7 +75,7 @@ flowchart TD
     subgraph HybridEngine ["3. Advanced Hybrid Fusion Engine (src/hybrid/)"]
         Router["Query Intent Router\n(ROUTE_TRANSIT | FACT_RETRIEVAL | HYBRID_COMPLEX)"]
         RRF["Reciprocal Rank Fusion (RRF)\nRRF_Score = 1 / (60 + Rank)"]
-        ReRanker["Cross-Modal Semantic Re-ranking\n(Cosine Similarity Top-3)"]
+        ReRanker["Intent-aware Semantic Re-ranking\n(Cosine + RRF + Graph boost)"]
         ContextAssembler["Context Aggregator\n(Structured Graph + Dense Chunks + Citations)"]
         RAGService --> Router
     end
@@ -138,8 +138,8 @@ flowchart TD
    - ผสานผลการค้นหาจาก Dense, Sparse และ Graph โดยใช้สูตร:
      $$RRF\_Score(d) = \sum_{m \in M} \frac{w_m}{k + \text{rank}_m(d)}$$
      *(โดย $k=60$ และกำหนดค่าน้ำหนัก $w_m$ ตาม Intent ที่วิเคราะห์ได้)*
-3. **Cross-Modal Semantic Re-ranking:**
-   - นำ Top Candidates ที่ผ่าน RRF มาคำนวณ Cosine Similarity ซ้ำด้วย Sentence Transformer เพื่อจัดอันดับ 3 ลำดับแรกที่ดีที่สุด (Top-3) ก่อนประกอบเข้า Prompt
+3. **Intent-aware Semantic Re-ranking:**
+   - นำ Top Candidates ที่ผ่าน RRF มาคำนวณ cosine similarity ด้วย Sentence Transformer รุ่นเดียวกับดัชนี แล้วผสานคะแนน RRF และอันดับ entity จาก Graph ตาม intent ก่อนเลือก context
 
 ---
 
@@ -165,13 +165,15 @@ flowchart TD
 
 ### 5.1 การเปรียบเทียบ Retrieval: Dense vs Graph vs Hybrid RAG
 
-จากการประเมินผลผ่านชุดคำถามทดสอบ 30 ข้อ ครอบคลุมคำถามทั้ง 10 หมวดหมู่ (A–J):
+จากการประเมิน retrieval 100 ข้อ ครอบคลุมคำถาม 10 หมวดหมู่ (A–J) โดยผลรายข้ออยู่ใน `data/ablation_per_query_results.json`:
 
-| กลยุทธ์การค้นคืน (Retrieval Strategy) | Hit@1 | Hit@3 | Mean Reciprocal Rank (MRR) | Transit Accuracy | Hallucination Rate |
-| :---| :---: | :---: | :---: | :---: | :---: |
-| **Dense Vector Only (ChromaDB)** | 46.7% | 63.3% | 0.548 | 33.3% | 26.7% |
-| **Knowledge Graph Only (Neo4j)** | 53.3% | 60.0% | 0.572 | 93.3% | 0.0% |
-| **Hybrid Graph RAG (โครงงานนี้)** | **63.3%** | **76.7%** | **0.692** | **96.7%** | **0.0%** |
+| กลยุทธ์การค้นคืน (Retrieval Strategy) | Hit@1 | Hit@3 | Mean Reciprocal Rank (MRR) | Graph coverage |
+| :---| :---: | :---: | :---: | :---: |
+| **Dense Vector Only (FAISS)** | 42% | 64% | 0.5183 | 0% |
+| **Knowledge Graph Only** | 53% | 54% | 0.5358 | 80% |
+| **Hybrid Graph RAG** | **60%** | **76%** | **0.6883** | 80% |
+
+ตัวเลขชุดนี้วัด retrieval เท่านั้น จึงไม่ใช้สรุป hallucination rate หรือความถูกต้องของข้อความที่ LLM สร้าง โดยผล Hybrid ล่าสุดมาจาก query expansion, weighted RRF, semantic similarity และ Graph entity boost
 
 ### 5.2 การทดสอบ Embedding Models: MiniLM vs E5-small
 
@@ -184,8 +186,8 @@ flowchart TD
 
 | ปัจจัยการประเมิน | Google Gemini API (Cloud) | Ollama: Qwen 2.5 3B (Local) |
 |---|:---:|:---:|
-| **Average Latency** | **2.15 – 2.65 วินาที** | 5.80 – 8.40 วินาที |
-| **Hardware Consumption** | **Zero Machine RAM/VRAM** | ใช้ RAM ~3.2 GB, CPU/GPU 70-90% |
+| **Average Latency (10 queries)** | 14.322 วินาที | **4.566 วินาที** |
+| **Hardware Consumption** | ประมวลผลบน Cloud; client ยังใช้ RAM สำหรับ pipeline | มีไฟล์สรุป resource profiling แต่ต้องรันซ้ำเพื่อเก็บ raw samples รายข้อ |
 | **Thai Fluency & Formatting** | ยอดเยี่ยมมาก (ภาษาสละสลวย Emoji ครบ) | ปานกลาง-ดี (ตอบตรงบริบท) |
 | **Offline Privacy & Resilience** | ต้องต่ออินเทอร์เน็ต | **รันออฟไลน์ได้ 100% ไม่พึ่งพาคลาวด์** |
 
@@ -317,7 +319,7 @@ python -m unittest tests/test_service.py -v          # ทดสอบ RAG Orche
 | **1. Data & Knowledge Base** | 10 | ข้อมูลจริงจาก JTA และ Ekidata, ผ่าน Data Cleaning, Chunking, และมี [Data Provenance](./data/data_provenance.md) ครบถ้วน |
 | **2. Dense RAG** | 15 | มีทั้ง FAISS และ ChromaDB (พร้อม Metadata Filtering) มีผล Benchmark เทียบ MiniLM vs E5-small 30 คำถาม |
 | **3. Graph RAG** | 15 | Neo4j + NetworkX Fallback มี Node `(:Place)`, `(:Station)`, `(:Line)` พร้อมการคำนวณ Multi-hop Path |
-| **4. Hybrid RAG (หัวใจสำคัญ)** | 20 | Query Intent Router ผสานผลลัพธ์ด้วย Reciprocal Rank Fusion (RRF) และ Semantic Re-ranking พิสูจน์ผล Hit@3 76.7% และ Transit Accuracy 96.7% |
+| **4. Hybrid RAG (หัวใจสำคัญ)** | 20 | Query Intent Router ผสานผลด้วย RRF, semantic score และ Graph boost; ผลที่ตรวจสอบย้อนหลังได้ปัจจุบันคือ Hit@1 60%, Hit@3 76% และ MRR 0.6883 จาก 100 ข้อ |
 | **5. Local LLM + API LLM** | 15 | รันจริงทั้ง Google Gemini และ Local Ollama (`Qwen 2.5 3B`), มี Side-by-Side Comparator และ Graceful Fallback |
 | **6. System Integration** | 10 | เชื่อมต่อครบวงจรทั้ง LINE Bot (Flex Cards, Quick Replies), Web Application (React Modern Japanese Clean), และ In-Memory Caching |
 | **7. Evaluation & Analysis** | 10 | ชุดทดสอบ 100 ข้อ (A–J), ตารางเปรียบเทียบ Latency, Throughput, Token Cost, RAM Profiling และกราฟวิเคราะห์ครบถ้วน |

@@ -216,18 +216,19 @@ graph LR
 
 | เกณฑ์การประเมิน (Metrics) | Dense Vector Only (Chroma) | Knowledge Graph Only (Neo4j) | **Hybrid Graph RAG (โครงงานนี้)** |
 |---|:---:|:---:|:---:|
-| **Transit Accuracy** (ความถูกต้องของเส้นทาง) | 33.3% | 93.3% | **96.7%** |
-| **Fact Retrieval Precision** (ความแม่นยำของข้อมูลสถานที่) | 83.3% | 40.0% | **93.3%** |
-| **Multi-hop / Spatial Query Success** | 20.0% | 86.7% | **93.3%** |
-| **Hallucination Rate** (อัตราการกุข้อมูลเท็จ) | 26.7% | 0.0% | **0.0% (Zero Hallucination)** |
-| **Citation Traceability** (ตรวจสอบย้อนกลับได้) | 40.0% | 80.0% | **100.0%** |
+| **Hit@1** | 42% | 53% | **60%** |
+| **Hit@3** | 64% | 54% | **76%** |
+| **MRR** | 0.5183 | 0.5358 | **0.6883** |
+| **Graph coverage** | 0% | 80% | 80% |
+
+> ตารางนี้เป็น retrieval evaluation 100 ข้อ ไม่ใช่ generation evaluation จึงยังไม่สรุป hallucination rate จนกว่าจะมี human/automatic judge แยกต่างหาก
 
 ### 6.2 การเปรียบเทียบโมเดลภาษา (LLM Benchmark: Cloud vs Local)
 
 | ปัจจัยการวัดผล | Google Gemini (Cloud API) | Ollama: Qwen 2.5 3B (Local LLM) |
 |---|:---:|:---:|
-| **Average Latency** | **2.15 – 2.65 วินาที** | 5.80 – 8.40 วินาที (บน CPU/GPU) |
-| **Hardware Consumption** | **Zero Machine RAM/VRAM** | ใช้ RAM ~3.2 GB, CPU/GPU 70-90% |
+| **Average Latency (10 queries)** | 14.322 วินาที | **4.566 วินาที** |
+| **Hardware Consumption** | ประมวลผลโมเดลบน Cloud | รันบนเครื่องผ่าน Ollama; ต้องเก็บ raw resource samples ใหม่ก่อนสรุป peak usage |
 | **Thai Fluency & Formatting** | ยอดเยี่ยมมาก (ภาษาสละสลวย Emoji ชัดเจน) | ปานกลาง-ดี (ตอบตรงบริบท) |
 | **Offline Privacy & Resilience** | ต้องเชื่อมต่ออินเทอร์เน็ต | **รันออฟไลน์ได้ 100% ไม่พึ่งพาคลาวด์** |
 

@@ -38,6 +38,24 @@ class TokyoHybridRAGEngine:
         # ตรวจสอบและโหลด Indices
         self.faiss_store.load_index()
         self.bm25_store.load_index()
+        self._rerank_embedding_cache: Dict[str, np.ndarray] = {}
+        self._prepare_rerank_embeddings()
+
+    def _prepare_rerank_embeddings(self) -> None:
+        """Embed the static document corpus once for low-latency re-ranking."""
+        documents = self.bm25_store.documents
+        if not documents:
+            return
+        try:
+            vectors = self.faiss_store.embeddings.embed_documents(
+                [doc.page_content for doc in documents]
+            )
+            for doc, vector in zip(documents, vectors):
+                doc_id = doc.metadata.get("chunk_id", doc.page_content[:50])
+                self._rerank_embedding_cache[doc_id] = np.asarray(vector, dtype=float)
+        except Exception:
+            # Search still works through RRF if precomputation is unavailable.
+            self._rerank_embedding_cache = {}
 
     def route_query_intent(self, query: str) -> str:
         """
@@ -87,11 +105,37 @@ class TokyoHybridRAGEngine:
         else:
             return "HYBRID_COMPLEX"
 
+    @staticmethod
+    def expand_query(query: str) -> str:
+        """Add compact domain terms for common Thai/English paraphrases.
+
+        The original user text is always kept first.  Expansion is deliberately
+        small so it improves recall without turning every question into the same
+        generic Tokyo query.
+        """
+        clean_q = query.lower()
+        groups = [
+            (["ฟรี", "ไม่เสียค่า", "ไม่เสียเงิน", "free"], "ค่าเข้าชมฟรี free admission"),
+            (["คนเดียว", "เที่ยวเดี่ยว", "solo"], "เที่ยวคนเดียว solo travel เดินเล่น"),
+            (["ไม่ยอดนิยม", "คนไม่เยอะ", "เงียบ", "hidden gem"], "สถานที่เงียบสงบ hidden gem ไม่แออัด"),
+            (["ครึ่งวัน", "3 ชั่วโมง", "สามชั่วโมง"], "แผนเที่ยวระยะสั้น half day itinerary"),
+            (["เด็ก", "ครอบครัว", "family"], "เหมาะสำหรับครอบครัวและเด็ก family friendly"),
+            (["อนิเมะ", "anime", "เกม", "gaming", "โปเกมอน", "pokemon"], "อนิเมะ เกม เทคโนโลยี pop culture"),
+            (["อาหาร", "ของกิน", "กิน", "ตลาด", "street food"], "อาหาร ตลาด ของกิน สตรีทฟู้ด food market"),
+            (["สวน", "ธรรมชาติ", "ซากุระ", "พักผ่อน"], "สวน ธรรมชาติ จุดชมวิว nature park"),
+            (["ช้อป", "shopping", "แฟชั่น", "เสื้อผ้า"], "ช้อปปิ้ง แฟชั่น shopping district"),
+            (["ใกล้", "เดินถึง", "ระยะเดิน", "แถว", "รอบ"], "สถานีใกล้เคียง ระยะเดิน nearby station walking"),
+        ]
+        additions = [expansion for aliases, expansion in groups if any(alias in clean_q for alias in aliases)]
+        return query if not additions else f"{query} {' '.join(dict.fromkeys(additions))}"
+
     def reciprocal_rank_fusion(
         self,
         dense_results: List[Tuple[Document, float]],
         sparse_results: List[Tuple[Document, float]],
-        k_const: int = 60
+        k_const: int = 60,
+        dense_weight: float = 1.0,
+        sparse_weight: float = 1.0,
     ) -> List[Document]:
         """
         อัลกอริทึม Reciprocal Rank Fusion (RRF):
@@ -104,37 +148,90 @@ class TokyoHybridRAGEngine:
         for rank, (doc, _) in enumerate(dense_results):
             doc_id = doc.metadata.get("chunk_id", doc.page_content[:50])
             doc_map[doc_id] = doc
-            doc_scores[doc_id] = doc_scores.get(doc_id, 0.0) + (1.0 / (k_const + rank + 1))
+            doc_scores[doc_id] = doc_scores.get(doc_id, 0.0) + (dense_weight / (k_const + rank + 1))
 
         # 2. ให้คะแนนจาก Sparse BM25
         for rank, (doc, _) in enumerate(sparse_results):
             doc_id = doc.metadata.get("chunk_id", doc.page_content[:50])
             doc_map[doc_id] = doc
-            doc_scores[doc_id] = doc_scores.get(doc_id, 0.0) + (1.0 / (k_const + rank + 1))
+            doc_scores[doc_id] = doc_scores.get(doc_id, 0.0) + (sparse_weight / (k_const + rank + 1))
 
         # เรียงตามคะแนนรวม RRF จากมากไปน้อย
         sorted_ids = sorted(doc_scores.keys(), key=lambda i: doc_scores[i], reverse=True)
-        return [doc_map[i] for i in sorted_ids]
+        max_score = max(doc_scores.values(), default=1.0)
+        ranked_docs = []
+        for doc_id in sorted_ids:
+            doc = doc_map[doc_id]
+            doc.metadata["rrf_score"] = doc_scores[doc_id]
+            doc.metadata["rrf_score_normalized"] = doc_scores[doc_id] / max_score
+            ranked_docs.append(doc)
+        return ranked_docs
 
     def rerank_documents(
         self,
         query: str,
         candidates: List[Document],
         top_n: int = 3,
-        intent: str = "FACT_RETRIEVAL"
+        intent: str = "FACT_RETRIEVAL",
+        graph_ranked_entities: Optional[List[str]] = None,
     ) -> List[Document]:
         """
-        Fast & Thermal-Safe Semantic Re-ranking:
-        จัดลำดับเอกสารโดยใช้ผลลัพธ์จาก Reciprocal Rank Fusion (RRF) และ Diversity Selection
-        - ความเร็วระดับเสี้ยววินาที (< 0.1ms)
-        - ไม่คำนวณ Document Embedding ซ้ำซ้อน เพื่อป้องกัน CPU Overheating และเครื่องดับ
+        Semantic re-ranking using the same embedding model as the FAISS index.
+        The score blends semantic similarity, RRF rank and a graph entity boost.
         - หากเป็นคำถามภาพรวม/แนะนำ: ใช้ Diversity-Aware คัดเลือกสถานที่ (place_id) ไม่ให้ซ้ำ
         - หากเป็นคำถามเจาะจง: คัดเลือก Top-N Chunks ที่มีคะแนน RRF สูงสุดตามลำดับ
         """
         if not candidates:
             return []
-        if len(candidates) <= top_n:
-            return candidates
+        graph_ranked_entities = graph_ranked_entities or []
+        graph_rank = {entity_id: rank for rank, entity_id in enumerate(graph_ranked_entities, start=1)}
+
+        try:
+            query_vec = np.asarray(self.faiss_store.embeddings.embed_query(query), dtype=float)
+            doc_vec_list = []
+            missing_docs = []
+            missing_indices = []
+            for index, doc in enumerate(candidates):
+                doc_id = doc.metadata.get("chunk_id", doc.page_content[:50])
+                vector = self._rerank_embedding_cache.get(doc_id)
+                if vector is None:
+                    missing_docs.append(doc.page_content)
+                    missing_indices.append(index)
+                    doc_vec_list.append(None)
+                else:
+                    doc_vec_list.append(vector)
+            if missing_docs:
+                new_vectors = self.faiss_store.embeddings.embed_documents(missing_docs)
+                for index, vector in zip(missing_indices, new_vectors):
+                    array = np.asarray(vector, dtype=float)
+                    doc_vec_list[index] = array
+                    doc = candidates[index]
+                    doc_id = doc.metadata.get("chunk_id", doc.page_content[:50])
+                    self._rerank_embedding_cache[doc_id] = array
+            doc_vecs = np.asarray(doc_vec_list, dtype=float)
+            query_norm = np.linalg.norm(query_vec) or 1.0
+            doc_norms = np.linalg.norm(doc_vecs, axis=1)
+            semantic_scores = (doc_vecs @ query_vec) / np.maximum(doc_norms * query_norm, 1e-12)
+        except Exception:
+            # Retrieval remains available even if a backend cannot batch-embed.
+            semantic_scores = np.zeros(len(candidates), dtype=float)
+
+        scored = []
+        for index, doc in enumerate(candidates):
+            semantic = float((semantic_scores[index] + 1.0) / 2.0)
+            rrf = float(doc.metadata.get("rrf_score_normalized", 0.0))
+            entity_id = doc.metadata.get("place_id", "")
+            graph = 1.0 / graph_rank[entity_id] if entity_id in graph_rank else 0.0
+            if intent == "ROUTE_TRANSIT":
+                weights = (0.40, 0.20, 0.40)
+            elif intent == "FACT_RETRIEVAL":
+                weights = (0.65, 0.30, 0.05)
+            else:
+                weights = (0.50, 0.25, 0.25)
+            final_score = weights[0] * semantic + weights[1] * rrf + weights[2] * graph
+            doc.metadata["rerank_score"] = round(final_score, 6)
+            scored.append((final_score, doc))
+        candidates = [doc for _, doc in sorted(scored, key=lambda item: item[0], reverse=True)]
 
         # ตรวจสอบว่าคำถามต้องการกระจายสถานที่หรือไม่ (เช่น แนะนำ 5 ที่, ทริป)
         is_recommendation = any(kw in query.lower() for kw in ["แนะนำ", "ที่เที่ยว", "จัดทริป", "มีที่ไหนบ้าง", "ไฮไลท์", "5", "10"])
@@ -176,6 +273,7 @@ class TokyoHybridRAGEngine:
         """
         intent = self.route_query_intent(query)
         clean_q = query.lower()
+        retrieval_query = self.expand_query(query)
 
         # ปรับ Top-N อัตโนมัติหากเป็นคำถามที่ต้องการคำแนะนำหลายสถานที่ (เช่น แนะนำ 5 สถานที่, ยอดนิยม)
         recommend_keywords = ["5", "10", "แนะนำ", "ยอดนิยม", "ที่เที่ยว", "จัดทริป", "มีที่ไหนบ้าง", "ไฮไลท์", "แลนด์มาร์ก"]
@@ -190,16 +288,34 @@ class TokyoHybridRAGEngine:
 
         # 1. ดึงข้อมูลจาก Knowledge Graph เพื่อหาความสัมพันธ์เชิงพื้นที่/เส้นทาง/ข้อมูลจำเพาะของโหนด
         graph_context = self.pathfinder.extract_graph_context_for_rag(query)
+        graph_ranked_entities = self.pathfinder.retrieve_ranked_entities(query)
 
         # 2. ดึงข้อมูลจาก Vector & Sparse Retrieval
-        dense_results = self.faiss_store.search(query, k=top_k_retrieval)
-        sparse_results = self.bm25_store.search(query, k=top_k_retrieval)
+        dense_results = self.faiss_store.search(retrieval_query, k=top_k_retrieval)
+        sparse_results = self.bm25_store.search(retrieval_query, k=top_k_retrieval)
 
         # 3. รวมผลด้วย Reciprocal Rank Fusion (RRF)
-        fused_docs = self.reciprocal_rank_fusion(dense_results, sparse_results)
+        if intent == "FACT_RETRIEVAL":
+            dense_weight, sparse_weight = 1.15, 1.0
+        elif intent == "ROUTE_TRANSIT":
+            dense_weight, sparse_weight = 0.85, 1.15
+        else:
+            dense_weight, sparse_weight = 1.0, 1.0
+        fused_docs = self.reciprocal_rank_fusion(
+            dense_results,
+            sparse_results,
+            dense_weight=dense_weight,
+            sparse_weight=sparse_weight,
+        )
 
         # 4. Re-rank ให้เหลือ Top-N ที่แม่นยำที่สุด
-        final_docs = self.rerank_documents(query, fused_docs, top_n=top_n_rerank, intent=intent)
+        final_docs = self.rerank_documents(
+            retrieval_query,
+            fused_docs,
+            top_n=top_n_rerank,
+            intent=intent,
+            graph_ranked_entities=graph_ranked_entities,
+        )
 
         # 5. ประกอบร่างบริบทเอกสาร (Context Aggregation)
         doc_blocks = []

@@ -32,6 +32,8 @@ CHARTS_DIR = os.path.join(BASE_DIR, "reports", "charts")
 BENCHMARK_GEMINI_FILE = os.path.join(BASE_DIR, "data", "benchmark_results_gemini.json")
 EMBEDDING_RESULTS_FILE = os.path.join(BASE_DIR, "data", "processed", "embedding_benchmark_results.json")
 MODEL_COMPARISON_FILE = os.path.join(BASE_DIR, "data", "model_comparison_raw.json")
+ABLATION_RESULTS_FILE = os.path.join(BASE_DIR, "data", "ablation_per_query_results.json")
+RESOURCE_RESULTS_FILE = os.path.join(BASE_DIR, "data", "local_llm_resource_benchmark.json")
 
 
 def setup_style():
@@ -151,32 +153,34 @@ def plot_llm_resource_usage(output_path: str):
     - Subplot 1: GPU VRAM Allocation (MB)
     - Subplot 2: CPU Utilization (%)
     """
-    backends = ["Local Qwen 2.5 3B", "Gemini 3.1 Flash Lite", "Fallback Rule"]
-    # Qwen 2.5 3B: ~1,920 MB VRAM, Gemini: 0 (Cloud), Fallback: 0
-    vram_usage = [1920.0, 0.0, 0.0]
-    # CPU: Qwen 14.8%, Gemini ~0%, Fallback 1.0%
-    cpu_usage = [14.8, 0.5, 1.0]
+    backends = ["Local Qwen 2.5 3B"]
+    with open(RESOURCE_RESULTS_FILE, "r", encoding="utf-8") as f:
+        resource_data = json.load(f)
+    metrics = resource_data.get("summary", {}).get("resource_metrics", {})
+    vram_usage = [float(metrics.get("avg_peak_vram_mb") or 0.0)]
+    cpu_usage = [float(metrics.get("avg_cpu_load_pct") or 0.0)]
+    total_vram = float(metrics.get("total_gpu_vram_mb") or max(vram_usage + [1.0]))
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 5.5), dpi=300)
     fig.patch.set_facecolor("#FFFFFF")
 
-    colors = ["#2563EB", "#0284C7", "#059669"]
+    colors = ["#2563EB"]
 
     bars1 = ax1.bar(backends, vram_usage, color=colors, width=0.52, edgecolor="#0F172A", linewidth=0.5)
     ax1.set_title("Peak GPU VRAM Usage (MB) - RTX 3080 Ti 12GB", fontsize=12, fontweight="bold", pad=12, color="#0F172A")
     ax1.set_ylabel("VRAM (Megabytes)", fontsize=10, fontweight="bold")
-    ax1.set_ylim(0, 3000)
-    ax1.axhline(12288, color="#DC2626", linestyle=":", linewidth=1, label="Max VRAM (12,288 MB)")
+    ax1.set_ylim(0, max(vram_usage + [1.0]) * 1.35)
+    ax1.axhline(total_vram, color="#DC2626", linestyle=":", linewidth=1, label=f"Total VRAM ({total_vram:,.0f} MB)")
     add_bar_labels(ax1, bars1, fmt="%.0f", unit=" MB")
     ax1.legend(loc="upper right", frameon=True)
 
     bars2 = ax2.bar(backends, cpu_usage, color=colors, width=0.52, edgecolor="#0F172A", linewidth=0.5)
     ax2.set_title("Average CPU Load During Generation (%)", fontsize=12, fontweight="bold", pad=12, color="#0F172A")
     ax2.set_ylabel("CPU Load (%)", fontsize=10, fontweight="bold")
-    ax2.set_ylim(0, 30)
+    ax2.set_ylim(0, max(cpu_usage + [1.0]) * 1.35)
     add_bar_labels(ax2, bars2, fmt="%.1f", unit="%")
 
-    fig.suptitle("Hardware Resource Profiling: Live Measured on RTX 3080 Ti (Zero SSD Thrash)", fontsize=14, fontweight="bold", y=1.02, color="#0F172A")
+    fig.suptitle("Local LLM Resource Profiling (Reported Benchmark Summary)", fontsize=14, fontweight="bold", y=1.02, color="#0F172A")
     plt.tight_layout()
     plt.savefig(output_path, bbox_inches="tight", dpi=300)
     plt.close()
@@ -246,9 +250,20 @@ def plot_retrieval_ablation(output_path: str):
     วัดผลจาก 100 คำถามมาตรฐาน: Hit@1, Hit@3, MRR
     """
     metrics = ["Hit@1 (%)", "Hit@3 (%)", "MRR (x100)"]
-    dense_scores = [42.0, 64.0, 51.83]
-    graph_scores = [53.0, 54.0, 53.58]
-    hybrid_scores = [54.0, 74.0, 65.46]
+    with open(ABLATION_RESULTS_FILE, "r", encoding="utf-8") as f:
+        summary = json.load(f)["summary"]
+
+    def scores_for(mode: str):
+        values = summary[mode]
+        return [
+            float(values["hit_rate_top1_pct"]),
+            float(values["hit_rate_top3_pct"]),
+            float(values["mrr"]) * 100.0,
+        ]
+
+    dense_scores = scores_for("dense_only")
+    graph_scores = scores_for("graph_only")
+    hybrid_scores = scores_for("hybrid_rag")
 
     x = np.arange(len(metrics))
     width = 0.24
@@ -256,7 +271,7 @@ def plot_retrieval_ablation(output_path: str):
     fig, ax = plt.subplots(figsize=(10, 5.5), dpi=300)
     fig.patch.set_facecolor("#FFFFFF")
 
-    bars_dense = ax.bar(x - width, dense_scores, width, label="Dense Only (ChromaDB)", color="#94A3B8", edgecolor="#0F172A", linewidth=0.5)
+    bars_dense = ax.bar(x - width, dense_scores, width, label="Dense Only (FAISS)", color="#94A3B8", edgecolor="#0F172A", linewidth=0.5)
     bars_graph = ax.bar(x, graph_scores, width, label="Graph Only (Neo4j)", color="#38BDF8", edgecolor="#0F172A", linewidth=0.5)
     bars_hybrid = ax.bar(x + width, hybrid_scores, width, label="Hybrid RAG (RRF Fusion)", color="#2563EB", edgecolor="#0F172A", linewidth=0.5)
 

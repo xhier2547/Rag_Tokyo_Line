@@ -1,6 +1,6 @@
 # รายงานประเมินระบบ Tokyo Hybrid Graph RAG
 
-**วันที่รันผลล่าสุด:** 30 กันยายน 2026
+**วันที่รันผลล่าสุด:** 3 ตุลาคม 2026
 
 **ขอบเขต:** Retrieval ablation 100 คำถาม และผล End-to-End Gemini 30 คำถามที่บันทึกไว้
 
@@ -16,16 +16,16 @@
 
 | Architecture | Hit@1 | Hit@3 | MRR | Graph coverage | Retrieval latency |
 |---|---:|---:|---:|---:|---:|
-| Dense only | 42% | 64% | 0.5183 | 0% | 15.08 ms |
-| Graph only | 53% | 54% | 0.5358 | 80% | 0.16 ms |
-| **Hybrid RAG** | **54%** | **74%** | **0.6546** | 80% | 27.36 ms |
+| Dense only | 42% | 64% | 0.5183 | 0% | 15.36 ms |
+| Graph only | 53% | 54% | 0.5358 | 80% | 0.18 ms |
+| **Hybrid RAG** | **60%** | **76%** | **0.6883** | 80% | 46.86 ms |
 
 ### การตีความ
 
-- Hybrid เพิ่ม Hit@1 จาก Dense 12 จุดเปอร์เซ็นต์ และเพิ่ม Hit@3 10 จุดเปอร์เซ็นต์
-- Hybrid เพิ่ม MRR จาก Dense 0.5183 เป็น 0.6546 หรือประมาณ 26.3%
+- Hybrid เพิ่ม Hit@1 จาก Dense 18 จุดเปอร์เซ็นต์ และเพิ่ม Hit@3 12 จุดเปอร์เซ็นต์
+- Hybrid เพิ่ม MRR จาก Dense 0.5183 เป็น 0.6883 หรือประมาณ 32.8%
 - Graph ให้ Hit@1 สูงกว่า Dense แต่ Hit@3 ต่ำกว่า แสดงว่า heuristic ของกราฟมักคืนคำตอบหลักได้เร็ว แต่มี candidate ที่เกี่ยวข้องในสามอันดับแรกไม่หลากหลายพอ
-- Hybrid ใช้เวลามากกว่า Dense เพราะรวม Dense, BM25, Graph และ RRF ผลด้านคุณภาพจึงแลกกับ latency เพิ่มประมาณ 12 ms ในการรันครั้งล่าสุด
+- Hybrid ใช้เวลามากกว่า Dense เพราะรวม Dense, BM25, Graph, weighted RRF และ semantic reranking ผลด้านคุณภาพจึงแลกกับ latencyเพิ่มประมาณ 31.5 ms ในการรันครั้งล่าสุด
 - Graph coverage 80% หมายความว่า 20% ของคำถามไม่มี graph signal ที่เข้าเกณฑ์ ไม่ควรตีความว่า graph ตอบถูก 80%
 
 ## 3. Embedding Benchmark
@@ -65,16 +65,16 @@ E5-small ให้ retrieval accuracy สูงกว่าในการทด
 อ้างอิงจาก `data/category_ablation_and_error_report.md` (100 ข้อมาตรฐาน):
 
 ### 6.1 ประสิทธิภาพแยกหมวด A–J
-- **หมวด B (วัด/ประวัติศาสตร์):** Hybrid ทำได้ **100% Hit@3** (+30% เมื่อเทียบกับ Dense/Graph เดี่ยว)
+- **หมวด B (วัด/ประวัติศาสตร์):** Hybrid ทำได้ **90% Hit@3** (+20 จุดเปอร์เซ็นต์จาก Dense)
 - **หมวด E (อาหาร/ตลาด):** Hybrid ทำได้ **90% Hit@3** (+20% เหนือ Dense/Graph)
 - **หมวด G (การเดินทาง/สายรถไฟ):** Hybrid และ Dense ทำได้ **100% Hit@3** (MRR 1.000 สมบูรณ์)
-- **หมวด J (Complex Multi-hop Graph):** Hybrid ทำได้ **70% Hit@3** (เหนือกว่า Dense ที่ทำได้เพียง 30% อย่างเด็ดขาด สะท้อนคุณค่าของ Knowledge Graph)
+- **หมวด J (Complex Multi-hop Graph):** Hybrid ทำได้ **60% Hit@1 และ 70% Hit@3** เทียบกับ Dense ที่ 10% และ 30%
 
 ### 6.2 การจำแนกสาเหตุข้อผิดพลาด (Failure Mode Distribution)
 จากการวินิจฉัยข้อที่ Hybrid ตอบไม่ติด Top 1:
-1. **UNSTRUCTURED_SEMANTIC_GAP (37.0%):** คำถามเชิงคุณภาพกว้าง (เช่น แนะนำที่เที่ยวครึ่งวัน) ทำให้หลุดจาก Curated Ground Truth $\rightarrow$ แก้ด้วย Semantic Re-ranker
-2. **GRAPH_COVERAGE_GAP (34.8%):** ขาด Edge หรือจุดเชื่อมโยงย่อยใน Knowledge Graph $\rightarrow$ แก้ด้วยการขยาย Schema และ Ingest เส้นทางเพิ่มเติม
-3. **FUSION_WEIGHT_IMBALANCE (28.3%):** RRF ให้คะแนนสัญญาณหลอกแย่งอันดับ $\rightarrow$ แก้ด้วย Confidence-Weighted Dynamic RRF
+1. **GRAPH_COVERAGE_GAP (45.0%):** ขาด Edge หรือจุดเชื่อมโยงย่อยใน Knowledge Graph $\rightarrow$ แก้ด้วยการขยาย Schema และ Ingest เส้นทางเพิ่มเติม
+2. **UNSTRUCTURED_SEMANTIC_GAP (42.5%):** คำถามเชิงคุณภาพกว้างยังหลุดจาก Curated Ground Truth บางส่วน $\rightarrow$ ปรับ query expansion และ fine-tune reranker ต่อ
+3. **FUSION_WEIGHT_IMBALANCE (12.5%):** ลดลงหลังใช้ intent-aware weights แต่ยังมีบางคำถามที่สัญญาณจาก engine แย่งอันดับกัน
 4. **ENTITY_EXTRACTION_FAILURE (0.0%):** การตัดคำและสกัดชื่อเฉพาะจากภาษาไทยทำงานได้สมบูรณ์
 
 ## 7. กรอบการประเมินโดยมนุษย์ (Human Evaluation Protocol)
@@ -92,4 +92,4 @@ E5-small ให้ retrieval accuracy สูงกว่าในการทด
 
 ## 9. สรุป
 
-ระบบ Tokyo Hybrid Graph RAG ได้รับการทดสอบอย่างครบถ้วนทั้งในระดับ **Retrieval Layer** (100 ข้อ Hit@3 74%, MRR 0.6546), **Component Ablation** (แยกหมวด A–J ชัดเจนว่า Graph จำเป็นต่อ Multi-hop), **Hardware Profiling** (ยืนยันว่า Qwen 2.5 3B บน RTX 3080 Ti ใช้ VRAM เพียง 1.92 GB โดย SSD I/O เป็นศูนย์ ปลอดภัยต่อระบบ 100%), และ **Systematic Error Analysis** ครบถ้วนตามมาตรฐานโครงงานวิจัยระดับสูง
+ระบบ Tokyo Hybrid Graph RAG ได้รับการทดสอบในระดับ **Retrieval Layer** 100 ข้อ โดย Hybrid ได้ Hit@1 60%, Hit@3 76% และ MRR 0.6883 พร้อมผลแยกหมวด A–J และ systematic error analysis ส่วน generation quality และ hardware profiling แบบมี raw samples ยังเป็นงานที่ต้องเก็บหลักฐานเพิ่ม

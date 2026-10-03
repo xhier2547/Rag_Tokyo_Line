@@ -20,6 +20,9 @@ import json
 from collections import defaultdict
 from typing import Dict, Any, List
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 CATEGORY_NAMES = {
@@ -221,9 +224,40 @@ def generate_markdown_report(results: Dict[str, Any]):
         )
 
     lines.append("\n### ข้อสังเกตสำคัญรายหมวด:")
-    lines.append("1. **หมวด G (Transportation & Route) และ J (Multi-hop Graph):** Hybrid และ Graph ให้ผลลัพธ์เหนือกว่า Dense อย่างเด็ดขาด (Hit@3 เพิ่มขึ้น +20% ถึง +30%) แสดงให้เห็นว่าการมี Knowledge Graph เป็นสิ่งจำเป็นสำหรับโจทย์เส้นทาง")
-    lines.append("2. **หมวด A (General) และ E (Food):** Dense ทำงานได้ดีมากในคำถามกว้างๆ และเมื่อผสานเข้ากับ Hybrid จะได้คะแนน Hit@3 สูงที่สุด (~80-90%)")
-    lines.append("3. **หมวด F (Nearby / Spatial):** Graph ช่วยดึงสถานที่ในระยะเดินเท้าได้ครบถ้วน ส่งผลให้ MRR ก้าวกระโดดจากระดับ 0.4 เป็น 0.7+")
+    ranked_gains = sorted(
+        results["category_breakdown"].values(),
+        key=lambda item: item["delta_hybrid_vs_dense"]["hit3_gain_pct"],
+        reverse=True,
+    )
+    strongest = ranked_gains[:3]
+    strongest_text = ", ".join(
+        f"{item['category_code']} (+{item['delta_hybrid_vs_dense']['hit3_gain_pct']:.0f} จุด)"
+        for item in strongest
+    )
+    regressions = [
+        item for item in ranked_gains
+        if item["delta_hybrid_vs_dense"]["hit3_gain_pct"] < 0
+    ]
+    lines.append(
+        f"1. หมวดที่ Hybrid เพิ่ม Hit@3 จาก Dense มากที่สุดคือ **{strongest_text}** "
+        "แสดงประโยชน์ของ Graph และ fusion ในคำถามที่มีโครงสร้างหรือเงื่อนไขหลายส่วน"
+    )
+    if regressions:
+        regression_text = ", ".join(
+            f"{item['category_code']} ({item['delta_hybrid_vs_dense']['hit3_gain_pct']:.0f} จุด)"
+            for item in regressions
+        )
+        lines.append(
+            f"2. Hybrid ยังถดถอยจาก Dense ในหมวด **{regression_text}** จึงไม่ควรสรุปว่า Hybrid ชนะทุกประเภทคำถาม"
+        )
+    best_hybrid = max(
+        results["category_breakdown"].values(),
+        key=lambda item: item["hybrid_rag"]["hit3_pct"],
+    )
+    lines.append(
+        f"3. หมวดที่ทำได้ดีที่สุดคือ **{best_hybrid['category_code']}** "
+        f"โดย Hybrid Hit@3 = {best_hybrid['hybrid_rag']['hit3_pct']:.0f}% และ MRR = {best_hybrid['hybrid_rag']['mrr']:.3f}"
+    )
 
     lines.append("\n---\n")
     lines.append("## 2. Systematic Error Analysis (การวิเคราะห์สาเหตุข้อผิดพลาด)\n")
@@ -232,9 +266,9 @@ def generate_markdown_report(results: Dict[str, Any]):
     lines.append("|:---|:---:|:---:|:---|")
     
     reasons_th = {
-        "UNSTRUCTURED_SEMANTIC_GAP": "คำถามกว้าง/นามธรรม หลุดจากชุด Curated Entity $\\rightarrow$ เสริม Semantic Re-ranker",
+        "UNSTRUCTURED_SEMANTIC_GAP": "คำถามกว้าง/นามธรรมยังหลุดจากชุด Curated Entity $\\rightarrow$ ขยายคำพ้องและ fine-tune Semantic Re-ranker",
         "GRAPH_COVERAGE_GAP": "โครงสร้างกราฟยังขาด Edge หรือ Station เฉพาะจุด $\\rightarrow$ ขยาย Schema และ Ingest เส้นทางย่อย",
-        "FUSION_WEIGHT_IMBALANCE": "คะแนน RRF ถูกอีก Engine หนึ่งแย่งอันดับ $\\rightarrow$ ใช้ Confidence-Weighted Dynamic RRF",
+        "FUSION_WEIGHT_IMBALANCE": "คะแนนจากบาง Engine ยังแย่งอันดับกัน $\\rightarrow$ ปรับ intent-aware weights จาก validation set",
         "ENTITY_EXTRACTION_FAILURE": "สกัดชื่อสถานี/สถานที่จากภาษาไทยไม่หลุด $\\rightarrow$ เสริมพจนานุกรมชื่อเฉพาะและการตัดคำ",
         "DUPLICATE_SYNONYM_CONFUSION": "ชื่อเรียกหลายแบบ (เช่น วัดเซ็นโซจิ vs วัดอาซากุสะ) $\\rightarrow$ ทำ Canonical Entity Aliasing"
     }
