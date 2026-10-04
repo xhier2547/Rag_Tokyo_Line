@@ -43,7 +43,7 @@
 2. **ข้อจำกัดของ Graph RAG เดี่ยวๆ:**  
    - Graph ค้นหา Shortest Path และ Neighbor Nodes ได้แม่นยำมาก แต่**ขาดความยืดหยุ่นทางภาษา** ไม่สามารถเข้าใจคำค้นหาที่ไม่ระบุชื่อเฉพาะ (Unstructured semantic queries) เช่น *"ที่เที่ยวสำหรับครอบครัวที่มีเด็กเล็ก"*
 3. **ทางออกของโปรเจกต์นี้: Hybrid Graph RAG:**  
-   - บูรณาการทั้งสองโครงสร้างเข้าด้วยกัน โดยใช้ **Query Intent Router** จำแนกเจตนาคำถาม แล้วส่งไปยัง Retrieval Engines ที่เหมาะสม จากนั้นผสานคะแนนด้วย **Reciprocal Rank Fusion (RRF)** และจัดลำดับความสำคัญก่อนส่งให้ LLM ตอบพร้อม Citations อ้างอิงแหล่งข้อมูลจริง ปราศจากปัญหา AI Hallucination
+   - บูรณาการทั้งสองโครงสร้างเข้าด้วยกัน โดยใช้ **Query Intent Router** จำแนกเจตนาคำถาม แล้วส่งไปยัง Retrieval Engines ที่เหมาะสม จากนั้นผสานคะแนนด้วย **Reciprocal Rank Fusion (RRF)** และจัดลำดับความสำคัญก่อนส่งให้ LLM ตอบพร้อม Citations เพื่อลดความเสี่ยงของ AI Hallucination และช่วยให้ตรวจสอบแหล่งข้อมูลได้
 
 ---
 
@@ -93,7 +93,7 @@ flowchart TD
     end
 
     subgraph LLMLayer ["5. LLM Generation Layer (src/llm/)"]
-        PromptBuilder["Prompt Builder & Zero-Hallucination Guardrail"]
+        PromptBuilder["Prompt Builder & Grounding Guardrail"]
         GeminiClient["Google Gemini API\n(gemini-2.5-flash / flash-lite)"]
         LocalClient["Local Ollama LLM\n(qwen2.5:3b with Safe Throttling)"]
         Comparator["Side-by-Side Model Comparator"]
@@ -177,21 +177,25 @@ flowchart TD
 
 เพื่อประเมินการ generalize แยกต่างหาก มี stratified held-out test 40 ข้อ ซึ่ง Hybrid ได้ Hit@1 **45.0%**, Hit@3 **65.0%** และ MRR **0.5571** สูงกว่า Dense และ Graph เดี่ยวบน split เดียวกัน ไฟล์ผลดิบคือ `data/ablation_test_40_results.json`
 
+ด้าน latency มีการรัน benchmark 100 ข้อซ้ำ 5 รอบ ค่าเฉลี่ย Hybrid เท่ากับ **43.996 ms** (sample SD **3.731 ms**, 95% Student's t CI **39.363–48.629 ms**) โดยเก็บผลรายรอบไว้ใน `data/retrieval_latency_repeated_runs.json`
+
 ### 5.2 การทดสอบ Embedding Models: MiniLM vs E5-small
 
 | โมเดล (Embedding Model) | มิติ (Dimensions) | เวลาสร้าง Index (Build Time) | Query Latency | Hit@1 | Hit@3 |
 |---|:---:|:---:|:---:|:---:|:---:|
-| **paraphrase-multilingual-MiniLM-L12-v2** | 384 | 20.32 วินาที | **16.45 ms** | 47% | 67% |
-| **multilingual-e5-small** | 384 | **12.41 วินาที** | 18.39 ms | **70%** | **80%** |
+| **paraphrase-multilingual-MiniLM-L12-v2** | 384 | 14.232 วินาที | **15.11 ms** | 42% | 64% |
+| **multilingual-e5-small** | 384 | **5.234 วินาที** | 15.22 ms | **52%** | **72%** |
 
 ### 5.3 การเปรียบเทียบ LLM: Local Qwen 2.5 3B vs Gemini Flash Lite
 
 | ปัจจัยการประเมิน | Google Gemini API (Cloud) | Ollama: Qwen 2.5 3B (Local) |
 |---|:---:|:---:|
 | **Average Latency (10 queries)** | 14.322 วินาที | **4.566 วินาที** |
-| **Hardware Consumption** | ประมวลผลบน Cloud; client ยังใช้ RAM สำหรับ pipeline | มีไฟล์สรุป resource profiling แต่ต้องรันซ้ำเพื่อเก็บ raw samples รายข้อ |
+| **Hardware Consumption** | ประมวลผลบน Cloud; client ยังใช้ RAM สำหรับ pipeline | วัดจริงผ่าน Ollama: VRAM peak 1,920 MB และ throughput เฉลี่ย 195.76 tok/s |
 | **Thai Fluency & Formatting** | ยอดเยี่ยมมาก (ภาษาสละสลวย Emoji ครบ) | ปานกลาง-ดี (ตอบตรงบริบท) |
 | **Offline Privacy & Resilience** | ต้องต่ออินเทอร์เน็ต | **รันออฟไลน์ได้ 100% ไม่พึ่งพาคลาวด์** |
+
+ผล End-to-End Gemini รอบล่าสุด 30 ข้อสำเร็จ 30/30, latency เฉลี่ย **4.873 วินาที**, และทุกคำตอบมี citation อย่างน้อยหนึ่งรายการ หลังตรวจด้วย name-matching proxy พบว่า citation ทั้งหมดตรงกับ entity หรือ metadata ใน knowledge base ทั้งนี้ citation presence ไม่ได้ยืนยัน factual faithfulness ของเนื้อหาทั้งคำตอบ
 
 ---
 
@@ -320,7 +324,7 @@ python -m unittest tests/test_service.py -v          # ทดสอบ RAG Orche
 | หัวข้อประเมินตาม Rubric | คะแนนเต็ม | สิ่งที่ระบบพัฒนาและหลักฐานเชิงประจักษ์ |
 | :---| :---: | :---|
 | **1. Data & Knowledge Base** | 10 | ข้อมูลจริงจาก JTA และ Ekidata, ผ่าน Data Cleaning, Chunking, และมี [Data Provenance](./data/data_provenance.md) ครบถ้วน |
-| **2. Dense RAG** | 15 | มีทั้ง FAISS และ ChromaDB (พร้อม Metadata Filtering) มีผล Benchmark เทียบ MiniLM vs E5-small 30 คำถาม |
+| **2. Dense RAG** | 15 | มีทั้ง FAISS และ ChromaDB (พร้อม Metadata Filtering) มีผล Benchmark เทียบ MiniLM vs E5-small ครบ 100 คำถาม |
 | **3. Graph RAG** | 15 | Neo4j + NetworkX Fallback มี Node `(:Place)`, `(:Station)`, `(:Line)` พร้อมการคำนวณ Multi-hop Path |
 | **4. Hybrid RAG (หัวใจสำคัญ)** | 20 | Query Intent Router ผสานผลด้วย RRF, semantic score, structured constraints และ Graph boost; ผลล่าสุดคือ Hit@1 59%, Hit@3 78% และ MRR 0.6933 จาก 100 ข้อ |
 | **5. Local LLM + API LLM** | 15 | รันจริงทั้ง Google Gemini และ Local Ollama (`Qwen 2.5 3B`), มี Side-by-Side Comparator และ Graceful Fallback |

@@ -32,8 +32,8 @@
 | ประเด็นการค้นหา | Traditional Vector RAG (Dense Only) | Hybrid Graph RAG (โครงงานนี้) |
 |---|---|---|
 | **Semantic Matching** (เช่น "วัดเก่าแก่", "จุดชมวิวสูง") | ✅ ทำได้ดี (ดึงความหมายใกล้เคียง) | ✅ ทำได้ดีเยี่ยม (FAISS + BM25) |
-| **Topological & Shortest Path** (คำนวณเส้นทาง A ➔ B) | ❌ **ล้มเหลว** (ไม่มีมิติโครงสร้างกราฟ) | ✅ **แม่นยำ 100%** ผ่าน Neo4j Dijkstra/ShortestPath |
-| **Multi-hop / Spatial Proximity** (เช่น "สถานที่รอบสถานี") | ⚠️ เกิด **Hallucination** สูง ดึงข้อมูลมั่วข้ามย่าน | ✅ กรองตามระยะทางจริงจาก Knowledge Graph |
+| **Topological & Shortest Path** (คำนวณเส้นทาง A ➔ B) | ❌ ไม่มีมิติโครงสร้างกราฟ | ✅ คำนวณผ่าน Neo4j `shortestPath` จากโครงข่ายที่บันทึกไว้ |
+| **Multi-hop / Spatial Proximity** (เช่น "สถานที่รอบสถานี") | ⚠️ อาจดึงข้อมูลที่คล้ายกันแต่ผิดย่าน | ✅ กรองตามความสัมพันธ์และระยะเดินใน Knowledge Graph |
 | **การเปลี่ยนสายรถไฟ (Transfers & Durations)** | ❌ คาดเดาสายรถไฟและเวลาผิดพลาด | ✅ คำนวณเวลาเดินเท้าและสายรถไฟจาก Graph สด |
 
 > **สรุปปัญหา:** Vector Search เพียงอย่างเดียวขาดความเข้าใจเชิงโครงสร้าง (Graph Structure) ในขณะที่ Graph เพียงอย่างเดียวขาดความยืดหยุ่นทางภาษา การผสาน **Hybrid Graph RAG** จึงเป็นคำตอบที่ดีที่สุด
@@ -69,7 +69,7 @@ flowchart TD
         SPARSE_B["Sparse BM25 Store\n(Exact Keyword Matching)"]
         
         RRF["Reciprocal Rank Fusion (RRF) & Re-ranker"]
-        GUARD["Zero-Hallucination Guardrail & Prompt Assembler"]
+        GUARD["Grounding Guardrail & Prompt Assembler"]
         
         SESSION --> ROUTER
         ROUTER -- "ROUTE_TRANSIT" --> GRAPH_P
@@ -196,13 +196,13 @@ graph LR
 [Step 3: Reciprocal Rank Fusion (RRF)] ────► RRF Score = Σ (1 / (60 + Rank_i)) ผสานและเรียงลำดับ
      │
      ▼
-[Step 4: Context Assembly & Guardrails] ───► ประกอบเป็น Structured Context + กฎ Zero-Hallucination
+[Step 4: Context Assembly & Guardrails] ───► ประกอบเป็น Structured Context + กฎ Grounding
      │
      ▼
 [Step 5: LLM Generation & Citation Extraction] ──► Gemini 2.5 / Qwen 2.5 สร้างคำตอบพร้อม [อ้างอิง: ...]
 ```
 
-### 5.2 Zero-Hallucination Prompt Guardrail (กฎเหล็กในการสร้างคำตอบ)
+### 5.2 Grounding Prompt Guardrail (กฎควบคุมการสร้างคำตอบ)
 1. **ห้ามแต่งข้อมูลเส้นทางเอง:** ข้อมูลสายรถไฟ สถานี และเวลาต้องมาจาก Knowledge Graph เท่านั้น
 2. **การอ้างอิงแหล่งที่มา:** บังคับใส่แท็ก `[อ้างอิง: ...]` กำกับท้ายข้อเท็จจริงทุกครั้ง
 3. **Graceful Fallback:** กรณีถามเส้นทางโดยไม่บอกต้นทาง AI จะแนะนำสถานีที่ใกล้ที่สุดของสถานที่นั้น และเชิญชวนให้ผู้ใช้บอกสถานีต้นทางต่อ แทนการตอบปฏิเสธ
@@ -212,7 +212,7 @@ graph LR
 <!-- SLIDE 6 -->
 ## 6. การวัดผลและประเมินประสิทธิภาพ (Evaluation & Benchmarks)
 
-### 6.1 ผลการทดสอบ Retrieval: Dense vs Graph vs Hybrid RAG (30 Benchmark Queries)
+### 6.1 ผลการทดสอบ Retrieval: Dense vs Graph vs Hybrid RAG (100 Benchmark Queries)
 
 | เกณฑ์การประเมิน (Metrics) | Dense Vector Only (Chroma) | Knowledge Graph Only (Neo4j) | **Hybrid Graph RAG (โครงงานนี้)** |
 |---|:---:|:---:|:---:|
@@ -228,13 +228,13 @@ graph LR
 | ปัจจัยการวัดผล | Google Gemini (Cloud API) | Ollama: Qwen 2.5 3B (Local LLM) |
 |---|:---:|:---:|
 | **Average Latency (10 queries)** | 14.322 วินาที | **4.566 วินาที** |
-| **Hardware Consumption** | ประมวลผลโมเดลบน Cloud | รันบนเครื่องผ่าน Ollama; ต้องเก็บ raw resource samples ใหม่ก่อนสรุป peak usage |
+| **Hardware Consumption** | ประมวลผลโมเดลบน Cloud | วัดจริงผ่าน Ollama: VRAM peak 1,920 MB และ throughput เฉลี่ย 195.76 tok/s |
 | **Thai Fluency & Formatting** | ยอดเยี่ยมมาก (ภาษาสละสลวย Emoji ชัดเจน) | ปานกลาง-ดี (ตอบตรงบริบท) |
 | **Offline Privacy & Resilience** | ต้องเชื่อมต่ออินเทอร์เน็ต | **รันออฟไลน์ได้ 100% ไม่พึ่งพาคลาวด์** |
 
 ### 6.3 Automated Test Suite & Code Quality
-* มีชุดทดสอบครอบคลุม **17 ไฟล์ทดสอบ รวมกว่า 50+ Unit & Integration Tests**
-* ครอบคลุม: Data Pipeline, Vector Store, Neo4j Graph, Multi-turn Session, Intent Router, Web Chat API และ Resource Profiler ผ่านฉลุย 100%
+* มีชุดทดสอบครอบคลุม **17 ไฟล์ทดสอบ รวมกว่า 80 Unit & Integration Tests**
+* ครอบคลุม: Data Pipeline, Vector Store, Neo4j Graph, Multi-turn Session, Intent Router, Web Chat API และ Resource Profiler
 
 ---
 
@@ -242,14 +242,14 @@ graph LR
 ## 7. สรุปผลการดำเนินงาน (Summary & Value Proposition)
 
 ### 7.1 สิ่งที่พัฒนาสำเร็จเป็นรูปธรรม (Key Deliverables)
-1. **Hybrid Graph RAG Engine:** บูรณาการ Graph (Neo4j) + Vector (FAISS/ChromaDB) + BM25 แก้ปัญหาเรื่องเส้นทางรถไฟและข้อจำกัดของ Vector RAG ได้อย่างสมบูรณ์แบบ
+1. **Hybrid Graph RAG Engine:** บูรณาการ Graph (Neo4j) + Vector (FAISS/ChromaDB) + BM25 เพื่อเพิ่มความแม่นยำของคำถามเส้นทางและคำถามที่ Vector RAG จัดการได้จำกัด
 2. **LINE Official Chatbot ระดับ Production:** รองรับ Rich Menu, Flex Message Cards (รูปภาพสถานที่จริงจาก CDN), Quick Replies และระบบจำบทสนทนาต่อเนื่อง (Multi-turn)
 3. **Interactive Web Application สไตล์ Modern Japanese Clean:** หน้าจอ Split-Screen พร้อมแผง **RAG & Graph X-Ray Inspector** แสดง Intent, Graph Path, Telemetry เวลาคำนวณ, Token Usage, และ Process RAM
 4. **Resilience & Graceful Fallback Architecture:** ระบบไม่ล่มแม้ API หรือเครือข่ายมีปัญหา มี Cache ในหน่วยความจำ และสลับโหมดอัตโนมัติ
 
 ### 7.2 คุณค่าและประโยชน์ต่อผู้ใช้ (Impact & Value)
 * ลดเวลาการวางแผนท่องเที่ยวในโตเกียวจากหลายชั่วโมงเหลือเพียงไม่กี่วินาที
-* ข้อมูลถูกต้อง แม่นยำ ตรวจสอบย้อนกลับได้ 100% ปราศจากปัญหา AI มโนข้อมูล
+* ชุดข้อมูลมี provenance ตรวจสอบย้อนกลับได้ และคำตอบแนบ citation เพื่อลดความเสี่ยงของข้อมูลที่โมเดลแต่งเติม
 * สถาปัตยกรรมสะอาด มี Unit Tests กำกับ ปรับขยายไปยังเมืองอื่นๆ (เช่น โอซาก้า เกียวโต) ได้ง่าย
 
 ---

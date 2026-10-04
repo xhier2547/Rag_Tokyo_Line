@@ -4,6 +4,7 @@ These metrics do not claim factual faithfulness.  They screen saved outputs and
 identify answers that need human review.
 """
 
+import csv
 import json
 import re
 from pathlib import Path
@@ -26,6 +27,17 @@ def _known_sources() -> list[str]:
             value = _normalize(str(chunk.get(key, "")))
             if value:
                 values.add(value)
+    # Graph answers can cite stations, lines, places and hotels directly. Include
+    # every human-readable CSV value so those citations are checked against the
+    # same curated knowledge base instead of being marked unknown.
+    for filename in ("stations.csv", "lines.csv", "places.csv", "hotels.csv"):
+        path = BASE_DIR / "data/processed" / filename
+        with path.open(encoding="utf-8-sig", newline="") as handle:
+            for row in csv.DictReader(handle):
+                for raw_value in row.values():
+                    value = _normalize(str(raw_value or ""))
+                    if len(value) >= 3:
+                        values.add(value)
     return sorted(values)
 
 
@@ -50,7 +62,7 @@ def evaluate(input_path: str, output_path: str) -> dict:
     known_sources = _known_sources()
     rows = []
     for item in source.get("details", []):
-        citations = item.get("citations", [])
+        citations = list(dict.fromkeys(item.get("citations", [])))
         checks = [citation_is_known(citation, known_sources) for citation in citations]
         rows.append({
             "question_id": item.get("question_id"),

@@ -6,19 +6,19 @@
 
 ## 1. Embedding Models
 
-การทดลองใช้ 30 คำถามจาก 10 หมวด หมวดละ 3 ข้อ และวัดการพบ ground-truth entity ในอันดับ 1 และ 3
+การทดลองใช้ครบ 100 คำถามจาก 10 หมวด และวัดการพบ ground-truth entity ในอันดับ 1 และ 3
 
 ![Embedding benchmark](reports/charts/chart_1_embedding_comparison.png)
 
 | Model | Dimensions | Build time | Query latency | Hit@1 | Hit@3 |
 |---|---:|---:|---:|---:|---:|
-| paraphrase-multilingual-MiniLM-L12-v2 | 384 | 20.323 s | **16.45 ms** | 47% | 67% |
-| **multilingual-e5-small** | 384 | **12.405 s** | 18.39 ms | **70%** | **80%** |
+| paraphrase-multilingual-MiniLM-L12-v2 | 384 | 14.232 s | **15.11 ms** | 42% | 64% |
+| **multilingual-e5-small** | 384 | **5.234 s** | 15.22 ms | **52%** | **72%** |
 
 ### ข้อสรุปจากผลที่วัดได้
 
-- E5-small เหนือกว่า MiniLM 23 จุดเปอร์เซ็นต์ที่ Hit@1 และ 13 จุดเปอร์เซ็นต์ที่ Hit@3
-- MiniLM มี query latency ต่ำกว่า 1.94 ms
+- E5-small เหนือกว่า MiniLM 10 จุดเปอร์เซ็นต์ที่ Hit@1 และ 8 จุดเปอร์เซ็นต์ที่ Hit@3
+- MiniLM มี query latency ต่ำกว่า 0.11 ms
 - หากเน้น accuracy ผลรอบนี้สนับสนุน E5-small หากเน้น latency และ compatibility กับระบบเดิม MiniLM ยังใช้งานได้
 - ไม่มีผล BGE-M3 ใน artifact ปัจจุบัน จึงไม่นำมาเปรียบเทียบ
 

@@ -10,7 +10,7 @@
     "fallback_avg_latency_sec": 0.0003,
     "local_ollama_status": "MEASURED_LIVE",
     "local_ollama_avg_latency_sec": 4.566,
-    "latency_speedup_gemini_vs_local": 0.32,
+    "local_speedup_vs_gemini_x": 3.14,
     "verification_note": "Only live measurements are reported; unavailable backends remain explicitly unmeasured."
   },
   "raw_results": [

@@ -195,9 +195,9 @@ def generate_raw_benchmark() -> Dict[str, Any]:
         "fallback_avg_latency_sec": round(sum(fallback_latencies) / len(fallback_latencies), 4),
         "local_ollama_status": "MEASURED_LIVE" if local_available else "UNAVAILABLE_NOT_MEASURED",
         "local_ollama_avg_latency_sec": round(sum(local_latencies) / len(local_latencies), 3) if local_latencies else None,
-        "latency_speedup_gemini_vs_local": round(
-            (sum(local_latencies) / len(local_latencies)) /
-            (sum(gemini_latencies) / len(gemini_latencies)), 2
+        "local_speedup_vs_gemini_x": round(
+            (sum(gemini_latencies) / len(gemini_latencies)) /
+            (sum(local_latencies) / len(local_latencies)), 2
         ) if local_latencies else None,
         "verification_note": "Only live measurements are reported; unavailable backends remain explicitly unmeasured."
     }

@@ -11,6 +11,10 @@ from langchain_core.documents import Document
 from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings
 
+# Benchmarks must be reproducible from the already pinned local model cache and
+# must not stall on network metadata checks.
+os.environ.setdefault("HF_HUB_OFFLINE", "1")
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 PROCESSED_DIR = os.path.join(BASE_DIR, "data", "processed")
 CHUNKS_FILE = os.path.join(PROCESSED_DIR, "documents_chunks.json")
@@ -32,13 +36,9 @@ CANDIDATE_MODELS = [
 ]
 
 def load_benchmark_queries() -> List[Dict[str, Any]]:
-    """Select three curated questions from each category (30 total)."""
+    """Load the complete 100-question benchmark across categories A-J."""
     with open(QUESTIONS_FILE, "r", encoding="utf-8") as f:
-        questions = json.load(f)
-    selected = []
-    for category in sorted({q["category"] for q in questions}):
-        selected.extend([q for q in questions if q["category"] == category][:3])
-    return selected
+        return json.load(f)
 
 def run_embedding_benchmark(output_path: str = BENCHMARK_OUTPUT) -> Dict[str, Any]:
     """

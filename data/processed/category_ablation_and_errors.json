@@ -12,7 +12,7 @@
         "hit1_pct": 60.0,
         "hit3_pct": 70.0,
         "mrr": 0.65,
-        "avg_latency_ms": 15.79,
+        "avg_latency_ms": 15.31,
         "coverage_pct": 0.0
       },
       "graph_only": {
@@ -26,7 +26,7 @@
         "hit1_pct": 60.0,
         "hit3_pct": 70.0,
         "mrr": 0.65,
-        "avg_latency_ms": 100.7,
+        "avg_latency_ms": 123.46,
         "coverage_pct": 100.0
       },
       "delta_hybrid_vs_dense": {
@@ -43,7 +43,7 @@
         "hit1_pct": 70.0,
         "hit3_pct": 70.0,
         "mrr": 0.7,
-        "avg_latency_ms": 14.86,
+        "avg_latency_ms": 15.12,
         "coverage_pct": 0.0
       },
       "graph_only": {
@@ -57,7 +57,7 @@
         "hit1_pct": 70.0,
         "hit3_pct": 100.0,
         "mrr": 0.85,
-        "avg_latency_ms": 31.76,
+        "avg_latency_ms": 32.46,
         "coverage_pct": 100.0
       },
       "delta_hybrid_vs_dense": {
@@ -74,21 +74,21 @@
         "hit1_pct": 50.0,
         "hit3_pct": 70.0,
         "mrr": 0.5833,
-        "avg_latency_ms": 18.1,
+        "avg_latency_ms": 14.85,
         "coverage_pct": 0.0
       },
       "graph_only": {
         "hit1_pct": 30.0,
         "hit3_pct": 30.0,
         "mrr": 0.3,
-        "avg_latency_ms": 0.16,
+        "avg_latency_ms": 0.15,
         "coverage_pct": 70.0
       },
       "hybrid_rag": {
         "hit1_pct": 50.0,
         "hit3_pct": 80.0,
         "mrr": 0.675,
-        "avg_latency_ms": 43.49,
+        "avg_latency_ms": 44.35,
         "coverage_pct": 100.0
       },
       "delta_hybrid_vs_dense": {
@@ -105,21 +105,21 @@
         "hit1_pct": 30.0,
         "hit3_pct": 80.0,
         "mrr": 0.5333,
-        "avg_latency_ms": 14.79,
+        "avg_latency_ms": 15.13,
         "coverage_pct": 0.0
       },
       "graph_only": {
         "hit1_pct": 40.0,
         "hit3_pct": 40.0,
         "mrr": 0.4,
-        "avg_latency_ms": 0.17,
+        "avg_latency_ms": 0.16,
         "coverage_pct": 90.0
       },
       "hybrid_rag": {
         "hit1_pct": 40.0,
         "hit3_pct": 80.0,
         "mrr": 0.625,
-        "avg_latency_ms": 32.91,
+        "avg_latency_ms": 32.92,
         "coverage_pct": 100.0
       },
       "delta_hybrid_vs_dense": {
@@ -136,21 +136,21 @@
         "hit1_pct": 70.0,
         "hit3_pct": 70.0,
         "mrr": 0.7,
-        "avg_latency_ms": 15.01,
+        "avg_latency_ms": 15.05,
         "coverage_pct": 0.0
       },
       "graph_only": {
         "hit1_pct": 70.0,
         "hit3_pct": 70.0,
         "mrr": 0.7,
-        "avg_latency_ms": 0.17,
+        "avg_latency_ms": 0.18,
         "coverage_pct": 100.0
       },
       "hybrid_rag": {
         "hit1_pct": 80.0,
         "hit3_pct": 90.0,
         "mrr": 0.8333,
-        "avg_latency_ms": 34.89,
+        "avg_latency_ms": 35.08,
         "coverage_pct": 100.0
       },
       "delta_hybrid_vs_dense": {
@@ -167,7 +167,7 @@
         "hit1_pct": 70.0,
         "hit3_pct": 80.0,
         "mrr": 0.7333,
-        "avg_latency_ms": 15.12,
+        "avg_latency_ms": 14.89,
         "coverage_pct": 0.0
       },
       "graph_only": {
@@ -181,7 +181,7 @@
         "hit1_pct": 60.0,
         "hit3_pct": 70.0,
         "mrr": 0.6783,
-        "avg_latency_ms": 34.18,
+        "avg_latency_ms": 34.33,
         "coverage_pct": 100.0
       },
       "delta_hybrid_vs_dense": {
@@ -198,21 +198,21 @@
         "hit1_pct": 50.0,
         "hit3_pct": 100.0,
         "mrr": 0.7333,
-        "avg_latency_ms": 15.43,
+        "avg_latency_ms": 15.44,
         "coverage_pct": 0.0
       },
       "graph_only": {
         "hit1_pct": 80.0,
         "hit3_pct": 80.0,
         "mrr": 0.8,
-        "avg_latency_ms": 0.17,
+        "avg_latency_ms": 0.18,
         "coverage_pct": 80.0
       },
       "hybrid_rag": {
         "hit1_pct": 100.0,
         "hit3_pct": 100.0,
         "mrr": 1.0,
-        "avg_latency_ms": 83.94,
+        "avg_latency_ms": 85.36,
         "coverage_pct": 100.0
       },
       "delta_hybrid_vs_dense": {
@@ -229,7 +229,7 @@
         "hit1_pct": 0.0,
         "hit3_pct": 40.0,
         "mrr": 0.1833,
-        "avg_latency_ms": 15.07,
+        "avg_latency_ms": 15.48,
         "coverage_pct": 0.0
       },
       "graph_only": {
@@ -243,7 +243,7 @@
         "hit1_pct": 40.0,
         "hit3_pct": 50.0,
         "mrr": 0.4625,
-        "avg_latency_ms": 44.0,
+        "avg_latency_ms": 44.17,
         "coverage_pct": 100.0
       },
       "delta_hybrid_vs_dense": {
@@ -260,21 +260,21 @@
         "hit1_pct": 10.0,
         "hit3_pct": 30.0,
         "mrr": 0.1833,
-        "avg_latency_ms": 15.13,
+        "avg_latency_ms": 15.42,
         "coverage_pct": 0.0
       },
       "graph_only": {
         "hit1_pct": 40.0,
         "hit3_pct": 40.0,
         "mrr": 0.4,
-        "avg_latency_ms": 0.16,
+        "avg_latency_ms": 0.17,
         "coverage_pct": 60.0
       },
       "hybrid_rag": {
         "hit1_pct": 30.0,
         "hit3_pct": 70.0,
         "mrr": 0.4667,
-        "avg_latency_ms": 33.78,
+        "avg_latency_ms": 34.73,
         "coverage_pct": 100.0
       },
       "delta_hybrid_vs_dense": {
@@ -291,7 +291,7 @@
         "hit1_pct": 10.0,
         "hit3_pct": 30.0,
         "mrr": 0.1833,
-        "avg_latency_ms": 16.93,
+        "avg_latency_ms": 17.18,
         "coverage_pct": 0.0
       },
       "graph_only": {
@@ -305,7 +305,7 @@
         "hit1_pct": 60.0,
         "hit3_pct": 70.0,
         "mrr": 0.6917,
-        "avg_latency_ms": 37.98,
+        "avg_latency_ms": 38.79,
         "coverage_pct": 100.0
       },
       "delta_hybrid_vs_dense": {
@@ -368,10 +368,10 @@
       "category": "A",
       "query": "สถานที่ไหนเหมาะสำหรับเที่ยวคนเดียว?",
       "ground_truth": [
-        "P_SHINJUKU_GYOEN",
-        "P_MEIJI_JINGU",
+        "P_HAMARIKYU_GARDENS",
         "P_UENO_PARK",
-        "P_HAMARIKYU_GARDENS"
+        "P_MEIJI_JINGU",
+        "P_SHINJUKU_GYOEN"
       ],
       "dense_rank": null,
       "graph_rank": null,
@@ -384,10 +384,10 @@
       "category": "A",
       "query": "แนะนำสถานที่ที่ไม่ใช่แหล่งท่องเที่ยวยอดนิยมแต่มีความน่าสนใจ",
       "ground_truth": [
-        "P_OMOTESANDO_HILLS",
+        "P_HAMARIKYU_GARDENS",
         "P_TOKYO_DOME_CITY",
-        "P_TEAMLAB_PLANETS",
-        "P_HAMARIKYU_GARDENS"
+        "P_OMOTESANDO_HILLS",
+        "P_TEAMLAB_PLANETS"
       ],
       "dense_rank": 1,
       "graph_rank": null,
@@ -400,9 +400,9 @@
       "category": "A",
       "query": "มีสถานที่ไหนที่สามารถใช้เวลาเที่ยวได้ครึ่งวัน?",
       "ground_truth": [
-        "P_SHINJUKU_GYOEN",
         "P_SENSOJI",
-        "P_UENO_PARK"
+        "P_UENO_PARK",
+        "P_SHINJUKU_GYOEN"
       ],
       "dense_rank": null,
       "graph_rank": null,
@@ -455,8 +455,8 @@
       "category": "C",
       "query": "ถ้าชอบ Anime ควรไปเที่ยวบริเวณไหนใน Tokyo?",
       "ground_truth": [
-        "P_AKIHABARA_ELECTRIC",
-        "P_ODAIBA_GUNDAM"
+        "P_ODAIBA_GUNDAM",
+        "P_AKIHABARA_ELECTRIC"
       ],
       "dense_rank": null,
       "graph_rank": null,
@@ -482,8 +482,8 @@
       "category": "C",
       "query": "มีพิพิธภัณฑ์หรือสถานที่เกี่ยวกับ Animation ใน Tokyo หรือไม่?",
       "ground_truth": [
-        "P_TEAMLAB_PLANETS",
-        "P_ODAIBA_GUNDAM"
+        "P_ODAIBA_GUNDAM",
+        "P_TEAMLAB_PLANETS"
       ],
       "dense_rank": 2,
       "graph_rank": null,
@@ -509,9 +509,9 @@
       "category": "C",
       "query": "แนะนำเส้นทาง Anime Tour 1 วันใน Tokyo",
       "ground_truth": [
+        "P_ODAIBA_GUNDAM",
         "P_AKIHABARA_ELECTRIC",
-        "P_TEAMLAB_PLANETS",
-        "P_ODAIBA_GUNDAM"
+        "P_TEAMLAB_PLANETS"
       ],
       "dense_rank": null,
       "graph_rank": null,
@@ -524,9 +524,9 @@
       "category": "D",
       "query": "แนะนำสวนสาธารณะที่สวยที่สุดใน Tokyo",
       "ground_truth": [
-        "P_SHINJUKU_GYOEN",
+        "P_HAMARIKYU_GARDENS",
         "P_UENO_PARK",
-        "P_HAMARIKYU_GARDENS"
+        "P_SHINJUKU_GYOEN"
       ],
       "dense_rank": 2,
       "graph_rank": null,
@@ -539,9 +539,9 @@
       "category": "D",
       "query": "มีสถานที่ชมใบไม้เปลี่ยนสีใน Tokyo ที่ไหนบ้าง?",
       "ground_truth": [
-        "P_SHINJUKU_GYOEN",
+        "P_HAMARIKYU_GARDENS",
         "P_UENO_PARK",
-        "P_HAMARIKYU_GARDENS"
+        "P_SHINJUKU_GYOEN"
       ],
       "dense_rank": 2,
       "graph_rank": null,
@@ -554,9 +554,9 @@
       "category": "D",
       "query": "จุดไหนสามารถชมวิวเมือง Tokyo จากที่สูงได้?",
       "ground_truth": [
-        "P_TOKYO_SKYTREE",
+        "P_TOKYO_TOWER",
         "P_ROPPONGI_HILLS",
-        "P_TOKYO_TOWER"
+        "P_TOKYO_SKYTREE"
       ],
       "dense_rank": 1,
       "graph_rank": null,
@@ -583,9 +583,9 @@
       "category": "D",
       "query": "สถานที่ไหนเหมาะสำหรับชมพระอาทิตย์ตก?",
       "ground_truth": [
-        "P_TOKYO_SKYTREE",
+        "P_TOKYO_TOWER",
         "P_ROPPONGI_HILLS",
-        "P_TOKYO_TOWER"
+        "P_TOKYO_SKYTREE"
       ],
       "dense_rank": 3,
       "graph_rank": null,
@@ -598,9 +598,9 @@
       "category": "D",
       "query": "ถ้าอยากเที่ยวธรรมชาติแต่ไม่ออกนอก Tokyo ควรไปที่ไหน?",
       "ground_truth": [
-        "P_SHINJUKU_GYOEN",
+        "P_HAMARIKYU_GARDENS",
         "P_UENO_PARK",
-        "P_HAMARIKYU_GARDENS"
+        "P_SHINJUKU_GYOEN"
       ],
       "dense_rank": 2,
       "graph_rank": null,
@@ -613,8 +613,8 @@
       "category": "E",
       "query": "มีตลาดอาหารที่สามารถเดินทางจาก Ginza ได้ง่ายหรือไม่?",
       "ground_truth": [
-        "P_TOYOSU_MARKET",
-        "P_TSUKIJI_OUTER"
+        "P_TSUKIJI_OUTER",
+        "P_TOYOSU_MARKET"
       ],
       "dense_rank": null,
       "graph_rank": null,
@@ -641,8 +641,8 @@
       "category": "F",
       "query": "มีสถานที่อะไรอยู่ในระยะเดินจาก Sensō-ji?",
       "ground_truth": [
-        "P_TOKYO_SKYTREE",
-        "P_SENSOJI"
+        "P_SENSOJI",
+        "P_TOKYO_SKYTREE"
       ],
       "dense_rank": 1,
       "graph_rank": null,
@@ -655,8 +655,8 @@
       "category": "F",
       "query": "มีวัดหรือศาลเจ้าอะไรอยู่ใกล้สถานที่ชมวิวใน Tokyo?",
       "ground_truth": [
-        "P_TOKYO_SKYTREE",
-        "P_SENSOJI"
+        "P_SENSOJI",
+        "P_TOKYO_SKYTREE"
       ],
       "dense_rank": 3,
       "graph_rank": null,
@@ -669,8 +669,8 @@
       "category": "F",
       "query": "สถานที่ท่องเที่ยวใดบ้างที่อยู่ห่างกันไม่เกิน 2 กิโลเมตร?",
       "ground_truth": [
-        "P_TOKYO_SKYTREE",
-        "P_SENSOJI"
+        "P_SENSOJI",
+        "P_TOKYO_SKYTREE"
       ],
       "dense_rank": null,
       "graph_rank": null,
@@ -683,10 +683,10 @@
       "category": "F",
       "query": "ช่วยหากลุ่มสถานที่ 3–4 แห่งที่อยู่ใกล้กันและเที่ยวต่อเนื่องได้",
       "ground_truth": [
-        "P_TOKYO_SKYTREE",
+        "P_UENO_PARK",
         "P_SENSOJI",
         "P_AMEYOKO",
-        "P_UENO_PARK"
+        "P_TOKYO_SKYTREE"
       ],
       "dense_rank": null,
       "graph_rank": null,

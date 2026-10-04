@@ -20,7 +20,7 @@ src/evaluation/run_comprehensive_eval.py
 2. End-to-End Generation Evaluation:
    ประเมินผลการตอบของ LLM (Gemini 3.1 Flash Lite) ในด้าน:
    - Success Rate (%)
-   - Citation Rate / Zero-Hallucination (%)
+   - Citation Presence Rate (%)
    - Graph Utilization Rate (%)
    - Latency Distribution
 

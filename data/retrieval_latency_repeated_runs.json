@@ -1,0 +1,172 @@
+{
+  "benchmark_file": "data/benchmark_100_questions.json",
+  "questions_per_run": 100,
+  "method": "Independent full retrieval runs; two-sided 95% Student's t CI over run means.",
+  "runs": [
+    {
+      "run": 1,
+      "summary": {
+        "dense_only": {
+          "hit_rate_top1_pct": 42.0,
+          "hit_rate_top3_pct": 64.0,
+          "mrr": 0.5183,
+          "avg_latency_ms": 15.28,
+          "graph_coverage_pct": 0.0
+        },
+        "graph_only": {
+          "hit_rate_top1_pct": 53.0,
+          "hit_rate_top3_pct": 54.0,
+          "mrr": 0.5358,
+          "avg_latency_ms": 0.17,
+          "graph_coverage_pct": 80.0
+        },
+        "hybrid_rag": {
+          "hit_rate_top1_pct": 59.0,
+          "hit_rate_top3_pct": 78.0,
+          "mrr": 0.6933,
+          "avg_latency_ms": 50.51,
+          "graph_coverage_pct": 80.0
+        }
+      }
+    },
+    {
+      "run": 2,
+      "summary": {
+        "dense_only": {
+          "hit_rate_top1_pct": 42.0,
+          "hit_rate_top3_pct": 64.0,
+          "mrr": 0.5183,
+          "avg_latency_ms": 15.54,
+          "graph_coverage_pct": 0.0
+        },
+        "graph_only": {
+          "hit_rate_top1_pct": 53.0,
+          "hit_rate_top3_pct": 54.0,
+          "mrr": 0.5358,
+          "avg_latency_ms": 0.18,
+          "graph_coverage_pct": 80.0
+        },
+        "hybrid_rag": {
+          "hit_rate_top1_pct": 59.0,
+          "hit_rate_top3_pct": 78.0,
+          "mrr": 0.6933,
+          "avg_latency_ms": 41.7,
+          "graph_coverage_pct": 80.0
+        }
+      }
+    },
+    {
+      "run": 3,
+      "summary": {
+        "dense_only": {
+          "hit_rate_top1_pct": 42.0,
+          "hit_rate_top3_pct": 64.0,
+          "mrr": 0.5183,
+          "avg_latency_ms": 15.43,
+          "graph_coverage_pct": 0.0
+        },
+        "graph_only": {
+          "hit_rate_top1_pct": 53.0,
+          "hit_rate_top3_pct": 54.0,
+          "mrr": 0.5358,
+          "avg_latency_ms": 0.18,
+          "graph_coverage_pct": 80.0
+        },
+        "hybrid_rag": {
+          "hit_rate_top1_pct": 59.0,
+          "hit_rate_top3_pct": 78.0,
+          "mrr": 0.6933,
+          "avg_latency_ms": 42.23,
+          "graph_coverage_pct": 80.0
+        }
+      }
+    },
+    {
+      "run": 4,
+      "summary": {
+        "dense_only": {
+          "hit_rate_top1_pct": 42.0,
+          "hit_rate_top3_pct": 64.0,
+          "mrr": 0.5183,
+          "avg_latency_ms": 16.14,
+          "graph_coverage_pct": 0.0
+        },
+        "graph_only": {
+          "hit_rate_top1_pct": 53.0,
+          "hit_rate_top3_pct": 54.0,
+          "mrr": 0.5358,
+          "avg_latency_ms": 0.19,
+          "graph_coverage_pct": 80.0
+        },
+        "hybrid_rag": {
+          "hit_rate_top1_pct": 59.0,
+          "hit_rate_top3_pct": 78.0,
+          "mrr": 0.6933,
+          "avg_latency_ms": 43.73,
+          "graph_coverage_pct": 80.0
+        }
+      }
+    },
+    {
+      "run": 5,
+      "summary": {
+        "dense_only": {
+          "hit_rate_top1_pct": 42.0,
+          "hit_rate_top3_pct": 64.0,
+          "mrr": 0.5183,
+          "avg_latency_ms": 15.4,
+          "graph_coverage_pct": 0.0
+        },
+        "graph_only": {
+          "hit_rate_top1_pct": 53.0,
+          "hit_rate_top3_pct": 54.0,
+          "mrr": 0.5358,
+          "avg_latency_ms": 0.18,
+          "graph_coverage_pct": 80.0
+        },
+        "hybrid_rag": {
+          "hit_rate_top1_pct": 59.0,
+          "hit_rate_top3_pct": 78.0,
+          "mrr": 0.6933,
+          "avg_latency_ms": 41.81,
+          "graph_coverage_pct": 80.0
+        }
+      }
+    }
+  ],
+  "aggregate": {
+    "dense_only": {
+      "runs": 5,
+      "mean_latency_ms": 15.558,
+      "sample_stdev_ms": 0.338,
+      "ci95_mean_latency_ms": [
+        15.138,
+        15.978
+      ],
+      "min_latency_ms": 15.28,
+      "max_latency_ms": 16.14
+    },
+    "graph_only": {
+      "runs": 5,
+      "mean_latency_ms": 0.18,
+      "sample_stdev_ms": 0.007,
+      "ci95_mean_latency_ms": [
+        0.171,
+        0.189
+      ],
+      "min_latency_ms": 0.17,
+      "max_latency_ms": 0.19
+    },
+    "hybrid_rag": {
+      "runs": 5,
+      "mean_latency_ms": 43.996,
+      "sample_stdev_ms": 3.731,
+      "ci95_mean_latency_ms": [
+        39.363,
+        48.629
+      ],
+      "min_latency_ms": 41.7,
+      "max_latency_ms": 50.51
+    }
+  }
+}

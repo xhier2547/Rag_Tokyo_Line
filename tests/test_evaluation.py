@@ -11,6 +11,8 @@ import os
 import pytest
 from src.evaluation.evaluator import TokyoRAGEvaluator, EvaluationItemResult, BenchmarkSummary
 from src.evaluation.create_benchmark_splits import create_splits
+from src.evaluation.evaluate_generation_proxies import _known_sources, citation_is_known
+from src.vector.benchmark_embeddings import load_benchmark_queries
 
 
 def test_load_100_benchmark_questions():
@@ -22,6 +24,12 @@ def test_load_100_benchmark_questions():
     categories = set(q["category"] for q in questions)
     expected_categories = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"}
     assert categories == expected_categories
+
+
+def test_embedding_benchmark_uses_all_100_questions():
+    questions = load_benchmark_queries()
+    assert len(questions) == 100
+    assert {question["category"] for question in questions} == set("ABCDEFGHIJ")
 
 
 def test_filter_by_category():
@@ -50,6 +58,10 @@ def test_stratified_dev_test_split():
     for category in "ABCDEFGHIJ":
         assert sum(item["category"] == category for item in dev) == 6
         assert sum(item["category"] == category for item in test) == 4
+
+
+def test_generation_proxy_accepts_graph_station_citation():
+    assert citation_is_known("สถานีโตเกียว", _known_sources())
 
 
 def test_calculate_summary():

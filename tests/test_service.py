@@ -40,6 +40,16 @@ def test_existing_llm_citations_are_preserved():
     assert citations == ["วัดเซ็นโซจิ"]
 
 
+def test_duplicate_llm_citations_are_deduplicated():
+    answer, citations = TokyoRAGService._ensure_retrieval_citations(
+        "คำตอบ [อ้างอิง: สถานีโตเกียว]",
+        ["สถานีโตเกียว", "สถานีโตเกียว"],
+        ["แหล่งอื่น"],
+    )
+    assert answer == "คำตอบ [อ้างอิง: สถานีโตเกียว]"
+    assert citations == ["สถานีโตเกียว"]
+
+
 def test_rag_service_cache_mechanism():
     """ทดสอบระบบ In-Memory Response Caching เพื่อประหยัดเวลาและพลังงานเครื่อง"""
     # จำลอง Mock Engine และ Gemini Client เพื่อทดสอบ Logic Caching อย่างรวดเร็ว

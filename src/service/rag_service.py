@@ -108,8 +108,10 @@ class TokyoRAGService:
         retrieved_citations: List[str],
     ) -> tuple[str, List[str]]:
         """Attach traceable retrieval sources when an LLM omitted citation tags."""
-        if generated_citations or not retrieved_citations:
-            return answer, generated_citations
+        if generated_citations:
+            return answer, list(dict.fromkeys(generated_citations))
+        if not retrieved_citations:
+            return answer, []
         grounded = list(dict.fromkeys(retrieved_citations))[:3]
         citation_line = " ".join(f"[อ้างอิง: {source}]" for source in grounded)
         return f"{answer.rstrip()}\n\n📚 ข้อมูลอ้างอิงยืนยัน: {citation_line}", grounded

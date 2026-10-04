@@ -16,9 +16,19 @@
 
 | Architecture | Hit@1 | Hit@3 | MRR | Graph coverage | Retrieval latency |
 |---|---:|---:|---:|---:|---:|
-| Dense only | 42% | 64% | 0.5183 | 0% | 15.62 ms |
+| Dense only | 42% | 64% | 0.5183 | 0% | 15.39 ms |
 | Graph only | 53% | 54% | 0.5358 | 80% | 0.17 ms |
-| **Hybrid RAG** | **59%** | **78%** | **0.6933** | 80% | 47.76 ms |
+| **Hybrid RAG** | **59%** | **78%** | **0.6933** | 80% | 50.57 ms |
+
+### 2.2 ความแปรปรวนของเวลา Retrieval จากการรันซ้ำ
+
+รัน benchmark 100 ข้อแบบอิสระ 5 รอบและคำนวณช่วงความเชื่อมั่น 95% ด้วย Student's t จากค่าเฉลี่ยรายรอบ หลักฐานดิบอยู่ที่ `data/retrieval_latency_repeated_runs.json`:
+
+| Architecture | Mean latency | Sample SD | 95% CI ของค่าเฉลี่ย |
+|---|---:|---:|---:|
+| Dense only | 15.558 ms | 0.338 ms | 15.138–15.978 ms |
+| Graph only | 0.180 ms | 0.007 ms | 0.171–0.189 ms |
+| Hybrid RAG | 43.996 ms | 3.731 ms | 39.363–48.629 ms |
 
 ### การตีความ
 
@@ -42,18 +52,19 @@ Hybrid ยังเหนือกว่า retrieval เดี่ยวบน�
 
 ## 3. Embedding Benchmark
 
-ทดลอง 30 คำถาม โดยเลือก 3 ข้อต่อหมวดจาก benchmark เดียวกัน
+ทดลองครบ 100 คำถามจาก 10 หมวด โดยใช้ ground-truth entity ชุดเดียวกับ retrieval ablation
 
 | Model | Build time | Avg. query latency | Hit@1 | Hit@3 | Queries |
 |---|---:|---:|---:|---:|---:|
-| paraphrase-multilingual-MiniLM-L12-v2 | 20.323 s | **16.45 ms** | 47% | 67% | 30 |
-| **multilingual-e5-small** | **12.405 s** | 18.39 ms | **70%** | **80%** | 30 |
+| paraphrase-multilingual-MiniLM-L12-v2 | 14.232 s | **15.11 ms** | 42% | 64% | 100 |
+| **multilingual-e5-small** | **5.234 s** | 15.22 ms | **52%** | **72%** | 100 |
 
-E5-small ให้ retrieval accuracy สูงกว่าในการทดลองนี้ ส่วน MiniLM เร็วกว่าประมาณ 1.94 ms ต่อ query การทดลองยังมีขนาดเล็กและใช้ knowledge base ชุดเดียว จึงไม่ควรสรุปผลครอบคลุมทุกโดเมน
+E5-small ให้ Hit@1 สูงกว่า 10 จุดเปอร์เซ็นต์และ Hit@3 สูงกว่า 8 จุดเปอร์เซ็นต์ ขณะที่ MiniLM เร็วกว่าประมาณ 0.11 ms ต่อ query ผลนี้ใช้ knowledge base โดเมนโตเกียวชุดเดียว จึงไม่ควรสรุปครอบคลุมทุกโดเมน
 
 ## 4. End-to-End และ LLM
 
-- artifact เดิม `data/benchmark_results_comprehensive.json` บันทึกการเรียก Gemini 30 ข้อสำเร็จ 30 ข้อ
+- `data/benchmark_results_comprehensive.json` บันทึกการเรียก Gemini รอบล่าสุด 30 ข้อสำเร็จ 30 ข้อ โดยมี latency เฉลี่ย 4.873 วินาที
+- คำตอบทั้ง 30 ข้อมี citation อย่างน้อยหนึ่งรายการหลังเพิ่ม retrieval citation fallback
 - success rate วัดเพียงการทำงานสำเร็จ ไม่ใช่ answer correctness
 - citation rate วัดว่ามี citation หรือไม่ ไม่ใช่ faithfulness ของข้อความ
 - `data/model_comparison_raw.json` มีการรัน Gemini และ Local Qwen จริงอย่างละ 10 ข้อ
@@ -77,16 +88,16 @@ E5-small ให้ retrieval accuracy สูงกว่าในการทด
 อ้างอิงจาก `data/category_ablation_and_error_report.md` (100 ข้อมาตรฐาน):
 
 ### 6.1 ประสิทธิภาพแยกหมวด A–J
-- **หมวด B (วัด/ประวัติศาสตร์):** Hybrid ทำได้ **90% Hit@3** (+20 จุดเปอร์เซ็นต์จาก Dense)
+- **หมวด B (วัด/ประวัติศาสตร์):** Hybrid ทำได้ **100% Hit@3** (+30 จุดเปอร์เซ็นต์จาก Dense)
 - **หมวด E (อาหาร/ตลาด):** Hybrid ทำได้ **90% Hit@3** (+20% เหนือ Dense/Graph)
 - **หมวด G (การเดินทาง/สายรถไฟ):** Hybrid และ Dense ทำได้ **100% Hit@3** (MRR 1.000 สมบูรณ์)
 - **หมวด J (Complex Multi-hop Graph):** Hybrid ทำได้ **60% Hit@1 และ 70% Hit@3** เทียบกับ Dense ที่ 10% และ 30%
 
 ### 6.2 การจำแนกสาเหตุข้อผิดพลาด (Failure Mode Distribution)
 จากการวินิจฉัยข้อที่ Hybrid ตอบไม่ติด Top 1:
-1. **GRAPH_COVERAGE_GAP (45.0%):** ขาด Edge หรือจุดเชื่อมโยงย่อยใน Knowledge Graph $\rightarrow$ แก้ด้วยการขยาย Schema และ Ingest เส้นทางเพิ่มเติม
-2. **UNSTRUCTURED_SEMANTIC_GAP (42.5%):** คำถามเชิงคุณภาพกว้างยังหลุดจาก Curated Ground Truth บางส่วน $\rightarrow$ ปรับ query expansion และ fine-tune reranker ต่อ
-3. **FUSION_WEIGHT_IMBALANCE (12.5%):** ลดลงหลังใช้ intent-aware weights แต่ยังมีบางคำถามที่สัญญาณจาก engine แย่งอันดับกัน
+1. **GRAPH_COVERAGE_GAP (43.9%):** ขาด Edge หรือจุดเชื่อมโยงย่อยใน Knowledge Graph $\rightarrow$ แก้ด้วยการขยาย Schema และ Ingest เส้นทางเพิ่มเติม
+2. **UNSTRUCTURED_SEMANTIC_GAP (41.5%):** คำถามเชิงคุณภาพกว้างยังหลุดจาก Curated Ground Truth บางส่วน $\rightarrow$ ปรับ query expansion และ fine-tune reranker ต่อ
+3. **FUSION_WEIGHT_IMBALANCE (14.6%):** ลดลงหลังใช้ intent-aware weights แต่ยังมีบางคำถามที่สัญญาณจาก engine แย่งอันดับกัน
 4. **ENTITY_EXTRACTION_FAILURE (0.0%):** การตัดคำและสกัดชื่อเฉพาะจากภาษาไทยทำงานได้สมบูรณ์
 
 ## 7. กรอบการประเมินโดยมนุษย์ (Human Evaluation Protocol)
@@ -98,13 +109,13 @@ E5-small ให้ retrieval accuracy สูงกว่าในการทด
 
 ### Automatic generation screening
 
-`data/generation_quality_proxies.json` ตรวจคำตอบที่บันทึกไว้ 30 ข้อโดยไม่ใช้ LLM judge พบ citation ใน 66.7% ของคำตอบ และ citation ที่มีอยู่ทั้งหมดตรงกับชื่อแหล่งข้อมูลใน knowledge base ตาม name-matching proxy ส่วน lexical answer relevance เฉลี่ย 0.4723 มี 10 ข้อที่ไม่มี citation และต้องให้มนุษย์ตรวจต่อ เมตริกนี้เป็นเพียงตัวกรองเบื้องต้น ไม่ใช่หลักฐานยืนยัน faithfulness หรือ factual correctness
+`data/generation_quality_proxies.json` ตรวจคำตอบรอบล่าสุด 30 ข้อโดยไม่ใช้ LLM judge พบ citation ใน 100% ของคำตอบ และชื่อ citation ทั้งหมดตรงกับ entity หรือ metadata ใน knowledge base ตาม name-matching proxy ส่วน lexical answer relevance เฉลี่ย 0.484 เมตริกนี้เป็นเพียงตัวกรองเบื้องต้น ไม่ใช่หลักฐานยืนยัน faithfulness หรือ factual correctness
 
 ## 8. ข้อจำกัดและงานในอนาคต
 
 1. การประเมิน Human Evaluation ยังอยู่ในขั้นตอนเตรียมชุดคำถามและเกณฑ์การให้คะแนนสำหรับให้ผู้ประเมินอิสระลงคะแนนจริง
-2. ยังไม่มีการคำนวณ Confidence Interval จากการรันซ้ำ 5 รอบเพื่อหา Standard Deviation ของ Latency
-3. สามารถขยายผลการทดลอง Embedding Benchmark จาก 30 ข้อเป็น 100 ข้อเต็มในอนาคต
+2. ช่วงความเชื่อมั่นของ latency มาจากเพียง 5 รอบบนเครื่องเดียว จึงยังไม่ครอบคลุมความแปรปรวนข้ามฮาร์ดแวร์
+3. Embedding benchmark ยังใช้ knowledge base โดเมนเดียว ควรตรวจซ้ำกับข้อมูลจากเมืองหรือโดเมนอื่นเพื่อวัด external validity
 
 ## 9. สรุป
 

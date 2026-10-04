@@ -8,13 +8,13 @@
 ### Slide 1: หน้าปกโครงงาน (Title Slide)
 * **ชื่อโครงงาน:** Tokyo Hybrid Graph RAG: ระบบผู้ช่วยท่องเที่ยวและวางแผนเส้นทางรถไฟโตเกียวบน LINE ด้วยการผสาน Knowledge Graph และ Large Language Model
 * **ผู้จัดทำ:** นักศึกษาชั้นปีที่ 4 ภาควิชาวิศวกรรมคอมพิวเตอร์ / วิทยาการคอมพิวเตอร์
-* **ใจความสำคัญ (Key Message):** การแก้ปัญหา Hallucination และข้อจำกัดด้านความสัมพันธ์เชิงพื้นที่ของ Vector-only RAG ด้วยการผสาน Neo4j Knowledge Graph เข้ากับ Vector Database อย่างเป็นระบบ
+* **ใจความสำคัญ (Key Message):** การลดความเสี่ยงของ Hallucination และแก้ข้อจำกัดด้านความสัมพันธ์เชิงพื้นที่ของ Vector-only RAG ด้วยการผสาน Neo4j Knowledge Graph เข้ากับ Vector Database อย่างเป็นระบบ
 
 ---
 
 ### Slide 2: ที่มาและความสำคัญ (Motivation & Problem Statement)
 * **ปัญหาของ Traditional Vector-only RAG (ทำไมเวกเตอร์อย่างเดียวถึงไม่พอ?):**
-  1. **Spatial & Multi-hop Blindness:** เวกเตอร์ค้นหาคำที่ "ความหมายคล้ายกัน" ได้ดี แต่ตอบคำถามความสัมพันธ์เชิงพื้นที่ไม่ได้ เช่น *"จากสถานี A ไปสถานี B มีสถานที่อะไรระหว่างทางบ้าง?"* เวกเตอร์มักดึงข้อมูลกระจัดกระจายและเกิด Hallucination
+  1. **Spatial & Multi-hop Blindness:** เวกเตอร์ค้นหาคำที่ "ความหมายคล้ายกัน" ได้ดี แต่ไม่มีโครงสร้างเส้นทางโดยตรง เช่น *"จากสถานี A ไปสถานี B มีสถานที่อะไรระหว่างทางบ้าง?"* จึงอาจดึงข้อมูลกระจัดกระจายหรือผิดย่าน
   2. **ขาดโครงสร้างความสัมพันธ์ที่แน่นอน (Lack of Deterministic Graph Topology):** ข้อมูลสายรถไฟและการเปลี่ยนสายต้องการความถูกต้อง 100% ซึ่งเวกเตอร์ไม่สามารถการันตีได้
 * **แนวทางแก้ไขของโครงงาน:**
   - สร้างสถาปัตยกรรม **Hybrid Graph RAG** ผสาน **ChromaDB (Dense Semantic)** + **Neo4j (Knowledge Graph)** เข้าด้วยกันด้วยกลยุทธ์ **Reciprocal Rank Fusion (RRF)**
@@ -41,12 +41,12 @@
 * **1. โครงสร้าง Vector Database:**
   - ใช้ **ChromaDB** สำหรับจัดเก็บ Text Chunks และทำ Similarity Search
   - รองรับ **Metadata Filtering** กรองตามย่าน (`ward`) หรือประเภทสถานที่ (`category`)
-* **2. ผลการทดลองเปรียบเทียบโมเดล Embedding (Embedding Benchmark 30 คำถาม):**
+* **2. ผลการทดลองเปรียบเทียบโมเดล Embedding (Embedding Benchmark 100 คำถาม):**
 
 | โมเดล (Embedding Model) | มิติ (Dimensions) | เวลาสร้าง Index (Build Time) | Query Latency | Hit@1 | Hit@3 |
 |---|:---:|:---:|:---:|:---:|:---:|
-| **paraphrase-multilingual-MiniLM-L12-v2** | 384 | 20.32 วินาที | **16.45 ms** | 47% | 67% |
-| **multilingual-e5-small** | 384 | **12.41 วินาที** | 18.39 ms | **70%** | **80%** |
+| **paraphrase-multilingual-MiniLM-L12-v2** | 384 | 14.232 วินาที | **15.11 ms** | 42% | 64% |
+| **multilingual-e5-small** | 384 | **5.234 วินาที** | 15.22 ms | **52%** | **72%** |
 
 * **รูปภาพประกอบ:** [reports/charts/chart_1_embedding_comparison.png](file:///c:/Users/wator/Documents/Y4/SOCIAL/Final_01/reports/charts/chart_1_embedding_comparison.png)
 * **ข้อสรุปเชิงวิเคราะห์:** E5-small ให้ความแม่นยำสูงกว่า MiniLM อย่างมีนัยสำคัญ (+13% ถึง +23%) และสร้างดัชนีเร็วกว่าเกือบเท่าตัว
@@ -85,7 +85,7 @@
 
 ### Slide 7: [Rubric ด้านที่ 5] LLM Integration & Prompt Engineering
 *สอดคล้องกับ Rubric 3.5: Multi-backend LLM, Prompt Template, Citations, และ Token Throughput*
-* **1. โครงสร้าง Prompt และ Zero-Hallucination Guardrails:**
+* **1. โครงสร้าง Prompt และ Grounding Guardrails:**
   - ออกแบบกล่องบริบทแยกชัดเจนระหว่าง `Graph Context` และ `Vector Context`
   - บังคับให้ใส่ป้ายอ้างอิงท้ายชื่อสถานที่เสมอ เช่น `[อ้างอิง: วัดเซ็นโซจิ (สถานีใกล้เคียง: Asakusa)]` หากไม่มีในบริบทห้ามแต่งเติมเอง
 * **2. การเปรียบเทียบโมเดลภาษา (Multi-backend Comparison):**
