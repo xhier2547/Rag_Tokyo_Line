@@ -101,6 +101,19 @@ class TokyoRAGService:
         self._cache.clear()
         print("[TokyoRAGService] ล้าง Response Cache เรียบร้อยแล้ว")
 
+    @staticmethod
+    def _ensure_retrieval_citations(
+        answer: str,
+        generated_citations: List[str],
+        retrieved_citations: List[str],
+    ) -> tuple[str, List[str]]:
+        """Attach traceable retrieval sources when an LLM omitted citation tags."""
+        if generated_citations or not retrieved_citations:
+            return answer, generated_citations
+        grounded = list(dict.fromkeys(retrieved_citations))[:3]
+        citation_line = " ".join(f"[อ้างอิง: {source}]" for source in grounded)
+        return f"{answer.rstrip()}\n\n📚 ข้อมูลอ้างอิงยืนยัน: {citation_line}", grounded
+
     def _format_offline_fallback(self, query: str, context: str, graph_context: str) -> str:
         """
         จัดรูปแบบข้อความตอบกลับในโหมด Offline Fallback ให้สวยงาม ไพเราะ และเป็นภาษาไทยล้วน (ตัดข้อความภาษาอังกฤษออก)
@@ -187,6 +200,9 @@ class TokyoRAGService:
             if gemini_resp.success:
                 answer = gemini_resp.text
                 citations = gemini_resp.citations or extract_citations(answer)
+                answer, citations = self._ensure_retrieval_citations(
+                    answer, citations, hybrid_res.citations
+                )
                 model_used = gemini_resp.model
                 mode_used = "gemini"
                 prompt_tokens = gemini_resp.prompt_tokens
@@ -244,6 +260,9 @@ class TokyoRAGService:
                         f"{gemini_fallback.text}"
                     )
                     citations = gemini_fallback.citations or extract_citations(answer)
+                    answer, citations = self._ensure_retrieval_citations(
+                        answer, citations, hybrid_res.citations
+                    )
                     model_used = f"{gemini_fallback.model} (Auto-fallback)"
                     mode_used = "gemini"
                     prompt_tokens = gemini_fallback.prompt_tokens
@@ -266,6 +285,9 @@ class TokyoRAGService:
                 if local_resp.success:
                     answer = local_resp.text
                     citations = local_resp.citations or extract_citations(answer)
+                    answer, citations = self._ensure_retrieval_citations(
+                        answer, citations, hybrid_res.citations
+                    )
                     model_used = local_resp.model
                     mode_used = "local"
                     prompt_tokens = local_resp.prompt_tokens

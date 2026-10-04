@@ -217,6 +217,7 @@ flowchart TD
     - 🎯 **Intent Routing** (ROUTE_TRANSIT / FACT_RETRIEVAL / HYBRID_COMPLEX)
     - 🕸️ **Knowledge Graph Active Path** (แสดงสถานีและสายรถไฟจริงจาก Neo4j)
     - 📚 **Traceable Citations** (รายการแหล่งอ้างอิงยืนยัน)
+      - หากโมเดลไม่ได้สร้างแท็กอ้างอิง ระบบจะเติมแหล่งข้อมูลจากผล retrieval ที่ใช้ตอบโดยอัตโนมัติ (สูงสุด 3 แหล่ง)
     - 🧮 **Token Usage Breakdown** (Prompt Tokens, Completion Tokens, Total Tokens, Tokens/Sec)
     - 💾 **Resource & RAM Profiler** (Process Memory RSS ในหน่วย MB และ System RAM %)
 
