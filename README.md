@@ -29,7 +29,7 @@
 8. [การเชื่อมต่อ LINE Chatbot & Cloudflare Tunnel 📱](#8-การเชื่อมต่อ-line-chatbot--cloudflare-tunnel-)
 9. [คู่มือการติดตั้งและการใช้งาน (Setup & Usage Guide)](#9-คู่มือการติดตั้งและการใช้งาน-setup--usage-guide)
 10. [Automated Testing Suite (17 Test Suites)](#10-automated-testing-suite)
-11. [เอกสารสำหรับสไลด์นำเสนอ (Presentation Deck Guide)](#11-เอกสารสำหรับสไลด์นำเสนอ-presentation-deck-guide)
+11. [เอกสารรายงานและสไลด์ (Report & Presentation)](#11-เอกสารรายงานและสไลด์-report--presentation)
 12. [ตารางเทียบเกณฑ์ประเมิน Rubric](#12-ตารางเทียบเกณฑ์ประเมิน-rubric)
 13. [ข้อจำกัดและทิศทางการพัฒนาต่อ (Limitations & Future Work)](#13-ข้อจำกัดและทิศทางการพัฒนาต่อ-limitations--future-work)
 
@@ -181,6 +181,8 @@ flowchart TD
 
 ### 5.2 การทดสอบ Embedding Models: MiniLM vs E5-small
 
+การทดลองนี้วัดจากคำถามจริง **100 ข้อ** ชุดเดียวกับ retrieval benchmark ไม่ใช่ผลจากตัวอย่างขนาดเล็ก:
+
 | โมเดล (Embedding Model) | มิติ (Dimensions) | เวลาสร้าง Index (Build Time) | Query Latency | Hit@1 | Hit@3 |
 |---|:---:|:---:|:---:|:---:|:---:|
 | **paraphrase-multilingual-MiniLM-L12-v2** | 384 | 14.232 วินาที | **15.11 ms** | 42% | 64% |
@@ -312,7 +314,23 @@ python -m unittest tests/test_service.py -v          # ทดสอบ RAG Orche
 
 ---
 
-## 11. เอกสารสำหรับสไลด์นำเสนอ (Presentation Deck Guide)
+## 11. เอกสารรายงานและสไลด์ (Report & Presentation)
+
+### 11.1 รายงานโครงงานฉบับสมบูรณ์
+
+รายงานจัดทำตามโครงร่าง Final Project วิศวกรรมศาสตร์ ใช้ฟอนต์ **TH Sarabun New** พร้อมเลขหน้าและสารบัญที่อัปเดตแล้ว รวมทั้งหมด **31 หน้า** เนื้อหาครอบคลุม:
+
+- ที่มา วัตถุประสงค์ ขอบเขต เกณฑ์ความสำเร็จ และคำถามวิจัย
+- ทฤษฎี Dense RAG, Graph RAG, Hybrid Fusion, LLM และตัวชี้วัดการประเมิน
+- สถาปัตยกรรมระบบ Data Pipeline, Query Flow, RRF, Reranking และกลไก Fallback
+- ผล Retrieval Ablation 100 ข้อ, Held-out 40 ข้อ และ Embedding Benchmark 100 ข้อ
+- ผลรัน Gemini และ Ollama จริง, Hardware Profiling, Repeated Latency และ Error Analysis
+- ข้อจำกัด ภัยคุกคามต่อความเที่ยงตรง แนวทาง Human Evaluation และการนำไปใช้งานจริง
+- ภาคผนวกคู่มือติดตั้ง คำสั่งประเมินผล และการเปิดดู Neo4j Graph
+
+> ไฟล์ Word ฉบับเต็มเก็บไว้นอก repository ส่วนผล retrieval, latency, embedding และ LLM ที่ใช้อ้างอิงมีหลักฐานการรันอยู่ใน repository ทั้งนี้ Human Evaluation จากผู้ประเมินอิสระยังไม่ได้ดำเนินการและระบุเป็นงานต่อยอดอย่างชัดเจน
+
+### 11.2 เอกสารสำหรับสไลด์นำเสนอ
 
 สำหรับทีมงานที่ต้องเตรียมสไลด์พรีเซนต์โครงงาน สามารถเปิดดูเอกสารคู่มือสไลด์ฉบับเต็มทั้ง 7 หัวข้อหลัก พร้อมแผนภาพ Mermaid, ตารางผลการทดลอง และบทพูดสรุป ได้ที่:  
 👉 **[docs/presentation_slides.md](./docs/presentation_slides.md)**

@@ -4,6 +4,8 @@ __pycache__/
 .pytest_cache/
 .env
 scratch/
+.tmp/
+รายงาน_*.docx
 *.log
 data/faiss_index/
 data/chroma_db/

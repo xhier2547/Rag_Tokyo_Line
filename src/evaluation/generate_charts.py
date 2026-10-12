@@ -96,7 +96,18 @@ def plot_embedding_comparison(output_path: str):
     ax2.set_ylim(0, max(build_time) * 1.25)
     add_bar_labels(ax2, bars2, fmt="%.1f", unit=" s")
 
-    fig.suptitle("Embedding Models Benchmark: 30 Measured Queries", fontsize=14, fontweight="bold", y=1.02, color="#0F172A")
+    measured_query_counts = [
+        int(result.get("total_queries_tested", result.get("num_queries", 0)))
+        for result in measured.values()
+    ]
+    measured_query_count = max(measured_query_counts, default=0)
+    fig.suptitle(
+        f"Embedding Models Benchmark: {measured_query_count} Measured Queries",
+        fontsize=14,
+        fontweight="bold",
+        y=1.02,
+        color="#0F172A",
+    )
     plt.tight_layout()
     plt.savefig(output_path, bbox_inches="tight", dpi=300)
     plt.close()
